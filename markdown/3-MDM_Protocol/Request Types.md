@@ -339,7 +339,7 @@ The queries in  are available if the MDM host has a Device Information access ri
 |`CatalogURL`|String|The URL to the software update catalog currently in use by the client.|
 |`IsDefaultCatalog`|Boolean|
 |`PreviousScanDate`|Date|
-|`PreviousScanResult`|String|
+|`PreviousScanResult`|Integer|
 |`PerformPeriodicCheck`|Boolean|
 |`AutomaticCheckEnabled`|Boolean|
 |`BackgroundDownloadEnabled`|Boolean|
@@ -355,7 +355,7 @@ The queries in  are available if the MDM host has a Device Information access ri
 
 The queries in  are available if the MDM host has a Network Information access right.  
 
-> **Note:** Not all devices understand all queries. For example, queries specific to GSM (IMEI, SIM card queries, and so on) are ignored if the device is not GSM-capable. The macOS MDM client responds only to `BluetoothMAC`, `WiFiMAC`, and `EthernetMACs`.  
+> **Note:** Not all devices understand all queries. For example, queries specific to GSM (IMEI, SIM card queries, and so on) are ignored if the device is not GSM-capable. The macOS MDM client responds only to `BluetoothMAC`, `WiFiMAC`, and `EthernetMAC`.  
   
 
 
@@ -364,7 +364,8 @@ The queries in  are available if the MDM host has a Network Information access r
 |`ICCID`|String|The ICC identifier for the installed SIM card.|
 |`BluetoothMAC`|String|Bluetooth MAC address.|
 |`WiFiMAC`|String|Wi-Fi MAC address.|
-|`EthernetMACs`|Array of strings|Ethernet MAC addresses.</br>**Availability:** Available in macOS v10.8 and later, and in iOS 7 and later.|
+|`EthernetMACs`|Array of strings|Ethernet MAC addresses.</br>**Availability:** Available in iOS 7 and later.|
+|`EthernetMAC`|String|Primary Ethernet MAC address.</br>**Availability:** Available in macOS v10.7 and later.|
 |`CurrentCarrierNetwork`|String|Name of the current carrier network.|
 |`SIMCarrierNetwork`|String|Name of the home carrier network. (Note: this query *is* supported on CDMA in spite of its name.)|
 |`SubscriberCarrierNetwork`|String|Name of the home carrier network. (Replaces `SIMCarrierNetwork`.)</br>**Availability:** Available in iOS 5.0 and later.|
@@ -559,7 +560,7 @@ To send a `RequestMirroring` command, the server sends a dictionary containing t
 |`RequestType`|String|`RequestMirroring`.|
 |`DestinationName`|String|Optional. The name of the AirPlay mirroring destination. For Apple TV, this is the name of the Apple TV.|
 |`DestinationDeviceID`|String|Optional. The device ID (hardware address) of the AirPlay mirroring destination, in the format "xx:xx:xx:xx:xx:xx". This field is not case sensitive.|
-|`ScanTime`|String|Optional. Number of seconds to spend searching for the destination. The default is 30 seconds. This value must be in the range 10–300.|
+|`ScanTime`|Integer|Optional. Number of seconds to spend searching for the destination. The default is 30 seconds. This value must be in the range 10–300.|
 |`Password`|String|Optional. The screen sharing password that the device should use when connecting to the destination.|
   
 
@@ -680,10 +681,6 @@ The `ClearRestrictionsPassword` command allows the server to clear the restricti
   
 
 Three MDM Protocol commands—`UsersList`, `LogOutUser`, and `DeleteUser`—let the MDM server exercise control over the access of users to MDM devices in an educational environment. These commands are all available in iOS 9.3 and later and may be used only in Shared iPad mode.  
-
-> **Note:** 
-Enterprise apps are not supported on Shared iPads; only device-based apps installed under the Volume Purchase Program may be used.  
-  
 
   
 
@@ -881,7 +878,7 @@ The macOS MDM client does not support managed applications. However, it does sup
 
   
 
-#### InstallApplication Commands Install a Third-Party Application
+#### InstallApplication Commands Install an Application
   
 
 To send an `InstallApplication` command, the server sends a request containing the following keys:  
@@ -891,16 +888,16 @@ To send an `InstallApplication` command, the server sends a request containing t
 |-|-|-|
 |`RequestType`|String|`InstallApplication`.|
 |`iTunesStoreID`|Number|The application’s iTunes Store ID.</br>For example, the numeric ID for Keynote is `361285480` as found in the App Store link [http://itunes.apple.com/us/app/keynote/id361285480?mt=8](http://itunes.apple.com/us/app/keynote/id361285480?mt=8).|
-|`Identifier`|String|Optional. The application’s bundle identifier. Available in iOS 7 and later.|
+|`Identifier`|String|Optional. The application’s bundle identifier. </br>Available in iOS 7 and later. </br>In iOS 11.3 and later, this can be used to reinstall a system app. System apps installed in this manner will not be considered managed apps.|
 |`Options`|Dictionary|Optional. App installation options. The available options are listed below. Available in iOS 7 and later.|
-|`ManifestURL`|String|The `https` URL where the manifest of an enterprise application can be found.</br>Note: In iOS 7 and later, this URL and the URLs of any assets specified in the manifest must begin with `https`.|
+|`ManifestURL`|String|The `https` URL where the manifest of an enterprise application can be found. For more information about the manifest file, see [Install in-house apps wirelessly](https://help.apple.com/deployment/ios/#/apda0e3426d7).</br>Note: In iOS 7 and later, this URL and the URLs of any assets specified in the manifest must begin with `https`.|
 |`ManagementFlags`|Integer|The bitwise OR of the following flags:</br>1: Remove app when MDM profile is removed.</br>4: Prevent backup of the app data.|
 |Configuration|Dictionary|Optional. If provided, this contains the initial configuration dictionary for the managed app. For more information, see [Managed App Configuration and Feedback](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/3-MDM_Protocol/MDM_Protocol.html#//apple_ref/doc/uid/TP40017387-CH3-SW68).|
 |Attributes|Dictionary|Optional. If provided, this dictionary contains the initial attributes for the app. For a list of allowed keys, see [ManagedApplicationAttributes Queries App Attributes](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/3-MDM_Protocol/MDM_Protocol.html#//apple_ref/doc/uid/TP40017387-CH3-SW69).|
 |`ChangeManagementState`|String|Optional. Currently the only supported value is the following:</br>`Managed`: Take management of this app if the user has installed it already. Available in iOS 9 and later.|
   
 
-If the application is not already installed and the `ChangeManagementState` is set to `Managed`, the app will be installed and managed.  If the application is installed unmanaged, the user will be prompted to allow management of the app on unsupervised devices and, if accepted, the application becomes managed.  
+If the application is not already installed and the `ChangeManagementState` is set to `Managed`, the app will be installed and managed.  If the application is installed unmanaged, the user will be prompted to allow management of the app on unsupervised devices and, if accepted, the application becomes managed.   
 
 The request must contain exactly one of the following fields: `Identifier`, `iTunesStoreID`, or `ManifestURL` value.  
 
@@ -1249,7 +1246,7 @@ If a `MediaURL` is provided, the URL must lead to a PDF, gzipped epub, or gzippe
 |`Title`|String|Optional.|
   
 
-Installing a book not from the iBooks Store with the same `PersistentID` as an existing book not from the iBooks Store replaces the old book with the new. Installing an iBooks Store book with the same `iTunesStoreID` as an existing installed book updates the book from the iBooks Store.  
+Installing a book not from the iBooks Storewith the same `PersistentID` as an existing book not from the iBooks Store replaces the old book with the new. Installing an iBooks Store book with the same `iTunesStoreID` as an existing installed book updates the book from the iBooks Store.  
 
 The user is not prompted for book installation or update unless user interaction is needed to complete an iBooks Store transaction.  
 
@@ -1445,8 +1442,8 @@ To send a `Bluetooth` command, the server sends a dictionary containing the foll
 
 |Key|Type|Content|
 |-|-|-|
-|`Item`|String|`Bluetooth`.|
-|`Enabled`|Boolean|If `true`, enables Bluetooth.</br>If `false`, disables Bluetooth.</br>This setting takes effect even when the allowBluetoothModification restriction is set.|
+|`Item`|String|`Bluetooth`.</br>**Availability:** Available in iOS 11.3 and later for supervised devices and in macOS 10.13.4 and later.|
+|`Enabled`|Boolean|If `true`, enables Bluetooth.</br>If `false`, disables Bluetooth.</br>**Availability:** Available in iOS 11.3 and later for supervised devices and in macOS 10.13.4 and later.|
   
 
   
@@ -1863,11 +1860,9 @@ The `passwordHash` data objects should be created on the server using the Common
 
 The Software Update commands allow an MDM server to perform software updates. In macOS, a variety of system software can be updated. In iOS, only OS updates are supported.  
 
-> **Note:** 
-If the device has a passcode, it must be cleared before an iOS update is performed.  
-  
+On macOS, all supported Software Update commands except the `AvailableOSUpdates` query require DEP enrollment.  
 
-Only Supervised DEP-enrolled iOS devices and DEP-managed Mac computers are eligible for software update management. However, the `AvailableOSUpdates` query is available to non-DEP managed devices.  
+On iOS 10.3 and later, supported Software Update commands require supervision but not DEP enrollment. If there is a passcode on the device, a user must enter it to start a software update. Prior to iOS 10.3, the supervised devices need to be DEP-enrolled and have no passcode.  
 
 The MDM server must have the App Installation right to perform these commands.  
 
@@ -1880,7 +1875,7 @@ The MDM server must have the App Installation right to perform these commands.
 |Key|Type|Content|
 |-|-|-|
 |`RequestType`|String|`ScheduleOSUpdate`.|
-|Updates|Array|An array of dictionaries specifying the OS updates to download or install. If this entry is missing, the device applies the default behavior for all available updates.|
+|`Updates`|Array|An array of dictionaries specifying the OS updates to download or install. If this entry is missing, the device applies the default behavior for all available updates.|
   
 
 The Updates array contains dictionaries with the following keys and values:  
@@ -1889,6 +1884,7 @@ The Updates array contains dictionaries with the following keys and values:
 |Key|Type|Content|
 |-|-|-|
 |`ProductKey`|String|The product key of the update to be installed.|
+|`ProductVersion`|String|Optional. Defines the version to install. If the `ProductVersion` is specified, the `ProductKey` field is optional.</br>If a matching update is not available, the result of the operation will be “update not available”, even if there are other valid and available updates for the device.</br>The `Version` key from the `AvailableOSUpdates` command can be used. The version format is the user facing version, like “11.2.5” or “11.3”.</br>**Availability:** Available in iOS 11.3 and later.|
 |`InstallAction`|String|One of the following:<ul><li>`Default`: Download and/or install the software update, depending on the current device state. See the `UpdateResults` dictionary, below, to determine which `InstallAction` is scheduled.</li><li>`DownloadOnly`: Download the software update without installing it.</li><li>`InstallASAP`: Install an already downloaded software update.</li><li>`NotifyOnly`: Download the software update and notify the user via the App Store (macOS only).</li><li>`InstallLater`: Download the software update and install it at a later time (macOS only).</li></ul>|
   
 
@@ -1912,10 +1908,6 @@ The `UpdateResults` dictionary contains the following keys and values:
   
 
 The device may return a different `InstallAction` than the one that was requested.  
-
-> **Note:** 
-In iOS versions before 10.3, responding to the `ScheduleOSUpdate` request relied on the device not being passcode-protected.  
-  
 
 Because software updates may happen immediately, the device may not have the opportunity to respond to an installation command before it restarts for installation. When this happens, the MDM server should resend the `ScheduleOSUpdate` request when the device checks in again. The device returns a status of `Idle` because the update has been installed and is no longer applicable.  
 
@@ -2024,6 +2016,73 @@ Percentage of download that is complete. Floating point number (0.0 to 1.0).|
 
   
 
+### Extension Management
+  
+
+These commands support the management of extensions on macOS.  
+
+  
+
+#### ActiveNSExtensions
+  
+
+`ActiveNSExtensions` returns information about the active NSExtensions for a particular user. NSExtensions are installed and enabled at the user level; there is no concept of “device” NSExtensions.  
+
+Requires access rights to inspect installed apps. Supported only on the user channel.  
+
+
+|Key|Type|Content|
+|-|-|-|
+|`RequestType`|String|`ActiveNSExtensions`.|
+|`FilterExtensionPoints`|Array|Optional. Array of extension points, that limit the results to the extensions belonging to the specified extension points.|
+  
+
+The response will be an array of dictionaries with the following keys and values:  
+
+
+|Key|Type|Content|
+|-|-|-|
+|`Identifier`|String|The identifier of the extension.|
+|`ExtensionPoint`|String|The `NSExtensionPointIdentifier` for the extension.|
+|`DisplayName`|String|The display name.|
+|`ContainerDisplayName`|String|The display name of the container app (if any).|
+|`ContainerIdentifier`|String|The identifier of the container (if any).|
+|`Path`|String|The path to the extension.|
+|`Version`|String|The version of the extension.|
+|`UserElection`|String|The user’s enable/disable state of the extension, set through the preferences pane. Will be one of: “Default”, “Use”, or “Ignore”.|
+  
+
+Extensions that have been restricted from executing (via the `com.apple.NSExtension` configuration profile payload or Application Launch Restrictions) will not appear in the response list.  
+
+  
+
+#### NSExtensionMappings
+  
+
+`NSExtensionMappings` returns information about the installed extensions for a user. This command is useful when building the set of extension identifiers and extension points for the `com.apple.NSExtension` profile payloads.  
+
+Requires access rights to inspect installed apps. Supported only on the user channel.  
+
+
+|Key|Type|Content|
+|-|-|-|
+|`RequestType`|String|`NSExtensionMappings`.|
+  
+
+The response will be an array of dictionaries with the following keys and values:  
+
+
+|Key|Type|Content|
+|-|-|-|
+|`Identifier`|String|The identifier of the extension.|
+|`ExtensionPoint`|String|The `NSExtensionPointIdentifier` for the extension.|
+|`DisplayName`|String|The display name.|
+  
+
+The returned list will be a superset of the list returned by the `ActiveNSExtensions` command. This list may contain extensions that will never be enabled on the system due to various restrictions.  
+
+  
+
 ### Support for macOS Requests
   
 
@@ -2033,6 +2092,7 @@ The table below lists the MDM protocol request types that are available for Appl
 |Command|Min OS|User/Device|Comments|
 |-|-|-|-|
 |AccountConfiguration|10.11|Device|Valid only during DEP enrollment.|
+|ActiveNSExtensions|10.13|User|
 |AvailableOSUpdates|10.11|Device|
 |CertificateList|10.7|Both|
 |DeviceConfigured|10.11|Both|Valid only during DEP enrollment.|
@@ -2046,6 +2106,7 @@ The table below lists the MDM protocol request types that are available for Appl
 |InstallMedia|10.9|User|For VPP books only.|
 |InstallProfile|10.7|Both|
 |InviteToProgram|10.9|Both|
+|NSExtensionMappings|10.13|User|
 |OSUpdateStatus|10.11.5|Device|
 |ProfileList|10.7|Both|
 |ProvisioningProfileList|10.7|Both|Supported, but always returns empty list.|

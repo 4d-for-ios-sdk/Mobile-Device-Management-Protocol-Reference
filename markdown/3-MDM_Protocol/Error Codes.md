@@ -247,7 +247,7 @@ The following sections list the error codes currently returned by iOS and macOS 
 | 12023 | The iTunes Store ID of the application could not be validated |
 | 12024 | Could not validate app manifest |
 | 12025 | App already installed |
-| 12026 | License for app “<app bundle ID>” could not be found |
+| 12026 | Request to install application already queued / in progress |
 | 12027 | Not an app |
 | 12028 | Not waiting for redemption |
 | 12029 | App not managed |
@@ -302,11 +302,12 @@ The following sections list the error codes currently returned by iOS and macOS 
 | 12078 | Invalid request type in MDM Lost mode |
 | 12079 | No MDM instance |
 | 12080 | Could not play Lost Mode sound |
-| 12081 | Not netwok tethered |
+| 12081 | Not network tethered |
 | 12082 | Global restrictions fetch failed |
 | 12083 | Profile restrictions fetch failed |
-| 12084 | Invalid request type |
+| 12084 | Invalid request type in Single App Mode |
 | 12085 | Activation lock bypass code expired |
+| 12086 | Activation lock bypass code is unavailable |
   
 
   
