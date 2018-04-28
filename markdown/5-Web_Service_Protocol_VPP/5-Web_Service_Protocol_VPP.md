@@ -3,7 +3,7 @@
  [Configuration Profile Reference - VPP App Assignment](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/5-Web_Service_Protocol_VPP/webservice.html)  
   
 
-[Next](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/6.5-MDM_Rosters/MDM_Rosters.html)[Previous](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/4-Profile_Management/ProfileManagement.html)
+[Next](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/ManagedAppsUpdates/ManagedAppsUpdates.html)[Previous](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/4-Profile_Management/ProfileManagement.html)
   
 In iOS 7 and later or macOS v10.9 and later, Volume Purchase Program (VPP) App Assignment allows an organization to assign apps to users. At a later date, if a user no longer needs an app, you can reclaim the app license and assign it to a different user. In iOS 9 and later or macOS v10.11 and later, VPP can assign a license to the device serial number, so no Apple ID is required to download the app.  
 The Volume Purchase Program provides a number of web services that MDM servers can use to associate volume purchases with particular users or devices. The following services are currently supported:  
@@ -12,11 +12,9 @@ The Volume Purchase Program provides a number of web services that MDM servers c
 
 * Determine the current iTunes account status of one or more VPP users: [getVPPUserSrv](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/5-Web_Service_Protocol_VPP/webservice.html#//apple_ref/doc/uid/TP40017387-CH8-SW6) or [getVPPUsersSrv](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/5-Web_Service_Protocol_VPP/webservice.html#//apple_ref/doc/uid/TP40017387-CH8-SW7). 
 
-* Determine the statuses of a VPP user’s current licenses for software and other products: [getVPPLicensesSrv](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/5-Web_Service_Protocol_VPP/webservice.html#//apple_ref/doc/uid/TP40017387-CH8-SW8). 
-
 * List the VPP assets for which an organization has licenses, including counts of assigned and unassigned licenses for each asset: [getVPPAssetsSrv](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/5-Web_Service_Protocol_VPP/webservice.html#//apple_ref/doc/uid/TP40017387-CH8-SW302). 
 
-* Query the iTunes Store for information about apps and books: . 
+* Query the iTunes Store for information about apps and books: [contentMetadataLookupUrl](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/5-Web_Service_Protocol_VPP/webservice.html#//apple_ref/doc/uid/TP40017387-CH8-SW209). 
 
 * Disassociate a VPP user from their iTunes account and release their revocable licenses: [retireVPPUserSrv](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/5-Web_Service_Protocol_VPP/webservice.html#//apple_ref/doc/uid/TP40017387-CH8-SW9). 
 
@@ -27,22 +25,26 @@ The Volume Purchase Program provides a number of web services that MDM servers c
 * Store and/or return organization-specific information to/from the VPP server: [VPPClientConfigSrv](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/5-Web_Service_Protocol_VPP/webservice.html#//apple_ref/doc/uid/TP40017387-CH8-SW14). 
 
 * Fetch the current list of VPP web service URLs and error numbers: [VPPServiceConfigSrv](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/5-Web_Service_Protocol_VPP/webservice.html#//apple_ref/doc/uid/TP40017387-CH8-SW15). 
+
+* Determine the statuses of a VPP user’s current licenses for software and other products: [getVPPLicensesSrv](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/5-Web_Service_Protocol_VPP/webservice.html#//apple_ref/doc/uid/TP40017387-CH8-SW8). Please note that this service will be deprecated and its use should be avoided. 
   
   
 
 ## VPP in Apple School Manager
   
 
-In the fall of 2017, VPP was added into Apple School Manager. Apple School Manager is a single destination for schools to manage devices and content for their users. Moving VPP into the Apps and Books section of the Apple School Manager enables program facilitators (also referred to as content managers) to purchase content in the same place that they manage Apple IDs and devices for students and teachers. The purchases made in VPP in Apple School Manager are location based, making it much easier for content managers to move licenses between locations as needed.   
+In the Fall of 2017, VPP was added into Apple School Manager. Apple School Manager is a single destination for schools to manage devices and content for their users. Moving VPP into the Apps and Books section of the Apple School Manager enables program facilitators (also referred to as content managers) to purchase content in the same place that they manage Apple IDs and devices for students and teachers. The purchases made in VPP in Apple School Manager are location based, making it much easier for content managers to move licenses between locations as needed.   
 
 To support location based assets, VPP in Apple School Manager uses location tokens. The location tokens are used by content managers the same way as the legacy VPP tokens are used. Content managers download the location token from the settings page in Apple School Manager and upload it into their MDM. The MDM then has access to the licenses available at that location. Allocating the licenses within the MDM uses the same workflow for both types of licenses.  
+
+VPP will continue to support legacy user based sTokens. Depending on the type of token used, VPP will return either the new location-based response or the existing user-based response. VPP API responses that differ by token type will have both the legacy and location based responses documented below.  
 
   
 
 ### Supporting VPP in Apple School Manager 
   
 
-Migrating to VPP in Apple School Manager is recommended, but optional. Licenses assigned when using the legacy token must be managed by the content manager’s legacy token, until they are transfered to a location. Therefore, MDMs will need to support both models of licensing at the same time. Failure to support the legacy and location based models of tokens will create discrepancies between user experiences in Apple School Manager and their MDM.  
+Migrating to VPP in Apple School Manager is recommended, but optional. Licenses assigned when using the legacy token must be managed by the content manager’s legacy token until they are transferred to a location. Therefore, MDMs will need to support both models of licensing at the same time. Failure to support the legacy and location based models of tokens will create discrepancies between user experiences in Apple School Manager and their MDM.  
 
 To update your MDM to support location based tokens, these steps must be taken:  
 
@@ -52,6 +54,8 @@ To update your MDM to support location based tokens, these steps must be taken:
 * Update the MDM UI to show location names for the tokens and assets. Location names are not unique (many schools may have the same name) but location UIDs are unique to a specific location. Displaying the location name to the user is particularly important when location token is about to expire. 
 
 * Refresh license status at appropriate times to maintain an accurate UI. Since licenses can be reallocated in the Apple School Manager, license counts will change outside of the MDM. Refreshing on each page load is recommended.  
+
+* Use [getVPPAssetsSrv](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/5-Web_Service_Protocol_VPP/webservice.html#//apple_ref/doc/uid/TP40017387-CH8-SW302), not [getVPPLicensesSrv](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/5-Web_Service_Protocol_VPP/webservice.html#//apple_ref/doc/uid/TP40017387-CH8-SW8), to get license counts. [getVPPAssetsSrv](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/5-Web_Service_Protocol_VPP/webservice.html#//apple_ref/doc/uid/TP40017387-CH8-SW302) is more efficient and will return a summary of adamIds and counts instead of all the licenses. 
 
 * Handle when duplicate tokens are uploaded by different content managers. There is just one location token that needs to be stored, instead of a token per VPP account.  
 
@@ -215,19 +219,19 @@ To ensure that a VPP account is not being managed by another product, follow the
 
   
 
-### Initial Import of VPP Managed Distribution Licenses Using getVPPLicensesSrv
+### Initial Import of VPP Managed Distribution Assigned Licenses Using getVPPLicensesSrv
   
 
-It is not necessary to sync every single app license for a specific VPP account. The recommended procedure for importing licenses is to skip importing all of the licenses and instead start importing license counts and then changes. This can be accomplished in the following way:  
+It is not necessary to sync every single app license for a specific VPP account. In fact, you only need to track the assigned licenses. The recommended procedure for importing assigned licenses is to skip importing all of the licenses and instead start importing license counts and then changes. This can be accomplished in the following way:  
 
 
 1. Send a request using `getVPPAssetsSrv` with `includeLicenseCounts : true`. This returns the current license count by `adamID`. 
 
-2. Send one request using `getVPPLicensesSrv`. Record the `batchToken` and `totalBatchCount`. 
+2. Send one request using `getVPPLicensesSrv`. Record the `batchToken` and `totalBatchCount`. Always set `assignedOnly=true`. 
 
-3. Send another request to `getVPPLicensesSrv` using the `batchToken` value from Step 2 and an `overrideIndex` value equal to `totalBatchCount`. 
+3. Send another request to `getVPPLicensesSrv` using the `batchToken` value from Step 2 and an `overrideIndex` value equal to `totalBatchCount`. Always set `assignedOnly=true`. 
 
-4. Record the `sinceModifiedToken` value and begin syncing license updates and changes instead of all licenses. Set `assignedOnly=true` if you want to get only new license assignments. 
+4. Record the `sinceModifiedToken` value and begin syncing license updates and changes instead of all licenses. Always set `assignedOnly=true`. 
   
 
 **Note:** Using `sinceModifiedToken` can result in batches with zero records in them. This is not an error or an end signal; just move to the next batch.  
@@ -337,7 +341,7 @@ Note that `vppGroupMembers` contains all of the members of the Program Facilitat
 #### Read-Only Access
   
 
-Using [Apple School Manager](https://help.apple.com/schoolmanager/) and Managed Apple IDs, you can tailor different sets of privileges for individual Program Facilitators. This allows a finer range of control on what such users can do. For example, a Program Facilitator that has only the “Read Only” privilege can use the `getVPPUserSrv`, `getVPPUsersSrv`, and `getVPPLicensesSrv` services but not use `retireVPPUserSrv`, `disassociateVPPLicenseSrv`, or `manageVPPLicensesByAdamIdSrv`. You can also assign Program Facilitators “Can Purchase” and/or “Can Manage” privileges, so an individual Program Facilitator could manage licenses but not buy them. (Note that purchasing users and managing users automatically have read privileges.)  
+Using [Apple School Manager](https://help.apple.com/schoolmanager/) and Managed Apple IDs, you can tailor different sets of privileges for individual Program Facilitators. This allows a finer range of control on what such users can do. For example, a Program Facilitator that has only the “Read Only” privilege can use the `getVPPUserSrv`, `getVPPUsersSrv`, and `getVPPAssetsSrv` services but not use `retireVPPUserSrv`, `disassociateVPPLicenseSrv`, or `manageVPPLicensesByAdamIdSrv`. You can also assign Program Facilitators “Can Purchase” and/or “Can Manage” privileges, so an individual Program Facilitator could manage licenses but not buy them. (Note that purchasing users and managing users automatically have read privileges.)  
 
   
 
@@ -463,6 +467,8 @@ Further, if two user identifiers exist for a given `clientUserIdStr`, one assign
 
 The `managedAppleIDStr` parameter is discussed in [Managed Apple IDs](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/5-Web_Service_Protocol_VPP/webservice.html#//apple_ref/doc/uid/TP40017387-CH8-SW501).  
 
+When registering multiple users, [registerVPPUserSrv](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/5-Web_Service_Protocol_VPP/webservice.html#//apple_ref/doc/uid/TP40017387-CH8-SW5) requests can be made in parallel.  
+
 The response contains some of these fields:  
 
 
@@ -549,6 +555,7 @@ Note the user object returned includes a list of licenses assigned to the user.
 |`batchToken`|Not required.|`EkZQCWOwhDFCwgQsUFJZkA`</br>`oUU0pKLEnOUAIKZOalpFYAR`</br>`YzA7OSc0pTUoNSSzKLUFJAy`</br>`Q6CSWgCS88JnkgAAAA==`.|
 |`sinceModifiedToken`|Not required.|`0zJTU5SAEplpMF4wWCozJy`</br>`ezGKjS0NjM0tjUwtTA3MzQ`</br>`1FqhFgBuLPH3TgAAAA==`.|
 |`includeRetired`|Not required.|`1`.|
+|`includeRetiredOnly`|Not required.|`1`.|
 |`sToken`|Required.|`"h40Gte9aQnZFDNM...6ZQ="`.|
 |`facilitatorMemberId`|Not required.|See [Program Facilitators](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/5-Web_Service_Protocol_VPP/webservice.html#//apple_ref/doc/uid/TP40017387-CH8-SW502).|
   
@@ -570,6 +577,8 @@ You can use this endpoint to obtain a list of all known users from the server an
   
 
 The `includeRetired` value contains `1` if retired users should be included in the results, otherwise it contains `0`.  
+
+If `includeRetiredOnly` is provided, the value of `includeRetired` is ignored. If `sinceModifiedToken` is provided and `includedRetiredOnly` is `1`, only retired users modified since the date in the token will be returned.  
 
 > **Note:** The `batchToken` value encodes the original value of `includeRetired`; therefore, if a `batchToken` value is present on the request, the `includeRetired` field (if passed) is ignored.  
   
@@ -606,10 +615,13 @@ The request takes the following parameters:
 |`batchToken`|Not required.|`EkZQCWOwhDFCwgQsUFJZkA`</br>`oUU0pKLEnOUAIKZOalpFYAR`</br>`YzA7OSc0pTUoNSSzKLUFJAy`</br>`Q6CSWgCS88JnkgAAAA==`.|
 |`sinceModifiedToken`|Not required.|`0zJTU5SAEplpMF4wWCozJy`</br>`ezGKjS0NjM0tjUwtTA3MzQ`</br>`1FqhFgBuLPH3TgAAAA==`.|
 |`adamId`|Not required.|`408709785`.|
-|`pricingParam`|Not required.|`"PLUS"`.|
 |`sToken`|Required.|`"h40Gte9aQnZFDNM...6ZQ="`.|
 |`facilitatorMemberId`|Not required.|See [Program Facilitators](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/5-Web_Service_Protocol_VPP/webservice.html#//apple_ref/doc/uid/TP40017387-CH8-SW502).|
-|`assignedOnly`|Not required.; defaults to false.|`true`.|
+|`assignedOnly`|Not required.|Defaults to `false`.|
+|`pricingParam`|Not required.|”PLUS”|
+|`serialNumber`|Not required.|"C9JQ5QWMXRGH”|
+|`userAssignedOnly`|Not required.|Defaults to `false`.|
+|`deviceAssignedOnly`|Not required.|Defaults to `false`.|
   
 
 The `batchToken` and `sinceModifiedToken` values are generated by the server, and the `batchToken` value can be several kilobytes in size.  
@@ -631,7 +643,17 @@ You can use this endpoint to obtain a list of licenses from the server and to ke
 > **Note:** The `batchToken` and `sinceModifiedToken` encode whether `adamId` and `pricingParam` were originally passed; therefore, if the `batchToken` or `sinceModifiedToken` is present on the request, the `adamId` and `pricingParam` fields (if passed) are ignored.  
   
 
-If the `assignedOnly` parameter is set to `true`, only licenses currently associated with an Apple ID or a device serial number are returned. When the `assignedOnly` parameter is omitted, all license records are returned regardless of association status.  
+If  `pricingParam` is specified, `adamId` must be specified. Otherwise, the pricing parameter is ignored.  
+
+If  `serialNumber` is specified, only licenses assigned to that serial number are returned.  
+
+If the `assignedOnly` parameter is set to `true`, only licenses currently associated with an Apple ID or a device serial number are returned. When the `assignedOnly` parameter is omitted, all license records are returned regardless of association status. It is highly recommended to set the `assignedOnly` parameter to `true`, for performance reasons.  
+
+If  `userAssignedOnly` is specified, only licenses currently assigned to users are returned.  
+
+If  `deviceAssignedOnly` is specified, only licenses currently assigned to devices are returned.  
+
+The parameters `userAssignedOnly` and `deviceAssignedOnly` are exclusive. They should never both be true in the same request.  
 
 If a `pricingParam` parameter is not passed in the `getVPPLicensesSrv` request, the VPP service returns all licenses (both PLUS and STDQ `pricingParam` values).  
 
@@ -682,10 +704,13 @@ This service returns an enumeration of the assets (`{adamIdStr, pricingParam}` t
 |-|-|-|
 |`includeLicenseCounts`|Not required. Defaults to `false`.|`true`.|
 |`sToken`|Required.|`"h40Gte9aQnZFDNM...6ZQ="`.|
+|`pricingParam`|Not required.|”PLUS” or “STDQ”.|
 |`facilitatorMemberId`|Not required.|See [Program Facilitators](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/5-Web_Service_Protocol_VPP/webservice.html#//apple_ref/doc/uid/TP40017387-CH8-SW502).|
   
 
 If `includeLicenseCounts` is set to true, the total number of licenses, the number of licenses assigned, and the number of licenses unassigned are included with the response for each asset.  
+
+if `pricingParam` is specified, only assets purchased with that pricing parameter will be included in the result.  
 
 
 |Field Name|Example of Value|
@@ -941,6 +966,14 @@ The following fields are added to the `VPPServiceConfigSrv` response to indicate
 
   
 
+### associateVPPLicenseSrv
+  
+
+> **Note:** This request is **deprecated**. Use [manageVPPLicensesByAdamIdSrv](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/5-Web_Service_Protocol_VPP/webservice.html#//apple_ref/doc/uid/TP40017387-CH8-SW301) instead.   
+  
+
+  
+
 ### associateVPPLicenseWithVPPUserSrv
   
 
@@ -948,41 +981,13 @@ The following fields are added to the `VPPServiceConfigSrv` response to indicate
 This request is **deprecated**. Use [manageVPPLicensesByAdamIdSrv](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/5-Web_Service_Protocol_VPP/webservice.html#//apple_ref/doc/uid/TP40017387-CH8-SW301) instead.  
   
 
-The request takes the following parameters:  
-
-
-|Parameter Name|Required or Not|Example|
-|-|-|-|
-|`userId`|One of these is required. `userId` takes precedence.|`100001`.|
-|`clientUserIdStr`|`"810C9B91-DF83-41DA-80A1-408AD7F081A8"`.|
-|`adamId`|One of these is required. `licenseId` takes precedence.|`361285480`.|
-|`licenseId`|`100002`.|
-|`pricingParam`|No. Used in combination with an `adamId` value. `"STDQ"` is assumed if not specified.|`"PLUS"`.|
-|`sToken`|Required.|`"h40Gte9aQnZFDNM...6ZQ="`.|
   
 
-For apps, pricingParam can only be `"STDQ"`. But if other types of assets are supported by VPP license, the following are the list of `pricingParam` values that may be used to narrow down the asset when used in combination with an `adamId` value:  
-
-
-|pricingParam|Description|Asset|
-|-|-|-|
-|`STDQ`|Standard Quality.|Apps and Books.|
-|`PLUS`|High Quality.|Books.|
+### disassociateVPPLicenseSrv
   
 
-The response contains some of these fields:  
-
-
-|Field Name|Example of Value|
-|-|-|
-|`status`|`0` for success, `-1` for error.|
-|`license`|`{`</br>`    "licenseId":2,`</br>`    "adamId":408709785,`</br>`    "productTypeId":7,`</br>`    "pricingParam":"STDQ",`</br>`    "productTypeName":"Software",`</br>`    "isIrrevocable": false,`</br>`    "userId":2,`</br>`    "clientUserIdStr":"810C9B91-DF83-41DA-80A1-408AD7F081A8",`</br>`    "itsIdHash":"C2Wwd8LcIaE2v6f2/mvu82Gs/Lc="`</br>`}`|
-|`user`|`{`</br>`      "userId":2,`</br>`      "email":"user2@test.com",`</br>`      "status":"Associated",`</br>`      "clientUserIdStr":"810C9B91-DF83-41DA-80A1-408AD7F081A8",`</br>`      "itsIdHash":"C2Wwd8LcIaE2v6f2/mvu82Gs/Lc="`</br>`}`|
-|`errorMessage`|`"License not found"`.|
-|`errorNumber`|`9602`.|
+> **Note:** This request is **deprecated**. Use [manageVPPLicensesByAdamIdSrv](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/5-Web_Service_Protocol_VPP/webservice.html#//apple_ref/doc/uid/TP40017387-CH8-SW301) instead.  
   
-
-The `itsIdHash` field is omitted if the account is not yet associated with an iTunes Store account.  
 
   
 
@@ -992,32 +997,6 @@ The `itsIdHash` field is omitted if the account is not yet associated with an iT
 > **Note:** 
 This request is **deprecated**. Use [manageVPPLicensesByAdamIdSrv](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/5-Web_Service_Protocol_VPP/webservice.html#//apple_ref/doc/uid/TP40017387-CH8-SW301) instead.  
   
-
-The request takes the following parameters:  
-
-
-|Parameter Name|Required or Not|Example|
-|-|-|-|
-|`userId`|Required.|`100001`.|
-|`licenseId`|Required.|`100002`.|
-|`sToken`|Required.|`"h40Gte9aQnZFDNM...6ZQ="`.|
-  
-
-The response contains some or all of these fields:  
-
-
-|Field Name|Example of Value|
-|-|-|
-|`status`|`0` for success, `-1` for error.|
-|`license`|`{`</br>`    "licenseId":4,`</br>`    "adamId":408709785,`</br>`    "productTypeId":7,`</br>`    "pricingParam":"STDQ",`</br>`    "productTypeName":"Software",`</br>`    "isIrrevocable": false`</br>`}`|
-|`user`|`{`</br>`      "userId":2,`</br>`      "email":"user2@test.com",`</br>`      "status":"Associated",`</br>`      "clientUserIdStr":"810C9B91-DF83-41DA-80A1-408AD7F081A8",`</br>`      "itsIdHash":"C2Wwd8LcIaE2v6f2/mvu82Gs/Lc="`</br>`}`|
-|`errorMessage`|`"License not found"`.|
-|`errorNumber`|`9602`.|
-  
-
-The `itsIdHash` field is omitted if the account is not yet associated with an iTunes Store account.  
-
-If the license is already disassociated, this request returns error number `9619` (license not associated).  
 
   
 
@@ -1078,6 +1057,7 @@ The response to `VPPClientConfigSrv` contains some of these fields:
 |Field Name|Example of Value|
 |-|-|
 |`status`|`0` for success, `-1` for error.|
+|`apnToken`|`OM3oPAbCdEiSC98erJn@F8a8jZGoS9PI=`|
 |`clientContext`|`"abc"`|
 |`errorMessage`|`"Login required"`.|
 |`errorNumber`|`9601`.|
@@ -1085,13 +1065,18 @@ The response to `VPPClientConfigSrv` contains some of these fields:
 |`appleId`|`"user1@someorg.com"`.|
 |`email`|`"user1@someorg.com"`.|
 |`facilitatorMemberId`|`"200841"`.|
-|`location`|` {`</br>`"locationId": 22222222222,`</br>`"locationName": "Lincoln High School" `</br>`}`|
 |`vppGroupMembers`|See [Program Facilitators](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/5-Web_Service_Protocol_VPP/webservice.html#//apple_ref/doc/uid/TP40017387-CH8-SW502).|
+|`organizationId`|`2000000001630588`|
+|`organizationIdHash`|`""0420773fb70e423ef77916dee3b381987e6c3fb4d8f19d1fd071b0c48c0cd380"`.|
+|`uId`|`"200841"`.|
+|`location`|` {`</br>`"locationId": 22222222222,`</br>`"locationName": "Lincoln High School" `</br>`}`|
   
 
 The `countryCode` value in the response is the ISO 3166-1 two-letter code designating the country where the VPP account is located. For example, "US" for United States, "CA" for Canada, "JP" for Japan, and so on.  
 
 The `location` field is only returned when using a location token with an account that has migrated to VPP in Apple School Manager.  
+
+The `uId` field is the unique library identifier. When querying assets using multiple tokens that may share libraries, use the `uId` field to filter duplicates.  
 
   
 
@@ -1122,6 +1107,8 @@ The response contains the URLs to be used to register VPP users and other web se
 |`retireUserSrvUrl`|`"https://vpp.itunes.apple.com/WebObjects/MZFinance.woa/wa/`</br>`retireVPPUserSrv"`.|
 |`getUsersSrvUrl`|`"https://vpp.itunes.apple.com/WebObjects/MZFinance.woa/wa/`</br>`getVPPUsersSrv"`.|
 |`getLicensesSrvUrl`|`"https://vpp.itunes.apple.com/WebObjects/MZFinance.woa/wa/`</br>`getVPPLicensesSrv"`.|
+|`getVPPAssetsSrvUrl`|`"https://vpp.itunes.apple.com/WebObjects/MZFinance.woa/wa/`</br>`getVPPAssetsSrv”`.|
+|`manageVPPLicensesByAdamIdSrvUrl`|`"https://vpp.itunes.apple.com/WebObjects/MZFinance.woa/wa/`</br>`manageVPPLicensesByAdamIdSrv"`.|
 |`associateLicenseSrvUrl`|`"https://vpp.itunes.apple.com/WebObjects/MZFinance.woa/wa/`</br>`associateVPPLicenseWithVPPUserSrv"`.|
 |`disassociateLicenseSrvUrl`|`"https://vpp.itunes.apple.com/WebObjects/MZFinance.woa/wa/`</br>`disassociateVPPLicenseFromVPPUserSrv"`.|
 |`errorCodes`|`
@@ -1241,6 +1228,8 @@ The response contains the URLs to be used to register VPP users and other web se
   
 
 The following are examples of requests and responses of each service. The requests are made with the curl command from the command line. The response JSON are all formatted with beautifier to facilitate viewing. They were one string without line breaks when received from the web services.  
+
+WIth the introduction of location based libraries, the API responses may differ depending on whether the request was made with a new location-based token or the legacy user-based token. Where responses differ, examples of both are provided.  
 
   
 
@@ -1378,6 +1367,62 @@ curl https://vpp.itunes.apple.com/WebObjects/MZFinance.woa/wa/VPPServiceConfigSr
         {
             "errorMessage":"The sToken is inapplicable to batchToken",
             "errorNumber":9629
+        },
+        {
+            "errorMessage":"Too many recent identical calls were made to assign a license that failed due to license being already assigned to the user or device",
+            "errorNumber":9630
+        },
+        {
+            "errorMessage":"Too many recent identical calls were made to assign a license that failed due to no license being being available.",
+            "errorNumber":9631
+        },
+        {
+            "errorMessage":"Too many recent calls to manage licenses with identical requests",
+            "errorNumber":9632
+        },
+        {
+            "errorMessage":"No batch data recovered for token.",
+            "errorNumber":9633
+        },
+        {
+            "errorMessage":"Service removed.",
+            "errorNumber":9634
+        },
+        {
+            "errorMessage":"Apple ID can't be associated with registered user.",
+            "errorNumber":9635
+        },
+        {
+            "errorMessage":"No registered user found.",
+            "errorNumber":9636
+        },
+        {
+            "errorMessage":"Facilitator operation not allowed.",
+            "errorNumber":9637
+        },
+        {
+            "errorMessage":"Facilitator missing Organization ID.",
+            "errorNumber":9638
+        },
+        {
+            "errorMessage":"Facilitator group member not found.",
+            "errorNumber":9639
+        },
+        {
+            "errorMessage":"Facilitator group member look-up failed.",
+            "errorNumber":9640
+        },
+        {
+            "errorMessage":"Apple ID already associated to registered user.",
+            "errorNumber":9641
+        },
+        {
+            "errorMessage":"Apple ID passed cannot be used at this time because it's a VPP manager and the iTunes Store account not yet created and such creation requires user to agree to Terms.",
+            "errorNumber":9642
+        },
+        {
+            "errorMessage":"Volume Purchase Program is currently in maintenance mode. Please try again later.",
+            "errorNumber":9644
         }
     ],
     "getLicensesSrvUrl":"https://vpp.itunes.apple.com/ WebObjects/MZFinance.woa/wa/getVPPLicensesSrv",
@@ -1615,95 +1660,6 @@ The response:
 
   
 
-### Request to associateVPPLicenseWithVPPUserSrv
-  
-
-Content of the associate_license.json file:  
-
-```
-{"userId": 2, "licenseId": 4, "sToken":
-"h40Gte9aQnZFDNM39IUkRPCsQDxBxbZB4Wy34pxefOuQkeeb3h2a5Rlopo4KDn3MrFKf4CM3OY+
-WGAoZ1cD6iZ6yzsMk1+5PVBNc66YS6ZQ=" }
-```  
-
-The command:  
-
-```
-curl https://vpp.itunes.apple.com/ WebObjects/MZFinance.woa/wa/associateVPPLicenseWithVPPUserSrv -d @associate_license.json
-```  
-
-The response:  
-
-```
-{
-   "status":0,
-   "license":{
-       "licenseId":4,
-       "adamId":497799835,
-       "productTypeId":7,
-       "pricingParam":"STDQ",
-       "productTypeName":"Software",
-       "isIrrevocable":false,
-       "userId": 2,
-       "clientUserIdStr":"200007",
-       "itsIdHash":"C2Wwd8LcIaE2v6f2/mvu82Gs/Lc="
-   },
-   "user":{
-       "userId":2,
-       "email":"user2@test.com",
-       "clientUserIdStr":"200007",
-       "status":"Associated",
-       "itsIdHash":"C2Wwd8LcIaE2v6f2/mvu82Gs/Lc="
-   }
-}
-```  
-
-  
-
-### Request to disassociateVPPLicenseFromVPPUserSrv
-  
-
-Content of the `disassociate_license.json` file:  
-
-```
-{"userId": 2, "licenseId": 4, "sToken":
-"h40Gte9aQnZFDNM39IUkRPCsQDxBxbZB4Wy34pxefOuQkeeb3h2a5Rlopo4KDn3MrFKf4CM3OY+
-WGAoZ1cD6iZ6yzsMk1+5PVBNc66YS6ZQ=" }
-```  
-
-The command:  
-
-```
-curl https://vpp.itunes.apple.com/ WebObjects/MZFinance.woa/wa/disassociateVPPLicenseFromVPPUserSrv -d
-@disassociate_license.json
-```  
-
-The response:  
-
-```
-{
-   "status":0,
-   "license":{
-      "licenseId":4,
-      "adamId":497799835,
-      "productTypeId":7,
-      "pricingParam":"STDQ",
-      "isIrrevocable":false,
-      "productTypeName":"Software",
-   },
-   "user":{
-      "userId":2,
-      "email":"user2@test.com",
-      "clientUserIdStr":"user2@test.com",
-      "itsIdHash":"C2Wwd8LcIaE2v6f2/mvu82Gs/Lc="
-      "status":"Associated",
-      "inviteCode":"a5ea54beb2954d4dadc65cf19cee5e58",
-   }
-}
-```  
-
-  
-
 ### Request to editVPPUserSrv
   
 
@@ -1785,7 +1741,293 @@ The response:
 }
 ```  
 
-[Next](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/6.5-MDM_Rosters/MDM_Rosters.html)[Previous](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/4-Profile_Management/ProfileManagement.html)
+  
+
+### Request to getVPPAssetsSrv
+  
+
+The command:  
+
+```
+curl https://vpp.itunes.apple.com/ WebObjects/MZFinance.woa/wa/getVPPAssetsSrv -d @get_assets.json
+```  
+
+The response using a location token:  
+
+```
+{
+   "assets": [
+       {
+           "adamIdStr": "748057890",
+           "assignedCount": 0,
+           "availableCount": 25,
+           "deviceAssignable": true,
+           "isIrrevocable": false,
+           "pricingParam": "STDQ",
+           "productTypeId": 8,
+           "productTypeName": "Application",
+           "retiredCount": 0,
+           "totalCount": 25
+       },
+       {
+           "adamIdStr": "635851129",
+           "assignedCount": 0,
+           "availableCount": 40,
+           "deviceAssignable": true,
+           "isIrrevocable": false,
+           "pricingParam": "STDQ",
+           "productTypeId": 8,
+           "productTypeName": "Application",
+           "retiredCount": 0,
+           "totalCount": 40
+       },
+       {
+           "adamIdStr": "284035177",
+           "assignedCount": 0,
+           "availableCount": 0,
+           "deviceAssignable": false,
+           "isIrrevocable": false,
+           "pricingParam": "STDQ",
+           "productTypeId": 8,
+           "productTypeName": "Application",
+           "retiredCount": 10,
+           "totalCount": 0
+       }
+   ],
+   "location": {
+       "locationId": 22222222222,
+       "locationName": “LocationName”
+   },
+   "status": 0,
+   "totalCount": 3,
+   "uId": "103614"
+}
+```  
+
+The response using a legacy token (migrated or non-migrated to VPP in ASM account):  
+
+```
+{
+   "assets": [
+       {
+           "adamIdStr": "748057890",
+           "assignedCount": 0,
+           "availableCount": 10,
+           "deviceAssignable": true,
+           "isIrrevocable": false,
+           "pricingParam": "STDQ",
+           "productTypeId": 8,
+           "productTypeName": "Application",
+           "retiredCount": 0,
+           "totalCount": 10
+       }
+   ],
+   "status": 0,
+   "totalCount": 1,
+   "uId": "103299"
+}
+```  
+
+  
+
+### Request to VPPClientConfigSrv 
+  
+
+The command:  
+
+```
+curl https://vpp.itunes.apple.com/ WebObjects/MZFinance.woa/wa/VPPClientConfigSrv -d @client_config.json
+```  
+
+The response using a location token:  
+
+```
+{
+   "appleId": “testuser1@test.org”,
+   "countryCode": "US",
+   "email": "testuser1@test.org",
+   "location": {
+       "locationId": 22222222222,
+       "locationName": “LocationName”
+   },
+   "organizationId": 2000000001630588,
+   "organizationIdHash": "0420773fb70e423ef77916dee3b381987e6c3fb4d8f19d1fd071b0c48c0cd380",
+   "status": 0,
+   "uId": "103614"
+}
+```  
+
+The response using a legacy token for an account which has not been migrated to VPP in ASM:  
+
+```
+{
+   "apnToken": "4IbRbXpge3ySkchugcf",
+   "appleId": “test1@test.org”,
+   "clientContext": "{\"guid\":\"b92\",\"hostname\”:\”test.test.org\”,\”ac2\":1}",
+   "countryCode": "US",
+   "email": “test1@test.org”,
+   "facilitatorMemberId": 123456,
+   "libraryId": 123456,
+   "organizationId": 2222222222,
+   “organizationIdHash”:”2555009cd3e53bd69b50723d2baec9f49558cbd90de2a1aa420dacdbff12cc8e",
+   "status": 0,
+   "uId": “123456”
+}
+```  
+
+The response using a legacy token for an account which has been migrated to VPP in ASM:  
+
+```
+{
+   "appleId": “test2@test.org”,
+   "countryCode": "US",
+   "email": "test2@test.org",
+   "facilitatorMemberId": 11111,
+   "libraries": [
+       {
+           "appleId": “test3@test3.org”,
+           "email": "test3@test3.org",
+           "libraryId": 11112,
+           "location": {
+               "locationId": 2222221,
+               "locationName": “Elementary School”
+           }
+       },
+       {
+           "appleId": “test4@test.org”,
+           "email": "test4@test.org",
+           "libraryId": 11113,
+           "location": {
+               "locationId": 2222221,
+               "locationName": “Elementary School”
+           }
+       },
+       {
+           "appleId": “test2@test.org”,
+           "email": "test2@test.org",
+           "libraryId": 11111,
+           "location": {
+               "locationId": 2222221,
+               "locationName": “Elementary School”
+           }
+       },
+       {
+           "appleId": “test2@test.org”,
+           "email": "test2@test.org",
+           "libraryId": 11114,
+           "location": {
+               "locationId": 2222222,
+               "locationName": “Middle School”
+           }
+       },
+     "libraryId": 11111,
+     "organizationId": 200000000,
+     "organizationIdHash": "7a002fe8b88fc00738c4d74382b94a1e464b65",
+     "status": 0,
+     "uId": "11111”,
+     "vppGroupMembers": [
+       {
+           "appleId": "test3@test3.org",
+           "email": "test3@test3.org",
+           "facilitatorMemberId": 11112,
+           "locationId": 2222221,
+           "locationName": “Elementary School“,
+           "organizationId": 200000000
+       },
+       {
+           "appleId": "test4@test.org",
+           "email": "test4@test.org",
+           "facilitatorMemberId": 11113,
+           "locationId": 2222221,
+           "locationName": "Elementary School",
+           "organizationId": 200000000
+       },
+       {
+           "appleId": "test2@test.org",
+           "email": "test2@test.org",
+           "facilitatorMemberId": 11111,
+           "locationId": 2222221,
+           "locationName": "Elementary School",
+           "organizationId": 200000000
+       },
+       {
+           "appleId": "test2@test.org",
+           "email": "test2@test.org",
+           "facilitatorMemberId": 11114,
+           "locationId": 2222222,
+           "locationName": “Middle School“,
+           "organizationId": 200000000
+       }
+    ]
+}
+```  
+
+  
+
+### Request to manageVPPLicensesByAdamIdSrv
+  
+
+The command:  
+
+```
+curl https://vpp.itunes.apple.com/ WebObjects/MZFinance.woa/wa/manageVPPLicensesByAdamIdSrv -d @manage.json
+```  
+
+The response using `associateClientUserIdStrs`:  
+
+```
+{
+   "associations": [
+      {
+         "adamId": 869183446,
+         "clientUserIdStr": "userIdStr",
+         "isIrrevocable": false,
+         "licenseId": 840998,
+         "pricingParam": "STDQ",
+         "productTypeId": 8,
+         "productTypeName": "Application",
+         "status": "Associated",
+         "userId": 204701
+      }
+   ],
+   "status": 0,
+   “uId”:”111123”
+}
+```  
+
+The response using `associateSerialNumbers`:  
+
+```
+{
+   "associations": [
+      {
+         "adamId": 869183446,
+         "isIrrevocable": false,
+         "licenseId": 840999,
+         "pricingParam": "STDQ",
+         "productTypeId": 8,
+         "productTypeName": "Application",
+         "serialNumber": "MERD1",
+         "status": "Associated"
+      },
+      {
+         "adamId": 869183446,
+         "isIrrevocable": false,
+         "licenseId": 841000,
+         "pricingParam": "STDQ",
+         "productTypeId": 8,
+         "productTypeName": "Application",
+         "serialNumber": "MERD2",
+         "status": "Associated"
+      }
+   ],
+   "status": 0,
+   “uId”:”11234”
+}
+ 
+```  
+
+[Next](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/ManagedAppsUpdates/ManagedAppsUpdates.html)[Previous](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/4-Profile_Management/ProfileManagement.html)
 
   
 

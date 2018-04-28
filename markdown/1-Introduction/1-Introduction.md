@@ -5,7 +5,6 @@
 
 [Next](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/2-MDM_Check_In_Protocol/MDM_Check_In_Protocol..html)
   
-**Important:** This documentation contains preliminary information about an API or technology in development. This information is subject to change, and software implemented according to this documentation should be tested with final operating system software.  
 The Mobile Device Management (MDM) protocol provides a way for system administrators to send device management commands to managed iOS devices running iOS 4 and later, macOS devices running macOS v10.7 and later, and Apple TV devices running iOS 7 (Apple TV software 6.0) and later. Through the MDM service, an IT administrator can inspect, install, or remove profiles; remove passcodes; and begin secure erase on a managed device.  
 The MDM protocol is built on top of HTTP, transport layer security (TLS), and push notifications. The related MDM check-in protocol provides a way to delegate the initial registration process to a separate server.  
 MDM uses the Apple Push Notification Service (APNS) to deliver a “wake up” message to a managed device. The device then connects to a predetermined web service to retrieve commands and return results.  

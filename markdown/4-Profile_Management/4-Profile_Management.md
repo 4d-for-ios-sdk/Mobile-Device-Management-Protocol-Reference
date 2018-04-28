@@ -871,7 +871,7 @@ In addition to the standard errors listed in [Common Error Codes](https://develo
 #### Disown Devices
   
 
-Tells Apple’s servers that your organization no longer owns one or more devices. **This request is deprecated and may not be supported in the future.**  
+Tells Apple’s servers that your organization no longer owns one or more devices.  
 
 > **Warning:** Disowning a device is a permanent action.  After a short grace period, a disowned device cannot be reassigned to an MDM server in your organization.  
   
@@ -1116,10 +1116,10 @@ To retrieve the bypass code, the MDM server uses the `ActivationLockBypassCode` 
   
 
 > **Note:** 
-The activation lock bypass code must be requested before the device receives the [MDMOptions](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/3-MDM_Protocol/MDM_Protocol.html#//apple_ref/doc/uid/TP40017387-CH3-SW87) setting that enables Activation Lock. If this sequence is not followed the user may lock the device before MDM installs the bypass, in which case the bypass code will not work.  
+The activation lock bypass code must be requested before the device receives the [MDMOptions Sets Options Related to the MDM Protocol](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/3-MDM_Protocol/MDM_Protocol.html#//apple_ref/doc/uid/TP40017387-CH3-SW87) setting that enables Activation Lock. If this sequence is not followed the user may lock the device before MDM installs the bypass, in which case the bypass code will not work.  
   
 
-If a bypass code has never been created on the device, a new one is created when this query is received. Either way the bypass code is returned, if possible:  
+If a bypass code has never been created on the device, a new one is created when this query is received. If you have cleared the bypass code, or it has expired, the server will receive an error noting that the code has expired. The error code will be 12085.  
 
 
 |Key|Type|Content|
@@ -1247,8 +1247,13 @@ Following is a sample of code that generates both an escrow key and a bypass cod
     CCKeyDerivationPBKDF(kCCPBKDF2, rawBytes, RANDOM_BYTES_LENGTH, salt, SALT_LENGTH,
         kCCPRFHmacAlgSHA256, 50000, hash, CC_SHA256_DIGEST_LENGTH);
  
-    if (outHash) *outHash = [NSData dataWithBytes:hash
-        length:MCBYPASS_HASH_LENGTH].hexString;
+    if (outHash) {
+        int                 len = MCBYPASS_HASH_LENGTH;
+        NSMutableString*    str = [NSMutableString stringWithCapacity:MCBYPASS_HASH_LENGTH * 2 + 1];
+        const uint8_t*      p   = (const uint8_t*)hash;
+        while (len-- > 0) [str appendFormat:@"%02X", *p++];
+        *outHash = [NSString stringWithString:str];
+    }
  
     int         outputCharacterCount = 0;
     const int*  nextDashPosition     = kDashPositions;
@@ -1348,10 +1353,12 @@ The request body should contain a JSON dictionary with the following keys:
 |`support_email_address`|Optional. String. A support email address for the organization. This key is valid in X-Server-Protocol-Version 2 and later.|
 |`org_magic`|A string that uniquely identifies various services that are managed by a single organization.|
 |`anchor_certs`|Optional. Array of strings. Each string should contain a DER-encoded certificate converted to Base64 encoding. If provided, these certificates are used as trusted anchor certificates when evaluating the trust of the connection to the MDM server URL. Otherwise, the built-in root certificates are used.|
-|`supervising_host_certs`|Optional. Array of strings. Each string contains a DER-encoded certificate converted to Base64 encoding. If provided, the device will continue to pair with a host possessing one of these certificates even when `allow_pairing` is set to `false`.|
-|`skip_setup_items`|Optional. Array of strings. A list of setup panes to skip. The array may contain one or more of the following strings:<ul><li>`AppleID`: Disables signing in to Apple ID and iCloud.</li><li>`Biometric`: Skips Touch ID setup.</li><li>`Diagnostics`: Disables automatically sending diagnostic information.</li><li>`DisplayTone`: Skips DisplayTone setup.</li><li>`Location`: Disables Location Services.</li><li>`Passcode`: Hides and disables the passcode pane.</li><li>`Payment`: Skips Apple Pay setup.</li><li>`Restore`: Disables restoring from backup.</li><li>`Siri`: Disables Siri.</li><li>`TOS`: Skips Terms and Conditions.</li><li>`Zoom`: Skips zoom setup.</li><li>`Android`: If the Restore pane is not skipped, removes Move from Android option from it.</li><li>`HomeButtonSensitivity`: Skips the Home Button screen in iOS.</li><li>`Keyboard`: Skips the keyboard selection screen in iOS.</li><li>`OnBoarding`: Skips on-boarding informational screens for user education (“Cover Sheet, Multitasking & Control Center”, for example) in iOS.</li><li>`WatchMigraton`: Skips the screen for watch migration in iOS.</li><li>`FileVault`: Disables FileVault Setup Assistant screen in macOS.</li><li>`iCloudDiagnostics`: Skips iCloud Analytics screen in macOS.</li><li>`Registration`: Disables registration screen in macOS.</li><li>`ScreenSaver`: Skips the tvOS screen about using aerial screensavers in ATV.</li><li>`TapToSetup`: Skips the Tap To Set Up option in ATV about using an iOS device to set up your ATV (instead of entering all your account information and setting choices separately).</li><li>`TVHomeScreenSync`: Skips TV home screen layout sync screen in tvOS.</li><li>`TVProviderSignIn`: Skips the TV provider sign in screen in tvOS.</li></ul>|
+|`supervising_host_certs`|Optional. Array of strings. Each string contains a DER-encoded certificate converted to Base64 encoding. If provided, the device will continue to pair with a host possessing one of these certificates even when `allow_pairing` is set to `false`. If `is_supervised` is `false`, this list is unused. |
+|`skip_setup_items`|Optional. Array of strings. A list of setup panes to skip. The array may contain one or more of the following strings:<ul><li>`AppleID`: Skips Apple ID setup.</li><li>`Biometric`: Skips Touch ID setup.</li><li>`Diagnostics`: Disables automatically sending diagnostic information.</li><li>`DisplayTone`: Skips DisplayTone setup.</li><li>`Location`: Disables Location Services.</li><li>`Passcode`: Hides and disables the passcode pane.</li><li>`Payment`: Skips Apple Pay setup.</li><li>`Privacy`: Skips privacy pane.</li><li>`Restore`: Disables restoring from backup.</li><li>`Siri`: Disables Siri.</li><li>`TOS`: Skips Terms and Conditions.</li><li>`Zoom`: Skips zoom setup.</li><li>`Android`: If the Restore pane is not skipped, removes Move from Android option from it.</li><li>`HomeButtonSensitivity`: Skips the Home Button screen in iOS.</li><li>`OnBoarding`: Skips on-boarding informational screens for user education (“Cover Sheet, Multitasking & Control Center”, for example) in iOS.</li><li>`WatchMigration`: Skips the screen for watch migration in iOS.</li><li>`FileVault`: Disables FileVault Setup Assistant screen in macOS.</li><li>`iCloudDiagnostics`: Skips iCloud Analytics screen in macOS.</li><li>`iCloudStorage`: Skips iCloud Documents and Desktop screen in macOS.</li><li>`Registration`: Disables registration screen in macOS.</li><li>`ScreenSaver`: Skips the tvOS screen about using aerial screensavers in ATV.</li><li>`TapToSetup`: Skips the Tap To Set Up option in ATV about using an iOS device to set up your ATV (instead of entering all your account information and setting choices separately).</li><li>`TVHomeScreenSync`: Skips TV home screen layout sync screen in tvOS.</li><li>`TVProviderSignIn`: Skips the TV provider sign in screen in tvOS.</li><li>`TVRoom`: Skips the “Where is this Apple TV?” screen in tvOS.</li></ul>|
 |`department`|Optional. String. The user-defined department or location name.|
 |`devices`|Array of strings containing device serial numbers. (May be empty.)|
+|`language`|Optional. String. A language designator is a code that represents a language. Available on tvOS.</br> Use the two-letter ISO 639-1 standard (preferred) or the three-letter ISO 639-2 standard. If an ISO 639-1 code is not available for a particular language, use the ISO 639-2 code instead.</br>[Apple Developer Localization Documentation](https://developer.apple.com/library/content/documentation/MacOSX/Conceptual/BPInternational/LanguageandLocaleIDs/LanguageandLocaleIDs.html)</br>Example two-letter: en, fr, ja</br>Example three-letter: eng, fre, jpn, haw|
+|`region`|Optional. String. A region designator is a code that represents a country. Available on tvOS.</br>Use the ISO 3166-1 standard, a two-letter, capitalized code.</br>Examples: US, GB, AU|
   
 
 For example, your MDM server might make the following request:  
@@ -1461,6 +1468,8 @@ In addition to the standard errors listed in [Common Error Codes](https://develo
 * A `400` error code with `SUPPORT_EMAIL_INVALID` in the response body indicates that the `support_email_address` field in the uploaded profile is either empty or has exceeded the maximum allowed length (250 UTF-8 characters). 
 
 * A `400` error code with `MAGIC_INVALID` in the response body indicates that the `magic` field in the uploaded profile is either empty or has exceeded the maximum allowed length (256 UTF-8 characters). 
+
+* A `400` error code with `LOCALE_INVALID` in the response body indicates that the local fields combination is invalid or unsupported. 
   
 
   
@@ -1559,7 +1568,7 @@ In addition to the standard errors listed in [Common Error Codes](https://develo
 
 * A `400` error with `PROFILE_UUID_REQUIRED` in the body of the response indicates that the request did not contain a profile ID. 
 
-* A `404` error with `PROFILE_NOT_FOUND` in the body of the response indicates that the profile with the specified UUID could not be found. 
+* A `404` error with `NOT_FOUND` in the body of the response indicates that the profile with the specified UUID could not be found. 
   
 
   
@@ -1629,9 +1638,11 @@ In response, the MDM enrollment service returns a JSON dictionary with the follo
 |`support_email_address`|Optional. String. A support email address for the organization. This key is valid in X-Server-Protocol-Version 2 and later.|
 |`org_magic`|A string that uniquely identifies various services that are managed by a single organization.|
 |`anchor_certs`|Optional. Array of strings. Each string should contain a DER-encoded certificate converted to Base64 encoding. If provided, these certificates are used as trusted anchor certificates when evaluating the trust of the connection to the MDM server URL. Otherwise, the built-in root certificates are used.|
-|`supervising_host_certs`|Optional. Array of strings. Each string contains a DER-encoded certificate converted to Base64 encoding. If provided, the device will continue to pair with a host possessing one of these certificates even when `allow_pairing` is set to `false`.|
-|`skip_setup_items`|Optional. Array of strings. A list of setup panes to skip. The array may contain one or more of the following strings:<ul><li>`Passcode`: Hides and disables the passcode pane.</li><li>`Registration`: Disables registration screen in macOS.</li><li>`Location`: Disables Location Services.</li><li>`Restore`: Disables restoring from backup.</li><li>`AppleID`: Disables signing in to Apple ID and iCloud.</li><li>`Biometric`: Skips Touch ID setup.</li><li>`Payment`: Skips Apple Pay setup.</li><li>`Zoom`: Skips zoom setup.</li><li>`DisplayTone`: Skips DisplayTone setup.</li><li>`Android`: If the Restore pane is not skipped, removes Move from Android option from it.</li><li>`TOS`: Skips Terms and Conditions.</li><li>`Siri`: Disables Siri.</li><li>`Diagnostics`: Disables automatically sending diagnostic information.</li><li>`HomeButtonSensitivity`: Skips the Home Button screen.</li><li>`FileVault`: Disables FileVault Setup Assistant screen.</li><li>`TapToSetup`: Skips the Tap To Set Up option in ATV about using an iOS device to set up your ATV (instead of entering all your account information and setting choices separately).</li><li>`ScreenSaver`: Skips the tvOS screen about using aerial screensavers in ATV (instead of entering all your account information and setting choices separately).</li></ul>|
+|`supervising_host_certs`|Optional. Array of strings. Each string contains a DER-encoded certificate converted to Base64 encoding. If provided, the device will continue to pair with a host possessing one of these certificates even when `allow_pairing` is set to `false`. If `is_supervised` is `false`, this list is unused. |
+|`skip_setup_items`|Optional. Array of strings. A list of setup panes to skip. The array may contain one or more of the following strings:<ul><li>`AppleID`: Skips Apple ID setup.</li><li>`Biometric`: Skips Touch ID setup.</li><li>`Diagnostics`: Disables automatically sending diagnostic information.</li><li>`DisplayTone`: Skips DisplayTone setup.</li><li>`Location`: Disables Location Services.</li><li>`Passcode`: Hides and disables the passcode pane.</li><li>`Payment`: Skips Apple Pay setup.</li><li>`Privacy`: Skips privacy pane.</li><li>`Restore`: Disables restoring from backup.</li><li>`Siri`: Disables Siri.</li><li>`TOS`: Skips Terms and Conditions.</li><li>`Zoom`: Skips zoom setup.</li><li>`Android`: If the Restore pane is not skipped, removes Move from Android option from it.</li><li>`HomeButtonSensitivity`: Skips the Home Button screen in iOS.</li><li>`OnBoarding`: Skips on-boarding informational screens for user education (“Cover Sheet, Multitasking & Control Center”, for example) in iOS.</li><li>`WatchMigration`: Skips the screen for watch migration in iOS.</li><li>`FileVault`: Disables FileVault Setup Assistant screen in macOS.</li><li>`iCloudDiagnostics`: Skips iCloud Analytics screen in macOS.</li><li>`iCloudStorage`: Skips iCloud Documents and Desktop screen in macOS.</li><li>`Registration`: Disables registration screen in macOS.</li><li>`ScreenSaver`: Skips the tvOS screen about using aerial screensavers in ATV.</li><li>`TapToSetup`: Skips the Tap To Set Up option in ATV about using an iOS device to set up your ATV (instead of entering all your account information and setting choices separately).</li><li>`TVHomeScreenSync`: Skips TV home screen layout sync screen in tvOS.</li><li>`TVProviderSignIn`: Skips the TV provider sign in screen in tvOS.</li><li>`TVRoom`: Skips the “Where is this Apple TV?” screen in tvOS.</li></ul>|
 |`department`|Optional. The user-defined department or location name.|
+|`language`|Optional. String. A language designator is a code that represents a language. Use the two-letter ISO 639-1 standard (preferred) or the three-letter ISO 639-2 standard. If an ISO 639-1 code is not available for a particular language, use the ISO 639-2 code instead.</br>[Apple Developer Localization Documentation](https://developer.apple.com/library/content/documentation/MacOSX/Conceptual/BPInternational/LanguageandLocaleIDs/LanguageandLocaleIDs.html)</br>Example two-letter: en, fr, ja</br>Example three-letter: eng, fre, jpn, haw|
+|`region`|Optional. String. A region designator is a code that represents a country. Use the ISO 3166-1 standard, a two-letter, capitalized code.</br>Examples: US, GB, AU|
   
 
 For example, the server might send a response that looks like this:  
@@ -1691,7 +1702,9 @@ In addition to the standard errors listed in [Common Error Codes](https://develo
 
 * A `400` error with `PROFILE_UUID_REQUIRED` in the body of the response indicates that the request did not contain a profile UUID. 
 
-* A `404` error with `PROFILE_NOT_FOUND` in the body of the response indicates that a profile cannot be found for the requested profile UUID. 
+* A `404` error with `NOT_FOUND` in the body of the response indicates that a profile cannot be found for the requested profile UUID. 
+
+* A `400` error code with `LOCALE_INVALID` in the response body indicates that the local fields combination is invalid or unsupported. 
   
 
   

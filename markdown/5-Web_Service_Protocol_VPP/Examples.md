@@ -8,6 +8,8 @@
 
 The following are examples of requests and responses of each service. The requests are made with the curl command from the command line. The response JSON are all formatted with beautifier to facilitate viewing. They were one string without line breaks when received from the web services.  
 
+WIth the introduction of location based libraries, the API responses may differ depending on whether the request was made with a new location-based token or the legacy user-based token. Where responses differ, examples of both are provided.  
+
   
 
 ### Request to VPPServiceConfigSrv
@@ -144,6 +146,62 @@ curl https://vpp.itunes.apple.com/WebObjects/MZFinance.woa/wa/VPPServiceConfigSr
         {
             "errorMessage":"The sToken is inapplicable to batchToken",
             "errorNumber":9629
+        },
+        {
+            "errorMessage":"Too many recent identical calls were made to assign a license that failed due to license being already assigned to the user or device",
+            "errorNumber":9630
+        },
+        {
+            "errorMessage":"Too many recent identical calls were made to assign a license that failed due to no license being being available.",
+            "errorNumber":9631
+        },
+        {
+            "errorMessage":"Too many recent calls to manage licenses with identical requests",
+            "errorNumber":9632
+        },
+        {
+            "errorMessage":"No batch data recovered for token.",
+            "errorNumber":9633
+        },
+        {
+            "errorMessage":"Service removed.",
+            "errorNumber":9634
+        },
+        {
+            "errorMessage":"Apple ID can't be associated with registered user.",
+            "errorNumber":9635
+        },
+        {
+            "errorMessage":"No registered user found.",
+            "errorNumber":9636
+        },
+        {
+            "errorMessage":"Facilitator operation not allowed.",
+            "errorNumber":9637
+        },
+        {
+            "errorMessage":"Facilitator missing Organization ID.",
+            "errorNumber":9638
+        },
+        {
+            "errorMessage":"Facilitator group member not found.",
+            "errorNumber":9639
+        },
+        {
+            "errorMessage":"Facilitator group member look-up failed.",
+            "errorNumber":9640
+        },
+        {
+            "errorMessage":"Apple ID already associated to registered user.",
+            "errorNumber":9641
+        },
+        {
+            "errorMessage":"Apple ID passed cannot be used at this time because it's a VPP manager and the iTunes Store account not yet created and such creation requires user to agree to Terms.",
+            "errorNumber":9642
+        },
+        {
+            "errorMessage":"Volume Purchase Program is currently in maintenance mode. Please try again later.",
+            "errorNumber":9644
         }
     ],
     "getLicensesSrvUrl":"https://vpp.itunes.apple.com/ WebObjects/MZFinance.woa/wa/getVPPLicensesSrv",
@@ -381,95 +439,6 @@ The response:
 
   
 
-### Request to associateVPPLicenseWithVPPUserSrv
-  
-
-Content of the associate_license.json file:  
-
-```
-{"userId": 2, "licenseId": 4, "sToken":
-"h40Gte9aQnZFDNM39IUkRPCsQDxBxbZB4Wy34pxefOuQkeeb3h2a5Rlopo4KDn3MrFKf4CM3OY+
-WGAoZ1cD6iZ6yzsMk1+5PVBNc66YS6ZQ=" }
-```  
-
-The command:  
-
-```
-curl https://vpp.itunes.apple.com/ WebObjects/MZFinance.woa/wa/associateVPPLicenseWithVPPUserSrv -d @associate_license.json
-```  
-
-The response:  
-
-```
-{
-   "status":0,
-   "license":{
-       "licenseId":4,
-       "adamId":497799835,
-       "productTypeId":7,
-       "pricingParam":"STDQ",
-       "productTypeName":"Software",
-       "isIrrevocable":false,
-       "userId": 2,
-       "clientUserIdStr":"200007",
-       "itsIdHash":"C2Wwd8LcIaE2v6f2/mvu82Gs/Lc="
-   },
-   "user":{
-       "userId":2,
-       "email":"user2@test.com",
-       "clientUserIdStr":"200007",
-       "status":"Associated",
-       "itsIdHash":"C2Wwd8LcIaE2v6f2/mvu82Gs/Lc="
-   }
-}
-```  
-
-  
-
-### Request to disassociateVPPLicenseFromVPPUserSrv
-  
-
-Content of the `disassociate_license.json` file:  
-
-```
-{"userId": 2, "licenseId": 4, "sToken":
-"h40Gte9aQnZFDNM39IUkRPCsQDxBxbZB4Wy34pxefOuQkeeb3h2a5Rlopo4KDn3MrFKf4CM3OY+
-WGAoZ1cD6iZ6yzsMk1+5PVBNc66YS6ZQ=" }
-```  
-
-The command:  
-
-```
-curl https://vpp.itunes.apple.com/ WebObjects/MZFinance.woa/wa/disassociateVPPLicenseFromVPPUserSrv -d
-@disassociate_license.json
-```  
-
-The response:  
-
-```
-{
-   "status":0,
-   "license":{
-      "licenseId":4,
-      "adamId":497799835,
-      "productTypeId":7,
-      "pricingParam":"STDQ",
-      "isIrrevocable":false,
-      "productTypeName":"Software",
-   },
-   "user":{
-      "userId":2,
-      "email":"user2@test.com",
-      "clientUserIdStr":"user2@test.com",
-      "itsIdHash":"C2Wwd8LcIaE2v6f2/mvu82Gs/Lc="
-      "status":"Associated",
-      "inviteCode":"a5ea54beb2954d4dadc65cf19cee5e58",
-   }
-}
-```  
-
-  
-
 ### Request to editVPPUserSrv
   
 
@@ -549,4 +518,290 @@ The response:
       ]
    }
 }
+```  
+
+  
+
+### Request to getVPPAssetsSrv
+  
+
+The command:  
+
+```
+curl https://vpp.itunes.apple.com/ WebObjects/MZFinance.woa/wa/getVPPAssetsSrv -d @get_assets.json
+```  
+
+The response using a location token:  
+
+```
+{
+   "assets": [
+       {
+           "adamIdStr": "748057890",
+           "assignedCount": 0,
+           "availableCount": 25,
+           "deviceAssignable": true,
+           "isIrrevocable": false,
+           "pricingParam": "STDQ",
+           "productTypeId": 8,
+           "productTypeName": "Application",
+           "retiredCount": 0,
+           "totalCount": 25
+       },
+       {
+           "adamIdStr": "635851129",
+           "assignedCount": 0,
+           "availableCount": 40,
+           "deviceAssignable": true,
+           "isIrrevocable": false,
+           "pricingParam": "STDQ",
+           "productTypeId": 8,
+           "productTypeName": "Application",
+           "retiredCount": 0,
+           "totalCount": 40
+       },
+       {
+           "adamIdStr": "284035177",
+           "assignedCount": 0,
+           "availableCount": 0,
+           "deviceAssignable": false,
+           "isIrrevocable": false,
+           "pricingParam": "STDQ",
+           "productTypeId": 8,
+           "productTypeName": "Application",
+           "retiredCount": 10,
+           "totalCount": 0
+       }
+   ],
+   "location": {
+       "locationId": 22222222222,
+       "locationName": “LocationName”
+   },
+   "status": 0,
+   "totalCount": 3,
+   "uId": "103614"
+}
+```  
+
+The response using a legacy token (migrated or non-migrated to VPP in ASM account):  
+
+```
+{
+   "assets": [
+       {
+           "adamIdStr": "748057890",
+           "assignedCount": 0,
+           "availableCount": 10,
+           "deviceAssignable": true,
+           "isIrrevocable": false,
+           "pricingParam": "STDQ",
+           "productTypeId": 8,
+           "productTypeName": "Application",
+           "retiredCount": 0,
+           "totalCount": 10
+       }
+   ],
+   "status": 0,
+   "totalCount": 1,
+   "uId": "103299"
+}
+```  
+
+  
+
+### Request to VPPClientConfigSrv 
+  
+
+The command:  
+
+```
+curl https://vpp.itunes.apple.com/ WebObjects/MZFinance.woa/wa/VPPClientConfigSrv -d @client_config.json
+```  
+
+The response using a location token:  
+
+```
+{
+   "appleId": “testuser1@test.org”,
+   "countryCode": "US",
+   "email": "testuser1@test.org",
+   "location": {
+       "locationId": 22222222222,
+       "locationName": “LocationName”
+   },
+   "organizationId": 2000000001630588,
+   "organizationIdHash": "0420773fb70e423ef77916dee3b381987e6c3fb4d8f19d1fd071b0c48c0cd380",
+   "status": 0,
+   "uId": "103614"
+}
+```  
+
+The response using a legacy token for an account which has not been migrated to VPP in ASM:  
+
+```
+{
+   "apnToken": "4IbRbXpge3ySkchugcf",
+   "appleId": “test1@test.org”,
+   "clientContext": "{\"guid\":\"b92\",\"hostname\”:\”test.test.org\”,\”ac2\":1}",
+   "countryCode": "US",
+   "email": “test1@test.org”,
+   "facilitatorMemberId": 123456,
+   "libraryId": 123456,
+   "organizationId": 2222222222,
+   “organizationIdHash”:”2555009cd3e53bd69b50723d2baec9f49558cbd90de2a1aa420dacdbff12cc8e",
+   "status": 0,
+   "uId": “123456”
+}
+```  
+
+The response using a legacy token for an account which has been migrated to VPP in ASM:  
+
+```
+{
+   "appleId": “test2@test.org”,
+   "countryCode": "US",
+   "email": "test2@test.org",
+   "facilitatorMemberId": 11111,
+   "libraries": [
+       {
+           "appleId": “test3@test3.org”,
+           "email": "test3@test3.org",
+           "libraryId": 11112,
+           "location": {
+               "locationId": 2222221,
+               "locationName": “Elementary School”
+           }
+       },
+       {
+           "appleId": “test4@test.org”,
+           "email": "test4@test.org",
+           "libraryId": 11113,
+           "location": {
+               "locationId": 2222221,
+               "locationName": “Elementary School”
+           }
+       },
+       {
+           "appleId": “test2@test.org”,
+           "email": "test2@test.org",
+           "libraryId": 11111,
+           "location": {
+               "locationId": 2222221,
+               "locationName": “Elementary School”
+           }
+       },
+       {
+           "appleId": “test2@test.org”,
+           "email": "test2@test.org",
+           "libraryId": 11114,
+           "location": {
+               "locationId": 2222222,
+               "locationName": “Middle School”
+           }
+       },
+     "libraryId": 11111,
+     "organizationId": 200000000,
+     "organizationIdHash": "7a002fe8b88fc00738c4d74382b94a1e464b65",
+     "status": 0,
+     "uId": "11111”,
+     "vppGroupMembers": [
+       {
+           "appleId": "test3@test3.org",
+           "email": "test3@test3.org",
+           "facilitatorMemberId": 11112,
+           "locationId": 2222221,
+           "locationName": “Elementary School“,
+           "organizationId": 200000000
+       },
+       {
+           "appleId": "test4@test.org",
+           "email": "test4@test.org",
+           "facilitatorMemberId": 11113,
+           "locationId": 2222221,
+           "locationName": "Elementary School",
+           "organizationId": 200000000
+       },
+       {
+           "appleId": "test2@test.org",
+           "email": "test2@test.org",
+           "facilitatorMemberId": 11111,
+           "locationId": 2222221,
+           "locationName": "Elementary School",
+           "organizationId": 200000000
+       },
+       {
+           "appleId": "test2@test.org",
+           "email": "test2@test.org",
+           "facilitatorMemberId": 11114,
+           "locationId": 2222222,
+           "locationName": “Middle School“,
+           "organizationId": 200000000
+       }
+    ]
+}
+```  
+
+  
+
+### Request to manageVPPLicensesByAdamIdSrv
+  
+
+The command:  
+
+```
+curl https://vpp.itunes.apple.com/ WebObjects/MZFinance.woa/wa/manageVPPLicensesByAdamIdSrv -d @manage.json
+```  
+
+The response using `associateClientUserIdStrs`:  
+
+```
+{
+   "associations": [
+      {
+         "adamId": 869183446,
+         "clientUserIdStr": "userIdStr",
+         "isIrrevocable": false,
+         "licenseId": 840998,
+         "pricingParam": "STDQ",
+         "productTypeId": 8,
+         "productTypeName": "Application",
+         "status": "Associated",
+         "userId": 204701
+      }
+   ],
+   "status": 0,
+   “uId”:”111123”
+}
+```  
+
+The response using `associateSerialNumbers`:  
+
+```
+{
+   "associations": [
+      {
+         "adamId": 869183446,
+         "isIrrevocable": false,
+         "licenseId": 840999,
+         "pricingParam": "STDQ",
+         "productTypeId": 8,
+         "productTypeName": "Application",
+         "serialNumber": "MERD1",
+         "status": "Associated"
+      },
+      {
+         "adamId": 869183446,
+         "isIrrevocable": false,
+         "licenseId": 841000,
+         "pricingParam": "STDQ",
+         "productTypeId": 8,
+         "productTypeName": "Application",
+         "serialNumber": "MERD2",
+         "status": "Associated"
+      }
+   ],
+   "status": 0,
+   “uId”:”11234”
+}
+ 
 ```

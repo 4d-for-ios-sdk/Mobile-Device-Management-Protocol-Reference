@@ -159,19 +159,19 @@ To ensure that a VPP account is not being managed by another product, follow the
 
   
 
-### Initial Import of VPP Managed Distribution Licenses Using getVPPLicensesSrv
+### Initial Import of VPP Managed Distribution Assigned Licenses Using getVPPLicensesSrv
   
 
-It is not necessary to sync every single app license for a specific VPP account. The recommended procedure for importing licenses is to skip importing all of the licenses and instead start importing license counts and then changes. This can be accomplished in the following way:  
+It is not necessary to sync every single app license for a specific VPP account. In fact, you only need to track the assigned licenses. The recommended procedure for importing assigned licenses is to skip importing all of the licenses and instead start importing license counts and then changes. This can be accomplished in the following way:  
 
 
 1. Send a request using `getVPPAssetsSrv` with `includeLicenseCounts : true`. This returns the current license count by `adamID`. 
 
-2. Send one request using `getVPPLicensesSrv`. Record the `batchToken` and `totalBatchCount`. 
+2. Send one request using `getVPPLicensesSrv`. Record the `batchToken` and `totalBatchCount`. Always set `assignedOnly=true`. 
 
-3. Send another request to `getVPPLicensesSrv` using the `batchToken` value from Step 2 and an `overrideIndex` value equal to `totalBatchCount`. 
+3. Send another request to `getVPPLicensesSrv` using the `batchToken` value from Step 2 and an `overrideIndex` value equal to `totalBatchCount`. Always set `assignedOnly=true`. 
 
-4. Record the `sinceModifiedToken` value and begin syncing license updates and changes instead of all licenses. Set `assignedOnly=true` if you want to get only new license assignments. 
+4. Record the `sinceModifiedToken` value and begin syncing license updates and changes instead of all licenses. Always set `assignedOnly=true`. 
   
 
 **Note:** Using `sinceModifiedToken` can result in batches with zero records in them. This is not an error or an end signal; just move to the next batch.  
@@ -281,7 +281,7 @@ Note that `vppGroupMembers` contains all of the members of the Program Facilitat
 #### Read-Only Access
   
 
-Using [Apple School Manager](https://help.apple.com/schoolmanager/) and Managed Apple IDs, you can tailor different sets of privileges for individual Program Facilitators. This allows a finer range of control on what such users can do. For example, a Program Facilitator that has only the “Read Only” privilege can use the `getVPPUserSrv`, `getVPPUsersSrv`, and `getVPPLicensesSrv` services but not use `retireVPPUserSrv`, `disassociateVPPLicenseSrv`, or `manageVPPLicensesByAdamIdSrv`. You can also assign Program Facilitators “Can Purchase” and/or “Can Manage” privileges, so an individual Program Facilitator could manage licenses but not buy them. (Note that purchasing users and managing users automatically have read privileges.)  
+Using [Apple School Manager](https://help.apple.com/schoolmanager/) and Managed Apple IDs, you can tailor different sets of privileges for individual Program Facilitators. This allows a finer range of control on what such users can do. For example, a Program Facilitator that has only the “Read Only” privilege can use the `getVPPUserSrv`, `getVPPUsersSrv`, and `getVPPAssetsSrv` services but not use `retireVPPUserSrv`, `disassociateVPPLicenseSrv`, or `manageVPPLicensesByAdamIdSrv`. You can also assign Program Facilitators “Can Purchase” and/or “Can Manage” privileges, so an individual Program Facilitator could manage licenses but not buy them. (Note that purchasing users and managing users automatically have read privileges.)  
 
   
 

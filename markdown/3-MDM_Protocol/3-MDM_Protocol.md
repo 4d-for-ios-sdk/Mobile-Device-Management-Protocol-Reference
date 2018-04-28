@@ -518,15 +518,15 @@ The three example flowcharts below illustrate the foregoing choices.
 
 **Example 1:** The final command results in the server receiving a `NotNow` response. The device will poll the server later, when the `InstallApplication` command might succeed.  
 
-<img src="https://github.com/erikberglund/Mobile-Device-Management-Protocol-Reference/blob/master/assets//NotNow1_2x.png" height="400" width="407">  
+<img src="https://github.com/erikberglund/Mobile-Device-Management-Protocol-Reference/blob/master/assets/Art/NotNow1_2x.png" height="400" width="407">  
 
 **Example 2:** The final command results in the server receiving something other than a `NotNow` response. The device will not poll the server later, because the last response was not `NotNow`.  
 
-<img src="https://github.com/erikberglund/Mobile-Device-Management-Protocol-Reference/blob/master/assets//NotNow2_2x.png" height="322" width="407">  
+<img src="https://github.com/erikberglund/Mobile-Device-Management-Protocol-Reference/blob/master/assets/Art/NotNow2_2x.png" height="322" width="407">  
 
 **Example 3:** The connection to the device is unexpectedly interrupted. Because the last status the server received was not `NotNow`, the server should send a push notification to the device to retry the `InstallApplication` command. The server must not assume that the device will automatically poll the server later.  
 
-<img src="https://github.com/erikberglund/Mobile-Device-Management-Protocol-Reference/blob/master/assets//NotNow3_2x.png" height="357" width="454">  
+<img src="https://github.com/erikberglund/Mobile-Device-Management-Protocol-Reference/blob/master/assets/Art/NotNow3_2x.png" height="357" width="454">  
   
 
 ## Request Types
@@ -752,6 +752,7 @@ Each entry in the `InstalledApplicationList` is a dictionary containing the foll
 |`Name`|String|The application’s name.|
 |`BundleSize`|Integer|The app’s static bundle size, in bytes.|
 |`DynamicSize`|Integer|The size of the app’s document, library, and other folders, in bytes.</br>**Availability:** Available in iOS 5.0 and later.|
+|`Installing`|Boolean|If `true`, the app is being downloaded. Otherwise, it’s already installed on the device.|
 |`IsValidated`|Boolean|If `true`, the app has validated as allowed to run and is able to run on the device. If an app is enterprise-distributed and is not validated, it will not run on the device until validated.</br>**Availability:** Available in iOS 9.2 and later.|
 |`ExternalVersionIdentifier`|String|The application’s external version ID. It can be used for comparison in the iTunes Search API to decide if the application needs to be updated.</br>**Availability:** Available in iOS 11 and later.|
 |`AppStoreVendable`|Boolean|If `true`, the app came from the store and can participate in store features.</br>**Availability:** Available in iOS 11.3 and later.|
@@ -796,8 +797,8 @@ The queries described in  are available without any special access rights:
 |Query|Reply Type|Comment|
 |-|-|-|
 |`UDID`|String|The unique device identifier (UDID) of the device.|
-|`Languages`|Array|Array of strings. The first entry in this array indicates the current language. **Availability:** Available in Apple TV software 6.0 and later. Supported in macOS 10.10 and 10.11 but will be removed in a future macOS release.|
-|`Locales`|String|Array of strings. The first entry in this array indicates the current locale. **Availability:** Available in Apple TV software 6.0 and later. Supported in macOS 10.10 and 10.11 but will be removed in a future macOS release.|
+|`Languages`|Array of Strings|Array of strings. The first entry in this array indicates the current language. **Availability:** Available in Apple TV software 6.0 and later. Supported in macOS 10.10 and 10.11 but will be removed in a future macOS release.|
+|`Locales`|Array of Strings|Array of strings. The first entry in this array indicates the current locale. **Availability:** Available in Apple TV software 6.0 and later. Supported in macOS 10.10 and 10.11 but will be removed in a future macOS release.|
 |`DeviceID`|String|The Apple TV device ID. Available in iOS 7 (Apple TV software 6.0) and later, on Apple TV only.|
 |`OrganizationInfo`|Dictionary|The contents (if any) of a previously set `OrganizationInfo` setting. Available in iOS 7 and later.|
 |`LastCloudBackupDate`|Date|The date of the last iCloud backup. **Availability:** Available in iOS 8.0 and later.|
@@ -940,6 +941,7 @@ The `SecurityInfo` dictionary contains the following keys and values:
 |`PasscodePresent`|Boolean|Set to `true` if the device is protected by a passcode.</br>**Availability:** Available in iOS only.|
 |`PasscodeCompliant`|Boolean|Set to `true` if the user’s passcode is compliant with all requirements on the device, including Exchange and other accounts.</br>**Availability:** Available in iOS only.|
 |`PasscodeCompliantWithProfiles`|Boolean|Set to `true` if the user’s passcode is compliant with requirements from profiles.</br>**Availability:** Available in iOS only.|
+|`PasscodeLockGracePeriod`|Integer|The user preference for the amount of time in seconds the device must be locked before unlock will require the device passcode.</br>**Availability:** Available in iOS only.|
 |`PasscodeLockGracePeriodEnforced`|Integer|The current enforced value for the amount of time in seconds the device must be locked before unlock will require the device passcode.</br>**Availability:** Available in iOS only.|
 |`FDE_Enabled`|Boolean|Device channel only. Whether Full Disk Encryption (FDE) is enabled or not.</br>**Availability:** Available in macOS 10.9 and later.|
 |`FDE_HasPersonalRecoveryKey`|Boolean|Device channel only. If FDE has been enabled, returns whether a personal recovery key has been set.</br>**Availability:** Available in macOS 10.9 and later.|
