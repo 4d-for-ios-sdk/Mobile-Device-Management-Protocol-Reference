@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Class Rosters</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=7">
+    <meta charset="utf-8">
+    <meta id="book-resource-type" name="book-resource-type" content="Guide">
+    <meta scheme="apple_ref" id="identifier" name="identifier" content="//apple_ref/doc/uid/TP40017387">
+    <meta id="document-version" name="document-version" content="4.3.1">
+    <meta id="build" name="build" content="bc2cee2fd2f336931ac1fbeab087f169" />
+    <meta id="chapterId" name="chapterId" content="TP40017387-CH9">
+    <meta id="date" name="date" content="2018-04-19">
+    <meta id="description" name="description" content="Describes how system administrators can send device
+management commands to managed devices.">
+    <meta id="book-title" name="book-title" content="Mobile Device Management Protocol Reference">
+    <meta id="book-root" name="book-root" content="../">
+    <meta id="book-json" name="book-json" content="../book.json">
+    <meta id="devcenter" name="devcenter" content="Mac Dev Center">
+    <meta id="devcenter-url" name="devcenter-url" content="http://developer.apple.com/devcenter/mac">
+    <meta id="reflib" name="reflib" content="Guides and Sample Code">
+    <meta id="book-assignments" name="book-assignments" content="{Type/Guide}, {Topic/Data Management/Device Information}">
+    
+    
+    <meta id="copyright" name="copyright" content="Copyright 2018 Apple Inc. All Rights Reserved.">
+    <meta id="xcode-display" name="xcode-display" content="render">
+    <meta id="IndexTitle" name="IndexTitle" content="Mobile Device Management Protocol Reference: Class Rosters">
+    <meta id="resources-uri" name="resources-uri" content="../../../../../Resources/1277">
+    <link id="book-index-page" rel="Start" title="Mobile Device Management Protocol Reference" type="text/html" href="../index.html">
+    <link id="next-page" rel="Next" type="text/html" href="../6-MDM_Best_Practices/MDM_Best_Practices.html">
+    <link id="previous-page" rel="Prev" type="text/html" href="../ManagedAppsUpdates/ManagedAppsUpdates.html">
+    <link rel="stylesheet" type="text/css" href="../../../../../Resources/1277/CSS/screen.css">
+    
+    <!-- xcode_css -->
+    <link rel="stylesheet" type="text/css" href="../../../../../Resources/1277/CSS/feedback.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta id="platforms" name="platforms" content="">
+</head>    
+<body><a name="//apple_ref/doc/uid/TP40017387-CH9" title="Class Rosters"></a>
+    <div id="_omniture_top">
+    <!-- SiteCatalyst code version: H.8. Copyright 1997-2006 Omniture, Inc. -->
+    <script type="text/javascript">
+    /* RSID: */
+    var s_account="appleglobal,appleusdeveloper,dappdeveloperlib"
+    </script>
+
+    <script type="text/javascript" src="https://www.apple.com/metrics/scripts/s_code_h.js"></script>
+    <script type="text/javascript">
+    s.pageName=AC.Tracking.pageName();
+    s.channel="www.us.developer"
+
+    /************* DO NOT ALTER ANYTHING BELOW THIS LINE ! **************/
+    var s_code=s.t();if(s_code)document.write(s_code)</script>
+    <!-- End SiteCatalyst code version: H.8. -->
+    </div>
+
+    <div id="adcHeader" class="hideOnPrint hideInXcode">
+        <div id='ssi_Header' class="hideInXcode unified">
+            <a id="ssi_LibraryTitle" href='../../../../../navigation/'>Guides and Sample Code</a>
+            <a id="ssi_AppleDeveloperConnection" href='https://developer.apple.com/'>Developer</a>
+            <div id='ssi_SearchButton' role="button" title="Search">Search</div>
+        </div>
+        <form id='ssi_SearchMenu' method='get' action='../../../../../search/' accept-charset='utf-8'>
+            <label for='adcsearch'>Search Guides and Sample Code</label>
+            
+            
+    
+            <input type='search' id='ssi_SearchField' name='q' accesskey='s' results='5' />
+        </form>
+    </div>
+
+    <header id="header">
+        <div id="title" role="banner">
+            <h1>Mobile Device Management Protocol Reference</h1>
+            <span id="file_links">
+                <a id="PDF_link" role="button" tabindex='4' rel="alternate" title="Download PDF"><span id="pdf_icon"></span>PDF</a>
+                <a id="Companion_link" role="button" tabindex='3' title="Download Companion File"><span id="companion_icon"></span>Companion File</a>
+            </span>
+        </div>
+        <ul id="headerButtons" class="hideOnPrint" role="toolbar">
+            <li id="toc_button" style="display:none">
+                <button tabindex="5" id="table_of_contents" class="open" role="checkbox" aria-label="Show Table of Contents"><span class="disclosure"></span>Table of Contents</button>
+            </li>
+            <li id="jumpto_button" style="display:none" role="navigation"><select tabindex="6" id="jumpTo"><option value="top">Jump To&#133;</option></select></li>
+            <li id="downloadSample_button" style="display:none">
+                <a id="Sample_link"><button id="Sample_button">Download Sample Code</button></a>
+            </li>
+        </ul>
+    </header>
+    <nav id="tocContainer" tabindex="7">
+        <ul id="toc" role="tree"></ul>
+    </nav>
+
+    <article id="contents" tabindex="0" role="main">
+        <div id="pageNavigationLinks_top" class="pageNavigationLinks">
+            <a class='nextLink' rel='next' href='../6-MDM_Best_Practices/MDM_Best_Practices.html'>Next</a><a class='previousLink' rel='prev' href='../ManagedAppsUpdates/ManagedAppsUpdates.html'>Previous</a>
+        </div>
+        <a id="top" name="top"></a>
+        <a id="INDEX" href="../index.html" style="display:none;"></a>
+        
+        <a name="//apple_ref/doc/uid/TP40017387-CH9-SW2" title="Class Rosters"></a>
+<h1 id="pageTitle">Class Rosters</h1>
+<p>This chapter describes a system of MDM APIs, introduced with iOS 9.3, that retrieve roster information for schools and other personnel-based organizations. These APIs form an extension to the Device Enrollment Program API, so the DEP initial authentication steps are required before sending requests to the roster service.</p>
+<p>Roster information does not require extra security beyond that provided by DEP tokens submitted to any MDM server. See <span class="content_text"><a href="../4-Profile_Management/ProfileManagement.html#//apple_ref/doc/uid/TP40017387-CH7-SW68" data-renderer-version="1">DEP Server Tokens</a></span>.</p>
+<div class="notebox"><aside><a name="//apple_ref/doc/uid/TP40017387-CH9-SW1" title="Note"></a><p><strong>Note:</strong>&nbsp;
+The Roster APIs are read-only. It is not possible to change roster information using MDM.</p><p></p></aside></div>
+
+<section><a name="//apple_ref/doc/uid/TP40017387-CH9-SW3" title="Class Roster Information"></a><h2 class="jump">Class Roster Information</h2>
+<p>This API returns class roster information for an organization at a given location.</p>
+<section><a name="//apple_ref/doc/uid/TP40017387-CH9-SW4" title="Requests"></a><h3 class="jump">Requests</h3>
+<p>To access this information, POST a request in JSON format and UTF-8 charset to the following URL: <code>https://mdmenrollment.apple.com/roster/class</code>. The request body should contain a JSON dictionary with the following keys:</p>
+<div class="tableholder"><table class="graybox" border = "0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Key</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Type</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Content</p></th></tr>
+<tr><td  scope="row"><p><code>cursor</code></p></td><td ><p>String</p></td><td ><p>Optional. A hex string that represents the starting position for a request. This is used for pagination. On the initial request, this should be omitted. </p></td></tr>
+<tr><td  scope="row"><p><code>limit</code></p></td><td ><p>Integer</p></td><td ><p>Optional. The maximum number of entries to return. The default value is 1000 and the maximum value is 1000.</p></td></tr>
+</table></div>
+<p>With its required header, a typical request looks like this:</p>
+<div class="codesample clear"><table><tr><td scope="row"><pre>POST /roster/class HTTP/1.1<span></span></pre></td></tr><tr><td scope="row"><pre>User-Agent:&#60;client-software-information&#62;<span></span></pre></td></tr><tr><td scope="row"><pre>Accept-Encoding: gzip, deflate<span></span></pre></td></tr><tr><td scope="row"><pre>X-Server-Protocol-Version:2<span></span></pre></td></tr><tr><td scope="row"><pre>X-ADM-Auth-Session: 87a235815b8d6661ac73329f75815b8d6661ac73329f815<span></span></pre></td></tr><tr><td scope="row"><pre>Content-Type: application/json;charset=UTF8<span></span></pre></td></tr><tr><td scope="row"><pre>Content-Length: &#60;Content-Length&#62;<span></span></pre></td></tr><tr><td scope="row"><pre>{<span></span></pre></td></tr><tr><td scope="row"><pre>"limit": 1000,<span></span></pre></td></tr><tr><td scope="row"><pre>"cursor": "1ac73329f75817"<span></span></pre></td></tr><tr><td scope="row"><pre>}<span></span></pre></td></tr></table></div>
+</section>
+<section><a name="//apple_ref/doc/uid/TP40017387-CH9-SW5" title="Responses"></a><h3 class="jump">Responses</h3>
+<p>In response, the MDM service returns a JSON dictionary with following keys:</p>
+<div class="tableholder"><table class="graybox" border = "0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Key</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Type</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Content</p></th></tr>
+<tr><td  scope="row"><p><code>cursor</code></p></td><td ><p>String</p></td><td ><p>Optional. A hex string that should be used for the next request to paginate. This field data type has a maximum length of 512 UTF-8 characters. </p></td></tr>
+<tr><td  scope="row"><p><code>more_to_follow</code></p></td><td ><p>Boolean</p></td><td ><p>Indicates whether the request’s limit and cursor values resulted in only a partial list of classes. If true, the MDM server should then make another request (starting from the newly returned cursor) to obtain additional records.</p></td></tr>
+<tr><td  scope="row"><p><code>classes</code></p></td><td ><p>Array of dictionaries</p></td><td ><p>Provides information about classes, sorted in lexical order by a class source_system_identifier. The organization must provide this identifier to Apple.</p></td></tr>
+</table></div>
+<p>Each dictionary in the <code>classes</code> array contains these keys:</p>
+<div class="tableholder"><table class="graybox" border = "0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Key</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Type</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Content</p></th></tr>
+<tr><td  scope="row"><p><code>name</code></p></td><td ><p>String</p></td><td ><p>Optional. Class name. Maximum length is 1024 UTF-8 characters.</p></td></tr>
+<tr><td  scope="row"><p><code>source</code></p></td><td ><p>String</p></td><td ><p>Data source where class was created. Possible values include “iTunes U,” “SIS,” “CSV,” "SFTP," and “MANUAL.” Maximum length is 64 UTF-8 characters.</p></td></tr>
+<tr><td  scope="row"><p><code>unique_identifier</code></p></td><td ><p>String</p></td><td ><p>Unique identifier for the class. Maximum length is 256 UTF-8 characters.</p></td></tr>
+<tr><td  scope="row"><p><code>source_system_identifier</code></p></td><td ><p>String</p></td><td ><p>Optional. Identifier configured by the organization for its classes. Maximum length is 256 UTF-8 characters. See Note below.</p></td></tr>
+<tr><td  scope="row"><p><code>room</code></p></td><td ><p>String</p></td><td ><p>Optional. Room where class is held. Maximum length is 512 UTF-8 characters.</p></td></tr>
+<tr><td  scope="row"><p><code>location</code></p></td><td ><p>Dictionary</p></td><td ><p>Geographical or organizational location where class is held (see below).</p></td></tr>
+<tr><td  scope="row"><p><code>course</code></p></td><td ><p>Dictionary</p></td><td ><p>Course definition for the class (see below).</p></td></tr>
+<tr><td  scope="row"><p><code>instructor_unique_identifiers</code></p></td><td ><p>Array of strings</p></td><td ><p>Unique identification for instructors. Each string in the array has a maximum length of 256 UTF-8 characters.</p></td></tr>
+<tr><td  scope="row"><p><code>student_unique_identifiers</code></p></td><td ><p>Array of strings</p></td><td ><p>Unique identification for students. Each string in the array has a maximum length of 256 UTF-8 characters.</p></td></tr>
+<tr><td  scope="row"><p><code>class_number</code></p></td><td ><p>String</p></td><td ><p>Optional. Indicates the class number. Maximum string length is 256 UTF-8 characters. <strong>Availability: </strong>Available in X-Protocol Version 4 and later.</p></td></tr>
+</table></div>
+
+<div class="notebox"><aside><a name="//apple_ref/doc/uid/TP40017387-CH9-SW6" title="Note"></a><p><strong>Note:</strong>&nbsp;
+The value of <code>source_system_identifier</code> in this and other roster API responses is not guaranteed to be unique and can potentially change.</p><p></p></aside></div>
+
+<p>The <code>location</code> dictionary contains the following keys:</p>
+<div class="tableholder"><table class="graybox" border = "0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Key</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Type</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Content</p></th></tr>
+<tr><td  scope="row"><p><code>name</code></p></td><td ><p>String</p></td><td ><p>Location name. Maximum length 1024 UTF-8 characters.</p></td></tr>
+<tr><td  scope="row"><p><code>unique_identifier</code></p></td><td ><p>String</p></td><td ><p>Unique identifier for the location. Maximum length 256 UTF-8 characters.</p></td></tr>
+</table></div>
+<p>The <code>course</code> dictionary contains the following keys:</p>
+<div class="tableholder"><table class="graybox" border = "0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Key</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Type</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Content</p></th></tr>
+<tr><td  scope="row"><p><code>name</code></p></td><td ><p>String</p></td><td ><p>Optional. Course name. Maximum length 1024 UTF-8 characters.</p></td></tr>
+<tr><td  scope="row"><p><code>unique_identifier</code></p></td><td ><p>String</p></td><td ><p>Unique identifier for the course. Maximum length 256 UTF-8 characters.</p></td></tr>
+</table></div>
+<p>The response contains a list of classes. Each class record contains the location where the class is held and the instructors and students that are registered for that class. It also identifies the course with which the class is associated. The <code>more_to_follow</code> Boolean indicates if more class information remains to be fetched. The client should read this flag to determine if subsequent requests are necessary to get the next batch of classes.</p>
+<p>The class list could be huge. If modifications are performed while the response is being returned, it will not return any classes created after it started responding. If any updates are applied on any of the entities or attributes, you must send the request again to get the latest snapshot of classes.</p>
+<p>One record in a typical response might look like this:</p>
+<div class="codesample clear"><table><tr><td scope="row"><pre>{<span></span></pre></td></tr><tr><td scope="row"><pre>  "classes": [<span></span></pre></td></tr><tr><td scope="row"><pre>    {<span></span></pre></td></tr><tr><td scope="row"><pre>      "unique_identifier": "UNICLS1003",<span></span></pre></td></tr><tr><td scope="row"><pre>      "source": "SIS",<span></span></pre></td></tr><tr><td scope="row"><pre>      "source_system_identifier": "CLSBIO101",<span></span></pre></td></tr><tr><td scope="row"><pre>      "name": "Miss Smith's Biology 101",<span></span></pre></td></tr><tr><td scope="row"><pre>      "class_number": "1A",<span></span></pre></td></tr><tr><td scope="row"><pre>      "room": "Hall 101",<span></span></pre></td></tr><tr><td scope="row"><pre>      "location": {<span></span></pre></td></tr><tr><td scope="row"><pre>        "unique_identifier": "UNILOC1003",<span></span></pre></td></tr><tr><td scope="row"><pre>        "name": "Biology department"<span></span></pre></td></tr><tr><td scope="row"><pre>      },<span></span></pre></td></tr><tr><td scope="row"><pre>      "instructor_unique_identifiers": [<span></span></pre></td></tr><tr><td scope="row"><pre>        "UNIINSTID1003",<span></span></pre></td></tr><tr><td scope="row"><pre>        "UNIINSTID1003"<span></span></pre></td></tr><tr><td scope="row"><pre>      ],<span></span></pre></td></tr><tr><td scope="row"><pre>      "student_unique_identifiers": [<span></span></pre></td></tr><tr><td scope="row"><pre>        "UNISTUDID1003",<span></span></pre></td></tr><tr><td scope="row"><pre>        "UNISTUDID1004"<span></span></pre></td></tr><tr><td scope="row"><pre>      ],<span></span></pre></td></tr><tr><td scope="row"><pre>      "course": {<span></span></pre></td></tr><tr><td scope="row"><pre>        "unique_identifier": "UNICOURID1003",<span></span></pre></td></tr><tr><td scope="row"><pre>        "name": "Biology 101"<span></span></pre></td></tr><tr><td scope="row"><pre>      }<span></span></pre></td></tr><tr><td scope="row"><pre>    }<span></span></pre></td></tr><tr><td scope="row"><pre>  ],<span></span></pre></td></tr><tr><td scope="row"><pre>  "cursor": "1ac73329f75816",<span></span></pre></td></tr><tr><td scope="row"><pre>  "more_to_follow": "false"<span></span></pre></td></tr><tr><td scope="row"><pre>}<span></span></pre></td></tr></table></div>
+</section>
+
+<section><a name="//apple_ref/doc/uid/TP40017387-CH9-SW311" title="Class Roster Sync Service"></a><h3 class="jump">Class Roster Sync Service</h3>
+<p>This sync service uses a cursor returned by the full class roster service. It returns a list of all modifications (additions or deletions) made since the cursor date, up to 7 days.</p>
+<p>This service may return the same class more than once. You can identify duplicates by matching their <code>unique_identifier</code> values.</p>
+<section><a name="//apple_ref/doc/uid/TP40017387-CH9-SW312" title="Requests"></a><h4 class="jump">Requests</h4>
+<p>To access this information, POST a request in JSON format and UTF-8 charset to the following URL: <code>https://mdmenrollment.apple.com/roster/class/sync</code>. The request body should contain a JSON dictionary with the following keys:</p>
+<div class="tableholder"><table class="graybox" border = "0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Key</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Type</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Content</p></th></tr>
+
+<tr><td  scope="row"><p><code>cursor</code></p></td><td ><p>String</p></td><td ><p>Optional. A hex string that represents the starting position for a request, used for pagination. This position should not be older than 7 days. On the initial request, it should be omitted. </p></td></tr>
+<tr><td  scope="row"><p><code>limit</code></p></td><td ><p>Integer</p></td><td ><p>Optional. The maximum number of entries to return. The default value is 1000 and the maximum value is 1000.</p></td></tr>
+</table></div>
+<p>With its required header, a typical request looks like this:</p>
+<div class="codesample clear"><table><tr><td scope="row"><pre>POST /roster/class/sync HTTP/1.1<span></span></pre></td></tr><tr><td scope="row"><pre>User-Agent:&#60;client-software-information&#62;<span></span></pre></td></tr><tr><td scope="row"><pre>Accept-Encoding: gzip, deflate<span></span></pre></td></tr><tr><td scope="row"><pre>X-Server-Protocol-Version:2<span></span></pre></td></tr><tr><td scope="row"><pre>X-ADM-Auth-Session: 87a235815b8d6661ac73329f75815b8d6661ac73329f815<span></span></pre></td></tr><tr><td scope="row"><pre>Content-Type: application/json;charset=UTF8<span></span></pre></td></tr><tr><td scope="row"><pre>Content-Length: &#60;Content-Length&#62;<span></span></pre></td></tr><tr><td scope="row"><pre>Host: &#60;vip-name&#62;<span></span></pre></td></tr><tr><td scope="row"><pre>Cookie: ...<span></span></pre></td></tr><tr><td scope="row"><pre>{<span></span></pre></td></tr><tr><td scope="row"><pre>"limit": 1000,<span></span></pre></td></tr><tr><td scope="row"><pre>"cursor": "1ac73329f75817"<span></span></pre></td></tr><tr><td scope="row"><pre>}<span></span></pre></td></tr></table></div>
+<p>Only content of type <code>application/json</code> in UTF-8 charset will be accepted by the server.</p>
+</section>
+<section><a name="//apple_ref/doc/uid/TP40017387-CH9-SW313" title="Responses"></a><h4 class="jump">Responses</h4>
+<p>In response, the MDM service returns a JSON dictionary with following keys:</p>
+<div class="tableholder"><table class="graybox" border = "0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Key</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Type</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Content</p></th></tr>
+
+<tr><td  scope="row"><p><code>cursor</code></p></td><td ><p>String</p></td><td ><p>Optional. A hex string that should be used for the next request to paginate. This field data type has a maximum length of 512 UTF-8 characters. </p></td></tr>
+<tr><td  scope="row"><p><code>more_to_follow</code></p></td><td ><p>Boolean</p></td><td ><p>Indicates whether the request’s limit and cursor values resulted in only a partial list of classes. If <code>true</code>, the MDM server should then make another request (starting from the newly returned cursor) to obtain additional records.</p></td></tr>
+<tr><td  scope="row"><p><code>fetched_until</code></p></td><td ><p>String</p></td><td ><p>A time and date stamp in ISO 8601 format specifying the latest date of data being fetched.</p></td></tr>
+<tr><td  scope="row"><p><code>classes</code></p></td><td ><p>Array of dictionaries</p></td><td ><p>Provides information about classes, sorted in lexical order by a class <code>source_system_identifier</code>. The organization must provide this identifier to Apple.</p></td></tr>
+</table></div>
+<p>Each dictionary in the <code>classes</code> array contains these keys:</p>
+<div class="tableholder"><table class="graybox" border = "0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Key</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Type</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Content</p></th></tr>
+
+<tr><td  scope="row"><p><code>name</code></p></td><td ><p>String</p></td><td ><p>Optional. Class name. Maximum length is 1024 UTF-8 characters.</p></td></tr>
+<tr><td  scope="row"><p><code>source</code></p></td><td ><p>String</p></td><td ><p>Data source where class was created. Possible values include “iTunes U,” “SIS,” “CSV,” "SFTP," and “MANUAL.” Maximum length is 64 UTF-8 characters.</p></td></tr>
+<tr><td  scope="row"><p><code>unique_identifier</code></p></td><td ><p>String</p></td><td ><p>Unique identifier for the class. Maximum length is 256 UTF-8 characters.</p></td></tr>
+<tr><td  scope="row"><p><code>source_system_identifier</code></p></td><td ><p>String</p></td><td ><p>Optional. Identifier configured by the organization for its classes, with a maximum length of 256 UTF-8 characters. Its value is not guaranteed to be unique and can potentially change.</p></td></tr>
+<tr><td  scope="row"><p><code>room</code></p></td><td ><p>String</p></td><td ><p>Optional. Room where class is held. Maximum length is 512 UTF-8 characters.</p></td></tr>
+<tr><td  scope="row"><p><code>location</code></p></td><td ><p>Dictionary</p></td><td ><p>Geographical or organizational location where class is held (see below).</p></td></tr>
+<tr><td  scope="row"><p><code>course</code></p></td><td ><p>Dictionary</p></td><td ><p>Course definition for the class (see below).</p></td></tr>
+<tr><td  scope="row"><p><code>instructor_unique_identifiers</code></p></td><td ><p>Array of strings</p></td><td ><p>Unique identification for instructors. Each string in the array has a maximum length of 256 UTF-8 characters.</p></td></tr>
+<tr><td  scope="row"><p><code>student_unique_identifiers</code></p></td><td ><p>Array of strings</p></td><td ><p>Unique identification for students. Each string in the array has a maximum length of 256 UTF-8 characters.</p></td></tr>
+<tr><td  scope="row"><p><code>class_number</code></p></td><td ><p>String</p></td><td ><p>Optional. Indicates the class number. Maximum string length is 256 UTF-8 characters. <strong>Availability: </strong>Available in X-Protocol Version 4 and later.</p></td></tr>
+</table></div>
+<p>The <code>location</code> dictionary contains the following keys:</p>
+<div class="tableholder"><table class="graybox" border = "0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Key</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Type</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Content</p></th></tr>
+<tr><td  scope="row"><p><code>name</code></p></td><td ><p>String</p></td><td ><p>Location name. Maximum length 1024 UTF-8 characters.</p></td></tr>
+<tr><td  scope="row"><p><code>unique_identifier</code></p></td><td ><p>String</p></td><td ><p>Unique identifier for the location. Maximum length 256 UTF-8 characters.</p></td></tr>
+</table></div>
+<p>The <code>course</code> dictionary contains the following keys:</p>
+<div class="tableholder"><table class="graybox" border = "0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Key</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Type</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Content</p></th></tr>
+<tr><td  scope="row"><p><code>name</code></p></td><td ><p>String</p></td><td ><p>Optional. Course name. Maximum length 1024 UTF-8 characters.</p></td></tr>
+<tr><td  scope="row"><p><code>unique_identifier</code></p></td><td ><p>String</p></td><td ><p>Unique identifier for the course. Maximum length 256 UTF-8 characters.</p></td></tr>
+</table></div>
+<p>One record in a typical successful Class Roster Sync Service response might look like this:</p>
+<div class="codesample clear"><table><tr><td scope="row"><pre>{<span></span></pre></td></tr><tr><td scope="row"><pre>  "classes": [<span></span></pre></td></tr><tr><td scope="row"><pre>    {<span></span></pre></td></tr><tr><td scope="row"><pre>      "unique_identifier": "UNICLS1003",<span></span></pre></td></tr><tr><td scope="row"><pre>      "source": "SIS",<span></span></pre></td></tr><tr><td scope="row"><pre>      "source_system_identifier": "CLSBIO101",<span></span></pre></td></tr><tr><td scope="row"><pre>      "name": "Miss Smith's Biology 101",<span></span></pre></td></tr><tr><td scope="row"><pre>      "room": "Hall 101",<span></span></pre></td></tr><tr><td scope="row"><pre>      "class_number": "1A",<span></span></pre></td></tr><tr><td scope="row"><pre>      "location": {<span></span></pre></td></tr><tr><td scope="row"><pre>        "unique_identifier": "UNILOC1003",<span></span></pre></td></tr><tr><td scope="row"><pre>        "name": "Biology department"<span></span></pre></td></tr><tr><td scope="row"><pre>      },<span></span></pre></td></tr><tr><td scope="row"><pre>      "instructor_unique_identifiers": [<span></span></pre></td></tr><tr><td scope="row"><pre>        "UNIINSTID1003",<span></span></pre></td></tr><tr><td scope="row"><pre>        "UNIINSTID1003"<span></span></pre></td></tr><tr><td scope="row"><pre>      ],<span></span></pre></td></tr><tr><td scope="row"><pre>      "student_unique_identifiers": [<span></span></pre></td></tr><tr><td scope="row"><pre>        "UNISTUDID1003",<span></span></pre></td></tr><tr><td scope="row"><pre>        "UNISTUDID1004"<span></span></pre></td></tr><tr><td scope="row"><pre>      ],<span></span></pre></td></tr><tr><td scope="row"><pre>      "course": {<span></span></pre></td></tr><tr><td scope="row"><pre>        "unique_identifier": "UNICOURID1003",<span></span></pre></td></tr><tr><td scope="row"><pre>        "name": "Biology 101"<span></span></pre></td></tr><tr><td scope="row"><pre>      }<span></span></pre></td></tr><tr><td scope="row"><pre>    }<span></span></pre></td></tr><tr><td scope="row"><pre>  ],<span></span></pre></td></tr><tr><td scope="row"><pre>  "cursor": "1ac73329f75816",<span></span></pre></td></tr><tr><td scope="row"><pre>  "more_to_follow": "false"<span></span></pre></td></tr><tr><td scope="row"><pre>  "fetched_until": "2016-05-09T02:30:00Z"<span></span></pre></td></tr><tr><td scope="row"><pre>}<span></span></pre></td></tr></table></div>
+<p>Note these features and cautions:</p>
+<ul class="ul">
+<li class="li"><p>The response contains a list of classes. Each class record contains the location where the class is held and the instructors and students that are registered for that class. It also identifies the course with which the class is associated.</p></li>
+<li class="li"><p>The <code>more_to_follow</code> Boolean indicates if more class information remains to be fetched. The client should read this flag to determine if subsequent requests are necessary to get the next batch of classes.</p></li>
+<li class="li"><p>The server will issue a cursor in all responses. If the cursor is sent in the next request, the server will return next set of records in chronological order and issue a new cursor.</p></li>
+<li class="li"><p>Data changes will be recognized up to the <code>fetched_until</code> time, which may be a few minutes behind real time.</p></li>
+<li class="li"><p>This service does not return deleted data. The client is expected to do a full sync and compare once every few days to identify deletes.</p></li>
+<li class="li"><p>For a discussion of potential problems with using the Class Roster Sync Service, see <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH9-SW40" data-renderer-version="1">Error Responses</a></span>.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+<section><a name="//apple_ref/doc/uid/TP40017387-CH9-SW11" title="Person Roster Information"></a><h2 class="jump">Person Roster Information</h2>
+<p>This API returns roster information for an organization. Besides instructors and students, this list may contain additional people who do not belong to any class.</p>
+<section><a name="//apple_ref/doc/uid/TP40017387-CH9-SW12" title="Requests"></a><h3 class="jump">Requests</h3>
+<p>To access this information, POST a request in JSON format and UTF-8 charset to the following URL: <code>https://mdmenrollment.apple.com/roster/class/person</code>. The request body should contain a JSON dictionary with the following keys:</p>
+<div class="tableholder"><table class="graybox" border = "0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Key</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Type</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Content</p></th></tr>
+<tr><td  scope="row"><p><code>cursor</code></p></td><td ><p>String</p></td><td ><p>Optional. A hex string that represents the starting position for a request. This is used for pagination. On the initial request, this should be omitted. </p></td></tr>
+<tr><td  scope="row"><p><code>limit</code></p></td><td ><p>Integer</p></td><td ><p>Optional. The maximum number of entries to return. The default value is 1000 and the maximum value is 1000.</p></td></tr>
+</table></div>
+<p>With its required header, a typical request looks like this:</p>
+<div class="codesample clear"><table><tr><td scope="row"><pre>POST /roster/class/person HTTP/1.1<span></span></pre></td></tr><tr><td scope="row"><pre>User-Agent:&#60;client-software-information&#62;<span></span></pre></td></tr><tr><td scope="row"><pre>Accept-Encoding: gzip, deflate<span></span></pre></td></tr><tr><td scope="row"><pre>X-Server-Protocol-Version:2<span></span></pre></td></tr><tr><td scope="row"><pre>X-ADM-Auth-Session: 87a235815b8d6661ac73329f75815b8d6661ac73329f815<span></span></pre></td></tr><tr><td scope="row"><pre>Content-Type: application/json;charset=UTF8<span></span></pre></td></tr><tr><td scope="row"><pre>Content-Length: &#60;Content-Length&#62;<span></span></pre></td></tr><tr><td scope="row"><pre>{<span></span></pre></td></tr><tr><td scope="row"><pre>"limit": 1000,<span></span></pre></td></tr><tr><td scope="row"><pre>"cursor": "1ac73329f75817"<span></span></pre></td></tr><tr><td scope="row"><pre>}<span></span></pre></td></tr></table></div>
+</section>
+<section><a name="//apple_ref/doc/uid/TP40017387-CH9-SW13" title="Responses"></a><h3 class="jump">Responses</h3>
+<p>In response, the MDM service returns a JSON dictionary with following keys:</p>
+<div class="tableholder"><table class="graybox" border = "0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Key</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Type</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Content</p></th></tr>
+<tr><td  scope="row"><p><code>cursor</code></p></td><td ><p>String</p></td><td ><p>Optional. A hex string that should be used for the next request to paginate. This field data type has a maximum length of 512 UTF-8 characters. </p></td></tr>
+<tr><td  scope="row"><p><code>more_to_follow</code></p></td><td ><p>Boolean</p></td><td ><p>Indicates whether the request’s limit and cursor values resulted in only a partial list of persons. If true, the MDM server should then make another request (starting from the newly returned cursor) to obtain additional records.</p></td></tr>
+<tr><td  scope="row"><p><code>persons</code></p></td><td ><p>Array of dictionaries</p></td><td ><p>Provides information about persons, both teachers and students, sorted in lexical order by a person source_system_identifier. The organization must provide this identifier to Apple.</p></td></tr>
+</table></div>
+<p>Each <code>persons</code> dictionary contains the following keys:</p>
+<div class="tableholder"><table class="graybox" border = "0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Key</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Type</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Content</p></th></tr>
+
+<tr><td  scope="row"><p><code>first_name</code></p></td><td ><p>String</p></td><td ><p>Person’s first name. Maximum length 1024 UTF-8 characters. Available in protocol version 3 and above.</p></td></tr>
+
+<tr><td  scope="row"><p><code>middle_name</code></p></td><td ><p>String</p></td><td ><p>Optional. Person’s middle name. Maximum length 1024 UTF-8 characters. Available in protocol version 3 and above.</p></td></tr>
+
+<tr><td  scope="row"><p><code>last_name</code></p></td><td ><p>String</p></td><td ><p>Person’s last name. Maximum length 1024 UTF-8 characters. Available in protocol version 3 and above.</p></td></tr>
+
+<tr><td  scope="row"><p><code>name</code></p></td><td ><p>String</p></td><td ><p>Person’s name. Maximum length 1024 UTF-8 characters.</p></td></tr>
+
+<tr><td  scope="row"><p><code>managed_apple_id</code></p></td><td ><p>String</p></td><td ><p>Managed Apple ID for the person. Maximum length 1024 UTF-8 characters.</p></td></tr>
+
+<tr><td  scope="row"><p><code>unique_identifier</code></p></td><td ><p>String</p></td><td ><p>Unique identifier for the person. Maximum length 256 UTF-8 characters.</p></td></tr>
+
+<tr><td  scope="row"><p><code>passcode_type</code></p></td><td ><p>String</p></td><td ><p>The password policy of the person. Possible values are “complex”, “four”, or “six”. Available in protocol version 3 and above.</p></td></tr>
+
+<tr><td  scope="row"><p><code>source</code></p></td><td ><p>String</p></td><td ><p>Data source where class was created. Possible values include “iTunes U,” “SIS,” “CSV,” "SFTP," "SYSTEM," and “MANUAL.” Maximum length is 64 UTF-8 characters.</p></td></tr>
+
+<tr><td  scope="row"><p><code>source_system_identifier</code></p></td><td ><p>String</p></td><td ><p>Identifier configured by organization for the person. Maximum length 256 UTF-8 characters.</p></td></tr>
+
+<tr><td  scope="row"><p><code>grade</code></p></td><td ><p>String</p></td><td ><p>Optional; not used for instructors. Student grade information. Maximum length 256 UTF-8 characters. Value can be null.</p></td></tr>
+
+<tr><td  scope="row"><p><code>status</code></p></td><td ><p>String</p></td><td ><p>Indicates the status of the person. Possible values are <code>Active</code> and <code>InActive</code>. <strong>Availability: </strong>Available in X-Protocol Version 3 and later.</p></td></tr><tr><td  scope="row"><p><code>person_id</code></p></td><td ><p>String</p></td><td ><p>Optional. Indicates the <code>personid</code> of the person as displayed in ASM. <strong>Availability: </strong>Available in X-Protocol Version 4 and later.</p></td></tr><tr><td  scope="row"><p><code>sis_username</code></p></td><td ><p>String</p></td><td ><p>Optional. Indicates the SIS usernname of the person as displayed in ASM. <strong>Availability: </strong>Available in X-Protocol Version 5 and later.</p></td></tr>
+
+<tr><td  scope="row"><p><code>email_address</code></p></td><td ><p>String</p></td><td ><p>Optional. Indicates the email address of the person as displayed in ASM. <strong>Availability: </strong>Available in X-Protocol Version 5 and later.</p></td></tr>
+
+</table></div>
+
+<p>The response contains a list of persons. The <code>more_to_follow</code> Boolean indicates if more information about persons remains to be fetched. The client should read this flag to determine if subsequent requests are necessary to get the next batch of persons.</p>
+<p>The person list could be huge. If modifications are performed while the response is being returned, it will not return any persons enrolled after it started responding. If any updates are applied on any of the entities or attributes, you must send the request again to get the latest snapshot of personnel.</p>
+<p>One record in a typical response might look like this:</p>
+<div class="codesample clear"><table><tr><td scope="row"><pre>HTTP/1.1 200 OK<span></span></pre></td></tr><tr><td scope="row"><pre>Date: Mon,12 Oct 2015 02:25:30 GMT<span></span></pre></td></tr><tr><td scope="row"><pre>Content-Type: application/json;charset=UTF8<span></span></pre></td></tr><tr><td scope="row"><pre>X-ADM-Auth-Session: 87a235815b8d6661ac73329f75815b8d6661ac73329f815<span></span></pre></td></tr><tr><td scope="row"><pre>Content-Length: ...<span></span></pre></td></tr><tr><td scope="row"><pre>Connection: Keep-Alive<span></span></pre></td></tr><tr><td scope="row"><pre> <span></span></pre></td></tr><tr><td scope="row"><pre>{<span></span></pre></td></tr><tr><td scope="row"><pre>  "persons": [<span></span></pre></td></tr><tr><td scope="row"><pre>    {<span></span></pre></td></tr><tr><td scope="row"><pre>      "unique_identifier": "UNIINSTID1003",<span></span></pre></td></tr><tr><td scope="row"><pre>      "source": "CSV",<span></span></pre></td></tr><tr><td scope="row"><pre>      "source_system_identifier": "INSTID1003",<span></span></pre></td></tr><tr><td scope="row"><pre>      "name": "Miss Will Smith",<span></span></pre></td></tr><tr><td scope="row"><pre>      "managed_apple_id": "smith@example.com"<span></span></pre></td></tr><tr><td scope="row"><pre>      "first_name": "Miss",<span></span></pre></td></tr><tr><td scope="row"><pre>      "middle_name": "Will",<span></span></pre></td></tr><tr><td scope="row"><pre>      "last_name": "Smith",<span></span></pre></td></tr><tr><td scope="row"><pre>      "passcode_type": "complex",<span></span></pre></td></tr><tr><td scope="row"><pre>      "person_id": "6378376667",<span></span></pre></td></tr><tr><td scope="row"><pre>      "status": "Active"<span></span></pre></td></tr><tr><td scope="row"><pre>    },<span></span></pre></td></tr><tr><td scope="row"><pre>    {<span></span></pre></td></tr><tr><td scope="row"><pre>      "unique_identifier": "UNISTUDID1003",<span></span></pre></td></tr><tr><td scope="row"><pre>      "source": "SIS",<span></span></pre></td></tr><tr><td scope="row"><pre>      "source_system_identifier": "INSTSTUDID1003",<span></span></pre></td></tr><tr><td scope="row"><pre>      "name": "John Smith",<span></span></pre></td></tr><tr><td scope="row"><pre>      "managed_apple_id": "john@example.com",<span></span></pre></td></tr><tr><td scope="row"><pre>      "grade": "K"<span></span></pre></td></tr><tr><td scope="row"><pre>      "first_name": "John",<span></span></pre></td></tr><tr><td scope="row"><pre>      "last_name": "Smith",<span></span></pre></td></tr><tr><td scope="row"><pre>      "passcode_type": "four",<span></span></pre></td></tr><tr><td scope="row"><pre>      "person_id": "4909090667",<span></span></pre></td></tr><tr><td scope="row"><pre>      "status": "Active"<span></span></pre></td></tr><tr><td scope="row"><pre>    }<span></span></pre></td></tr><tr><td scope="row"><pre>  ],<span></span></pre></td></tr><tr><td scope="row"><pre>  "cursor": "1ac73329f75816",<span></span></pre></td></tr><tr><td scope="row"><pre>  "more_to_follow": "false"<span></span></pre></td></tr><tr><td scope="row"><pre>}<span></span></pre></td></tr></table></div>
+</section>
+
+<section><a name="//apple_ref/doc/uid/TP40017387-CH9-SW321" title="Person Roster Sync Service"></a><h3 class="jump">Person Roster Sync Service</h3>
+<p>This sync service uses a cursor returned by the full person roster service. It returns a list of all modifications (additions or deletions) made since the cursor date, up to 7 days.</p>
+<p>This service may return the same person more than once. You can identify duplicates by matching their <code>unique_identifier</code> values.</p>
+<section><a name="//apple_ref/doc/uid/TP40017387-CH9-SW322" title="Requests"></a><h4 class="jump">Requests</h4>
+<p>To access this information, POST a request in JSON format and UTF-8 charset to the following URL: <code>https://mdmenrollment.apple.com/roster/class/person/sync</code>. The request body should contain a JSON dictionary with the following keys:</p>
+<div class="tableholder"><table class="graybox" border = "0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Key</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Type</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Content</p></th></tr>
+
+<tr><td  scope="row"><p><code>cursor</code></p></td><td ><p>String</p></td><td ><p>Optional. A hex string that represents the starting position for a request, used for pagination. This position should not be older than 7 days. On the initial request, it should be omitted. </p></td></tr>
+<tr><td  scope="row"><p><code>limit</code></p></td><td ><p>Integer</p></td><td ><p>Optional. The maximum number of entries to return. The default value is 1000 and the maximum value is 1000.</p></td></tr>
+</table></div>
+<p>With its required header, a typical request looks like this:</p>
+<div class="codesample clear"><table><tr><td scope="row"><pre>POST /roster/class/person/sync HTTP/1.1<span></span></pre></td></tr><tr><td scope="row"><pre>User-Agent:&#60;client-software-information&#62;<span></span></pre></td></tr><tr><td scope="row"><pre>Accept-Encoding: gzip, deflate<span></span></pre></td></tr><tr><td scope="row"><pre>X-Server-Protocol-Version:2<span></span></pre></td></tr><tr><td scope="row"><pre>X-ADM-Auth-Session: 87a235815b8d6661ac73329f75815b8d6661ac73329f815<span></span></pre></td></tr><tr><td scope="row"><pre>Content-Type: application/json;charset=UTF8<span></span></pre></td></tr><tr><td scope="row"><pre>Content-Length: &#60;Content-Length&#62;<span></span></pre></td></tr><tr><td scope="row"><pre>Host: &#60;vip-name&#62;<span></span></pre></td></tr><tr><td scope="row"><pre>Cookie: ...<span></span></pre></td></tr><tr><td scope="row"><pre>{<span></span></pre></td></tr><tr><td scope="row"><pre>"limit": 1000,<span></span></pre></td></tr><tr><td scope="row"><pre>"cursor": "1ac73329f75817"<span></span></pre></td></tr><tr><td scope="row"><pre>}<span></span></pre></td></tr></table></div>
+<p>Only content of type <code>application/json</code> in UTF-8 charset will be accepted by the server.</p>
+</section>
+<section><a name="//apple_ref/doc/uid/TP40017387-CH9-SW323" title="Responses"></a><h4 class="jump">Responses</h4>
+<p>In response, the MDM service returns a JSON dictionary with following keys:</p>
+<div class="tableholder"><table class="graybox" border = "0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Key</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Type</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Content</p></th></tr>
+
+<tr><td  scope="row"><p><code>cursor</code></p></td><td ><p>String</p></td><td ><p>Optional. A hex string that should be used for the next request to paginate. This field data type has a maximum length of 512 UTF-8 characters. </p></td></tr>
+<tr><td  scope="row"><p><code>fetched_until</code></p></td><td ><p>String</p></td><td ><p>A time and date stamp in ISO 8601 format specifying the latest date of data being fetched.</p></td></tr>
+<tr><td  scope="row"><p><code>more_to_follow</code></p></td><td ><p>Boolean</p></td><td ><p>Indicates whether the request’s limit and cursor values resulted in only a partial list of persons. If <code>true</code>, the MDM server should then make another request (starting from the newly returned cursor) to obtain additional records.</p></td></tr>
+<tr><td  scope="row"><p><code>persons</code></p></td><td ><p>Array of dictionaries</p></td><td ><p>Provides information about persons, both teachers and students, sorted in lexical order by a person source_system_identifier. The organization must provide this identifier to Apple.</p></td></tr>
+</table></div>
+<p>Each <code>persons</code> dictionary contains the following keys:</p>
+<div class="tableholder"><table class="graybox" border = "0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Key</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Type</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Content</p></th></tr>
+<tr><td  scope="row"><p><code>name</code></p></td><td ><p>String</p></td><td ><p>Person’s name. Maximum length 1024 UTF-8 characters.</p></td></tr>
+<tr><td  scope="row"><p><code>managed_apple_id</code></p></td><td ><p>String</p></td><td ><p>Managed Apple ID for the person. Maximum length 1024 UTF-8 characters.</p></td></tr>
+<tr><td  scope="row"><p><code>unique_identifier</code></p></td><td ><p>String</p></td><td ><p>Unique identifier for the person. Maximum length 256 UTF-8 characters.</p></td></tr>
+<tr><td  scope="row"><p><code>source</code></p></td><td ><p>String</p></td><td ><p>Data source where class was created. Possible values include “iTunes U,” “SIS,” “CSV,” "SFTP," "SYSTEM," and “MANUAL.” Maximum length is 64 UTF-8 characters.</p></td></tr>
+<tr><td  scope="row"><p><code>source_system_identifier</code></p></td><td ><p>String</p></td><td ><p>Identifier configured by organization for the person. Maximum length 256 UTF-8 characters.</p></td></tr>
+<tr><td  scope="row"><p><code>grade</code></p></td><td ><p>String</p></td><td ><p>Optional; not used for instructors. Student grade information. Maximum length 256 UTF-8 characters. Value can be null. This field is omitted for instructors.</p></td></tr>
+<tr><td  scope="row"><p><code>first_name</code></p></td><td ><p>String</p></td><td ><p>Person’s first name. Maximum length 1024 UTF-8 characters. Available in protocol version 3 and above.</p></td></tr>
+<tr><td  scope="row"><p><code>middle_name</code></p></td><td ><p>String</p></td><td ><p>Optional. Person’s middle name. Maximum length 1024 UTF-8 characters. Available in protocol version 3 and above.</p></td></tr>
+<tr><td  scope="row"><p><code>last_name</code></p></td><td ><p>String</p></td><td ><p>Person’s last name. Maximum length 1024 UTF-8 characters. Available in protocol version 3 and above.</p></td></tr>
+<tr><td  scope="row"><p><code>passcode_type</code></p></td><td ><p>String</p></td><td ><p>The password policy of the person. Possible values are “complex”, “four”, or “six”. Available in protocol version 3 and above.</p></td></tr>
+<tr><td  scope="row"><p><code>status</code></p></td><td ><p>String</p></td><td ><p>Indicates the status of the person. Possible values are <code>Active</code> and <code>InActive</code>. <strong>Availability: </strong>Available in X-Protocol Version 3 and later.</p></td></tr>
+<tr><td  scope="row"><p><code>person_id</code></p></td><td ><p>String</p></td><td ><p>Optional. Indicates the <code>personid</code> of the person as displayed in ASM. <strong>Availability: </strong>Available in X-Protocol Version 4 and later.</p></td></tr><tr><td  scope="row"><p><code>sis_username</code></p></td><td ><p>String</p></td><td ><p>Optional. Indicates the SIS usernname of the person as displayed in ASM. <strong>Availability: </strong>Available in X-Protocol Version 5 and later.</p></td></tr><tr><td  scope="row"><p><code>email_address</code></p></td><td ><p>String</p></td><td ><p>Optional. Indicates the email address of the person as displayed in ASM. <strong>Availability: </strong>Available in X-Protocol Version 5 and later.</p></td></tr>
+</table></div>
+<p>One record in a typical successful Person Roster Sync Service response might look like this:</p>
+<div class="codesample clear"><table><tr><td scope="row"><pre>{<span></span></pre></td></tr><tr><td scope="row"><pre>  "persons": [<span></span></pre></td></tr><tr><td scope="row"><pre>    {<span></span></pre></td></tr><tr><td scope="row"><pre>      "unique_identifier": "UNIINSTID1003",<span></span></pre></td></tr><tr><td scope="row"><pre>      "source": "CSV",<span></span></pre></td></tr><tr><td scope="row"><pre>      "source_system_identifier": "INSTID1003",<span></span></pre></td></tr><tr><td scope="row"><pre>      "name": "Miss Will Smith",<span></span></pre></td></tr><tr><td scope="row"><pre>      "managed_apple_id": "smith@example.com"<span></span></pre></td></tr><tr><td scope="row"><pre>      "first_name": "Miss",<span></span></pre></td></tr><tr><td scope="row"><pre>      "middle_name": "Will",<span></span></pre></td></tr><tr><td scope="row"><pre>      "last_name": "Smith",<span></span></pre></td></tr><tr><td scope="row"><pre>      "passcode_type": "complex",<span></span></pre></td></tr><tr><td scope="row"><pre>      "person_id": "627626672",<span></span></pre></td></tr><tr><td scope="row"><pre>      "status": "Active"<span></span></pre></td></tr><tr><td scope="row"><pre>    },<span></span></pre></td></tr><tr><td scope="row"><pre>    {<span></span></pre></td></tr><tr><td scope="row"><pre>      "unique_identifier": "UNISTUDID1003",<span></span></pre></td></tr><tr><td scope="row"><pre>      "source": "SIS",<span></span></pre></td></tr><tr><td scope="row"><pre>      "source_system_identifier": "INSTSTUDID1003",<span></span></pre></td></tr><tr><td scope="row"><pre>      "name": "John Smith",<span></span></pre></td></tr><tr><td scope="row"><pre>      "managed_apple_id": "john@example.com",<span></span></pre></td></tr><tr><td scope="row"><pre>      "grade": "K"<span></span></pre></td></tr><tr><td scope="row"><pre>      "first_name": "John",<span></span></pre></td></tr><tr><td scope="row"><pre>      "last_name": "Smith",<span></span></pre></td></tr><tr><td scope="row"><pre>      "passcode_type": "four",<span></span></pre></td></tr><tr><td scope="row"><pre>      "person_id": "7873878737",<span></span></pre></td></tr><tr><td scope="row"><pre>      "status": "Active"<span></span></pre></td></tr><tr><td scope="row"><pre>    }<span></span></pre></td></tr><tr><td scope="row"><pre>  ],<span></span></pre></td></tr><tr><td scope="row"><pre>  "cursor": "1ac73329f75816",<span></span></pre></td></tr><tr><td scope="row"><pre>  "more_to_follow": "false"<span></span></pre></td></tr><tr><td scope="row"><pre>  "fetched_until": "2016-05-09T02:30:00Z"<span></span></pre></td></tr><tr><td scope="row"><pre>}<span></span></pre></td></tr></table></div>
+<p>Note these features and cautions:</p>
+<ul class="ul">
+<li class="li"><p>The response contains a list of persons.</p></li>
+<li class="li"><p>The <code>more_to_follow</code> Boolean indicates if more information remains to be fetched. The client should read this flag to determine if subsequent requests are necessary to get the next batch of persons.</p></li>
+<li class="li"><p>The server will issue a cursor in all responses. If the cursor is sent in the next request, the server will return next set of records in chronological order and issue a new cursor.</p></li>
+<li class="li"><p>Data changes will be delayed by a few minutes.</p></li>
+<li class="li"><p>This service does not return deleted data. The client is expected to do a full sync and compare once every few days to identify deletes.</p></li>
+<li class="li"><p>For a discussion of potential problems with using the Person Roster Sync Service, see <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH9-SW40" data-renderer-version="1">Error Responses</a></span>.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+<section><a name="//apple_ref/doc/uid/TP40017387-CH9-SW21" title="Location Information"></a><h2 class="jump">Location Information</h2>
+<p>This API returns information for an organization about the locations where any classes are held.</p>
+<section><a name="//apple_ref/doc/uid/TP40017387-CH9-SW22" title="Requests"></a><h3 class="jump">Requests</h3>
+<p>To access this information, POST a request in JSON format and UTF-8 charset to the following URL: <code>https://mdmenrollment.apple.com/roster/class/location</code>. The request body should contain a JSON dictionary with the following keys:</p>
+<div class="tableholder"><table class="graybox" border = "0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Key</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Type</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Content</p></th></tr>
+<tr><td  scope="row"><p><code>cursor</code></p></td><td ><p>String</p></td><td ><p>Optional. A hex string that represents the starting position for a request. This is used for pagination. On the initial request, this should be omitted. </p></td></tr>
+<tr><td  scope="row"><p><code>limit</code></p></td><td ><p>Integer</p></td><td ><p>Optional. The maximum number of entries to return. The default value is 1000 and the maximum value is 1000.</p></td></tr>
+</table></div>
+<p>With its required header, a typical request looks like this:</p>
+<div class="codesample clear"><table><tr><td scope="row"><pre>POST /roster/class/location HTTP/1.1<span></span></pre></td></tr><tr><td scope="row"><pre>User-Agent:&#60;client-software-information&#62;<span></span></pre></td></tr><tr><td scope="row"><pre>Accept-Encoding: gzip, deflate<span></span></pre></td></tr><tr><td scope="row"><pre>X-Server-Protocol-Version:2<span></span></pre></td></tr><tr><td scope="row"><pre>X-ADM-Auth-Session: 87a235815b8d6661ac73329f75815b8d6661ac73329f815<span></span></pre></td></tr><tr><td scope="row"><pre>Content-Type: application/json;charset=UTF8<span></span></pre></td></tr><tr><td scope="row"><pre>Content-Length: &#60;Content-Length&#62;<span></span></pre></td></tr><tr><td scope="row"><pre>{<span></span></pre></td></tr><tr><td scope="row"><pre>"limit": 1000,<span></span></pre></td></tr><tr><td scope="row"><pre>"cursor": "1ac73329f75817"<span></span></pre></td></tr><tr><td scope="row"><pre>}<span></span></pre></td></tr></table></div>
+</section>
+<section><a name="//apple_ref/doc/uid/TP40017387-CH9-SW23" title="Responses"></a><h3 class="jump">Responses</h3>
+<p>In response, the MDM service returns a JSON dictionary with the following keys:</p>
+<div class="tableholder"><table class="graybox" border = "0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Key</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Type</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Content</p></th></tr>
+<tr><td  scope="row"><p><code>cursor</code></p></td><td ><p>String</p></td><td ><p>Optional. A hex string that should be used for the next request to paginate. This field data type has a maximum length of 512 UTF-8 characters. </p></td></tr>
+<tr><td  scope="row"><p><code>more_to_follow</code></p></td><td ><p>Boolean</p></td><td ><p>Indicates whether the request’s limit and cursor values resulted in only a partial list of locations. If true, the MDM server should then make another request (starting from the newly returned cursor) to obtain additional records.</p></td></tr>
+<tr><td  scope="row"><p><code>locations</code></p></td><td ><p>Array of dictionaries</p></td><td ><p>Provides information about locations, sorted in lexical order by a location source_system_identifier. The organization must provide this identifier to Apple.</p></td></tr>
+</table></div>
+<p>Each <code>locations</code> dictionary contains the following keys:</p>
+<div class="tableholder"><table class="graybox" border = "0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Key</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Type</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Content</p></th></tr>
+<tr><td  scope="row"><p><code>name</code></p></td><td ><p>String</p></td><td ><p>Location name. Maximum length 1024 UTF-8 characters.</p></td></tr>
+<tr><td  scope="row"><p><code>unique_identifier</code></p></td><td ><p>String</p></td><td ><p>Unique identifier for the location. Maximum length 256 UTF-8 characters.</p></td></tr>
+<tr><td  scope="row"><p><code>source_system_identifier</code></p></td><td ><p>String</p></td><td ><p>Identifier configured by organization for the location. Maximum length 256 UTF-8 characters.</p></td></tr>
+<tr><td  scope="row"><p><code>source</code></p></td><td ><p>String</p></td><td ><p>Data source where class was created. Possible values include “iTunes U,” “SIS,” “CSV,” "SFTP," "ENROLLMENT," and “MANUAL.” Maximum length 64 UTF-8 characters.</p></td></tr>
+</table></div>
+<p>The response contains a list of locations. The <code>more_to_follow</code> Boolean indicates if more information about locations remains to be fetched. The client should read this flag to determine if subsequent requests are necessary to get the next batch of locations.</p>
+<p>If modifications to locations are performed while the response is being returned, it will not return any locations rostered after it started responding. If any updates are applied on any of the entities or attributes, you must send the request again to get the latest snapshot of locations in use.</p>
+<p>One record in a typical response might look like this:</p>
+<div class="codesample clear"><table><tr><td scope="row"><pre>HTTP/1.1 200 OK<span></span></pre></td></tr><tr><td scope="row"><pre>Date: Mon,12 Oct 2015 02:25:30 GMT<span></span></pre></td></tr><tr><td scope="row"><pre>Content-Type: application/json;charset=UTF8<span></span></pre></td></tr><tr><td scope="row"><pre>X-ADM-Auth-Session: 87a235815b8d6661ac73329f75815b8d6661ac73329f815<span></span></pre></td></tr><tr><td scope="row"><pre>Content-Length: ...<span></span></pre></td></tr><tr><td scope="row"><pre>Connection: Keep-Alive<span></span></pre></td></tr><tr><td scope="row"><pre> <span></span></pre></td></tr><tr><td scope="row"><pre>{<span></span></pre></td></tr><tr><td scope="row"><pre>  "locations": [<span></span></pre></td></tr><tr><td scope="row"><pre>    {<span></span></pre></td></tr><tr><td scope="row"><pre>      "unique_identifier": "UNILOC1003",<span></span></pre></td></tr><tr><td scope="row"><pre>      "source": "SIS",<span></span></pre></td></tr><tr><td scope="row"><pre>      "source_system_identifier": "INSTLOCID1003",<span></span></pre></td></tr><tr><td scope="row"><pre>      "name": "Biology department"<span></span></pre></td></tr><tr><td scope="row"><pre>    }<span></span></pre></td></tr><tr><td scope="row"><pre>  ],<span></span></pre></td></tr><tr><td scope="row"><pre>  "cursor": "1ac73329f75816",<span></span></pre></td></tr><tr><td scope="row"><pre>  "more_to_follow": "false"<span></span></pre></td></tr><tr><td scope="row"><pre>}<span></span></pre></td></tr></table></div>
+</section>
+
+<section><a name="//apple_ref/doc/uid/TP40017387-CH9-SW331" title="Location Roster Sync Service"></a><h3 class="jump">Location Roster Sync Service</h3>
+<p>This sync service uses a cursor returned by the full location roster service. It returns a list of all modifications (additions or deletions) made since the cursor date, up to 7 days.</p>
+<p>This service may return the same location more than once. You can identify duplicates by matching their <code>unique_identifier</code> values.</p>
+<section><a name="//apple_ref/doc/uid/TP40017387-CH9-SW332" title="Requests"></a><h4 class="jump">Requests</h4>
+<p>To access this information, POST a request in JSON format and UTF-8 charset to the following URL: <code>https://mdmenrollment.apple.com/roster/class/location/sync</code>. The request body should contain a JSON dictionary with the following keys:</p>
+<div class="tableholder"><table class="graybox" border = "0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Key</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Type</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Content</p></th></tr>
+
+<tr><td  scope="row"><p><code>cursor</code></p></td><td ><p>String</p></td><td ><p>Optional. A hex string that represents the starting position for a request, used for pagination. This position should not be older than 7 days. On the initial request, it should be omitted. </p></td></tr>
+<tr><td  scope="row"><p><code>limit</code></p></td><td ><p>Integer</p></td><td ><p>Optional. The maximum number of entries to return. The default value is 1000 and the maximum value is 1000.</p></td></tr>
+</table></div>
+<p>With its required header, a typical request looks like this:</p>
+<div class="codesample clear"><table><tr><td scope="row"><pre>POST /roster/class/location/sync HTTP/1.1<span></span></pre></td></tr><tr><td scope="row"><pre>User-Agent:&#60;client-software-information&#62;<span></span></pre></td></tr><tr><td scope="row"><pre>Accept-Encoding: gzip, deflate<span></span></pre></td></tr><tr><td scope="row"><pre>X-Server-Protocol-Version:2<span></span></pre></td></tr><tr><td scope="row"><pre>X-ADM-Auth-Session: 87a235815b8d6661ac73329f75815b8d6661ac73329f815<span></span></pre></td></tr><tr><td scope="row"><pre>Content-Type: application/json;charset=UTF8<span></span></pre></td></tr><tr><td scope="row"><pre>Content-Length: &#60;Content-Length&#62;<span></span></pre></td></tr><tr><td scope="row"><pre>Host: &#60;vip-name&#62;<span></span></pre></td></tr><tr><td scope="row"><pre>Cookie: ...<span></span></pre></td></tr><tr><td scope="row"><pre>{<span></span></pre></td></tr><tr><td scope="row"><pre>"limit": 1000,<span></span></pre></td></tr><tr><td scope="row"><pre>"cursor": "1ac73329f75817"<span></span></pre></td></tr><tr><td scope="row"><pre>}<span></span></pre></td></tr></table></div>
+<p>Only content of type <code>application/json</code> in UTF-8 charset will be accepted by the server.</p>
+</section>
+<section><a name="//apple_ref/doc/uid/TP40017387-CH9-SW333" title="Responses"></a><h4 class="jump">Responses</h4>
+<p>In response, the MDM service returns a JSON dictionary with following keys:</p>
+<div class="tableholder"><table class="graybox" border = "0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Key</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Type</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Content</p></th></tr>
+
+<tr><td  scope="row"><p><code>cursor</code></p></td><td ><p>String</p></td><td ><p>Optional. A hex string that should be used for the next request to paginate. This field data type has a maximum length of 512 UTF-8 characters. </p></td></tr>
+<tr><td  scope="row"><p><code>fetched_until</code></p></td><td ><p>String</p></td><td ><p>A time and date stamp in ISO 8601 format specifying the latest date of data being fetched.</p></td></tr>
+<tr><td  scope="row"><p><code>more_to_follow</code></p></td><td ><p>Boolean</p></td><td ><p>Indicates whether the request’s limit and cursor values resulted in only a partial list of locations. If <code>true</code>, the MDM server should then make another request (starting from the newly returned cursor) to obtain additional records.</p></td></tr>
+<tr><td  scope="row"><p><code>locations</code></p></td><td ><p>Array of dictionaries</p></td><td ><p>Provides information about locations, sorted in lexical order by a location <code>source_system_identifier</code>. The organization must provide this identifier to Apple.</p></td></tr>
+</table></div>
+<p>Each dictionary in the <code>locations</code> array contains these keys:</p>
+<div class="tableholder"><table class="graybox" border = "0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Key</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Type</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Content</p></th></tr>
+
+<tr><td  scope="row"><p><code>name</code></p></td><td ><p>String</p></td><td ><p>Optional. Location name. Maximum length is 1024 UTF-8 characters.</p></td></tr>
+<tr><td  scope="row"><p><code>unique_identifier</code></p></td><td ><p>String</p></td><td ><p>Unique identifier for the location. Maximum length is 256 UTF-8 characters.</p></td></tr>
+<tr><td  scope="row"><p><code>source_system_identifier</code></p></td><td ><p>String</p></td><td ><p>Optional. Identifier configured by the organization for its locations, with a maximum length of 256 UTF-8 characters. Its value is not guaranteed to be unique and can potentially change.</p></td></tr>
+<tr><td  scope="row"><p><code>source</code></p></td><td ><p>String</p></td><td ><p>Data source where class was created. Possible values include “iTunes U,” “SIS,” “CSV,” "SFTP," and “MANUAL.” Maximum length is 64 UTF-8 characters.</p></td></tr>
+</table></div>
+<p>One record in a typical successful Location Roster Sync Service response might look like this:</p>
+<div class="codesample clear"><table><tr><td scope="row"><pre>{<span></span></pre></td></tr><tr><td scope="row"><pre>  "locations": [<span></span></pre></td></tr><tr><td scope="row"><pre>    {<span></span></pre></td></tr><tr><td scope="row"><pre>      "unique_identifier": "UNILOC1003",<span></span></pre></td></tr><tr><td scope="row"><pre>      "source": "SIS",<span></span></pre></td></tr><tr><td scope="row"><pre>      "source_system_identifier": "INSTLOCID1003",<span></span></pre></td></tr><tr><td scope="row"><pre>      "name": "Biology department",<span></span></pre></td></tr><tr><td scope="row"><pre>    }<span></span></pre></td></tr><tr><td scope="row"><pre>  ],<span></span></pre></td></tr><tr><td scope="row"><pre>  "cursor": "1ac73329f75816",<span></span></pre></td></tr><tr><td scope="row"><pre>  "more_to_follow": "false"<span></span></pre></td></tr><tr><td scope="row"><pre>  "fetched_until": "2016-05-09T02:30:00Z"<span></span></pre></td></tr><tr><td scope="row"><pre>}<span></span></pre></td></tr></table></div>
+<p>Note these features and cautions:</p>
+<ul class="ul">
+<li class="li"><p>The response contains a list of locations.</p></li>
+<li class="li"><p>The <code>more_to_follow</code> Boolean indicates if more locations remain to be fetched. The client should read this flag to determine if subsequent requests are necessary to get the next batch of locations.</p></li>
+<li class="li"><p>The server will issue a cursor in all responses. If the cursor is sent in the next request, the server will return next set of records in chronological order and issue a new cursor.</p></li>
+<li class="li"><p>Data changes will be delayed by a few minutes.</p></li>
+<li class="li"><p>This service does not return deleted data. The client is expected to do a full sync and compare once every few days to identify deletes.</p></li>
+<li class="li"><p>For a discussion of potential problems with using the Location Roster Sync Service, see <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH9-SW40" data-renderer-version="1">Error Responses</a></span>.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+<section><a name="//apple_ref/doc/uid/TP40017387-CH9-SW31" title="Course Roster Information"></a><h2 class="jump">Course Roster Information</h2>
+<p>This API returns course information for an organization.</p>
+<section><a name="//apple_ref/doc/uid/TP40017387-CH9-SW32" title="Requests"></a><h3 class="jump">Requests</h3>
+<p>To access this information, POST a request in JSON format and UTF-8 charset to the following URL: <code>https://mdmenrollment.apple.com/roster/course</code>. The request body should contain a JSON dictionary with the following keys:</p>
+<div class="tableholder"><table class="graybox" border = "0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Key</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Type</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Content</p></th></tr>
+<tr><td  scope="row"><p><code>cursor</code></p></td><td ><p>String</p></td><td ><p>Optional. A hex string that represents the starting position for a request. This is used for pagination. On the initial request, this should be omitted. </p></td></tr>
+<tr><td  scope="row"><p><code>limit</code></p></td><td ><p>Integer</p></td><td ><p>Optional. The maximum number of entries to return. The default value is 1000 and the maximum value is 1000.</p></td></tr>
+</table></div>
+<p>With its required header, a typical request looks like this:</p>
+<div class="codesample clear"><table><tr><td scope="row"><pre>POST /roster/course HTTP/1.1<span></span></pre></td></tr><tr><td scope="row"><pre>User-Agent:&#60;client-software-information&#62;<span></span></pre></td></tr><tr><td scope="row"><pre>Accept-Encoding: gzip, deflate<span></span></pre></td></tr><tr><td scope="row"><pre>X-Server-Protocol-Version:2<span></span></pre></td></tr><tr><td scope="row"><pre>X-ADM-Auth-Session: 87a235815b8d6661ac73329f75815b8d6661ac73329f815<span></span></pre></td></tr><tr><td scope="row"><pre>Content-Type: application/json;charset=UTF8<span></span></pre></td></tr><tr><td scope="row"><pre>Content-Length: &#60;Content-Length&#62;<span></span></pre></td></tr><tr><td scope="row"><pre>{<span></span></pre></td></tr><tr><td scope="row"><pre>"limit": 1000,<span></span></pre></td></tr><tr><td scope="row"><pre>"cursor": "1ac73329f75817"<span></span></pre></td></tr><tr><td scope="row"><pre>}<span></span></pre></td></tr></table></div>
+</section>
+
+<section><a name="//apple_ref/doc/uid/TP40017387-CH9-SW33" title="Responses"></a><h3 class="jump">Responses</h3>
+<p>In response, the MDM service returns a JSON dictionary with following keys:</p>
+<div class="tableholder"><table class="graybox" border = "0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Key</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Type</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Content</p></th></tr>
+<tr><td  scope="row"><p><code>cursor</code></p></td><td ><p>String</p></td><td ><p>Optional. A hex string that should be used for the next request to paginate. This field data type has a maximum length of 512 UTF-8 characters. </p></td></tr>
+<tr><td  scope="row"><p><code>more_to_follow</code></p></td><td ><p>Boolean</p></td><td ><p>Indicates whether the request’s limit and cursor values resulted in only a partial list of courses. If true, the MDM server should then make another request (starting from the newly returned cursor) to obtain additional records.</p></td></tr>
+<tr><td  scope="row"><p><code>courses</code></p></td><td ><p>Array of dictionaries</p></td><td ><p>Provides information about courses, sorted in lexical order by a course source_system_identifier. The organization must provide this identifier to Apple.</p></td></tr>
+</table></div>
+<p>Each <code>courses</code> dictionary contains the following keys:</p>
+<div class="tableholder"><table class="graybox" border = "0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Key</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Type</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Content</p></th></tr>
+<tr><td  scope="row"><p><code>name</code></p></td><td ><p>String</p></td><td ><p>Optional. Course name. Maximum length 1024 UTF-8 characters.</p></td></tr>
+<tr><td  scope="row"><p><code>unique_identifier</code></p></td><td ><p>String</p></td><td ><p>Unique identifier for the course. Maximum length 256 UTF-8 characters.</p></td></tr>
+<tr><td  scope="row"><p><code>source</code></p></td><td ><p>String</p></td><td ><p>Data source where class was created. Possible values include “iTunes U,” “SIS,” “CSV,” "SFTP," and “MANUAL.” Maximum length 64 UTF-8 characters.</p></td></tr>
+<tr><td  scope="row"><p><code>source_system_identifier</code></p></td><td ><p>String</p></td><td ><p>Optional. Identifier configured by organization for the course. Maximum length is 256 UTF-8 characters. Value can be null.</p></td></tr>
+</table></div>
+<p>The response contains a list of courses. The <code>more_to_follow</code> Boolean indicates if more information about courses remains to be fetched. The client should read this flag to determine if subsequent requests are necessary to get the next batch of courses.</p>
+<p>If modifications to the course catalog are performed while the response is being returned, it will not return any courses rostered after it started responding. If any updates are applied on any of the entities or attributes, you must send the request again to get the latest snapshot of courses.</p>
+<p>One record in a typical response might look like this:</p>
+<div class="codesample clear"><table><tr><td scope="row"><pre>HTTP/1.1 200 OK<span></span></pre></td></tr><tr><td scope="row"><pre>Date: Mon,12 Oct 2015 02:25:30 GMT<span></span></pre></td></tr><tr><td scope="row"><pre>Content-Type: application/json;charset=UTF8<span></span></pre></td></tr><tr><td scope="row"><pre>X-ADM-Auth-Session: 87a235815b8d6661ac73329f75815b8d6661ac73329f815<span></span></pre></td></tr><tr><td scope="row"><pre>Content-Length: ...<span></span></pre></td></tr><tr><td scope="row"><pre>Connection: Keep-Alive<span></span></pre></td></tr><tr><td scope="row"><pre> <span></span></pre></td></tr><tr><td scope="row"><pre>{<span></span></pre></td></tr><tr><td scope="row"><pre>  "courses": [<span></span></pre></td></tr><tr><td scope="row"><pre>    {<span></span></pre></td></tr><tr><td scope="row"><pre>      "unique_identifier": "UNICOURID1003",<span></span></pre></td></tr><tr><td scope="row"><pre>      "source": "SIS",<span></span></pre></td></tr><tr><td scope="row"><pre>      "source_system_identifier": "INSTCOURSEID1003",<span></span></pre></td></tr><tr><td scope="row"><pre>      "name": "Biology 101"<span></span></pre></td></tr><tr><td scope="row"><pre>    }<span></span></pre></td></tr><tr><td scope="row"><pre>  ],<span></span></pre></td></tr><tr><td scope="row"><pre>  "cursor": "1ac73329f75816",<span></span></pre></td></tr><tr><td scope="row"><pre>  "more_to_follow": "false"<span></span></pre></td></tr><tr><td scope="row"><pre>}<span></span></pre></td></tr></table></div>
+</section>
+
+<section><a name="//apple_ref/doc/uid/TP40017387-CH9-SW341" title="Course Roster Sync Service"></a><h3 class="jump">Course Roster Sync Service</h3>
+<p>This sync service uses a cursor returned by the full course roster service. It returns a list of all modifications (additions or deletions) made since the cursor date, up to 7 days.</p>
+<p>This service may return the same course more than once. You can identify duplicates by matching their <code>unique_identifier</code> values.</p>
+<section><a name="//apple_ref/doc/uid/TP40017387-CH9-SW342" title="Requests"></a><h4 class="jump">Requests</h4>
+<p>To access this information, POST a request in JSON format and UTF-8 charset to the following URL: <code>https://mdmenrollment.apple.com/roster/course/sync</code>. The request body should contain a JSON dictionary with the following keys:</p>
+<div class="tableholder"><table class="graybox" border = "0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Key</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Type</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Content</p></th></tr>
+
+<tr><td  scope="row"><p><code>cursor</code></p></td><td ><p>String</p></td><td ><p>Optional. A hex string that represents the starting position for a request, used for pagination. This position should not be older than 7 days. On the initial request, it should be omitted. </p></td></tr>
+<tr><td  scope="row"><p><code>limit</code></p></td><td ><p>Integer</p></td><td ><p>Optional. The maximum number of entries to return. The default value is 1000 and the maximum value is 1000.</p></td></tr>
+</table></div>
+<p>With its required header, a typical request looks like this:</p>
+<div class="codesample clear"><table><tr><td scope="row"><pre>POST /roster/course/sync HTTP/1.1<span></span></pre></td></tr><tr><td scope="row"><pre>User-Agent:&#60;client-software-information&#62;<span></span></pre></td></tr><tr><td scope="row"><pre>Accept-Encoding: gzip, deflate<span></span></pre></td></tr><tr><td scope="row"><pre>X-Server-Protocol-Version:2<span></span></pre></td></tr><tr><td scope="row"><pre>X-ADM-Auth-Session: 87a235815b8d6661ac73329f75815b8d6661ac73329f815<span></span></pre></td></tr><tr><td scope="row"><pre>Content-Type: application/json;charset=UTF8<span></span></pre></td></tr><tr><td scope="row"><pre>Content-Length: &#60;Content-Length&#62;<span></span></pre></td></tr><tr><td scope="row"><pre>Host: &#60;vip-name&#62;<span></span></pre></td></tr><tr><td scope="row"><pre>Cookie: ...<span></span></pre></td></tr><tr><td scope="row"><pre>{<span></span></pre></td></tr><tr><td scope="row"><pre>"limit": 1000,<span></span></pre></td></tr><tr><td scope="row"><pre>"cursor": "1ac73329f75817"<span></span></pre></td></tr><tr><td scope="row"><pre>}<span></span></pre></td></tr></table></div>
+<p>Only content of type <code>application/json</code> in UTF-8 charset will be accepted by the server.</p>
+</section>
+<section><a name="//apple_ref/doc/uid/TP40017387-CH9-SW343" title="Responses"></a><h4 class="jump">Responses</h4>
+<p>In response, the MDM service returns a JSON dictionary with following keys:</p>
+<div class="tableholder"><table class="graybox" border = "0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Key</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Type</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Content</p></th></tr>
+
+<tr><td  scope="row"><p><code>cursor</code></p></td><td ><p>String</p></td><td ><p>Optional. A hex string that should be used for the next request to paginate. This field data type has a maximum length of 512 UTF-8 characters. </p></td></tr>
+<tr><td  scope="row"><p><code>fetched_until</code></p></td><td ><p>String</p></td><td ><p>A time and date stamp in ISO 8601 format specifying the latest date of data being fetched.</p></td></tr>
+<tr><td  scope="row"><p><code>more_to_follow</code></p></td><td ><p>Boolean</p></td><td ><p>Indicates whether the request’s limit and cursor values resulted in only a partial list of courses. If <code>true</code>, the MDM server should then make another request (starting from the newly returned cursor) to obtain additional records.</p></td></tr>
+<tr><td  scope="row"><p><code>courses</code></p></td><td ><p>Array of dictionaries</p></td><td ><p>Provides information about courses, sorted in lexical order by a course <code>source_system_identifier</code>. The organization must provide this identifier to Apple.</p></td></tr>
+</table></div>
+<p>Each dictionary in the <code>courses</code> array contains these keys:</p>
+<div class="tableholder"><table class="graybox" border = "0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Key</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Type</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Content</p></th></tr>
+
+<tr><td  scope="row"><p><code>name</code></p></td><td ><p>String</p></td><td ><p>Optional. Course name. Maximum length is 1024 UTF-8 characters.</p></td></tr>
+<tr><td  scope="row"><p><code>unique_identifier</code></p></td><td ><p>String</p></td><td ><p>Unique identifier for the course. Maximum length is 256 UTF-8 characters.</p></td></tr>
+<tr><td  scope="row"><p><code>source</code></p></td><td ><p>String</p></td><td ><p>Data source where class was created. Possible values include “iTunes U,” “SIS,” “CSV,” "SFTP," and “MANUAL.” Maximum length is 64 UTF-8 characters.</p></td></tr>
+<tr><td  scope="row"><p><code>source_system_identifier</code></p></td><td ><p>String</p></td><td ><p>Optional. Identifier configured by the organization for its courses, with a maximum length of 256 UTF-8 characters. Its value is not guaranteed to be unique and can potentially change.</p></td></tr>
+</table></div>
+<p>One record in a typical successful Course Roster Sync Service response might look like this:</p>
+<div class="codesample clear"><table><tr><td scope="row"><pre>{<span></span></pre></td></tr><tr><td scope="row"><pre>  "courses": [<span></span></pre></td></tr><tr><td scope="row"><pre>    {<span></span></pre></td></tr><tr><td scope="row"><pre>      "unique_identifier": "UNICOURID1003",<span></span></pre></td></tr><tr><td scope="row"><pre>      "source": "SIS",<span></span></pre></td></tr><tr><td scope="row"><pre>      "source_system_identifier": "INSTCOURSEID1003",<span></span></pre></td></tr><tr><td scope="row"><pre>      "name": "Biology 101",<span></span></pre></td></tr><tr><td scope="row"><pre>    }<span></span></pre></td></tr><tr><td scope="row"><pre>  ],<span></span></pre></td></tr><tr><td scope="row"><pre>  "cursor": "1ac73329f75816",<span></span></pre></td></tr><tr><td scope="row"><pre>  "more_to_follow": "false"<span></span></pre></td></tr><tr><td scope="row"><pre>  "fetched_until": "2016-05-09T02:30:00Z"<span></span></pre></td></tr><tr><td scope="row"><pre>}<span></span></pre></td></tr></table></div>
+<p>Note these features and cautions:</p>
+<ul class="ul">
+<li class="li"><p>The response contains a list of courses.</p></li>
+<li class="li"><p>The <code>more_to_follow</code> Boolean indicates if more course information remains to be fetched. The client should read this flag to determine if subsequent requests are necessary to get the next batch of courses.</p></li>
+<li class="li"><p>The server will issue a cursor in all responses. If the cursor is sent in the next request, the server will return next set of records in chronological order and issue a new cursor.</p></li>
+<li class="li"><p>Data changes will be delayed by a few minutes.</p></li>
+<li class="li"><p>This service does not return deleted data. The client is expected to do a full sync and compare once every few days to identify deletes.</p></li>
+<li class="li"><p>For a discussion of potential problems with using the Course Roster Sync Service, see <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH9-SW40" data-renderer-version="1">Error Responses</a></span>, below.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+<section><a name="//apple_ref/doc/uid/TP40017387-CH9-SW40" title="Error Responses"></a><h2 class="jump">Error Responses</h2>
+<p>Instead of the information responses described earlier in this chapter, MDM roster requests may return system errors. You must read and respond to three kinds of errors:</p>
+<ul class="ul">
+<li class="li"><p>Server failures</p></li>
+<li class="li"><p>Client failures</p></li>
+<li class="li"><p>MDM errors</p></li>
+</ul>
+<p>Server failures are mainly HTTP 500 and HTTP 503 errors:</p>
+<div class="codesample clear"><table><tr><td scope="row"><pre>HTTP/1.1 500 Internal Server Error<span></span></pre></td></tr><tr><td scope="row"><pre>Content-Type: text/plain;charset=UTF8<span></span></pre></td></tr><tr><td scope="row"><pre>Content-Length: 0<span></span></pre></td></tr><tr><td scope="row"><pre>Date: Thu, 22 Oct 2015 21:23:57 GMT<span></span></pre></td></tr><tr><td scope="row"><pre>Connection: close,<span></span></pre></td></tr><tr><td scope="row"><pre> <span></span></pre></td></tr><tr><td scope="row"><pre>HTTP/1.1 503 Service Unavailable<span></span></pre></td></tr><tr><td scope="row"><pre>Content-Type: text/plain;charset=UTF8<span></span></pre></td></tr><tr><td scope="row"><pre>Retry-After: 120<span></span></pre></td></tr><tr><td scope="row"><pre>Content-Length: 0<span></span></pre></td></tr><tr><td scope="row"><pre>Date: Thu, 22 Oct 2015 21:23:57 GMT<span></span></pre></td></tr><tr><td scope="row"><pre>Connection: close<span></span></pre></td></tr></table></div>
+<p>Client failures are HTTP 4xx-series or HTTP 429 errors:</p>
+<div class="codesample clear"><table><tr><td scope="row"><pre>HTTP/1.1 4xx &#60;Error Reason&#62;<span></span></pre></td></tr><tr><td scope="row"><pre>Content-Type: text/plain;Charset=UTF8<span></span></pre></td></tr><tr><td scope="row"><pre>Content-Length: 10<span></span></pre></td></tr><tr><td scope="row"><pre>Date: Thu, 22 Oct 2015 21:23:57 GMT<span></span></pre></td></tr><tr><td scope="row"><pre>Connection: close<span></span></pre></td></tr><tr><td scope="row"><pre> <span></span></pre></td></tr><tr><td scope="row"><pre>&#60;ERROR CODE&#62;<span></span></pre></td></tr><tr><td scope="row"><pre> <span></span></pre></td></tr><tr><td scope="row"><pre>HTTP/1.1 429 &#60;Error Reason&#62;<span></span></pre></td></tr><tr><td scope="row"><pre>Content-Type: text/plain;Charset=UTF8<span></span></pre></td></tr><tr><td scope="row"><pre>Content-Length: 10<span></span></pre></td></tr><tr><td scope="row"><pre>Retry-After: 10<span></span></pre></td></tr><tr><td scope="row"><pre>Date: Thu, 22 Oct 2015 21:23:57 GMT<span></span></pre></td></tr><tr><td scope="row"><pre>Connection: close<span></span></pre></td></tr><tr><td scope="row"><pre> <span></span></pre></td></tr><tr><td scope="row"><pre>&#60;ERROR CODE&#62;<span></span></pre></td></tr></table></div>
+<p>Client failures may return MDM error codes. When combined with HTTP codes, these errors give you the following information:</p>
+<ul class="ul">
+<li class="li"><p>UNAUTHORIZED + HTTP 401: Auth token has expired. The client should retry with a new auth token.</p></li>
+<li class="li"><p>FORBIDDEN + HTTP 403: Auth token is invalid.</p></li>
+<li class="li"><p>MALFORMED_REQUEST_BODY + HTTP 400: The request body is malformed.</p></li>
+<li class="li"><p>CURSOR_REQUIRED + HTTP 400: The cursor is missing in the request.</p></li>
+<li class="li"><p>INVALID_CURSOR + HTTP 400: The cursor in the request is invalid.</p></li>
+<li class="li"><p>EXPIRED_CURSOR + HTTP 400: The cursor is older than 1 day. </p></li>
+<li class="li"><p>TOO_MANY_REQUESTS + HTTP 429: Too many requests. Retry after time mentioned in “Retry-After” HTTP response header as per RFC 6585.</p></li>
+</ul>
+</section>
+
+
+        <div id="pageNavigationLinks_bottom" class="pageNavigationLinks">
+            <a class='nextLink' rel='next' href='../6-MDM_Best_Practices/MDM_Best_Practices.html'>Next</a><a class='previousLink' rel='prev' href='../ManagedAppsUpdates/ManagedAppsUpdates.html'>Previous</a>
+        </div><br/>
+        <div class="copyright"><br/><hr /><div align="center"><p class="content_text" lang="en" dir="ltr"> Copyright &#x00a9; 2018 Apple Inc. All Rights Reserved. <a href="http://www.apple.com/legal/internet-services/terms/site.html" target="_blank">Terms of Use</a>   |  <a href="http://www.apple.com/privacy/" target="_blank">Privacy Policy</a>  |  Updated: 2018-04-19</p></div></div>
+
+        <div id="pediaWindow">
+            <div id="pediaHeader"></div>
+            <div id="pediaBody"></div>
+        </div>
+    </article>
+
+    <div id="blackout">
+    <div id="preload"></div>
+</div>
+<div id="leave_feedback" class="button" role="button" tabindex="0">Feedback</div>
+<div id="modal" aria-hidden="true">
+    <div id="closebox" tabindex="0" aria-label="Close feedback form" role="button"></div>
+    <div id="sending" class="hidden">
+        <h2 tabindex="0">Sending feedback&hellip;</h2>
+        <div id="sending_img"></div>
+    </div>
+    <div id="error" class="hidden">
+        <h2 tabindex="0">We&rsquo;re sorry, an error has occurred.</h2>
+        <p>Please try submitting your feedback later.</p>
+        <div id="error_icon"></div>
+    </div>
+    <div id="success" class="hidden">
+        <h2 tabindex="0">Thank you for providing feedback!</h2>
+        <p>Your input helps improve our developer documentation.</p>
+        <div id="thank_you_icon"></div>
+    </div>
+    
+    <form id="feedback" action="#" method="post">
+        <div class="left-leaf">
+            <h2 id="helpful_title" data-asterisk="a1" tabindex="0">How helpful is this document?</h2>     
+            <sup id="a1" class="asterisk" aria-hidden="true">*</sup>
+
+            <div id="star_group" role="radiogroup" aria-required="true">
+                <label> 
+                    <input class="radio" type="radio" name="helped" value="1" /> 
+                    Very helpful
+                </label>
+                <label> 
+                    <input class="radio" type="radio" name="helped" value="2" /> 
+                    Somewhat helpful
+                </label>
+                <label>
+                    <input class="radio" type="radio" name="helped" value="3" /> 
+                    Not helpful
+                </label>
+            </div>
+        </div>
+        <div class="right-leaf">
+            <h2>How can we improve this document?</h2>
+            <div id="improve" class="checkboxes">
+                <label>
+                    <input type="checkbox" name="typo" /> 
+                    Fix typos or links
+                </label>
+                <label>
+                    <input type="checkbox" name="infoIncorrect" /> 
+                    Fix incorrect information
+                </label>
+                <label>
+                    <input type="checkbox" name="needs_examples" /> 
+                    Add or update code samples
+                </label>
+                <label>
+                    <input type="checkbox" name="needs_art" /> 
+                    Add or update illustrations
+                </label>
+                <label>
+                    <input type="checkbox" name="missingInfo" /> 
+                    Add information about...
+                </label>
+            </div>
+        </div>
+
+        <textarea id="comment" name="problem" cols="70" rows="8" placeholder="Please tell us more about your experience with this document" data-asterisk="a2" required></textarea>
+        <sup id="a2" class="asterisk" aria-hidden="true">*</sup>
+
+        <p class="fineprint">
+            <em aria-hidden="true"><span>*</span> Required information</em>
+        </p> 
+
+        <input id="submit" type="button" value="Send" />
+
+        <section id="legal">
+            <p>
+                To submit a product bug or enhancement request, please visit the 
+                <a href="https://developer.apple.com/bugreporter/" target="_blank">Bug Reporter</a> 
+                page.
+            </p>
+            <p>
+                Please read <a href="http://www.apple.com/legal/policies/ideas.html" target="_blank">Apple's Unsolicited Idea Submission Policy</a> 
+                before you send us your feedback.
+            </p> 
+        </section>
+    </form>
+</div>
+
+    
+    <script charset="utf-8" src="../../../../../Resources/1277/JavaScript/lib/prototype.js"></script>
+    <script src="../../../../../Resources/1277/JavaScript/library.js"></script>
+    <script src="../../../../../Resources/1277/JavaScript/feedback.js"></script>
+</body>
+</html>

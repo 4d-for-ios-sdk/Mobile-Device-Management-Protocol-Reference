@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>MDM Vendor CSR Signing Overview</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=7">
+    <meta charset="utf-8">
+    <meta id="book-resource-type" name="book-resource-type" content="Guide">
+    <meta scheme="apple_ref" id="identifier" name="identifier" content="//apple_ref/doc/uid/TP40017387">
+    <meta id="document-version" name="document-version" content="4.3.1">
+    <meta id="build" name="build" content="bc2cee2fd2f336931ac1fbeab087f169" />
+    <meta id="chapterId" name="chapterId" content="TP40017387-CH6">
+    <meta id="date" name="date" content="2018-04-19">
+    <meta id="description" name="description" content="Describes how system administrators can send device
+management commands to managed devices.">
+    <meta id="book-title" name="book-title" content="Mobile Device Management Protocol Reference">
+    <meta id="book-root" name="book-root" content="../">
+    <meta id="book-json" name="book-json" content="../book.json">
+    <meta id="devcenter" name="devcenter" content="Mac Dev Center">
+    <meta id="devcenter-url" name="devcenter-url" content="http://developer.apple.com/devcenter/mac">
+    <meta id="reflib" name="reflib" content="Guides and Sample Code">
+    <meta id="book-assignments" name="book-assignments" content="{Type/Guide}, {Topic/Data Management/Device Information}">
+    
+    
+    <meta id="copyright" name="copyright" content="Copyright 2018 Apple Inc. All Rights Reserved.">
+    <meta id="xcode-display" name="xcode-display" content="render">
+    <meta id="IndexTitle" name="IndexTitle" content="Mobile Device Management Protocol Reference: MDM Vendor CSR Signing Overview">
+    <meta id="resources-uri" name="resources-uri" content="../../../../../Resources/1277">
+    <link id="book-index-page" rel="Start" title="Mobile Device Management Protocol Reference" type="text/html" href="../index.html">
+    <link id="next-page" rel="Next" type="text/html" href="../RevHist_Index/RevisionHistory.html">
+    <link id="previous-page" rel="Prev" type="text/html" href="../6-MDM_Best_Practices/MDM_Best_Practices.html">
+    <link rel="stylesheet" type="text/css" href="../../../../../Resources/1277/CSS/screen.css">
+    
+    <!-- xcode_css -->
+    <link rel="stylesheet" type="text/css" href="../../../../../Resources/1277/CSS/feedback.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta id="platforms" name="platforms" content="">
+</head>    
+<body><a name="//apple_ref/doc/uid/TP40017387-CH6" title="MDM Vendor CSR Signing Overview"></a>
+    <div id="_omniture_top">
+    <!-- SiteCatalyst code version: H.8. Copyright 1997-2006 Omniture, Inc. -->
+    <script type="text/javascript">
+    /* RSID: */
+    var s_account="appleglobal,appleusdeveloper,dappdeveloperlib"
+    </script>
+
+    <script type="text/javascript" src="https://www.apple.com/metrics/scripts/s_code_h.js"></script>
+    <script type="text/javascript">
+    s.pageName=AC.Tracking.pageName();
+    s.channel="www.us.developer"
+
+    /************* DO NOT ALTER ANYTHING BELOW THIS LINE ! **************/
+    var s_code=s.t();if(s_code)document.write(s_code)</script>
+    <!-- End SiteCatalyst code version: H.8. -->
+    </div>
+
+    <div id="adcHeader" class="hideOnPrint hideInXcode">
+        <div id='ssi_Header' class="hideInXcode unified">
+            <a id="ssi_LibraryTitle" href='../../../../../navigation/'>Guides and Sample Code</a>
+            <a id="ssi_AppleDeveloperConnection" href='https://developer.apple.com/'>Developer</a>
+            <div id='ssi_SearchButton' role="button" title="Search">Search</div>
+        </div>
+        <form id='ssi_SearchMenu' method='get' action='../../../../../search/' accept-charset='utf-8'>
+            <label for='adcsearch'>Search Guides and Sample Code</label>
+            
+            
+    
+            <input type='search' id='ssi_SearchField' name='q' accesskey='s' results='5' />
+        </form>
+    </div>
+
+    <header id="header">
+        <div id="title" role="banner">
+            <h1>Mobile Device Management Protocol Reference</h1>
+            <span id="file_links">
+                <a id="PDF_link" role="button" tabindex='4' rel="alternate" title="Download PDF"><span id="pdf_icon"></span>PDF</a>
+                <a id="Companion_link" role="button" tabindex='3' title="Download Companion File"><span id="companion_icon"></span>Companion File</a>
+            </span>
+        </div>
+        <ul id="headerButtons" class="hideOnPrint" role="toolbar">
+            <li id="toc_button" style="display:none">
+                <button tabindex="5" id="table_of_contents" class="open" role="checkbox" aria-label="Show Table of Contents"><span class="disclosure"></span>Table of Contents</button>
+            </li>
+            <li id="jumpto_button" style="display:none" role="navigation"><select tabindex="6" id="jumpTo"><option value="top">Jump To&#133;</option></select></li>
+            <li id="downloadSample_button" style="display:none">
+                <a id="Sample_link"><button id="Sample_button">Download Sample Code</button></a>
+            </li>
+        </ul>
+    </header>
+    <nav id="tocContainer" tabindex="7">
+        <ul id="toc" role="tree"></ul>
+    </nav>
+
+    <article id="contents" tabindex="0" role="main">
+        <div id="pageNavigationLinks_top" class="pageNavigationLinks">
+            <a class='nextLink' rel='next' href='../RevHist_Index/RevisionHistory.html'>Next</a><a class='previousLink' rel='prev' href='../6-MDM_Best_Practices/MDM_Best_Practices.html'>Previous</a>
+        </div>
+        <a id="top" name="top"></a>
+        <a id="INDEX" href="../index.html" style="display:none;"></a>
+        
+        <a name="//apple_ref/doc/uid/TP40017387-CH6-SW4" title="MDM Vendor CSR Signing Overview"></a>
+<h1 id="pageTitle">MDM Vendor CSR Signing Overview</h1>
+
+<p>The process of generating an APNS push certificate can be completed using the Apple Push Notification Portal.</p>
+<p>Customers can learn how the process works at <span class="content_text"><a href="http://www.apple.com/business/mdm" class="urlLink" rel="external">http://www.apple.com/business/mdm</a></span>.</p>
+<section><a name="//apple_ref/doc/uid/TP40017387-CH6-SW5" title="Creating a Certificate Signing Request (Customer Action)"></a>
+<h2 class="jump">Creating a Certificate Signing Request (Customer Action)</h2>
+<ol class="ol">
+<li class="li">
+<p>During the setup process for your service, create an operation that generates a Certificate Signing Request for your customer.</p></li>
+<li class="li">
+<p>This process should take place within the instance of your MDM service that your customer has access to.</p>
+<div class="notebox"><aside><a name="//apple_ref/doc/uid/TP40017387-CH6-SW6" title="Note"></a>
+<p><strong>Note:</strong>&nbsp;
+The private key associated with this CSR should remain within the instance of your MDM service that the customer has access to. This private key is used to sign the MDM push certificate. The MDM service instance should not make this private key available to you (the vendor).</p><p></p></aside></div></li></ol>
+<p>Via your setup process, the CSR should be uploaded to your internal infrastructure to be signed as outlined below.</p></section>
+<section><a name="//apple_ref/doc/uid/TP40017387-CH6-SW7" title="Signing the Certificate Signing Request (MDM Vendor Action)"></a>
+<h2 class="jump">Signing the Certificate Signing Request (MDM Vendor Action)</h2>
+<p>Before you receive a CSR from your customer, download an MDM Signing Certificate and the associated trust certificates via the iOS Provisioning Portal.</p>
+<p>Next, you must create a script based on the instructions below to sign the customer’s CSR:</p>
+<ol class="ol">
+<li class="li">
+<p>If the CSR is in PEM format, convert CSR to DER (binary) format.</p></li>
+<li class="li">
+<p>Sign the CSR (in binary format) with the private key of the MDM Signing Cert using the <code>SHA1WithRSA</code> signing algorithm.</p>
+<div class="notebox"><aside><a name="//apple_ref/doc/uid/TP40017387-CH6-SW8" title="Note"></a>
+<p><strong>Note:</strong>&nbsp;
+Do not share the private key from your MDM Signing Cert with anyone, including customers or resellers of your solution. The process of signing the CSR should take place within your internal infrastructure and should not be accessible to customers.</p><p></p></aside></div></li>
+<li class="li">
+<p>Base64 encode the signature used in Step 2.</p></li>
+<li class="li">
+<p>Base64 encode the CSR (in binary format).</p></li>
+<li class="li">
+<p>Create a Push Certificate Request plist and Base64 encode it.</p>
+<p>Be certain that the <code>PushCertCertificateChain</code> value contains a <em>complete</em> certificate chain all the way back to a recognized root certificate (including the root certificate itself). This means it must contain your MDM signing certificate, the WWDR intermediate certificate (available from <span class="content_text"><a href="http://developer.apple.com/certificationauthority/AppleWWDRCA.cer" class="browserLink" >http://developer.apple.com/certificationauthority/AppleWWDRCA.cer</a></span>), and the Apple Inc. root certificate (available from <span class="content_text"><a href="http://www.apple.com/appleca/AppleIncRootCertificate.cer" class="urlLink" rel="external">http://www.apple.com/appleca/AppleIncRootCertificate.cer</a></span>).</p>
+<p>Also, be sure that every certificate complies with PEM formatting standards; each line except the last must contain exactly 64 printable characters, and the last line must contain 64 or fewer printable characters.</p>
+<p>It may be helpful to save the certificate and its chain into a file ending in <code>.pem</code> and then verify your certificate chain with the <code><!--a target="_self" -->certtool<!--/a--></code> (<code>certtool -e &lt; filename.pem</code>) or <code><!--a target="_self" -->openssl<!--/a--></code> (<code>openssl verify filename.pem</code>) command-line tools. To learn more about certificates and chains of trust, read the Apple book <em><a href="../../../../Security/Conceptual/Security_Overview/Introduction/Introduction.html#//apple_ref/doc/uid/TP30000976" data-renderer-version="1" target="_self">Security Overview</a></em>, available at <span class="content_text"><a href="https://developer.apple.com/library/content/documentation/Security/Conceptual/Security_Overview/Introduction/Introduction.html" class="urlLink" rel="external">developer.apple.com/library/content/documentation/Security/Conceptual/Security_Overview/Introduction/Introduction.html</a></span>.</p>
+<p>Refer to the code samples in <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH6-SW1" data-renderer-version="1">Listing 1</a></span>, <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH6-SW2" data-renderer-version="1">Listing 2</a></span>, and <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH6-SW3" data-renderer-version="1">Listing 3</a></span> for additional instructions.</p>
+<div class="notebox"><aside><a name="//apple_ref/doc/uid/TP40017387-CH6-SW9" title="Note"></a>
+<p><strong>Note:</strong>&nbsp;
+To minimize the risk of errors, you should use Xcode or the standalone Property List Editor application when editing property lists.</p><p>
+Alternatively, on the command line, you can make changes to property lists with the <code><!--a target="_self" -->plutil<!--/a--></code> tool or check the validity of property lists with the <code><!--a target="_self" -->xmllint<!--/a--></code> tool.</p><p></p></aside></div></li>
+<li class="li">
+<p>Deliver the Push Certificate Request plist file created in Step 5 back to the customer and direct the customer to <span class="content_text"><a href="https://identity.apple.com/pushcert" class="urlLink" rel="external">https://identity.apple.com/pushcert</a></span> to upload it to Apple.</p></li></ol><p>Be sure to use a separate push certificate for each customer. There are two reasons for this:</p><ul class="ul"><li class="li"><p>If multiple customers shared the same push topic, they would be able to see each other’s device tokens.</p></li><li class="li"><p>When a push certificate expires, gets invalidated or revoked, gets blocked, or otherwise becomes unusable, any customers sharing that certificate lose their ability to use MDM.</p></li></ul><p>All devices for the same customer should share a single push certificate. This same certificate should also be used to connect to the APNS feedback service.</p></section>
+<section><a name="//apple_ref/doc/uid/TP40017387-CH6-SW10" title="Creating the APNS Certificate for MDM (Customer Action)"></a>
+<h2 class="jump">Creating the APNS Certificate for MDM (Customer Action)</h2>
+<p>Once you have delivered the signed CSR back to the customer, the customer must log in to <span class="content_text"><a href="https://identity.apple.com/pushcert" class="urlLink" rel="external">https://identity.apple.com/pushcert</a></span> using a verified Apple ID and upload the CSR to the Apple Push Certificates Portal.</p>
+<p>The portal creates a certificate titled “MDM_<em>&lt;VendorName&gt;</em>_Certificate.pem.” At this point, the customer returns to your setup process to upload the APNS Certificate for MDM.</p></section>
+<section><a name="//apple_ref/doc/uid/TP40017387-CH6-SW11" title="Code Samples"></a>
+<h2 class="jump">Code Samples</h2>
+<p>The following code snippets demonstrate the CSR signing process.</p>
+<a name="//apple_ref/doc/uid/TP40017387-CH6-SW1" title="Listing 1Sample Java Code"></a>
+<p class="codesample clear"><strong class="caption_number">Listing 1</strong>&nbsp;&nbsp;Sample Java Code</p>
+<div class="codesample clear"><table><tr><td scope="row"><pre>/**<span></span></pre></td></tr><tr><td scope="row"><pre>* Sign the CSR ( DER format ) with signing private key.<span></span></pre></td></tr><tr><td scope="row"><pre>* SHA1WithRSA is used for signing. SHA1 for message digest and RSA to encrypt the message digest.<span></span></pre></td></tr><tr><td scope="row"><pre>*/<span></span></pre></td></tr><tr><td scope="row"><pre>byte[] signedData = signCSR(signingCertPrivateKey, csr);<span></span></pre></td></tr><tr><td scope="row"><pre> <span></span></pre></td></tr><tr><td scope="row"><pre>String certChain = ”-----BEGIN CERTIFICATE----”;<span></span></pre></td></tr><tr><td scope="row"><pre>/**<span></span></pre></td></tr><tr><td scope="row"><pre>* Create the Request Plist. The CSR and Signature is Base64 encoded.<span></span></pre></td></tr><tr><td scope="row"><pre>*/<span></span></pre></td></tr><tr><td scope="row"><pre>byte[] reqPlist = createPlist(new String(Base64.encodeBase64(csr)),certChain, new String(Base64.encodeBase64(signedData)));<span></span></pre></td></tr><tr><td scope="row"><pre> <span></span></pre></td></tr><tr><td scope="row"><pre> <span></span></pre></td></tr><tr><td scope="row"><pre>/**<span></span></pre></td></tr><tr><td scope="row"><pre>* Signature actually uses two algorithms--one to calculate a message digest and one to encrypt the message digest<span></span></pre></td></tr><tr><td scope="row"><pre>* Here is Message Digest is calculated using SHA1 and encrypted using RSA.<span></span></pre></td></tr><tr><td scope="row"><pre>* Initialize the Signature with the signer's private key using initSign().<span></span></pre></td></tr><tr><td scope="row"><pre>* Use the update() method to add the data of the message into the signature.<span></span></pre></td></tr><tr><td scope="row"><pre>*<span></span></pre></td></tr><tr><td scope="row"><pre>* @param privateKey Private key used to sign the data<span></span></pre></td></tr><tr><td scope="row"><pre>* @param data    Data to be signed.<span></span></pre></td></tr><tr><td scope="row"><pre>* @return Signature as byte array.<span></span></pre></td></tr><tr><td scope="row"><pre>* @throws Exception<span></span></pre></td></tr><tr><td scope="row"><pre>*/<span></span></pre></td></tr><tr><td scope="row"><pre>private byte[] signCSR( PrivateKey privateKey, byte[] data ) throws Exception{<span></span></pre></td></tr><tr><td scope="row"><pre>    Signature sig = Signature.getInstance("SHA1WithRSA");<span></span></pre></td></tr><tr><td scope="row"><pre>    sig.initSign(privateKey);<span></span></pre></td></tr><tr><td scope="row"><pre>    sig.update(data);<span></span></pre></td></tr><tr><td scope="row"><pre>    byte[] signatureBytes = sig.sign();<span></span></pre></td></tr><tr><td scope="row"><pre>    return signatureBytes;<span></span></pre></td></tr><tr><td scope="row"><pre>}<span></span></pre></td></tr></table></div>
+<a name="//apple_ref/doc/uid/TP40017387-CH6-SW2" title="Listing 2Sample .NET Code"></a>
+<p class="codesample clear"><strong class="caption_number">Listing 2</strong>&nbsp;&nbsp;Sample .NET Code</p>
+<div class="codesample clear"><table><tr><td scope="row"><pre>var privateKey = new PrivateKey(PrivateKey.KeySpecification.AtKeyExchange, 2048, false, true);<span></span></pre></td></tr><tr><td scope="row"><pre>var caCertificateRequest = new CaCertificateRequest();<span></span></pre></td></tr><tr><td scope="row"><pre>string csr = caCertificateRequest.GenerateRequest("cn=test", privateKey);<span></span></pre></td></tr><tr><td scope="row"><pre> <span></span></pre></td></tr><tr><td scope="row"><pre>//Load signing certificate from MDM_pfx.pfx, this is generated using signingCertificatePrivate.pem and SigningCert.pem.pem using openssl<span></span></pre></td></tr><tr><td scope="row"><pre>var cert = new X509Certificate2(MY_MDM_PFX, PASSWORD, X509KeyStorageFlags.Exportable);<span></span></pre></td></tr><tr><td scope="row"><pre> <span></span></pre></td></tr><tr><td scope="row"><pre>//RSA provider to generate SHA1WithRSA<span></span></pre></td></tr><tr><td scope="row"><pre>var crypt = (RSACryptoServiceProvider)cert.PrivateKey;<span></span></pre></td></tr><tr><td scope="row"><pre>var sha1 = new SHA1CryptoServiceProvider();<span></span></pre></td></tr><tr><td scope="row"><pre>byte[] data = Convert.FromBase64String(csr);<span></span></pre></td></tr><tr><td scope="row"><pre>byte[] hash = sha1.ComputeHash(data);<span></span></pre></td></tr><tr><td scope="row"><pre>//Sign the hash<span></span></pre></td></tr><tr><td scope="row"><pre>byte[] signedHash = crypt.SignHash(hash, CryptoConfig.MapNameToOID("SHA1"));<span></span></pre></td></tr><tr><td scope="row"><pre>var signedHashBytesBase64 = Convert.ToBase64String(signedHash);<span></span></pre></td></tr></table></div>
+<a name="//apple_ref/doc/uid/TP40017387-CH6-SW3" title="Listing 3Sample Request property list"></a>
+<p class="codesample clear"><strong class="caption_number">Listing 3</strong>&nbsp;&nbsp;Sample Request property list</p>
+<div class="codesample clear"><table><tr><td scope="row"><pre>&lt;?xml version="1.0" encoding="UTF-8"?&gt;<span></span></pre></td></tr><tr><td scope="row"><pre>&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;<span></span></pre></td></tr><tr><td scope="row"><pre>&lt;plist version="1.0"&gt;<span></span></pre></td></tr><tr><td scope="row"><pre>&lt;dict&gt;<span></span></pre></td></tr><tr><td scope="row"><pre>&lt;key&gt;PushCertRequestCSR&lt;/key&gt;<span></span></pre></td></tr><tr><td scope="row"><pre>&lt;string&gt;<span></span></pre></td></tr><tr><td scope="row"><pre>MIIDjzCCAncCAQAwDzENMAsGA1UEAwwEdGVzdDCCASIwDQYJKoZIhvcNAQEBBQAD<span></span></pre></td></tr><tr><td scope="row"><pre>&lt;/string&gt;<span></span></pre></td></tr><tr><td scope="row"><pre>&lt;key&gt;PushCertCertificateChain&lt;/key&gt;<span></span></pre></td></tr><tr><td scope="row"><pre>&lt;string&gt;<span></span></pre></td></tr><tr><td scope="row"><pre>-----BEGIN CERTIFICATE-----<span></span></pre></td></tr><tr><td scope="row"><pre>MIIDkzCCAnugAwIBAgIIQcQgtHQb9wwwDQYJKoZIhvcNAQEFBQAwUjEaMBgGA1UE<span></span></pre></td></tr><tr><td scope="row"><pre>AwwRU0FDSSBUZXN0IFJvb3QgQ0ExEjAQBgNVBAsMCUFwcGxlIElTVDETMBEGA1UE<span></span></pre></td></tr><tr><td scope="row"><pre>-----END CERTIFICATE-----<span></span></pre></td></tr><tr><td scope="row"><pre>-----BEGIN CERTIFICATE-----<span></span></pre></td></tr><tr><td scope="row"><pre>MIIDlTCCAn2gAwIBAgIIBInl9fQbaAkwDQYJKoZIhvcNAQEFBQAwXDEkMCIGA1UE<span></span></pre></td></tr><tr><td scope="row"><pre>AwwbU0FDSSBUZXN0IEludGVybWVkaWF0ZSBDQSAxMRIwEAYDVQQLDAlBcHBsZSBJ<span></span></pre></td></tr><tr><td scope="row"><pre>-----END CERTIFICATE-----<span></span></pre></td></tr><tr><td scope="row"><pre>-----BEGIN CERTIFICATE-----<span></span></pre></td></tr><tr><td scope="row"><pre>MIIDpjCCAo6gAwIBAgIIKRyFYgyyFPgwDQYJKoZIhvcNAQEFBQAwXDEkMCIGA1UE<span></span></pre></td></tr><tr><td scope="row"><pre>AwwbU0FDSSBUZXN0IEludGVybWVkaWF0ZSBDQSAxMRIwEAYDVQQLDAlBcHBsZSBJ<span></span></pre></td></tr><tr><td scope="row"><pre>-----END CERTIFICATE-----<span></span></pre></td></tr><tr><td scope="row"><pre>-----BEGIN CERTIFICATE-----<span></span></pre></td></tr><tr><td scope="row"><pre>MIIDiTCCAnGgAwIBAgIIdv/cjbnBgEgwDQYJKoZIhvcNAQEFBQAwUjEaMBgGA1UE<span></span></pre></td></tr><tr><td scope="row"><pre>AwwRU0FDSSBUZXN0IFJvb3QgQ0ExEjAQBgNVBAsMCUFwcGxlIElTVDETMBEGA1UE<span></span></pre></td></tr><tr><td scope="row"><pre>-----END CERTIFICATE-----<span></span></pre></td></tr><tr><td scope="row"><pre>&lt;/string&gt;<span></span></pre></td></tr><tr><td scope="row"><pre>&lt;key&gt;PushCertSignature&lt;/key&gt;<span></span></pre></td></tr><tr><td scope="row"><pre>&lt;string&gt;<span></span></pre></td></tr><tr><td scope="row"><pre>CGt6QWuixaO0PIBc9dr2kJpFBE1BZx2D8L0XH0Mtc/DePGJOjrM2W/IBFY0AVhhEx<span></span></pre></td></tr><tr><td scope="row"><pre>&lt;/string&gt;<span></span></pre></td></tr></table></div></section>
+        <div id="pageNavigationLinks_bottom" class="pageNavigationLinks">
+            <a class='nextLink' rel='next' href='../RevHist_Index/RevisionHistory.html'>Next</a><a class='previousLink' rel='prev' href='../6-MDM_Best_Practices/MDM_Best_Practices.html'>Previous</a>
+        </div><br/>
+        <div class="copyright"><br/><hr /><div align="center"><p class="content_text" lang="en" dir="ltr"> Copyright &#x00a9; 2018 Apple Inc. All Rights Reserved. <a href="http://www.apple.com/legal/internet-services/terms/site.html" target="_blank">Terms of Use</a>   |  <a href="http://www.apple.com/privacy/" target="_blank">Privacy Policy</a>  |  Updated: 2018-04-19</p></div></div>
+
+        <div id="pediaWindow">
+            <div id="pediaHeader"></div>
+            <div id="pediaBody"></div>
+        </div>
+    </article>
+
+    <div id="blackout">
+    <div id="preload"></div>
+</div>
+<div id="leave_feedback" class="button" role="button" tabindex="0">Feedback</div>
+<div id="modal" aria-hidden="true">
+    <div id="closebox" tabindex="0" aria-label="Close feedback form" role="button"></div>
+    <div id="sending" class="hidden">
+        <h2 tabindex="0">Sending feedback&hellip;</h2>
+        <div id="sending_img"></div>
+    </div>
+    <div id="error" class="hidden">
+        <h2 tabindex="0">We&rsquo;re sorry, an error has occurred.</h2>
+        <p>Please try submitting your feedback later.</p>
+        <div id="error_icon"></div>
+    </div>
+    <div id="success" class="hidden">
+        <h2 tabindex="0">Thank you for providing feedback!</h2>
+        <p>Your input helps improve our developer documentation.</p>
+        <div id="thank_you_icon"></div>
+    </div>
+    
+    <form id="feedback" action="#" method="post">
+        <div class="left-leaf">
+            <h2 id="helpful_title" data-asterisk="a1" tabindex="0">How helpful is this document?</h2>     
+            <sup id="a1" class="asterisk" aria-hidden="true">*</sup>
+
+            <div id="star_group" role="radiogroup" aria-required="true">
+                <label> 
+                    <input class="radio" type="radio" name="helped" value="1" /> 
+                    Very helpful
+                </label>
+                <label> 
+                    <input class="radio" type="radio" name="helped" value="2" /> 
+                    Somewhat helpful
+                </label>
+                <label>
+                    <input class="radio" type="radio" name="helped" value="3" /> 
+                    Not helpful
+                </label>
+            </div>
+        </div>
+        <div class="right-leaf">
+            <h2>How can we improve this document?</h2>
+            <div id="improve" class="checkboxes">
+                <label>
+                    <input type="checkbox" name="typo" /> 
+                    Fix typos or links
+                </label>
+                <label>
+                    <input type="checkbox" name="infoIncorrect" /> 
+                    Fix incorrect information
+                </label>
+                <label>
+                    <input type="checkbox" name="needs_examples" /> 
+                    Add or update code samples
+                </label>
+                <label>
+                    <input type="checkbox" name="needs_art" /> 
+                    Add or update illustrations
+                </label>
+                <label>
+                    <input type="checkbox" name="missingInfo" /> 
+                    Add information about...
+                </label>
+            </div>
+        </div>
+
+        <textarea id="comment" name="problem" cols="70" rows="8" placeholder="Please tell us more about your experience with this document" data-asterisk="a2" required></textarea>
+        <sup id="a2" class="asterisk" aria-hidden="true">*</sup>
+
+        <p class="fineprint">
+            <em aria-hidden="true"><span>*</span> Required information</em>
+        </p> 
+
+        <input id="submit" type="button" value="Send" />
+
+        <section id="legal">
+            <p>
+                To submit a product bug or enhancement request, please visit the 
+                <a href="https://developer.apple.com/bugreporter/" target="_blank">Bug Reporter</a> 
+                page.
+            </p>
+            <p>
+                Please read <a href="http://www.apple.com/legal/policies/ideas.html" target="_blank">Apple's Unsolicited Idea Submission Policy</a> 
+                before you send us your feedback.
+            </p> 
+        </section>
+    </form>
+</div>
+
+    
+    <script charset="utf-8" src="../../../../../Resources/1277/JavaScript/lib/prototype.js"></script>
+    <script src="../../../../../Resources/1277/JavaScript/library.js"></script>
+    <script src="../../../../../Resources/1277/JavaScript/feedback.js"></script>
+</body>
+</html>

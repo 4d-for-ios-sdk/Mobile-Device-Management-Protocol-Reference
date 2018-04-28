@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>About Mobile Device Management</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=7">
+    <meta charset="utf-8">
+    <meta id="book-resource-type" name="book-resource-type" content="Guide">
+    <meta scheme="apple_ref" id="identifier" name="identifier" content="//apple_ref/doc/uid/TP40017387">
+    <meta id="document-version" name="document-version" content="4.0.7">
+    <meta id="build" name="build" content="73a86ab2241a413ce0c3e0e8d970ff25"/>
+    <meta id="chapterId" name="chapterId" content="TP40017387-CH1">
+    <meta id="date" name="date" content="2017-09-12">
+    <meta id="description" name="description" content="Describes how system administrators can send device
+management commands to managed devices.">
+    <meta id="book-title" name="book-title" content="Mobile Device Management Protocol Reference">
+    <meta id="book-root" name="book-root" content="../">
+    <meta id="book-json" name="book-json" content="../book.json">
+    <meta id="devcenter" name="devcenter" content="Mac Dev Center">
+    <meta id="devcenter-url" name="devcenter-url" content="http://developer.apple.com/devcenter/mac">
+    <meta id="reflib" name="reflib" content="Guides and Sample Code">
+    <meta id="book-assignments" name="book-assignments" content="{Type/Guide}, {Topic/Data Management/Device Information}">
+    
+    
+    <meta id="copyright" name="copyright" content="Copyright 2017 Apple Inc. All Rights Reserved.">
+    <meta id="xcode-display" name="xcode-display" content="render">
+    <meta id="IndexTitle" name="IndexTitle" content="Mobile Device Management Protocol Reference: About Mobile Device Management">
+    <meta id="resources-uri" name="resources-uri" content="../../../../../Resources/1264">
+    <link id="book-index-page" rel="Start" title="Mobile Device Management Protocol Reference" type="text/html" href="../index.html">
+    <link id="next-page" rel="Next" type="text/html" href="https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/2-MDM_Check_In_Protocol/MDM_Check_In_Protocol..html">
+    <link id="previous-page" rel="Prev" type="text/html" href="">
+    <link rel="stylesheet" type="text/css" href="https://developer.apple.com/library/content/Resources/1264/CSS/screen.css">
+    
+    <!-- xcode_css -->
+    <link rel="stylesheet" type="text/css" href="https://developer.apple.com/library/content/Resources/1264/CSS/feedback.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta id="platforms" name="platforms" content="OS X,iOS,tvOS">
+</head>    
+<body>
+<a name="//apple_ref/doc/uid/TP40017387-CH1" title="About Mobile Device Management"></a>
+    <div id="_omniture_top">
+    <!-- SiteCatalyst code version: H.8. Copyright 1997-2006 Omniture, Inc. -->
+    <script type="text/javascript">
+    /* RSID: */
+    var s_account="appleglobal,appleusdeveloper,dappdeveloperlib"
+    </script>
+
+    <script type="text/javascript" src="https://www.apple.com/metrics/scripts/s_code_h.js"></script>
+    <script type="text/javascript">
+    s.pageName=AC.Tracking.pageName();
+    s.channel="www.us.developer"
+
+    /************* DO NOT ALTER ANYTHING BELOW THIS LINE ! **************/
+    var s_code=s.t();if(s_code)document.write(s_code)</script>
+    <!-- End SiteCatalyst code version: H.8. -->
+    </div>
+
+    <div id="adcHeader" class="hideOnPrint hideInXcode">
+        <div id="ssi_Header" class="hideInXcode unified">
+            <a id="ssi_LibraryTitle" href="https://developer.apple.com/library/content/navigation/">Guides and Sample Code</a>
+            <a id="ssi_AppleDeveloperConnection" href="https://developer.apple.com/">Developer</a>
+            <div id="ssi_SearchButton" role="button" title="Search">Search</div>
+        </div>
+        <form id="ssi_SearchMenu" method="get" action="https://developer.apple.com/library/content/search/" accept-charset="utf-8">
+            <label for="adcsearch">Search Guides and Sample Code</label>
+            
+            
+    
+            <input type="search" id="ssi_SearchField" name="q" accesskey="s" results="5"/>
+        </form>
+    </div>
+
+    <header id="header">
+        <div id="title" role="banner">
+            <h1>Mobile Device Management Protocol Reference</h1>
+            <span id="file_links">
+                <a id="PDF_link" role="button" tabindex="4" rel="alternate" title="Download PDF"><span id="pdf_icon"></span>PDF</a>
+                <a id="Companion_link" role="button" tabindex="3" title="Download Companion File"><span id="companion_icon"></span>Companion File</a>
+            </span>
+        </div>
+        <ul id="headerButtons" class="hideOnPrint" role="toolbar">
+            <li id="toc_button" style="display:none">
+                <button tabindex="5" id="table_of_contents" class="open" role="checkbox" aria-label="Show Table of Contents"><span class="disclosure"></span>Table of Contents</button>
+            </li>
+            <li id="jumpto_button" style="display:none" role="navigation"><select tabindex="6" id="jumpTo"><option value="top">Jump To&#133;</option></select></li>
+            <li id="downloadSample_button" style="display:none">
+                <a id="Sample_link"><button id="Sample_button">Download Sample Code</button></a>
+            </li>
+        </ul>
+    </header>
+    <nav id="tocContainer" tabindex="7">
+        <ul id="toc" role="tree"></ul>
+    </nav>
+
+    <article id="contents" tabindex="0" role="main">
+        <div id="pageNavigationLinks_top" class="pageNavigationLinks">
+            <a class="nextLink" rel="next" href="https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/2-MDM_Check_In_Protocol/MDM_Check_In_Protocol..html">Next</a>
+        </div>
+        <a id="top" name="top"></a>
+        <a id="INDEX" href="https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/index.html" style="display:none;"></a>
+        
+        <a name="//apple_ref/doc/uid/TP40017387" title="About Mobile Device Management"></a><a name="//apple_ref/doc/uid/TP40017387-CH1-SW1" title="About Mobile Device Management"></a><h1 id="pageTitle">About Mobile Device Management</h1><div class="importantbox clear"><aside><p><strong>Important:</strong>&nbsp;This documentation contains preliminary information about an API or technology in development. This information is subject to change, and software implemented according to this documentation should be tested with final operating system software.</p><p></p></aside></div>
+<a name="//apple_ref/doc/uid/TP40017387-CH1-DontLinkElementID_1"></a><p>The Mobile Device Management (MDM) protocol provides a way for system administrators to send device management commands to managed iOS devices running iOS 4 and later, macOS devices running macOS v10.7 and later, and Apple TV devices running iOS 7 (Apple TV software 6.0) and later. Through the MDM service, an IT administrator can inspect, install, or remove profiles; remove passcodes; and begin secure erase on a managed device.</p><p>The MDM protocol is built on top of HTTP, transport layer security (TLS), and push notifications. The related MDM check-in protocol provides a way to delegate the initial registration process to a separate server.</p><p>MDM uses the Apple Push Notification Service (APNS) to deliver a “wake up” message to a managed device. The device then connects to a predetermined web service to retrieve commands and return results.</p><p>To provide MDM service, your IT department needs to deploy an HTTPS server to act as an MDM server, then distribute profiles containing the MDM payload to your managed devices.</p><p>A managed device uses an identity to authenticate itself to the MDM server over TLS (SSL). This identity can be included in the profile as a Certificate payload or it can be generated by enrolling the device with SCEP.</p>
+<div class="notebox"><aside><a name="//apple_ref/doc/uid/TP40017387-CH1-SW14" title="Note"></a><p><strong>Note:</strong>&nbsp;
+For information about about SCEP, see the draft SCEP specification located at <span class="content_text"><a href="https://datatracker.ietf.org/doc/draft-nourse-scep/" class="urlLink" rel="external">datatracker.ietf.org/doc/draft-nourse-scep/</a></span>.</p><p></p></aside></div>
+<p>The MDM payload can be placed within a configuration profile (<code>.mobileconfig</code>) file distributed using email or a webpage, as part of the final configuration profile delivered by an over-the-air enrollment service, or automatically using the Device Enrollment Program. Only one MDM payload can be installed on a device at any given time.</p><p>Configuration profiles and provisioning profiles installed through the MDM service are called managed profiles. These profiles are automatically removed when the MDM payload is removed. Although an MDM service may have the rights to inspect the device for the complete list of configuration profiles or provisioning profiles, it may only remove apps, configuration profiles, and provisioning profiles that it originally installed. Accounts installed using managed profiles are called managed accounts.</p><p>In addition to managed profiles, you can also use MDM to install apps. Apps installed through the MDM service are called managed apps. The MDM service has additional control over how managed apps and their data are used on the device.</p><p>Devices running iOS 5 and later can be designated as supervised when they are being prepared for deployment with <span class="content_text"><a href="https://itunes.apple.com/us/app/apple-configurator-2/id1037126344?mt=12" class="urlLink" rel="external">Apple Configurator 2</a></span>. Additionally, devices running iOS 7 and later can be supervised using the Device Enrollment Program. A supervised device provides an organization with additional control over its configuration and restrictions. In this document, if any configuration option is limited to supervised devices, its description notes that limitation.</p><p>Unless the profile is installed using the Device Enrollment Program, a user may remove the profile containing the MDM payload at any time. The MDM server can always remove its own profile, regardless of its access rights. In macOS v10.8 and later and iOS 5, the MDM client makes a single attempt to contact the server with the <code>CheckOut</code> command when the profile is removed. In earlier OS versions, the device does not contact the MDM server when the user removes the payload. See <span class="content_text"><a href="https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/6-MDM_Best_Practices/MDM_Best_Practices.html#//apple_ref/doc/uid/TP40017387-CH5-SW2" data-renderer-version="1">MDM Best Practices</a></span> for recommendations on how to detect devices that are no longer managed.</p><p>A profile containing an MDM payload cannot be locked unless it is installed using the Device Enrollment Program. However, managed profiles installed through MDM may be locked. All managed profiles installed through MDM are removed when the main MDM profile is removed, even if they are locked.</p><a name="//apple_ref/doc/uid/TP40017387-CH1-DontLinkElementID_2" title="At a Glance"></a><h2 class="jump">At a Glance</h2><p>This document was written for system administrators and system integrators who design software for managing devices in enterprise environments.</p><section><a name="//apple_ref/doc/uid/TP40017387-CH1-SW2" title="The MDM Check-in Protocol Lets a Device Contact Your Server"></a><h3>The MDM Check-in Protocol Lets a Device Contact Your Server</h3><p>The MDM check-in protocol is used during initialization to validate a device’s eligibility for MDM enrollment and to inform the server that a device’s device token has been updated.</p><div class="notebox"><aside><a name="//apple_ref/doc/uid/TP40017387-CH1-SW3" title="Related Chapter"></a><p><strong>Related Chapter:</strong>&nbsp;<span class="content_text"><a href="https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/2-MDM_Check_In_Protocol/MDM_Check_In_Protocol..html#//apple_ref/doc/uid/TP40017387-CH4-SW2" data-renderer-version="1">MDM Check-in Protocol</a></span></p><p></p></aside></div></section><section><a name="//apple_ref/doc/uid/TP40017387-CH1-SW4" title="The MDM Protocol Sends Management Commands to the Device"></a><h3>The MDM Protocol Sends Management Commands to the Device</h3><p>The (main) MDM protocol uses push notifications to tell the managed device to perform specific functions, such as deleting an app or performing a remote wipe.</p><div class="notebox"><aside><a name="//apple_ref/doc/uid/TP40017387-CH1-SW5" title="Related Chapter"></a><p><strong>Related Chapter:</strong>&nbsp;<span class="content_text"><a href="https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/3-MDM_Protocol/MDM_Protocol.html#//apple_ref/doc/uid/TP40017387-CH3-SW2" data-renderer-version="1">Mobile Device Management (MDM) Protocol</a></span></p><p></p></aside></div></section><section><a name="//apple_ref/doc/uid/TP40017387-CH1-SW6" title="The Way You Design Your Payload Matters"></a><h3>The Way You Design Your Payload Matters</h3><p>For maximum effectiveness and security, install a base profile that contains little more than the most basic MDM management information, then install other profiles to the device after it is managed.</p><div class="notebox"><aside><a name="//apple_ref/doc/uid/TP40017387-CH1-SW7" title="Related Chapter"></a><p><strong>Related Chapter:</strong>&nbsp;<span class="content_text"><a href="https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/6-MDM_Best_Practices/MDM_Best_Practices.html#//apple_ref/doc/uid/TP40017387-CH5-SW2" data-renderer-version="1">MDM Best Practices</a></span></p><p></p></aside></div></section><section><a name="//apple_ref/doc/uid/TP40017387-CH1-SW8" title="The Device Enrollment Program Lets You Configure Devices with the Setup Assistant"></a><h3>The Device Enrollment Program Lets You Configure Devices with the Setup Assistant</h3><p>The HTTP-based Device Enrollment Program addresses the mass configuration needs of organizations purchasing and deploying devices in large quantities, without the need for factory customization or pre-configuration of devices prior to deployment.</p><p>The cloud service API provides profile management and mapping. With this API, you can create profiles, update profiles, delete profiles, obtain a list of devices, and associate those profiles with specific devices.</p><div class="notebox"><aside><a name="//apple_ref/doc/uid/TP40017387-CH1-SW9" title="Related Chapter"></a><p><strong>Related Chapter:</strong>&nbsp;<span class="content_text"><a href="https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/4-Profile_Management/ProfileManagement.html#//apple_ref/doc/uid/TP40017387-CH7-SW1" data-renderer-version="1">Device Enrollment Program</a></span></p><p></p></aside></div></section><section><a name="//apple_ref/doc/uid/TP40017387-CH1-SW10" title="The Volume Purchase Program Lets You Assign App Licenses to Users and Devices"></a><h3>The Volume Purchase Program Lets You Assign App Licenses to Users and Devices</h3><p>The Volume Purchase Program provides a number of web services that MDM servers can call to associate volume purchases with a particular user or device.</p><div class="notebox"><aside><a name="//apple_ref/doc/uid/TP40017387-CH1-SW11" title="Related Chapter"></a><p><strong>Related Chapter:</strong>&nbsp;<span class="content_text"><a href="https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/5-Web_Service_Protocol_VPP/webservice.html#//apple_ref/doc/uid/TP40017387-CH8-SW1" data-renderer-version="1">VPP App Assignment</a></span></p><p></p></aside></div></section><section><a name="//apple_ref/doc/uid/TP40017387-CH1-SW12" title="Apple Push Notification Certificates Can Be Generated Through the Apple Push Certificates Portal"></a><h3>Apple Push Notification Certificates Can Be Generated Through the Apple Push Certificates Portal</h3><p>Before you receive a CSR from your customer, you must download an “MDM Signing Certificate” and the associated trust certificates via the iOS Provisioning Portal. Then, you must use that certificate to sign your customers’ certificates.</p><div class="notebox"><aside><a name="//apple_ref/doc/uid/TP40017387-CH1-SW13" title="Related Chapter"></a><p><strong>Related Chapter:</strong>&nbsp;<span class="content_text"><a href="https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/7-MDMVendorCSRSigningOverview/MDMVendorCSRSigningOverview.html#//apple_ref/doc/uid/TP40017387-CH6-SW4" data-renderer-version="1">MDM Vendor CSR Signing Overview</a></span></p><p></p></aside></div></section><div id="introSeeAlsoSection"><a name="//apple_ref/doc/uid/TP40017387-CH1-DontLinkElementID_3" title="See Also"></a><h2 class="jump">See Also</h2><p>For discussions about Mobile Device Management, visit the <span class="content_text"><a href="https://devforums.apple.com/" class="urlLink" rel="external">MDM Developer Forum</a></span>.</p></div>
+        <div id="pageNavigationLinks_bottom" class="pageNavigationLinks">
+            <a class="nextLink" rel="next" href="https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/2-MDM_Check_In_Protocol/MDM_Check_In_Protocol..html">Next</a>
+        </div><br/>
+        <div class="copyright"><br/><hr/><div align="center"><p class="content_text" lang="en" dir="ltr"> Copyright &#x00a9; 2017 Apple Inc. All Rights Reserved.  <a href="http://www.apple.com/legal/internet-services/terms/site.html" target="_blank">Terms of Use</a>   |  <a href="http://www.apple.com/privacy/" target="_blank">Privacy Policy</a>  |  Updated: 2017-09-12</p></div></div>
+
+        <div id="pediaWindow">
+            <div id="pediaHeader"></div>
+            <div id="pediaBody"></div>
+        </div>
+    </article>
+
+    <div id="blackout">
+    <div id="preload"></div>
+</div>
+<div id="leave_feedback" class="button" role="button" tabindex="0">Feedback</div>
+<div id="modal" aria-hidden="true">
+    <div id="closebox" tabindex="0" aria-label="Close feedback form" role="button"></div>
+    <div id="sending" class="hidden">
+        <h2 tabindex="0">Sending feedback&hellip;</h2>
+        <div id="sending_img"></div>
+    </div>
+    <div id="error" class="hidden">
+        <h2 tabindex="0">We&rsquo;re sorry, an error has occurred.</h2>
+        <p>Please try submitting your feedback later.</p>
+        <div id="error_icon"></div>
+    </div>
+    <div id="success" class="hidden">
+        <h2 tabindex="0">Thank you for providing feedback!</h2>
+        <p>Your input helps improve our developer documentation.</p>
+        <div id="thank_you_icon"></div>
+    </div>
+    
+    <form id="feedback" action="#" method="post">
+        <div class="left-leaf">
+            <h2 id="helpful_title" data-asterisk="a1" tabindex="0">How helpful is this document?</h2>     
+            <sup id="a1" class="asterisk" aria-hidden="true">*</sup>
+
+            <div id="star_group" role="radiogroup" aria-required="true">
+                <label> 
+                    <input class="radio" type="radio" name="helped" value="1"/> 
+                    Very helpful
+                </label>
+                <label> 
+                    <input class="radio" type="radio" name="helped" value="2"/> 
+                    Somewhat helpful
+                </label>
+                <label>
+                    <input class="radio" type="radio" name="helped" value="3"/> 
+                    Not helpful
+                </label>
+            </div>
+        </div>
+        <div class="right-leaf">
+            <h2>How can we improve this document?</h2>
+            <div id="improve" class="checkboxes">
+                <label>
+                    <input type="checkbox" name="typo"/> 
+                    Fix typos or links
+                </label>
+                <label>
+                    <input type="checkbox" name="infoIncorrect"/> 
+                    Fix incorrect information
+                </label>
+                <label>
+                    <input type="checkbox" name="needs_examples"/> 
+                    Add or update code samples
+                </label>
+                <label>
+                    <input type="checkbox" name="needs_art"/> 
+                    Add or update illustrations
+                </label>
+                <label>
+                    <input type="checkbox" name="missingInfo"/> 
+                    Add information about...
+                </label>
+            </div>
+        </div>
+
+        <textarea id="comment" name="problem" cols="70" rows="8" placeholder="Please tell us more about your experience with this document" data-asterisk="a2" required></textarea>
+        <sup id="a2" class="asterisk" aria-hidden="true">*</sup>
+
+        <p class="fineprint">
+            <em aria-hidden="true"><span>*</span> Required information</em>
+        </p> 
+
+        <input id="submit" type="button" value="Send"/>
+
+        <section id="legal">
+            <p>
+                To submit a product bug or enhancement request, please visit the 
+                <a href="https://developer.apple.com/bugreporter/" target="_blank">Bug Reporter</a> 
+                page.
+            </p>
+            <p>
+                Please read <a href="http://www.apple.com/legal/policies/ideas.html" target="_blank">Apple's Unsolicited Idea Submission Policy</a> 
+                before you send us your feedback.
+            </p> 
+        </section>
+    </form>
+</div>
+
+    
+    <script charset="utf-8" src="https://developer.apple.com/library/content/Resources/1264/JavaScript/lib/prototype.js"></script>
+    <script src="https://developer.apple.com/library/content/Resources/1264/JavaScript/library.js"></script>
+    <script src="https://developer.apple.com/library/content/Resources/1264/JavaScript/feedback.js"></script>
+</body>
+</html>

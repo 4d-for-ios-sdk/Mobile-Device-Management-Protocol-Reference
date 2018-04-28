@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>VPP App Assignment</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=7">
+    <meta charset="utf-8">
+    <meta id="book-resource-type" name="book-resource-type" content="Guide">
+    <meta scheme="apple_ref" id="identifier" name="identifier" content="//apple_ref/doc/uid/TP40017387">
+    <meta id="document-version" name="document-version" content="4.0.7">
+    <meta id="build" name="build" content="055e909f9b40c07c5997c8e95b55f860"/>
+    <meta id="chapterId" name="chapterId" content="TP40017387-CH8">
+    <meta id="date" name="date" content="2017-09-12">
+    <meta id="description" name="description" content="Describes how system administrators can send device
+management commands to managed devices.">
+    <meta id="book-title" name="book-title" content="Mobile Device Management Protocol Reference">
+    <meta id="book-root" name="book-root" content="../">
+    <meta id="book-json" name="book-json" content="../book.json">
+    <meta id="devcenter" name="devcenter" content="Mac Dev Center">
+    <meta id="devcenter-url" name="devcenter-url" content="http://developer.apple.com/devcenter/mac">
+    <meta id="reflib" name="reflib" content="Guides and Sample Code">
+    <meta id="book-assignments" name="book-assignments" content="{Type/Guide}, {Topic/Data Management/Device Information}">
+    
+    
+    <meta id="copyright" name="copyright" content="Copyright 2017 Apple Inc. All Rights Reserved.">
+    <meta id="xcode-display" name="xcode-display" content="render">
+    <meta id="IndexTitle" name="IndexTitle" content="Mobile Device Management Protocol Reference: VPP App Assignment">
+    <meta id="resources-uri" name="resources-uri" content="../../../../../Resources/1264">
+    <link id="book-index-page" rel="Start" title="Mobile Device Management Protocol Reference" type="text/html" href="../index.html">
+    <link id="next-page" rel="Next" type="text/html" href="https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/6.5-MDM_Rosters/MDM_Rosters.html">
+    <link id="previous-page" rel="Prev" type="text/html" href="https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/4-Profile_Management/ProfileManagement.html">
+    <link rel="stylesheet" type="text/css" href="https://developer.apple.com/library/content/Resources/1264/CSS/screen.css">
+    
+    <!-- xcode_css -->
+    <link rel="stylesheet" type="text/css" href="https://developer.apple.com/library/content/Resources/1264/CSS/feedback.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta id="platforms" name="platforms" content="">
+</head>    
+<body>
+<a name="//apple_ref/doc/uid/TP40017387-CH8" title="VPP App Assignment"></a>
+    <div id="_omniture_top">
+    <!-- SiteCatalyst code version: H.8. Copyright 1997-2006 Omniture, Inc. -->
+    <script type="text/javascript">
+    /* RSID: */
+    var s_account="appleglobal,appleusdeveloper,dappdeveloperlib"
+    </script>
+
+    <script type="text/javascript" src="https://www.apple.com/metrics/scripts/s_code_h.js"></script>
+    <script type="text/javascript">
+    s.pageName=AC.Tracking.pageName();
+    s.channel="www.us.developer"
+
+    /************* DO NOT ALTER ANYTHING BELOW THIS LINE ! **************/
+    var s_code=s.t();if(s_code)document.write(s_code)</script>
+    <!-- End SiteCatalyst code version: H.8. -->
+    </div>
+
+    <div id="adcHeader" class="hideOnPrint hideInXcode">
+        <div id="ssi_Header" class="hideInXcode unified">
+            <a id="ssi_LibraryTitle" href="https://developer.apple.com/library/content/navigation/">Guides and Sample Code</a>
+            <a id="ssi_AppleDeveloperConnection" href="https://developer.apple.com/">Developer</a>
+            <div id="ssi_SearchButton" role="button" title="Search">Search</div>
+        </div>
+        <form id="ssi_SearchMenu" method="get" action="https://developer.apple.com/library/content/search/" accept-charset="utf-8">
+            <label for="adcsearch">Search Guides and Sample Code</label>
+            
+            
+    
+            <input type="search" id="ssi_SearchField" name="q" accesskey="s" results="5"/>
+        </form>
+    </div>
+
+    <header id="header">
+        <div id="title" role="banner">
+            <h1>Mobile Device Management Protocol Reference</h1>
+            <span id="file_links">
+                <a id="PDF_link" role="button" tabindex="4" rel="alternate" title="Download PDF"><span id="pdf_icon"></span>PDF</a>
+                <a id="Companion_link" role="button" tabindex="3" title="Download Companion File"><span id="companion_icon"></span>Companion File</a>
+            </span>
+        </div>
+        <ul id="headerButtons" class="hideOnPrint" role="toolbar">
+            <li id="toc_button" style="display:none">
+                <button tabindex="5" id="table_of_contents" class="open" role="checkbox" aria-label="Show Table of Contents"><span class="disclosure"></span>Table of Contents</button>
+            </li>
+            <li id="jumpto_button" style="display:none" role="navigation"><select tabindex="6" id="jumpTo"><option value="top">Jump To&#133;</option></select></li>
+            <li id="downloadSample_button" style="display:none">
+                <a id="Sample_link"><button id="Sample_button">Download Sample Code</button></a>
+            </li>
+        </ul>
+    </header>
+    <nav id="tocContainer" tabindex="7">
+        <ul id="toc" role="tree"></ul>
+    </nav>
+
+    <article id="contents" tabindex="0" role="main">
+        <div id="pageNavigationLinks_top" class="pageNavigationLinks">
+            <a class="nextLink" rel="next" href="https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/6.5-MDM_Rosters/MDM_Rosters.html">Next</a><a class="previousLink" rel="prev" href="https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/4-Profile_Management/ProfileManagement.html">Previous</a>
+        </div>
+        <a id="top" name="top"></a>
+        <a id="INDEX" href="https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/index.html" style="display:none;"></a>
+        
+        <a name="//apple_ref/doc/uid/TP40017387-CH8-SW1" title="VPP App Assignment"></a>
+<h1 id="pageTitle">VPP App Assignment</h1>
+<p>In iOS 7 and later or macOS v10.9 and later, Volume Purchase Program (VPP) App Assignment allows an organization to assign apps to users. At a later date, if a user no longer needs an app, you can reclaim the app license and assign it to a different user. In iOS 9 and later or macOS v10.11 and later, VPP can assign a license to the device serial number, so no Apple ID is required to download the app.</p><p>The Volume Purchase Program provides a number of web services that MDM servers can use to associate volume purchases with particular users or devices. The following services are currently supported:</p>
+<ul class="ul">
+<li class="li"><p>Create a user in the iTunes Store representing a user in the MDM system, against which licenses and an iTunes Store account may be linked: <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH8-SW5" data-renderer-version="1">registerVPPUserSrv</a></span>.</p></li>
+<li class="li"><p>Determine the current iTunes account status of one or more VPP users: <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH8-SW6" data-renderer-version="1">getVPPUserSrv</a></span> or <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH8-SW7" data-renderer-version="1">getVPPUsersSrv</a></span>.</p></li>
+<li class="li"><p>Determine the statuses of a VPP user’s current licenses for software and other products: <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH8-SW8" data-renderer-version="1">getVPPLicensesSrv</a></span>.</p></li>
+<li class="li"><p>List the VPP assets for which an organization has licenses, including counts of assigned and unassigned licenses for each asset: <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH8-SW302" data-renderer-version="1">getVPPAssetsSrv</a></span>.</p></li>
+<li class="li"><p>Query the iTunes Store for information about apps and books: <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH8-SW209" data-renderer-version="1"></a></span><span class="content_text">LookupUrl</span>.</p></li>
+<li class="li"><p>Disassociate a VPP user from their iTunes account and release their revocable licenses: <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH8-SW9" data-renderer-version="1">retireVPPUserSrv</a></span>.</p></li>
+<li class="li"><p>Perform batch associations or disassociations of multiple VPP users or devices with their licenses: <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH8-SW301" data-renderer-version="1">manageVPPLicensesByAdamIdSrv</a></span>.</p></li>
+
+
+
+<li class="li"><p>Fetch or update a VPP user’s email address and optionally link to a Managed Apple ID: <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH8-SW12" data-renderer-version="1">editVPPUserSrv</a></span>.</p></li>
+<li class="li"><p>Store and/or return organization-specific information to/from the VPP server: <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH8-SW14" data-renderer-version="1">VPPClientConfigSrv</a></span>.</p></li>
+<li class="li"><p>Fetch the current list of VPP web service URLs and error numbers: <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH8-SW15" data-renderer-version="1">VPPServiceConfigSrv</a></span>.</p></li>
+</ul><section><a name="//apple_ref/doc/uid/TP40017387-CH8-DontLinkElementID_6" title="VPP in Apple School Manager"></a><h2 class="jump">VPP in Apple School Manager</h2><p>In the fall of 2017, VPP was added into Apple School Manager. Apple School Manager is a single destination for schools to manage devices and content for their users. Moving VPP into the Apps and Books section of the Apple School Manager enables program facilitators (also referred to as content managers) to purchase content in the same place that they manage Apple IDs and devices for students and teachers. The purchases made in VPP in Apple School Manager are location based, making it much easier for content managers to move licenses between locations as needed. </p><p>To support location based assets, VPP in Apple School Manager uses location tokens. The location tokens are used by content managers the same way as the legacy VPP tokens are used. Content managers download the location token from the settings page in Apple School Manager and upload it into their MDM. The MDM then has access to the licenses available at that location. Allocating the licenses within the MDM uses the same workflow for both types of licenses.</p><section><a name="//apple_ref/doc/uid/TP40017387-CH8-DontLinkElementID_7" title="Supporting VPP in Apple School Manager "></a><h3 class="jump">Supporting VPP in Apple School Manager </h3><p>Migrating to VPP in Apple School Manager is recommended, but optional. Licenses assigned when using the legacy token must be managed by the content manager’s legacy token, until they are transfered to a location. Therefore, MDMs will need to support both models of licensing at the same time. Failure to support the legacy and location based models of tokens will create discrepancies between user experiences in Apple School Manager and their MDM.</p><p>To update your MDM to support location based tokens, these steps must be taken:</p><ul class="ul"><li class="li"><p>Update API calls to handle the location information being returned for the new VPP in Apple School Manager features. Licenses assigned with the legacy token will not have a location. All of the assets purchased with VPP in Apple School Manager will have additional location information in their API responses. Specifically, these API have been updated to return location information: <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH8-SW302" data-renderer-version="1">getVPPAssetsSrv</a></span>, <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH8-SW14" data-renderer-version="1">VPPClientConfigSrv</a></span>.</p></li><li class="li"><p>Update the MDM UI to show location names for the tokens and assets. Location names are not unique (many schools may have the same name) but location UIDs are unique to a specific location. Displaying the location name to the user is particularly important when location token is about to expire.</p></li><li class="li"><p>Refresh license status at appropriate times to maintain an accurate UI. Since licenses can be reallocated in the Apple School Manager, license counts will change outside of the MDM. Refreshing on each page load is recommended. </p></li><li class="li"><p>Handle when duplicate tokens are uploaded by different content managers. There is just one location token that needs to be stored, instead of a token per VPP account. </p></li><li class="li"><p>Handle new error codes for the location based tokens.</p></li></ul></section></section>
+
+<section><a name="//apple_ref/doc/uid/TP40017387-CH8-SW16" title="Using Web Services"></a><h2 class="jump">Using Web Services</h2>
+<p>You access the services described in this chapter through the MDM payloads described in <span class="content_text"><a href="https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/3-MDM_Protocol/MDM_Protocol.html#//apple_ref/doc/uid/TP40017387-CH3-SW50" data-renderer-version="1">Structure of MDM Payloads</a></span>.</p>
+<section><a name="//apple_ref/doc/uid/TP40017387-CH8-SW17" title="Service Request URL"></a><h3 class="jump">Service Request URL</h3><p>The service URL has the form of:</p><p><span class="content_text"><a href="http://livepage.apple.com/" class="urlLink" rel="external">https://vpp.itunes.apple.com/WebObjects/MZFinance.woa/wa/&lt;serviceName</a></span>&gt;</p><p>It is recommended that you obtain the service URLs from the <code>VPPServiceConfigSrv</code> service rather than using hard-coded values in the client. All service URLs are subject to change except for the <code>VPPServiceConfigSrv</code> URL.</p>
+
+
+
+</section>
+<section><a name="//apple_ref/doc/uid/TP40017387-CH8-SW19" title="Providing Parameters"></a><h3 class="jump">Providing Parameters</h3><p>Parameters to the service requests should be provided as a JSON string in the request body, and the <code>Content-Type</code> header value should contain <code>application/json</code>.</p><p>The value of a parameter can be in primitive type or string type. When the web services receive input parameters, all primitive types are converted to string type first before they are parsed into primitive types as required by the specific parameter. For example, <code>licenseId</code> requires a long type; the input in JSON format can be either <code>{"licenseId":1}</code> or <code>{"licenseId":"1"}</code>. The responses of the services use primitive type for non-string values.</p></section>
+
+<section><a name="//apple_ref/doc/uid/TP40017387-CH8-SW20" title="Authentication"></a><h3 class="jump">Authentication</h3><p>All services except <code>VPPServiceConfigSrv</code> require an <code>sToken</code> parameter to authenticate the client user. This parameter takes a secret token (in string format). A Program Facilitator can obtain such a token by logging in to <span class="content_text"><a href="https://vpp.itunes.apple.com/" class="urlLink" rel="external">https://vpp.itunes.apple.com/</a></span>.</p>
+
+<p>On the Account Summary page, click the Download button to generate and download a text file containing the new token. Each token is valid for one year from the time you generate it. Once created, tokens are listed on the Account Summary page.</p><p>The MDM server should store the user’s token along with its other private, protected properties and should send this token value in the <code>sToken</code> field of all VPP requests described in this chapter.</p><p>The <code>sToken</code> blob itself is a JSON object in Base64 encoding. When decoded, the resulting JSON object contains three fields: <code>token</code>, <code>expDate</code>, and <code>orgName</code>. For example, the following is an <code>sToken</code> value (with line breaks inserted):</p><div class="codesample clear"><table><tr><td scope="row"><pre>eyJ0b2tlbiI6InQxWG9VenBMRXRwZGxhK25zeENkd3JjdDBS<span></span></pre></td></tr><tr><td scope="row"><pre>andkaWNOaGRreW5STW05VVAyc2hSYTBMUnVGcVpQM0pLQmJU<span></span></pre></td></tr><tr><td scope="row"><pre>TWxDSE42ajNta1R6WVlQbVVkVXJXV2x3PT0iLCJleHBEYXRl<span></span></pre></td></tr><tr><td scope="row"><pre>IjoiMjAxNC0wOC0xNVQxODoxMzo1Mi0wNzAwIiwib3JnTmFt<span></span></pre></td></tr><tr><td scope="row"><pre>ZSI6Ik9SRy4yMDA5MDcxNjAwIn0=<span></span></pre></td></tr></table></div><p>After Base64 decoding, this is the JSON string (with line breaks inserted):</p><div class="codesample clear"><table><tr><td scope="row"><pre>{"token":"t1XoUzpLEtpdla+nsxCdwrct0RjwdicNhdkynRMm9UP<span></span></pre></td></tr><tr><td scope="row"><pre>2shRa0LRuFqZP3JKBbTMlCHN6j3mkTzYYPmUdUrWWlw==",<span></span></pre></td></tr><tr><td scope="row"><pre>"expDate":"2014-08-15T18:13:52-0700",<span></span></pre></td></tr><tr><td scope="row"><pre>"orgName":"ORG.2009071600"}<span></span></pre></td></tr></table></div><p>The <code>expDate</code> field contains the expiration date of the token in ISO 8601 format. The <code>orgName</code> field contains the name of the organization for which the token is issued.</p></section><section><a name="//apple_ref/doc/uid/TP40017387-CH8-SW21" title="Service Response"></a><h3 class="jump">Service Response</h3><p>Response content is in JSON format.</p><p>As a convention, fields with <code>null</code> values are not included in the response. For example, the user object has an <code>email</code> field that is optional. The following example doesn’t have the <code>email</code> field in the user object, so the <code>email</code> field value is <code>null</code>.</p><div class="codesample clear"><table><tr><td scope="row"><pre>   "user":{<span></span></pre></td></tr><tr><td scope="row"><pre>      "userId":1,<span></span></pre></td></tr><tr><td scope="row"><pre>      "clientUserIdStr":"810C9B91-DF83-41DA-80A1-408AD7F081A8",<span></span></pre></td></tr><tr><td scope="row"><pre>      "itsIdHash":"C2Wwd8LcIaE2v6f2/mvu82Gs/Lc=",<span></span></pre></td></tr><tr><td scope="row"><pre>      "status":"Associated",<span></span></pre></td></tr><tr><td scope="row"><pre>      "licenses":[<span></span></pre></td></tr><tr><td scope="row"><pre>         {<span></span></pre></td></tr><tr><td scope="row"><pre>            "licenseId":2,<span></span></pre></td></tr><tr><td scope="row"><pre>            "adamId":408709785,<span></span></pre></td></tr><tr><td scope="row"><pre>            "productTypeId":7,<span></span></pre></td></tr><tr><td scope="row"><pre>            "pricingParam":"STDQ",<span></span></pre></td></tr><tr><td scope="row"><pre>            "productTypeName":"Software",<span></span></pre></td></tr><tr><td scope="row"><pre>            "isIrrevocable":false<span></span></pre></td></tr><tr><td scope="row"><pre>         },<span></span></pre></td></tr><tr><td scope="row"><pre>         {<span></span></pre></td></tr><tr><td scope="row"><pre>            "licenseId":4,<span></span></pre></td></tr><tr><td scope="row"><pre>            "adamId":497799835,<span></span></pre></td></tr><tr><td scope="row"><pre>            "productTypeId":7,<span></span></pre></td></tr><tr><td scope="row"><pre>            "pricingParam":"STDQ",<span></span></pre></td></tr><tr><td scope="row"><pre>            "productTypeName":"Software",<span></span></pre></td></tr><tr><td scope="row"><pre>            "isIrrevocable":false<span></span></pre></td></tr><tr><td scope="row"><pre>         }<span></span></pre></td></tr><tr><td scope="row"><pre>      ]<span></span></pre></td></tr><tr><td scope="row"><pre>   }<span></span></pre></td></tr></table></div><p>Note the licenses associated with the user are returned as an array. If the user doesn’t have a license, the “licenses” field does not show up. The license object in this context is a subfield of the user object. To avoid a cyclic reference, the user object is not included in the license object. But if the license is the top object returned, it includes a <code>user</code> object with <code>id</code> and <code>clientUserIdStr</code> fields and, if the user is already associated with an iTunes account, an <code>itsIdHash</code> field.</p><p>JSON escapes some special characters including slash (<code>/</code>). So a URL returned in JSON looks like: <code>"https:\/\/vpp.itunes.apple.com\/WebObjects\/MZFinance.woa\/wa\/registerVPPUserSrv"</code>.</p><p>For any service that requires authentication with an <code>sToken</code> value, if the provided token is within the expiration warning period (currently 15 days before the expiration date), then the response contains an additional field, <code>tokenExpDate</code>. The value of this field is the expiration date in ISO 8601 format. For example:</p><p>"tokenExpDate":"2013-07-26T18:12:09-0700"</p><p>If this field is present in the response, it should serve as a reminder that it is time to get a new <code>sToken</code> blob in order to avoid any service disruption.</p></section>
+
+<section><a name="//apple_ref/doc/uid/TP40017387-CH8-SW304" title="Retry-After Header"></a><h3 class="jump">Retry-After Header</h3>
+<p>The VPP service may return a 503 Service Unavailable status to clients whose requests result in an unusually high load on the VPP service, or when the VPP service is experiencing loads beyond its current capacity to respond to requests. A Retry-After header may be included in this response, indicating how long the client must wait before making additional requests. Clients who make requests before this time may be rejected for even longer periods of time, or (in extreme cases) may have their VPP account suspended.</p>
+<p>Avoid triggering the Retry-After header by setting the <code>assignedOnly</code> parameter <code>true</code> in calls to <code>getVPPLicensesSrv</code>. </p>
+<p>The Retry-After response-header field may also be used with any 3xx (Redirection) response to indicate the minimum time the user-agent is asked to wait before issuing the redirected request (see <span class="content_text"><a href="http://www.rfc-base.org/txt/rfc-2616.txt" class="urlLink" rel="external">RFC 2616: HTTP/1.1</a></span>, Section 14.37). The value of this field can be either an HTTP-date or an integer number of seconds (in decimal) after the time of the response.</p>
+<p></p>
+<p><code>    Retry-After = "Retry-After" ":" ( HTTP-date | delta-seconds )</code></p>
+<p></p>
+<p>Two examples of its use are:</p>
+<p></p>
+<p><code>    Retry-After: Fri, 31 Dec 1999 23:59:59 GMT</code></p>
+<p><code>    Retry-After: 120</code></p>
+<p></p>
+<p>In the latter example, the delay is 2 minutes.</p>
+</section>
+
+<section><a name="//apple_ref/doc/uid/TP40017387-CH8-SW52" title="VPP Account Protection"></a><h3 class="jump">VPP Account Protection</h3>
+<p>It is reasonable behavior for a product that manages VPP app assignments to reset the VPP account by retiring all users and revoking all app assignments when it is first configured to use a VPP account. Therefore, it is very important that your product always sets the <code>clientContext</code> data as documented below so that other products that manage VPP accounts can know that the VPP account is being managed by another product and not reset the VPP account without warning.</p>
+<p>To ensure that a VPP account is not being managed by another product, follow these steps every time your product starts a VPP session:</p>
+<ul class="ul">
+<li class="li"><p>During initial setup, check the <code>clientContext</code> attribute returned from the <code>VPPClientConfigSrv</code> request.</p>
+<ul class="nested">
+<li class="nested li"><p>If <code>clientContext</code> is empty, create a JSON string with these keys and values:</p>
+<p><code>&#160;&#160;&#160;&#160;{"hostname":&#60;my.servername.com&#62;, "guid":&#60;random_uuid&#62;}</code></p>
+<p>The UUID should be a standard 8-4-4-4-12 formatted UUID string and must be unique for each installation of your product.</p>
+<p>Write this JSON string to <code>clientContext</code> to claim this VPP account for your product.</p></li>
+<li class="nested li"><p>If <code>clientContext</code> is not empty and does not match the <code>guid</code> value of your product, report the <code>hostname</code> returned by <code>clientContext</code> and confirm that your product should take over from it. Do not rely on <code>hostname</code> to confirm that your product still has a proper claim on the VPP account.</p></li>
+</ul>
+</li>
+<li class="li"><p>At the start of every subsequent VPP session, check <code>clientContext</code> to ensure that it still represents the correct installation of your product.</p></li>
+<li class="li"><p>If <code>clientContext</code> no longer refers to your product, do not make any further requests to the VPP service for that VPP account until the account has been reactivated by administrator commands. Your product should report this isolation action to an administrator, giving the <code>hostname</code> of the server that now claims to manage the VPP account.</p></li>
+</ul>
+</section>
+<section><a name="//apple_ref/doc/uid/TP40017387-CH8-SW202" title="Initial Import of VPP Managed Distribution Licenses Using getVPPLicensesSrv"></a><h3 class="jump">Initial Import of VPP Managed Distribution Licenses Using getVPPLicensesSrv</h3>
+<p>It is not necessary to sync every single app license for a specific VPP account. The recommended procedure for importing licenses is to skip importing all of the licenses and instead start importing license counts and then changes. This can be accomplished in the following way:</p>
+<ol class="ol">
+<li class="li"><p>Send a request using <code>getVPPAssetsSrv</code> with <code>includeLicenseCounts : true</code>. This returns the current license count by <code>adamID</code>.</p></li>
+<li class="li"><p>Send one request using <code>getVPPLicensesSrv</code>. Record the <code>batchToken</code> and <code>totalBatchCount</code>.</p></li>
+<li class="li"><p>Send another request to <code>getVPPLicensesSrv</code> using the <code>batchToken</code> value from Step 2 and an <code>overrideIndex</code> value equal to <code>totalBatchCount</code>.</p></li>
+<li class="li"><p>Record the <code>sinceModifiedToken</code> value and begin syncing license updates and changes instead of all licenses. Set <code>assignedOnly=true</code> if you want to get only new license assignments.</p></li>
+</ol>
+
+<p><strong>Note:</strong> Using <code>sinceModifiedToken</code> can result in batches with zero records in them. This is not an error or an end signal; just move to the next batch.</p>
+
+<p>For further information, see <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH8-SW22" data-renderer-version="1">Parallel getVPP Requests</a></span> and <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH8-SW8" data-renderer-version="1">getVPPLicensesSrv</a></span>.</p>
+</section>
+
+<section><a name="//apple_ref/doc/uid/TP40017387-CH8-SW802" title="productTypeId Codes"></a><h3 class="jump">productTypeId Codes</h3>
+<p>Some service requests may return the ID of an Apple product type as a decimal integer, with one of these values:</p>
+<div class="tableholder"><table class="graybox" border="0" cellspacing="0" cellpadding="5">
+<tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>productTypeId</p></th>
+<th scope="col" class="TableHeading_TableRow_TableCell"><p>Meaning</p></th></tr>
+
+<tr>
+<td scope="row"><p><code>7</code></p></td>
+<td><p>macOS software.</p></td></tr>
+<tr>
+<td scope="row"><p><code>8</code></p></td>
+<td><p>iOS or macOS App Store app.</p></td></tr>
+<tr>
+<td scope="row"><p><code>10</code></p></td>
+<td><p>book.</p></td></tr>
+</table></div>
+</section>
+
+<section><a name="//apple_ref/doc/uid/TP40017387-CH8-SW501" title="Managed Apple IDs"></a><h3 class="jump">Managed Apple IDs</h3>
+<p>Managed Apple IDs were introduced in iOS 9.3. These accounts can be tied to the same organization as the VPP Program Facilitator users who manage licenses. When this is the case, the MDM server may choose to instruct the VPP service to associate Managed Apple IDs with given VPP users. This removes the need to send out an invitation (email or push) to users and wait for them to join by going through an acceptance process.</p>
+<p>Managed Apple IDs are implemented through the following services by adding an optional parameter, <code>managedAppleIDStr</code>:</p>
+<ul class="ul">
+<li class="li"><p><span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH8-SW5" data-renderer-version="1">registerVPPUserSrv</a></span></p></li>
+<li class="li"><p><span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH8-SW12" data-renderer-version="1">editVPPUserSrv</a></span></p></li>
+</ul>
+<p>Apple uses the Apple ID passed in <code>managedAppleIDStr</code> to look up the user’s <code>organizationId</code>. If the VPP Program Facilitator account associated with the <code>sToken</code> making the request is also a Managed Apple ID and that Apple ID’s <code>organizationId</code> is the same as the user’s, the VPP user will be linked to that Apple ID.</p>
+
+
+
+<p>If the user cannot be found in the iTunes database, or the user is found but the user’s <code>organizationId</code> does not match the <code>organizationId</code> of the <code>sToken</code>’s associated user, the service response returns error 9635, <code>APPLE_ID_CANT_BE_USED</code>.</p>
+</section>
+
+<section><a name="//apple_ref/doc/uid/TP40017387-CH8-SW502" title="Program Facilitators"></a><h3 class="jump">Program Facilitators</h3>
+<p>As described in <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH8-SW20" data-renderer-version="1">Authentication</a></span>, Program Facilitators obtain from the iTunes VPP website the <code>sToken</code> parameters that must be passed in VPP service requests. Each <code>sToken</code> authenticates an organization through the associated Program Facilitator account that generated it.</p>
+
+
+
+<p>Managed Apple IDs make it possble for multiple Program Facilitators to be linked together into a group. Each Program Facilitator in the group is assigned a <code>facilitatorMemberId</code>. An <code>sToken</code> can use this <code>facilitatorMemberId</code> to access and change data associated with different Program Facilitators as long as the other Program Facilitators are in the same group. Using <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH8-SW14" data-renderer-version="1">VPPClientConfigSrv</a></span>, the MDM server can discover member info about all the other Program Facilitators whose data its <code>sToken</code> can access, including the <code>facilitatorMemberId</code> of each member.</p>
+
+<p>All VPP service calls, except <code>VPPClientConfigSrv</code>, accept an optional  <code>facilitatorMemberId</code> parameter. It is subject to these rules:</p>
+<ul class="ul">
+<li class="li"><p>If a Program Facilitator’s <code>facilitatorMemberId</code> is passed in a service request, the service is executed as if the request had been made with that Facilitator’s <code>sToken</code> instead.</p></li>
+<li class="li"><p>If a service request passes the <code>facilitatorMemberId</code> of a Program Facilitator that was never associated with the requesting organization, or left it, or is no longer managed, an error is returned.</p></li>
+</ul>
+<p>Here is an example of a <code>VPPClientConfigSrv</code> response when the <code>sToken</code> passed to it is associated with a group of three users, each of which has a different Program Facilitator:</p>
+<div class="codesample clear"><table><tr><td scope="row"><pre>{<span></span></pre></td></tr><tr><td scope="row"><pre>    "apnToken": "aJQGSAd+H7FrmIZn9K4IbRbXpge3ySkchugcfYK/ZXg=",<span></span></pre></td></tr><tr><td scope="row"><pre>    "appleId": "user1@someorg.com",<span></span></pre></td></tr><tr><td scope="row"><pre>    "clientContext": "{\"guid\":\"e91e570f-3eba-4b43-97d3-0f39450c8b92\",<span></span></pre></td></tr><tr><td scope="row"><pre>       \"hostname\":\"vpp-integrations2.apple.com\",\"ac2\":1}",<span></span></pre></td></tr><tr><td scope="row"><pre>    "countryCode": "US",<span></span></pre></td></tr><tr><td scope="row"><pre>    "email": "user1@someorg.com",<span></span></pre></td></tr><tr><td scope="row"><pre>    "facilitatorMemberId": 200841,<span></span></pre></td></tr><tr><td scope="row"><pre>    "organizationId": 2168850000179778,<span></span></pre></td></tr><tr><td scope="row"><pre>    "status": 0,<span></span></pre></td></tr><tr><td scope="row"><pre>    "vppGroupMembers": [<span></span></pre></td></tr><tr><td scope="row"><pre>        {<span></span></pre></td></tr><tr><td scope="row"><pre>            "appleId": "user3@someorg.com",<span></span></pre></td></tr><tr><td scope="row"><pre>            "clientContext": "test123test123test123",<span></span></pre></td></tr><tr><td scope="row"><pre>            "email": "user3@someorg.com",<span></span></pre></td></tr><tr><td scope="row"><pre>            "facilitatorMemberId": 200844,<span></span></pre></td></tr><tr><td scope="row"><pre>            "organizationId": 2168850000179778,<span></span></pre></td></tr><tr><td scope="row"><pre>            "locationId": 2167975000001686,<span></span></pre></td></tr><tr><td scope="row"><pre>            "locationName": "Central School"<span></span></pre></td></tr><tr><td scope="row"><pre>        },<span></span></pre></td></tr><tr><td scope="row"><pre>        {<span></span></pre></td></tr><tr><td scope="row"><pre>            "appleId": "user1@someorg.com",<span></span></pre></td></tr><tr><td scope="row"><pre>            "clientContext": "{\"guid\":\"e91e570f-3eba-4b43-97d3-0f39450c8b92\",<span></span></pre></td></tr><tr><td scope="row"><pre>               \"hostname\":\"vpp-integrations2.apple.com\",\"ac2\":1}",<span></span></pre></td></tr><tr><td scope="row"><pre>            "email": "user1@someorg.com",<span></span></pre></td></tr><tr><td scope="row"><pre>            "facilitatorMemberId": 200841,<span></span></pre></td></tr><tr><td scope="row"><pre>            "organizationId": 2168850000179778,<span></span></pre></td></tr><tr><td scope="row"><pre>            "locationId": 2167975000001686,<span></span></pre></td></tr><tr><td scope="row"><pre>            "locationName": "Central School"<span></span></pre></td></tr><tr><td scope="row"><pre>        },<span></span></pre></td></tr><tr><td scope="row"><pre>        {<span></span></pre></td></tr><tr><td scope="row"><pre>            "appleId": "user2@someorg.com",<span></span></pre></td></tr><tr><td scope="row"><pre>            "email": "user2@someorg.com",<span></span></pre></td></tr><tr><td scope="row"><pre>            "facilitatorMemberId": 200843,<span></span></pre></td></tr><tr><td scope="row"><pre>            "organizationId": 2168850000179778,<span></span></pre></td></tr><tr><td scope="row"><pre>            "locationId": 2167975000001686,<span></span></pre></td></tr><tr><td scope="row"><pre>            "locationName": "Central School"<span></span></pre></td></tr><tr><td scope="row"><pre>        }<span></span></pre></td></tr><tr><td scope="row"><pre>    ]<span></span></pre></td></tr><tr><td scope="row"><pre>}<span></span></pre></td></tr></table></div>
+<p>Note that <code>vppGroupMembers</code> contains all of the members of the Program Facilitator’s group, including the calling member.</p>
+
+<section><a name="//apple_ref/doc/uid/TP40017387-CH8-SW511" title="Read-Only Access"></a><h4 class="jump">Read-Only Access</h4>
+<p>Using <span class="content_text"><a href="https://help.apple.com/schoolmanager/" class="urlLink" rel="external">Apple School Manager</a></span> and Managed Apple IDs, you can tailor different sets of privileges for individual Program Facilitators. This allows a finer range of control on what such users can do. For example, a Program Facilitator that has only the “Read Only” privilege can use the <code>getVPPUserSrv</code>, <code>getVPPUsersSrv</code>, and <code>getVPPLicensesSrv</code> services but not use <code>retireVPPUserSrv</code>, <code>disassociateVPPLicenseSrv</code>, or <code>manageVPPLicensesByAdamIdSrv</code>. You can also assign Program Facilitators “Can Purchase” and/or “Can Manage” privileges, so an individual Program Facilitator could manage licenses but not buy them. (Note that purchasing users and managing users automatically have read privileges.)</p>
+</section>
+</section>
+
+<section><a name="//apple_ref/doc/uid/TP40017387-CH8-SW2" title="Error Codes"></a><h3 class="jump">Error Codes</h3><p>When a service request results in error, there are normally two fields containing the error information in the response: an <code>errorNumber</code> field and an <code>errorMessage</code> field. There could be additional fields depending on the error. The <code>errorMessage</code> field contains human-readable text explaining the error. The <code>errorNumber</code> field is intended for software to interpret. Any <code>errorMessage</code> value uniquely maps to an <code>errorNumber</code> value, but not the other way around. The possible <code>errorNumber</code> values are defined as follows:</p><div class="tableholder"><table class="graybox" border="0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>errorNumber</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Meaning</p></th></tr><tr><td scope="row"><p><code>9600</code></p></td><td><p>Missing required argument</p></td></tr><tr><td scope="row"><p><code>9601</code></p></td><td><p>Login required</p></td></tr><tr><td scope="row"><p><code>9602</code></p></td><td><p>Invalid argument</p></td></tr><tr><td scope="row"><p><code>9603</code></p></td><td><p>Internal error</p></td></tr><tr><td scope="row"><p><code>9604</code></p></td><td><p>Result not found</p></td></tr><tr><td scope="row"><p><code>9605</code></p></td><td><p>Account storefront incorrect</p></td></tr><tr><td scope="row"><p><code>9606</code></p></td><td><p>Error constructing token</p></td></tr><tr><td scope="row"><p><code>9607</code></p></td><td><p>License is irrevocable</p></td></tr><tr><td scope="row"><p><code>9608</code></p></td><td><p>Empty response from SharedData service</p></td></tr><tr><td scope="row"><p><code>9609</code></p></td><td><p>Registered user not found</p></td></tr><tr><td scope="row"><p><code>9610</code></p></td><td><p>License not found</p></td></tr><tr><td scope="row"><p><code>9611</code></p></td><td><p>Admin user not found</p></td></tr><tr><td scope="row"><p><code>9612</code></p></td><td><p>Failed to create claim job</p></td></tr><tr><td scope="row"><p><code>9613</code></p></td><td><p>Failed to create unclaim job</p></td></tr><tr><td scope="row"><p><code>9614</code></p></td><td><p>Invalid date format</p></td></tr><tr><td scope="row"><p><code>9615</code></p></td><td><p>OrgCountry not found</p></td></tr>
+
+<tr><td scope="row"><p><code>9616</code></p></td><td><p>License already assigned (see <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH8-SW403" data-renderer-version="1">Error Code 9616</a></span>)</p></td></tr>
+
+
+
+<tr><td scope="row"><p><code>9618</code></p></td><td><p>The user has already been retired</p></td></tr><tr><td scope="row"><p><code>9619</code></p></td><td><p>License not associated</p></td></tr><tr><td scope="row"><p><code>9620</code></p></td><td><p>The user has already been deleted</p></td></tr><tr><td scope="row"><p><code>9621</code></p></td><td><p>The token has expired. You need to generate a new token online using your organization’s account at <span class="content_text"><a href="https://vpp.itunes.apple.com/" class="urlLink" rel="external">https://vpp.itunes.apple.com/</a></span>.</p></td></tr><tr><td scope="row"><p><code>9622</code></p></td><td><p>Invalid authentication token</p></td></tr><tr><td scope="row"><p><code>9623</code></p></td><td><p>Invalid Apple push notification token</p></td></tr>
+<tr><td scope="row"><p><code>9624</code></p></td><td><p>License was refunded and is no longer valid.</p></td></tr>
+<tr><td scope="row"><p><code>9625</code></p></td><td><p>The sToken has been revoked.</p></td></tr>
+<tr><td scope="row"><p><code>9626</code></p></td><td><p>License already assigned to a different user. The MDM server should retry the assignment with a different license.</p></td></tr>
+<tr><td scope="row"><p><code>9628</code></p></td><td><p>Ineligible device assignment: MDM tried to assign an item to a serial number but device assignment is not allowed for that item.</p></td></tr>
+<tr><td scope="row"><p><code>9630</code></p></td><td><p>Too many recent already-assigned errors: If MDM gets the same 9616 error from assignments for the same organization, user identifier, and item identifier (license ID, adam ID, or pricing parameter) and does so within too short a time (generally several minutes), it may return this error code.</p></td></tr>
+<tr><td scope="row"><p><code>9631</code></p></td><td><p>Too many recent no-license errors: If MDM gets the same 9610 error from assignments for the same organization, user identifier, and item identifier (license ID, adam ID, or pricing parameter) and does so within too short a time (generally several minutes), it may return this error code.</p></td></tr>
+<tr><td scope="row"><p><code>9632</code></p></td><td><p>Too many recent manage-license calls with identical request: If MDM gets precisely the same request to <code>manageVPPLicensesByAdamIdSrv</code> too many times within too short a time (generally several minutes), it may return this error code.</p></td></tr>
+
+<tr><td scope="row"><p><code>9633</code></p></td><td><p>Data for a batch token passed could not be recovered.</p></td></tr>
+
+<tr><td scope="row"><p><code>9634</code></p></td><td><p>Returned when a caller tries to use a formerly deprecated featured that has been removed.</p></td></tr>
+
+<tr><td scope="row"><p><code>9635</code></p></td><td><p>Apple ID passed for iTunes Store association cannot be found or is not applicable to organization of the user (see <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH8-SW501" data-renderer-version="1">Managed Apple IDs</a></span>).</p></td></tr>
+
+<tr><td scope="row"><p><code>9636</code></p></td><td><p>Registered user not found.</p></td></tr>
+
+<tr><td scope="row"><p><code>9637</code></p></td><td><p><code>sToken</code> is not allowed to perform the operation requested.</p></td></tr>
+
+<tr><td scope="row"><p><code>9638</code></p></td><td><p>Facilitator account that generated <code>sToken</code> has no Managed ID organization ID and cannot manipulate the facilitator member requested.</p></td></tr>
+
+<tr><td scope="row"><p><code>9639</code></p></td><td><p>No facilitator member could be found for the facilitator member ID requested.</p></td></tr>
+
+<tr><td scope="row"><p><code>9640</code></p></td><td><p>Account details of the facilitator member ID requested could not be recovered (likely a transient issue).</p></td></tr><tr><td scope="row"><p><code>9641</code></p></td><td><p>Apple ID already associated to registered user.</p></td></tr><tr><td scope="row"><p><code>9642</code></p></td><td><p>Apple ID passed cannot be used at this time because it's a VPP manager and the iTunes Store account not yet created and such creation requires user to agree to Terms.</p></td></tr>
+
+</table></div>
+<p>Additional error types may be added in the future.</p>
+<section><a name="//apple_ref/doc/uid/TP40017387-CH8-SW403" title="Error Code 9616"></a><h4 class="jump">Error Code 9616</h4>
+<p>Error number <code>9616</code> is returned when an attempt is made to assign a license to a user that already has a license for the specified app or book, in which case there is no need to retry the assignment.</p>
+<p>Additional information is returned to  MDM when a <code>9616</code> error occurs. Sometimes it’s because the specific user in the request is already assigned to the item in question. When that happens the <code>9616</code> error is accompanied by a <code>licenseAlreadyAssigned</code> entry with details about the user and the license. For example,</p>
+<div class="codesample clear"><table><tr><td scope="row"><pre>{"licenseAlreadyAssigned":{"pricingParam":"STDQ","itsIdHash":<span></span></pre></td></tr><tr><td scope="row"><pre>"XuHVGvasXcfEVUUn4EP2wjHEUK00s=","userId":9918783273,"productTypeId":8,<span></span></pre></td></tr><tr><td scope="row"><pre>"isIrrevocable":false,"adamIdStr":"778658393","userIdStr":"9918783273",<span></span></pre></td></tr><tr><td scope="row"><pre>"licenseIdStr":"99147599840","productTypeName":"Application",<span></span></pre></td></tr><tr><td scope="row"><pre>"clientUserIdStr":"xxutt8-e079-4b05-b403-a0792890",<span></span></pre></td></tr><tr><td scope="row"><pre>"licenseId":9147599840,"adamId":778658393,"status":"Associated"},<span></span></pre></td></tr><tr><td scope="row"><pre>"errorMessage":"License already assigned","errorNumber":9616,"status":-1}<span></span></pre></td></tr></table></div>
+<p>Alternatively, a <code>9616</code> error may have a <code>regUsersAlreadyAssigned</code> entry in the response with information about the one or more other users who already have the item in question. In these cases, the VPP user specified by the user ID or the <code>clientUserIdStr</code> does not have the item, but some other users in the organization associated with the same iTunes Store account has the item. If that happens, the server returns <code>9616</code> and information about those other users:</p>
+<div class="codesample clear"><table><tr><td scope="row"><pre>{"errorMessage":"License already assigned",<span></span></pre></td></tr><tr><td scope="row"><pre>"regUsersAlreadyAssigned":[{"itsIdHash":"XXX2CVvZar9YZnpqJxV0SHOUCU=",<span></span></pre></td></tr><tr><td scope="row"><pre>"clientUserIdStr":"jjjCXhHHee0e3c-x999-43a9-Xe04-1dcax80ac01x",<span></span></pre></td></tr><tr><td scope="row"><pre>"userId":9991992450,"email”:”user@example.apple.com","status":"Associated"}],"<span></span></pre></td></tr><tr><td scope="row"><pre>"errorNumber":9616,"status":-1}<span></span></pre></td></tr></table></div>
+</section>
+</section></section>
+
+<section><a name="//apple_ref/doc/uid/TP40017387-CH8-SW3" title="The Services"></a><h2 class="jump">The Services</h2><p>The following are the web services exposed to the Internet that can be requested by your client.</p><section><a name="//apple_ref/doc/uid/TP40017387-CH8-SW5" title="registerVPPUserSrv"></a><h3 class="jump">registerVPPUserSrv</h3><p>The request takes the following parameters:</p><div class="tableholder"><table class="graybox" border="0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Parameter Name</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Required or Not</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Example</p></th></tr>
+<tr><td scope="row"><p><code>clientUserIdStr</code></p></td><td><p>Required.</p></td><td><p><code>"810C9B91-DF83-41DA-80A1-408AD7F081A8"</code>.</p></td></tr>
+<tr><td scope="row"><p><code>email</code></p></td><td><p>Not required.</p></td><td><p><code>"user1@someorg.com"</code>.</p></td></tr>
+
+<tr><td scope="row"><p><code>sToken</code></p></td>
+<td><p>Required.</p></td>
+<td><p><code>"h40Gte9aQnZFDNM...6ZQ="</code>.</p></td></tr>
+<tr><td scope="row"><p><code>facilitatorMemberId</code></p></td>
+<td><p>Not required.</p></td>
+<td><p>See <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH8-SW502" data-renderer-version="1">Program Facilitators</a></span>.</p></td></tr>
+
+<tr><td scope="row"><p><code>managedAppleIDStr</code></p></td><td><p>Not required.</p></td><td><p><code>"user1@someorg.com"</code>.</p></td></tr>
+</table></div>
+
+<p><code>clientUserIdStr</code> is a string field. It can be, for example, the GUID of the user. The <code>clientUserIdStr</code> strings must be unique within the organization and may not be changed once a user is registered. It should not, for example, be an email address, because an email address might be reused by a future user.</p><p>When a user is first registered, the user’s initial status is <code>Registered</code>. If the user has already been registered, as identified by <code>clientUserIdStr</code>, the following occurs:</p>
+<ul class="ul"><li class="li"><p>If the user’s status is <code>Registered</code> or <code>Associated</code>, that active user account is returned.</p></li><li class="li"><p>If the user’s status is <code>Retired</code> and the user has never been assigned to an iTunes account, the account’s status is changed to <code>Registered</code> and the existing user is returned.</p></li><li class="li"><p>If the user’s status is <code>Retired</code> and the user has previously been assigned to an iTunes account, a new account is created.</p></li></ul><p>Thus, it is possible for more than one user record to exist for the same <code>clientUserIdStr</code> value—one for each iTunes account that the <code>clientUserIdStr</code> value has been associated with in the past (in addition to a currently active record or a retired and never-associated record). Each of these users has a unique <code>userId</code> value. Over time, with iTunes Store assignment, retirement, and reassignment, it is possible for the <code>userId</code> value of the active user for a given <code>clientUserIdStr</code> to change.</p><p>Further, if two user identifiers exist for a given <code>clientUserIdStr</code>, one assigned to an iTunes account and the other unassigned, and a user accepts an invitation to be associated, it is possible for the user to use the same iTunes account that he or she used previously.  If the user does, the unassigned user record gets marked with the <code>Retired</code> status, and the formerly retired user record gets moved to the <code>Associated</code> status.</p>
+
+<p>The <code>managedAppleIDStr</code> parameter is discussed in <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH8-SW501" data-renderer-version="1">Managed Apple IDs</a></span>.</p>
+
+<p>The response contains some of these fields:</p><div class="tableholder"><table class="graybox" border="0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Field Name</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Example of Value</p></th></tr><tr><td scope="row"><p><code>status</code></p></td><td><p><code>0</code> for success, <code>-1</code> for error.</p></td></tr><tr><td scope="row"><p><code>user</code></p></td><td><p><code>{</code></p><p><code>      "userId":100014,</code></p><p><code>      "email":"test_reg_user11@test.com",</code></p><p><code>      "status":"Registered",</code></p><p><code>      "inviteUrl":</code></p><p><code>"https:\/\/buy.itunes.apple.com\/WebObjects\/MZFinance.woa\/</code></p><p><code>wa\/associateVPPUserWithITSAccount?inviteCode=</code></p><p><code>9e8d1ecc57924d9da13b42b4f772a066&amp;mt=8",</code></p><p><code>      "inviteCode":"9e8d1ecc57924d9da13b42b4f772a066",</code></p><p><code>      "clientUserIdStr":"810C9B91-DF83-41DA-80A1-408AD7F081A8",</code></p><p><code>}</code></p></td></tr><tr><td scope="row"><p><code>errorMessage</code></p></td><td><p><code>"\"clientUserIdStr\" or \"email\" is required input parameter"</code>.</p></td></tr>
+
+<tr><td scope="row"><p><code>facilitatorMember</code></p></td><td>
+<p><code>    {</code></p>
+<p><code>        "appleId":"user1@someorg.com",</code></p>
+<p><code>        "countryCode":"US",</code></p>
+<p><code>        "email":"user1@someorg.com",</code></p>
+<p><code>        "facilitatorMemberId":200843,</code></p>
+<p><code>        "organizationId":2168850000179778,</code></p>
+<p><code>    },</code></p>
+</td></tr>
+
+<tr><td scope="row"><p><code>errorNumber</code></p></td><td><p><code>9600</code>.</p></td></tr></table></div></section><section><a name="//apple_ref/doc/uid/TP40017387-CH8-SW6" title="getVPPUserSrv"></a><h3 class="jump">getVPPUserSrv</h3><p>                     The request takes the following parameters:</p><div class="tableholder"><table class="graybox" border="0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Parameter Name</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Required or Not</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Example</p></th></tr><tr><td scope="row"><p><code>userId</code></p></td><td rowspan="2"><p>One of these is required, but <code>userId</code> is deprecated.</p></td><td><p><code>100001</code>.</p></td></tr><tr><td scope="row"><p><code>clientUserIdStr</code></p></td><td><p><code>810C9B91-DF83-41DA-80A1-408AD7F081A8</code>.</p></td></tr><tr><td scope="row"><p><code>itsIdHash</code></p></td><td><p>Not required.</p></td><td><p><code>"C2Wwd8LcIaE2v6f2/mvu82Gs/Lc="</code>.</p></td></tr>
+<tr><td scope="row"><p><code>sToken</code></p></td>
+<td><p>Required.</p></td>
+<td><p><code>"h40Gte9aQnZFDNM...6ZQ="</code>.</p></td></tr>
+<tr><td scope="row"><p><code>facilitatorMemberId</code></p></td>
+<td><p>Not required.</p></td>
+<td><p>See <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH8-SW502" data-renderer-version="1">Program Facilitators</a></span>.</p></td></tr>
+</table></div><p>If a value is passed for <code>clientUserIdStr</code>, an <code>itsIdHash</code> (iTunes Store ID hash) value may be passed, but is optional. If a value is passed for <code>userId</code> is passed, that value is used, and <code>clientUserIdStr</code> and <code>itsIdHash</code> are ignored.</p>
+
+<p>The <code>getVPPUserSrv</code> request returns users with any status—<code>Registered</code>, <code>Associated</code>, <code>Retired</code>, and <code>Deleted</code>, as described below:</p><ul class="ul"><li class="li"><p>A <code>Registered</code> status indicates the user has been created in the system by making a <code>registerVPPUserSrv</code> request, but is not yet associated with an iTunes account.</p></li><li class="li"><p>An <code>Associated</code> status indicates that the user has been associated with an iTunes account. When a user is associated with an iTunes account, an <code>itsIdHash</code> value is generated for the user record.</p></li><li class="li"><p>A <code>Retired</code> status indicates that the user has been retired by making a <code>retireVPPUserSrv</code> request.</p></li><li class="li"><p>A <code>Deleted</code> status indicates that a VPP user is retired and its associated iTunes user has since been invited and associated with a new VPP user that shares the same <code>clientUserIdStr</code>. Because there are two VPP users with distinct <code>userId</code> values but the same <code>clientUserIdStr</code> value, the <code>Deleted</code> status is used to ensure database consistency.</p><p>This status appears only in the <code>getVPPUserSrv</code> service response, and only when a <code>userId</code> value is used to get a VPP user instead of a <code>clientUserIdStr</code> value. A user with a <code>Deleted</code> status, fetched by <code>userId</code>, will never change status again; its sole purpose is to ensure that your software can recognize that the <code>userId</code> is no longer associated with the <code>clientUserIdStr</code> record, and can update any internal references appropriately.</p></li></ul><p>Thus, it is possible for more than one user record to exist for the same <code>clientUserIdStr</code> value—one for each iTunes account that the <code>clientUserIdStr</code> value has been associated with in the past (in addition to a currently active record or a retired and never-associated record). However, no more than one of these records can be active at any given time.</p><p>When a new record is associated with a <code>clientUserIdStr</code> value that has previously been associated with a different user, because the <code>clientUserIdStr</code> is still associated with the same iTunes user when it is retired and associated again, any irrevocable licenses originally associated with the retired VPP user, if any, are moved to the new VPP user (as identified by <code>userId</code>) automatically.</p><p>If you use a <code>clientUserIdStr</code> value to fetch the VPP user after such a reassociation, the status of that user changes from <code>Retired</code> to <code>Associated</code>. If you use <code>userId</code> values to fetch the VPP users after the association, the status of the first VPP user changes from <code>Retired</code> to <code>Deleted</code>, and the status of the second VPP user changes from <code>Registered</code> to <code>Associated</code>.</p><p>To obtain only the record for the currently active user matching a <code>clientUserIdStr</code> value, your MDM server passes the <code>clientUserIdStr</code> by itself. If no users for the <code>clientUserIdStr</code> are active (all are retired or no matching record exists), <code>getVPPUserSrv</code> returns a "result not found" error number.</p><p>To obtain an old, retired user record that was previously associated with an iTunes Store account, your MDM server can pass either the <code>userId</code> for that record or the <code>clientUserIdStr</code> and <code>itsIdHash</code> for that record.</p><p>All user record responses for this request include an <code>itsIdHash</code> if the user is associated with an iTunes account.</p><p>The response contains some of these fields:</p><div class="tableholder"><table class="graybox" border="0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Field Name</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Example of Value</p></th></tr><tr><td scope="row"><p><code>status</code></p></td><td><p>0 for success, -1 for error.</p></td></tr><tr><td scope="row"><p><code>user</code></p></td><td><p><code>{</code></p><p><code>      "userId":2,</code></p><p><code>      "email":"user2@test.com",</code></p><p><code>      "status":"Associated",</code></p><p><code>      "clientUserIdStr":"810C9B91-DF83-41DA-80A1-408AD7F081A8",</code></p><p><code>      "itsIdHash":"C2Wwd8LcIaE2v6f2/mvu82Gs/Lc=",</code></p><p><code>      "licenses":[</code></p><p><code>         {</code></p><p><code>            "licenseId":4,</code></p><p><code>            "adamId":497799835,</code></p><p><code>            "productTypeId":7,</code></p><p><code>            "pricingParam":"STDQ",</code></p><p><code>            "productTypeName":"Software",</code></p><p><code>            "isIrrevocable": false</code></p><p><code>         }</code></p><p><code>      ]</code></p><p><code>}</code></p></td></tr>
+
+<tr><td scope="row"><p><code>facilitatorMember</code></p></td><td>
+<p><code>    {</code></p>
+<p><code>        "appleId":"user1@someorg.com",</code></p>
+<p><code>        "countryCode":"US",</code></p>
+<p><code>        "email":"user1@someorg.com",</code></p>
+<p><code>        "facilitatorMemberId":200843,</code></p>
+<p><code>        "organizationId":2168850000179778,</code></p>
+<p><code>    },</code></p>
+</td></tr>
+
+<tr><td scope="row"><p><code>errorMessage</code></p></td><td><p><code>"Result not found"</code>.</p></td></tr><tr><td scope="row"><p><code>errorNumber</code></p></td><td><p><code>9604</code>.</p></td></tr></table></div><p>The <code>itsIdHash</code> field is omitted if the account is not yet associated with an iTunes Store account.</p><p>Note the user object returned includes a list of licenses assigned to the user.</p></section><section><a name="//apple_ref/doc/uid/TP40017387-CH8-SW7" title="getVPPUsersSrv"></a><h3 class="jump">getVPPUsersSrv</h3><p>       The request takes the following parameters:</p><div class="tableholder"><table class="graybox" border="0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Parameter Name</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Required or Not</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Example</p></th></tr><tr><td scope="row"><p><code>batchToken</code></p></td><td><p>Not required.</p></td><td><p><code>EkZQCWOwhDFCwgQsUFJZkA</code></p><p><code>oUU0pKLEnOUAIKZOalpFYAR</code></p><p><code>YzA7OSc0pTUoNSSzKLUFJAy</code></p><p><code>Q6CSWgCS88JnkgAAAA==</code>.</p></td></tr><tr><td scope="row"><p><code>sinceModifiedToken</code></p></td><td><p>Not required.</p></td><td><p><code>0zJTU5SAEplpMF4wWCozJy</code></p><p><code>ezGKjS0NjM0tjUwtTA3MzQ</code></p><p><code>1FqhFgBuLPH3TgAAAA==</code>.</p></td></tr><tr><td scope="row"><p><code>includeRetired</code></p></td><td><p>Not required.</p></td><td><p><code>1</code>.</p></td></tr>
+<tr><td scope="row"><p><code>sToken</code></p></td>
+<td><p>Required.</p></td>
+<td><p><code>"h40Gte9aQnZFDNM...6ZQ="</code>.</p></td></tr>
+<tr><td scope="row"><p><code>facilitatorMemberId</code></p></td>
+<td><p>Not required.</p></td>
+<td><p>See <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH8-SW502" data-renderer-version="1">Program Facilitators</a></span>.</p></td></tr>
+</table></div><p>The <code>batchToken</code> and <code>sinceModifiedToken</code> values are generated by the server, and the <code>batchToken</code> value can be several kilobytes in size.</p><p>You can use this endpoint to obtain a list of all known users from the server and to keep your MDM system up-to-date with changes made on the server. To use this endpoint, your MDM server does the following:</p><ul class="ul"><li class="li"><p>Makes an initial request to <code>getVPPUsersSrv</code> with no <code>batchToken</code> or <code>sinceModifiedToken</code> (optionally with the <code>includeRetired</code> field).</p><p>This request returns all user records associated with the provided <code>sToken</code>.</p></li><li class="li"><p>If the number of users exceeds a server controlled limit (on the order of several hundred), a <code>batchToken</code> value is included in the response, along with the first batch of users.  Your MDM server should pass this <code>batchToken</code> value in subsequent requests to get the next batch.  As long as additional batches remain, the server returns a new <code>batchToken</code> value in its response.</p></li><li class="li"><p>Once all records have been returned for the request, the server includes a <code>sinceModifiedToken</code> value in the response.  Your MDM server should pass this token in subsequent requests to get users modified since that token was generated.</p><p>Even if no records are returned, the response still includes a <code>sinceModifiedToken</code> for use in subsequent requests.</p></li></ul>
+<p>The <code>includeRetired</code> value contains <code>1</code> if retired users should be included in the results, otherwise it contains <code>0</code>.</p>
+<div class="notebox"><aside><a name="//apple_ref/doc/uid/TP40017387-CH8-SW4" title="Note"></a><p><strong>Note:</strong>&nbsp;The <code>batchToken</code> value encodes the original value of <code>includeRetired</code>; therefore, if a <code>batchToken</code> value is present on the request, the <code>includeRetired</code> field (if passed) is ignored.</p><p>
+
+</p></aside></div><p>The response contains some of these fields:</p><div class="tableholder"><table class="graybox" border="0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Field Name</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Example of Value</p></th></tr><tr><td scope="row"><p><code>status</code></p></td><td><p><code>0</code> for success, <code>-1</code> for error.</p></td></tr><tr><td scope="row"><p><code>users</code></p></td><td><p><code>[</code></p><p><code>      {</code></p><p><code>         "userId":2,</code></p><p><code>         "email":"user2@test.com",</code></p><p><code>         "status":"Associated",</code></p><p><code>         "clientUserIdStr":"810C9B91-DF83-41DA-80A1-408AD7F081A8",</code></p><p><code>         "itsIdHash":"C2Wwd8LcIaE2v6f2/mvu82Gs/Lc="</code></p><p><code>      },</code></p><p><code>      {</code></p><p><code>         "userId":3,</code></p><p><code>         "email":"user3@test.com",</code></p><p><code>         "status":"Registered",</code></p><p><code>         "inviteUrl":</code></p><p><code>"https:\/\/buy.itunes.apple.com\/WebObjects\/MZFinance.woa\/wa\/</code></p><p><code>associateVPPUserWithITSAccount?inviteCode=</code></p><p><code>f551b37da07146628e8dcbe0111f0364&amp;mt=8",</code></p><p><code>         "inviteCode":"f551b37da07146628e8dcbe0111f0364",</code></p><p><code>         "clientUserIdStr":"293C9B02-DF83-41DA-20B7-203KD7F083C9"</code></p><p><code>      }</code></p><p><code>]</code></p><p>Note that the <code>inviteUrl</code> field is present only for users whose status is <code>Registered</code>, not for users whose status is <code>Associated</code> or <code>Retired</code> status.</p></td></tr>
+
+<tr><td scope="row"><p><code>facilitatorMember</code></p></td><td>
+<p><code>    {</code></p>
+<p><code>        "appleId":"user1@someorg.com",</code></p>
+<p><code>        "countryCode":"US",</code></p>
+<p><code>        "email":"user1@someorg.com",</code></p>
+<p><code>        "facilitatorMemberId":200843,</code></p>
+<p><code>        "organizationId":2168850000179778,</code></p>
+<p><code>    },</code></p>
+</td></tr>
+
+<tr><td scope="row"><p><code>totalCount</code></p></td><td><p><code>5</code></p><p>Note that this value is returned only for requests that do not include a <code>batchToken</code> value.</p></td></tr><tr><td scope="row"><p><code>errorMessage</code></p></td><td><p><code>"Result not found"</code>.</p></td></tr><tr><td scope="row"><p><code>errorNumber</code></p></td><td><p><code>9604</code>.</p></td></tr><tr><td scope="row"><p><code>batchToken</code></p></td><td><p><code>EkZQCWOwhDFCwgQsUFJZkA</code></p><p><code>oUU0pKLEnOUAIKZOalpFYAR</code></p><p><code>YzA7OSc0pTUoNSSzKLUFJAy</code></p><p><code>Q6CSWgCS88JnkgAAAA==</code></p><p>Note that this field is present only if there are more entries left to read.</p></td></tr><tr><td scope="row"><p><code>sinceModifiedToken</code></p></td><td><p><code>0zJTU5SAEplpMF4wWCozJy</code></p><p><code>ezGKjS0NjM0tjUwtTA3MzQ</code></p><p><code>1FqhFgBuLPH3TgAAAA==</code></p><p>Note that this field is present only if <code>batchToken</code> is not (that is, only after the last batch of users has been returned).</p></td></tr></table></div><p>The <code>itsIdHash</code> field is omitted if the account is not yet associated with an iTunes Store account.</p><p>The <code>totalCount</code> field contains an estimate of the total number of records that will be returned.</p></section>
+<section><a name="//apple_ref/doc/uid/TP40017387-CH8-SW8" title="getVPPLicensesSrv"></a><h3 class="jump">getVPPLicensesSrv</h3><p>The request takes the following parameters:</p><div class="tableholder"><table class="graybox" border="0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Parameter Name</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Required or Not</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Example</p></th></tr><tr><td scope="row"><p><code>batchToken</code></p></td><td><p>Not required.</p></td><td><p><code>EkZQCWOwhDFCwgQsUFJZkA</code></p><p><code>oUU0pKLEnOUAIKZOalpFYAR</code></p><p><code>YzA7OSc0pTUoNSSzKLUFJAy</code></p><p><code>Q6CSWgCS88JnkgAAAA==</code>.</p></td></tr><tr><td scope="row"><p><code>sinceModifiedToken</code></p></td><td><p>Not required.</p></td><td><p><code>0zJTU5SAEplpMF4wWCozJy</code></p><p><code>ezGKjS0NjM0tjUwtTA3MzQ</code></p><p><code>1FqhFgBuLPH3TgAAAA==</code>.</p></td></tr><tr><td scope="row"><p><code>adamId</code></p></td><td><p>Not required.</p></td><td><p><code>408709785</code>.</p></td></tr><tr><td scope="row"><p><code>pricingParam</code></p></td><td><p>Not required.</p></td><td><p><code>"PLUS"</code>.</p></td></tr>
+<tr><td scope="row"><p><code>sToken</code></p></td>
+<td><p>Required.</p></td>
+<td><p><code>"h40Gte9aQnZFDNM...6ZQ="</code>.</p></td></tr>
+<tr><td scope="row"><p><code>facilitatorMemberId</code></p></td>
+<td><p>Not required.</p></td>
+<td><p>See <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH8-SW502" data-renderer-version="1">Program Facilitators</a></span>.</p></td></tr>
+<tr><td scope="row"><p><code>assignedOnly</code></p></td><td><p>Not required.; defaults to false.</p></td><td><p><code>true</code>.</p></td></tr>
+</table></div><p>The <code>batchToken</code> and <code>sinceModifiedToken</code> values are generated by the server, and the <code>batchToken</code> value can be several kilobytes in size.</p><p>You can use this endpoint to obtain a list of licenses from the server and to keep your MDM system up-to-date with changes made on the server. To use this endpoint, your MDM server does the following:</p><ul class="ul"><li class="li"><p>Makes an initial request to <code>getVPPUsersSrv</code> with no <code>batchToken</code> or <code>sinceModifiedToken</code>.</p><p>This request returns all licenses associated with the provided <code>sToken</code>.</p></li><li class="li"><p>If the number of licenses exceeds a server controlled limit (on the order of several hundred), a <code>batchToken</code> value is included in the response, along with the first batch of users.  Your MDM server should pass this <code>batchToken</code> value in subsequent requests to get the next batch.  As long as additional batches remain, the server returns a new <code>batchToken</code> value in its response.</p></li><li class="li"><p>Once all records have been returned for the request, the server includes a <code>sinceModifiedToken</code> value in the response.  Your MDM server should pass this token in subsequent requests to get licenses modified since that token was generated.</p><p>Even if no records are returned, the response still includes a <code>sinceModifiedToken</code> for use in subsequent requests.</p></li></ul><div class="notebox"><aside><a name="//apple_ref/doc/uid/TP40017387-CH8-SW13" title="Note"></a><p><strong>Note:</strong>&nbsp;The <code>batchToken</code> and <code>sinceModifiedToken</code> encode whether <code>adamId</code> and <code>pricingParam</code> were originally passed; therefore, if the <code>batchToken</code> or <code>sinceModifiedToken</code> is present on the request, the <code>adamId</code> and <code>pricingParam</code> fields (if passed) are ignored.</p><p></p></aside></div>
+
+<p>If the <code>assignedOnly</code> parameter is set to <code>true</code>, only licenses currently associated with an Apple ID or a device serial number are returned. When the <code>assignedOnly</code> parameter is omitted, all license records are returned regardless of association status.</p>
+
+
+<p>If a <code>pricingParam</code> parameter is not passed in the <code>getVPPLicensesSrv</code> request, the VPP service returns all licenses (both PLUS and STDQ <code>pricingParam</code> values).</p>
+
+<p>The response contains some of these fields:</p><div class="tableholder"><table class="graybox" border="0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Field Name</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Example of Value</p></th></tr><tr><td scope="row"><p><code>status</code></p></td><td><p><code>0</code> for success, <code>-1</code> for error.</p></td></tr><tr><td scope="row"><p><code>licenses</code></p></td><td><p><code>[</code></p><p><code>    {</code></p>
+<p><code>        "licenseIdStr":1,</code></p>
+<p><code>        "adamIdStr":408709785,</code></p>
+<p><code>        "productTypeId":7,</code></p><p><code>        "pricingParam":"STDQ",</code></p><p><code>        "productTypeName":"Software",</code></p><p><code>        "isIrrevocable": false</code></p><p><code>    },</code></p><p><code>    {</code></p>
+<p><code>        "licenseIdStr":2,</code></p>
+<p><code>        "adamIdStr":408709785,</code></p>
+<p><code>        "productTypeId":7,</code></p><p><code>        "pricingParam":"STDQ",</code></p><p><code>        "productTypeName":"Software",</code></p><p><code>        "isIrrevocable": false,</code></p><p><code>        "userId":1,</code></p><p><code>        "clientUserIdStr":"810C9B91-DF83-41DA-80A1-408AD7F081A8",</code></p><p><code>        "itsIdHash":"C2Wwd8LcIaE2v6f2/mvu82Gs/Lc="</code></p><p><code>    }</code></p><p><code>]</code>.</p></td></tr>
+<tr><td scope="row"><p><code>totalCount</code></p></td><td><p><code>10</code></p><p>Note that this value is returned only for requests that do not include a token.</p></td></tr>
+<tr><td scope="row"><p><code>totalBatchCount</code></p></td><td><p><code>3</code></p><p> Indicates the total number of round trips that will be necessary to get the full result set.</p></td></tr>
+
+<tr><td scope="row"><p><code>facilitatorMember</code></p></td><td>
+<p><code>    {</code></p>
+<p><code>        "appleId":"user1@someorg.com",</code></p>
+<p><code>        "countryCode":"US",</code></p>
+<p><code>        "email":"user1@someorg.com",</code></p>
+<p><code>        "facilitatorMemberId":200843,</code></p>
+<p><code>        "organizationId":2168850000179778,</code></p>
+<p><code>    },</code></p>
+</td></tr>
+
+<tr><td scope="row"><p><code>errorMessage</code></p></td><td><p><code>"Result not found"</code>.</p></td></tr><tr><td scope="row"><p><code>errorNumber</code></p></td><td><p><code>9604</code>.</p></td></tr><tr><td scope="row"><p><code>batchToken</code></p></td><td><p><code>EkZQCWOwhDFCwgQsUFJZkA</code></p><p><code>oUU0pKLEnOUAIKZOalpFYAR</code></p><p><code>YzA7OSc0pTUoNSSzKLUFJAy</code></p><p><code>Q6CSWgCS88JnkgAAAA==</code></p><p>Note that this field is present only if there are more entries left to read.</p></td></tr><tr><td scope="row"><p><code>sinceModifiedToken</code></p></td><td><p><code>0zJTU5SAEplpMF4wWCozJy</code></p><p><code>ezGKjS0NjM0tjUwtTA3MzQ</code></p><p><code>1FqhFgBuLPH3TgAAAA==</code></p><p>Note that this field is present only if <code>batchToken</code> is not (that is, only after the last batch of users has been returned).</p></td></tr></table></div><p>Licenses that are assigned to a user contain <code>userId</code>, <code>clientUserIdStr</code>, and <code>itsIdHashfield</code> fields, as shown in the second example above. The <code>totalBatchCount</code> field contains the total number of round trips that are necessary to get all records in the request. This can be used to provide a progress indicator when compared to the number of batches processed so far.</p>
+<div class="notebox"><aside><a name="//apple_ref/doc/uid/TP40017387-CH8-SW18" title="Note"></a><p><strong>Note:</strong>&nbsp;
+The <code>totalCount</code> value is returned only on the request that started the batch process (the listing request issued without any tokens), because the actual number of licenses or users returned can be different by the time the client has finished.</p><p></p></aside></div>
+<p>One of a set of sequential <code>getVPPLicensesSrv</code> batch requests may return an error. It is also possible to get a response from a listing call that includes no token but also no error number. Because all listing API requests should return either a batch or <code>sinceModified</code> token, do not interpret an error or the lack of a token for an individual batch to mean that the last batch has been received. The last batch is signified by the inclusion of a <code>sinceModifiedToken</code>. If an individual batch request fails, the MDM server should retry the same batch using the same <code>batchToken</code>.</p>
+
+<p>Receiving a <code>9603 'Internal Error'</code> response typically indicates that the VPP server couldn’t provide timely processing. Nothing is necessarily wrong with the request. When the MDM server receives this response, it should send the current request again. If it continues to receive <code>9603</code> errors after more than five attempts, it may mean that the VPP service is unexpectedly down and further retries should be scheduled for minutes later, instead of seconds.</p>
+
+<section><a name="//apple_ref/doc/uid/TP40017387-CH8-SW22" title="Parallel getVPP Requests"></a><h4 class="jump">Parallel getVPP Requests</h4>
+<p>Both the <code>getVPPLicensesSrv</code> and <code>getVPPUsersSrv</code> services can accept multiple requests in parallel, instead of sequentially, which can significantly reduce the amount of time required to request all licenses and users. You start by making an initial request to receive a <code>batchToken</code>. Subsequent requests can be submitted in parallel by submitting the same <code>batchToken</code> and including an <code>overrideIndex</code> value from 1 to <code>totalBatchCount</code>, which is now returned with <code>getVPPLicensesSrv</code> requests. The request in which the <code>overrideIndex</code> value is equal to the <code>totalBatchCount</code> returns the new <code>sinceModifiedToken</code>.</p>
+<p>It is advisable not to submit more than five requests simultaneously.</p>
+</section>
+</section>
+
+<section><a name="//apple_ref/doc/uid/TP40017387-CH8-SW302" title="getVPPAssetsSrv"></a><h3 class="jump">getVPPAssetsSrv</h3>
+<p>This service returns an enumeration of the assets (<code>{adamIdStr, pricingParam}</code> tuples) for which an organization has licenses, along with an optional count of the total number of licenses and the number of licenses available for each asset.</p>
+<div class="tableholder"><table class="graybox" border="0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Parameter Name</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Required or Not</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Example</p></th></tr>
+
+<tr>
+<td scope="row"><p><code>includeLicenseCounts</code></p></td>
+<td><p>Not required. Defaults to <code>false</code>.</p></td>
+<td><p><code>true</code>.</p></td>
+</tr>
+<tr><td scope="row"><p><code>sToken</code></p></td>
+<td><p>Required.</p></td>
+<td><p><code>"h40Gte9aQnZFDNM...6ZQ="</code>.</p></td></tr>
+<tr><td scope="row"><p><code>facilitatorMemberId</code></p></td>
+<td><p>Not required.</p></td>
+<td><p>See <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH8-SW502" data-renderer-version="1">Program Facilitators</a></span>.</p></td></tr>
+</table></div>
+<p>If <code>includeLicenseCounts</code> is set to true, the total number of licenses, the number of licenses assigned, and the number of licenses unassigned are included with the response for each asset.</p>
+<div class="tableholder"><table class="graybox" border="0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Field Name</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Example of Value</p></th></tr>
+
+<tr>
+<td scope="row"><p><code>status</code></p></td>
+<td><p><code>0 for success, -1 for error.</code></p></td>
+</tr>
+<tr>
+<td scope="row"><p><code>assets</code></p></td>
+<td>
+<p><code>[</code></p>
+<p><code>    {</code></p>
+<p><code>        "adamIdStr":"375380948",</code></p>
+<p><code>        "assignedCount":2,</code></p>
+<p><code>        "availableCount":8,</code></p>
+<p><code>        "deviceAssignable":true,</code></p>
+<p><code>        "isIrrevocable":false,</code></p>
+<p><code>        "pricingParam":"STDQ",</code></p>
+<p><code>        "productTypeId":8,</code></p>
+<p><code>        "productTypeName":"Application",</code></p>
+<p><code>        "retiredCount":0,</code></p>
+<p><code>        "totalCount":10</code></p>
+<p><code>    },</code></p>
+<p><code>    {</code></p>
+<p><code>        "adamIdStr":"435160039",</code></p>
+<p><code>        "assignedCount":2,</code></p>
+<p><code>        "availableCount":8,</code></p>
+<p><code>        "deviceAssignable":false,</code></p>
+<p><code>        "isIrrevocable":true,</code></p>
+<p><code>        "pricingParam":"PLUS",</code></p>
+<p><code>        "productTypeId":10,</code></p>
+<p><code>        "productTypeName":"Publication",</code></p>
+<p><code>        "retiredCount":0,</code></p>
+<p><code>        "totalCount":10</code></p>
+<p><code>    }</code></p>
+<p><code>]</code></p>
+</td>
+</tr>
+<tr><td scope="row"><p><code>facilitatorMember</code></p></td><td>
+<p><code>    {</code></p>
+<p><code>        "appleId":"user1@someorg.com",</code></p>
+<p><code>        "countryCode":"US",</code></p>
+<p><code>        "email":"user1@someorg.com",</code></p>
+<p><code>        "facilitatorMemberId":200843,</code></p>
+<p><code>        "organizationId":2168850000179778,</code></p>
+<p><code>    },</code></p>
+</td></tr>
+<tr>
+<td scope="row"><p><code>totalCount</code></p></td>
+<td><p>4</p></td>
+</tr>
+<tr>
+<td scope="row"><p><code>errorMessage</code></p></td>
+<td><p><code>"Result not found"</code></p></td>
+</tr>
+<tr>
+<td scope="row"><p><code>errorNumber</code></p></td>
+<td><p><code>9604</code></p></td>
+</tr><tr><td scope="row"><p><code>location</code></p></td><td><p><code> {</code></p><p> <code>"locationId": 22222222222,</code></p><p> <code>"locationName": "Lincoln High School" </code></p><p> <code>}</code></p></td></tr>
+</table></div><p>The <code>location</code> field is only returned when using a location token with an account that has migrated to VPP in Apple School Manager.</p>
+</section>
+
+<section><a name="//apple_ref/doc/uid/TP40017387-CH8-SW209" title="contentMetadataLookupUrl"></a><h3 class="jump">contentMetadataLookupUrl</h3>
+
+<p>The <code>contentMetadataLookupUrl</code> in the <code>VPPServiceConfigSrv</code> response allows an MDM server to query the iTunes Store for app and book metadata. When the VPP <code>sToken</code> is included in the request as a cookie, an MDM server can also get authenticated app metadata for B2B apps already owned by the VPP account, as well as apps that can still be redownloaded but can no longer be purchased.</p>
+
+<p>The URL query string tells the content metadata lookup service what app or book to look up. The VPP <code>sToken</code> must be included as a cookie named <code>itvt</code> to access the authenticated metadata. </p><p>Content is filtered by platform. The valid platform values for the query parameter are: <code>itunes</code>, <code>ipad</code>, <code>iphone</code>, <code>atv</code>, <code>macappstore</code>, <code>macbookstore</code>, <code>enterprisestore</code>, and <code>volumepurchasestore</code>. For example, to get B2B app content, append <code>platform=enterprisestore</code> to your query string.</p><p>Here is an example of the URL to look up an app: <span class="content_text"><a href="https://uclient-api.itunes.apple.com/WebObjects/MZStorePlatform.woa/wa/lookup?version=2&amp;id=361309726&amp;p=mdm-lockup&amp;caller=MDM&amp;platform=itunes&amp;cc=us&amp;l=en" class="urlLink" rel="external">https://uclient-api.itunes.apple.com/WebObjects/MZStorePlatform.woa/wa/lookup?version=2&amp;id=361309726&amp;p=mdm-lockup&amp;caller=MDM&amp;platform=itunes&amp;cc=us&amp;l=en</a></span>.</p>
+
+<p>Here is an example of what a response might look like:</p>
+<div class="codesample clear"><table><tr><td scope="row"><pre>{<span></span></pre></td></tr><tr><td scope="row"><pre>    "isAuthenticated": false,<span></span></pre></td></tr><tr><td scope="row"><pre>    "results": {<span></span></pre></td></tr><tr><td scope="row"><pre>        "361309726": {<span></span></pre></td></tr><tr><td scope="row"><pre>            "artistId": "284417353",<span></span></pre></td></tr><tr><td scope="row"><pre>            "artistName": "Apple",<span></span></pre></td></tr><tr><td scope="row"><pre>            "artistUrl": "https://itunes.apple.com/us/artist/apple/id284417353?mt=8",<span></span></pre></td></tr><tr><td scope="row"><pre>            "artwork": {<span></span></pre></td></tr><tr><td scope="row"><pre>                "bgColor": "ffb800",<span></span></pre></td></tr><tr><td scope="row"><pre>                "height": 1024,<span></span></pre></td></tr><tr><td scope="row"><pre>                "supportsLayeredImage": false,<span></span></pre></td></tr><tr><td scope="row"><pre>                "textColor1": "161616",<span></span></pre></td></tr><tr><td scope="row"><pre>                "textColor2": "161616",<span></span></pre></td></tr><tr><td scope="row"><pre>                "textColor3": "453712",<span></span></pre></td></tr><tr><td scope="row"><pre>                "textColor4": "453712",<span></span></pre></td></tr><tr><td scope="row"><pre>                "url": "http://is5.mzstatic.com/image/thumb/ Purple3/v4/72/7d/38/727d38ee-9245-eda6-1188-3458133bd99a/source/{w}x{h}bb.{f}",<span></span></pre></td></tr><tr><td scope="row"><pre>                "width": 1024<span></span></pre></td></tr><tr><td scope="row"><pre>            },<span></span></pre></td></tr><tr><td scope="row"><pre>            "bundleId": "com.apple.Pages",<span></span></pre></td></tr><tr><td scope="row"><pre>            "contentRatingsBySystem": {<span></span></pre></td></tr><tr><td scope="row"><pre>                "appsApple": {<span></span></pre></td></tr><tr><td scope="row"><pre>                    "name": "4+",<span></span></pre></td></tr><tr><td scope="row"><pre>                    "rank": 1,<span></span></pre></td></tr><tr><td scope="row"><pre>                    "value": 100<span></span></pre></td></tr><tr><td scope="row"><pre>                }<span></span></pre></td></tr><tr><td scope="row"><pre>            },<span></span></pre></td></tr><tr><td scope="row"><pre>            "copyright": "\u00a9 2010 - 2015 Apple Inc.",<span></span></pre></td></tr><tr><td scope="row"><pre>            "description": {<span></span></pre></td></tr><tr><td scope="row"><pre>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"standard": "Pages is the most beautiful word processor you\u2019ve ever seen on a mobile device. This powerful word processor helps you create gorgeous reports, resumes, and documents in minutes. Pages has been designed exclusively for the iPad, iPhone, and iPod touch with support for Multi-Touch gestures and Smart Zoom.\n\nGet a quick start by using one of over 60 Apple-designed templates. Or use a blank document and easily add text, images, shapes, and more with a few taps. Then format using beautiful preset styles and fonts. And use advanced features like change tracking, comments, and highlights to easily review changes in a document.\n\nWith iCloud built in, your documents are kept up-to-date across all your devices. You can instantly share a document using just a link, giving others the latest version and the ability to edit it directly from www.icloud.com using a Mac or PC browser.\n\nPages 2.0 is updated with a stunning new design and improved performance. And with a new unified file format across Mac, iOS, and web, your documents are consistently beautiful everywhere you open them.\n\nGet started quickly\n\u2022 Choose from over 60 Apple-designed templates to instantly create beautiful reports, resumes, cards, and posters\n\u2022 Import and edit Microsoft Word and plain text files using Mail, a WebDAV service, or iTunes File Sharing\n\u2022 Quickly browse your document using the page navigator and see a thumbnail preview of each page\n\u2022 Turn on Coaching Tips for guided in-app help\n\nCreate beautiful documents\n\u2022 Write and edit documents using the onscreen keyboard or a wireless keyboard with Bluetooth\n\u2022 Format your document with gorgeous styles, fonts, and textures\n\u2022 Your most important text formatting options are right in your keyboard, and always just a tap or two away\n\u2022 Easily add images and video to your document using the Media Browser\n\u2022 Use auto-text wrap to flow text around images\n\u2022 Animate data with new interactive column, bar, scatter, and bubble charts\n\u2022 Organize your data easily in tables\n\nAdvanced writing tools\n\u2022 Turn on change tracking to mark up a document as you edit it\n\u2022 Use comments and highlights to share ideas and feedback with others\n\u2022 Create footnotes and endnotes and view word counts with character, paragraph, and page counts\n\u2022 Automatic list making and spellchecking \n\u2022 Create and view impressive 2D, 3D, and interactive bar, line, area, and pie charts\n\u2022 Use Undo to go back through your previous changes\n\niCloud\n\u2022 Turn on iCloud so your documents are automatically available on your Mac, iPad, iPhone, iPod touch, and iCloud.com\n\u2022 Access and edit your documents from a Mac or PC browser at www.icloud.com with Pages for iCloud beta\n\u2022 Pages automatically saves your documents as you make changes\n\nShare your work\n\u2022 Use AirDrop to send your document to anyone nearby\n\u2022 Quickly and easily share a link to your work via Mail, Messages, Twitter, or Facebook \n\u2022 Anyone with a shared document link always has access to the latest version of the document and can edit it with you at iCloud.com using Pages for iCloud beta\n\u2022 Export your document in ePub, Microsoft Word, and PDF format\n\u2022 Use \u201cOpen in Another App\u201d to copy documents to apps such as Dropbox\n\u2022 Print wirelessly with AirPrint, including page range selection, number of copies, and two-sided printing\n\nSome features may require Internet access; additional fees and terms may apply.\nPages does not include support for some Chinese, Japanese, or Korean (CJK) text input features such as vertical text.\nPages for iCloud beta is currently available in English only."<span></span></pre></td></tr><tr><td scope="row"><pre>            },<span></span></pre></td></tr><tr><td scope="row"><pre>            "deviceFamilies": [<span></span></pre></td></tr><tr><td scope="row"><pre>                "iphone",<span></span></pre></td></tr><tr><td scope="row"><pre>                "ipad",<span></span></pre></td></tr><tr><td scope="row"><pre>                "ipod"<span></span></pre></td></tr><tr><td scope="row"><pre>            ],<span></span></pre></td></tr><tr><td scope="row"><pre>            "editorialArtwork": {<span></span></pre></td></tr><tr><td scope="row"><pre>                "originalFlowcaseBrick": {<span></span></pre></td></tr><tr><td scope="row"><pre>                    "bgColor": "ffb700",<span></span></pre></td></tr><tr><td scope="row"><pre>                    "height": 600,<span></span></pre></td></tr><tr><td scope="row"><pre>                    "supportsLayeredImage": false,<span></span></pre></td></tr><tr><td scope="row"><pre>                    "textColor1": "161616",<span></span></pre></td></tr><tr><td scope="row"><pre>                    "textColor2": "161616",<span></span></pre></td></tr><tr><td scope="row"><pre>                    "textColor3": "453612",<span></span></pre></td></tr><tr><td scope="row"><pre>                    "textColor4": "453612",<span></span></pre></td></tr><tr><td scope="row"><pre>                    "url": "http://is4.mzstatic.com/image/ thumb/Features5/v4/22/60/94/226094a4-ed02-a234-7576-6de696ead0ba/source/{w}x{h}{c}.{f}",<span></span></pre></td></tr><tr><td scope="row"><pre>                    "width": 3200<span></span></pre></td></tr><tr><td scope="row"><pre>                }<span></span></pre></td></tr><tr><td scope="row"><pre>            },<span></span></pre></td></tr><tr><td scope="row"><pre>            "editorialBadgeInfo": {<span></span></pre></td></tr><tr><td scope="row"><pre>                "editorialBadgeType": "staffPick",<span></span></pre></td></tr><tr><td scope="row"><pre>                "nameForDisplay": "Essentials"<span></span></pre></td></tr><tr><td scope="row"><pre>            },<span></span></pre></td></tr><tr><td scope="row"><pre>            "genreNames": [<span></span></pre></td></tr><tr><td scope="row"><pre>                "Productivity",<span></span></pre></td></tr><tr><td scope="row"><pre>                "Business"<span></span></pre></td></tr><tr><td scope="row"><pre>            ],<span></span></pre></td></tr><tr><td scope="row"><pre>            "genres": [<span></span></pre></td></tr><tr><td scope="row"><pre>                {<span></span></pre></td></tr><tr><td scope="row"><pre>                    "mediaType": "8",<span></span></pre></td></tr><tr><td scope="row"><pre>                    "name": "Productivity",<span></span></pre></td></tr><tr><td scope="row"><pre>                    "url": "https://itunes.apple.com/us/genre/id6007"<span></span></pre></td></tr><tr><td scope="row"><pre>                },<span></span></pre></td></tr><tr><td scope="row"><pre>                {<span></span></pre></td></tr><tr><td scope="row"><pre>                    "mediaType": "8",<span></span></pre></td></tr><tr><td scope="row"><pre>                    "name": "Business",<span></span></pre></td></tr><tr><td scope="row"><pre>                    "url": "https://itunes.apple.com/us/genre/id6000"<span></span></pre></td></tr><tr><td scope="row"><pre>                }<span></span></pre></td></tr><tr><td scope="row"><pre>            ],<span></span></pre></td></tr><tr><td scope="row"><pre>            "id": "361309726",<span></span></pre></td></tr><tr><td scope="row"><pre>            "kind": "iosSoftware",<span></span></pre></td></tr><tr><td scope="row"><pre>            "latestVersionReleaseDate": "Sep 15, 2015",<span></span></pre></td></tr><tr><td scope="row"><pre>            "name": "Pages",<span></span></pre></td></tr><tr><td scope="row"><pre>            "nameRaw": "Pages",<span></span></pre></td></tr><tr><td scope="row"><pre>            "offers": [<span></span></pre></td></tr><tr><td scope="row"><pre>                {<span></span></pre></td></tr><tr><td scope="row"><pre>                    "actionText": {<span></span></pre></td></tr><tr><td scope="row"><pre>                        "downloaded": "Installed",<span></span></pre></td></tr><tr><td scope="row"><pre>                        "downloading": "Installing",<span></span></pre></td></tr><tr><td scope="row"><pre>                        "long": "Buy App",<span></span></pre></td></tr><tr><td scope="row"><pre>                        "medium": "Buy",<span></span></pre></td></tr><tr><td scope="row"><pre>                        "short": "Buy"<span></span></pre></td></tr><tr><td scope="row"><pre>                    },<span></span></pre></td></tr><tr><td scope="row"><pre>                    "assets": [<span></span></pre></td></tr><tr><td scope="row"><pre>                        {<span></span></pre></td></tr><tr><td scope="row"><pre>                            "flavor": "iosSoftware",<span></span></pre></td></tr><tr><td scope="row"><pre>                            "size": 278782033<span></span></pre></td></tr><tr><td scope="row"><pre>                        }<span></span></pre></td></tr><tr><td scope="row"><pre>                    ],<span></span></pre></td></tr><tr><td scope="row"><pre>                    "buyParams": "productType=C&amp;price=9990&amp;<span></span></pre></td></tr><tr><td scope="row"><pre>                    salableAdamId=361309726&amp;pricingParameters=STDQ&amp;appExtVrsId=813292538",<span></span></pre></td></tr><tr><td scope="row"><pre>                    "price": 9.99,<span></span></pre></td></tr><tr><td scope="row"><pre>                    "priceFormatted": "$9.99",<span></span></pre></td></tr><tr><td scope="row"><pre>                    "type": "buy",<span></span></pre></td></tr><tr><td scope="row"><pre>                    "version": {<span></span></pre></td></tr><tr><td scope="row"><pre>                        "display": "2.5.5",<span></span></pre></td></tr><tr><td scope="row"><pre>                        "externalId": 813292538<span></span></pre></td></tr><tr><td scope="row"><pre>                    }<span></span></pre></td></tr><tr><td scope="row"><pre>                }<span></span></pre></td></tr><tr><td scope="row"><pre>            ],<span></span></pre></td></tr><tr><td scope="row"><pre>            "releaseDate": "2010-04-01",<span></span></pre></td></tr><tr><td scope="row"><pre>            "shortUrl": "https://appsto.re/us/EysIv.i",<span></span></pre></td></tr><tr><td scope="row"><pre>            "url": "https://itunes.apple.com/us/app/pages/id361309726?mt=8",<span></span></pre></td></tr><tr><td scope="row"><pre>            "userRating": {<span></span></pre></td></tr><tr><td scope="row"><pre>                "ratingCount": 24848,<span></span></pre></td></tr><tr><td scope="row"><pre>                "ratingCountCurrentVersion": 236,<span></span></pre></td></tr><tr><td scope="row"><pre>                "value": 3.5,<span></span></pre></td></tr><tr><td scope="row"><pre>                "valueCurrentVersion": 3<span></span></pre></td></tr><tr><td scope="row"><pre>            },<span></span></pre></td></tr><tr><td scope="row"><pre>            "whatsNew": "This update contains stability improvements and bug fixes."<span></span></pre></td></tr><tr><td scope="row"><pre>        }<span></span></pre></td></tr><tr><td scope="row"><pre>    },<span></span></pre></td></tr><tr><td scope="row"><pre>    "version": 2<span></span></pre></td></tr><tr><td scope="row"><pre>}<span></span></pre></td></tr></table></div>
+</section>
+
+<section><a name="//apple_ref/doc/uid/TP40017387-CH8-SW9" title="retireVPPUserSrv"></a><h3 class="jump">retireVPPUserSrv</h3><p>This service disassociates a VPP user from its iTunes account and releases the revocable licenses associated with the VPP user. Currently, ebook licenses are irrevocable. The revoked licenses can then be assigned to other users in the organization. A retired VPP user can be reregistered, in the same organization, by making a <code>registerVPPUserSrv</code> request.</p><p>The request takes the following parameters:</p>
+<div class="tableholder"><table class="graybox" border="0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Parameter Name</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Required or Not</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Example</p></th></tr><tr><td scope="row"><p><code>userId</code></p></td><td rowspan="2"><p>One of these is required. <code>userId</code> takes precedence.</p></td><td><p><code>100001</code>.</p></td></tr><tr><td scope="row"><p><code>clientUserIdStr</code></p></td><td><p><code>"810C9B91-DF83-41DA-80A1-408AD7F081A8"</code>.</p></td></tr>
+<tr><td scope="row"><p><code>sToken</code></p></td>
+<td><p>Required.</p></td>
+<td><p><code>"h40Gte9aQnZFDNM...6ZQ="</code>.</p></td></tr>
+<tr><td scope="row"><p><code>facilitatorMemberId</code></p></td>
+<td><p>Not required.</p></td>
+<td><p>See <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH8-SW502" data-renderer-version="1">Program Facilitators</a></span>.</p></td></tr>
+</table></div><p>If the user passes the <code>userId</code> value for an already-retired user, this request returns an error that indicates that the user has already been retired.</p>
+<p>The response contains some of these fields:</p><div class="tableholder"><table class="graybox" border="0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Field Name</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Example of Value</p></th></tr>
+
+<tr><td scope="row"><p><code>facilitatorMember</code></p></td><td>
+<p><code>    {</code></p>
+<p><code>        "appleId":"user1@someorg.com",</code></p>
+<p><code>        "countryCode":"US",</code></p>
+<p><code>        "email":"user1@someorg.com",</code></p>
+<p><code>        "facilitatorMemberId":200843,</code></p>
+<p><code>        "organizationId":2168850000179778,</code></p>
+<p><code>    },</code></p>
+</td></tr>
+
+<tr><td scope="row"><p><code>status</code></p></td><td><p><code>0</code> for success, <code>-1</code> for error.</p></td></tr><tr><td scope="row"><p><code>errorMessage</code></p></td><td><p><code>"Result not found"</code>.</p></td></tr><tr><td scope="row"><p><code>errorNumber</code></p></td><td><p><code>9604</code>.</p></td></tr></table></div><p>The <code>itsIdHash</code> field is omitted if the account is not yet associated with an iTunes Store account.</p></section>
+
+<section><a name="//apple_ref/doc/uid/TP40017387-CH8-SW301" title="manageVPPLicensesByAdamIdSrv"></a><h3 class="jump">manageVPPLicensesByAdamIdSrv</h3>
+<p>This API supersedes the <code>associateVPPLicenseWithVPPUserSrv</code> and <code>disassociateVPPLicenseWithVPPUserSrv</code> APIs as a more flexible and efficient way of changing license assignments. It offers bulk license association and disassociation in one request, with some optional flags to control back end behavior.</p>
+
+
+
+<div class="tableholder"><table class="graybox" border="0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Parameter Name</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Required or Not</p></th></tr>
+
+<tr>
+<td scope="row"><p><code>adamIdStr</code></p></td>
+<td><p>Required.</p></td>
+</tr>
+<tr>
+<td scope="row"><p><code>pricingParam</code></p></td>
+<td><p>Required.</p></td>
+</tr>
+<tr>
+<td scope="row"><p><code>associateClientUserIdStrs</code></p></td>
+<td rowspan="2"><p>One (and only one) of these is required to associate licenses.</p></td>
+</tr>
+<tr>
+<td scope="row"><p><code>associateSerialNumbers</code></p></td>
+</tr>
+<tr>
+<td scope="row"><p><code>disassociateClientUserIdStrs</code></p></td>
+<td rowspan="3"><p>One (and only one) of these is required to disassociate licenses.</p></td>
+</tr>
+<tr>
+<td scope="row"><p><code>disassociateLicenseIdStrs</code></p></td>
+</tr>
+<tr>
+<td scope="row"><p><code>disassociateSerialNumbers</code></p></td>
+</tr>
+<tr>
+<td scope="row"><p><code>notifyDisassociation</code></p></td>
+<td><p>Not required.; defaults to <code>true</code>.</p></td>
+</tr>
+<tr><td scope="row"><p><code>sToken</code></p></td>
+<td><p>Required.</p></td>
+</tr>
+<tr><td scope="row"><p><code>facilitatorMemberId</code></p></td>
+<td><p>Not required.</p></td>
+</tr>
+</table></div>
+
+<div class="tableholder"><table class="graybox" border="0" cellspacing="0" cellpadding="5">
+<tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Parameter Name</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Example</p></th></tr>
+
+<tr>
+<td scope="row"><p><code>adamIdStr</code></p></td>
+<td><p><code>"408709785"</code></p></td>
+</tr>
+<tr>
+<td scope="row"><p><code>pricingParam</code></p></td>
+<td><p><code>"STDQ"</code></p></td>
+</tr>
+<tr>
+<td scope="row"><p><code>associateClientUserIdStrs</code></p></td>
+<td><p><code>["810C9B91-...-408AD7F081A8", "d735c1cc-...-
+c74571007ef6",...]</code></p></td>
+</tr>
+<tr>
+<td scope="row"><p><code>associateSerialNumbers</code></p></td>
+<td><p><code>["C17DK6D9DDQW", "DLXL6044FPH8",...]</code></p></td>
+</tr>
+<tr>
+<td scope="row"><p><code>disassociateClientUserIdStrs</code></p></td>
+<td><p><code>["810C9B91-...-408AD7F081A8", "d735c1cc-...-
+c74571007ef6",...]</code></p></td>
+</tr>
+<tr>
+<td scope="row"><p><code>disassociateLicenseIdStrs</code></p></td>
+<td><p><code>["2","3","4",...]</code></p></td>
+</tr>
+<tr>
+<td scope="row"><p><code>disassociateSerialNumbers</code></p></td>
+<td><p><code>["C17DK6D9DDQW", "DLXL6044FPH8",...]</code></p></td>
+</tr>
+<tr>
+<td scope="row"><p><code>notifyDisassociation</code></p></td>
+<td><p><code>false</code></p></td>
+</tr>
+<tr><td scope="row"><p><code>sToken</code></p></td>
+<td><p><code>"h40Gte9aQnZFDNM...6ZQ="</code>.</p></td></tr>
+<tr><td scope="row"><p><code>facilitatorMemberId</code></p></td>
+<td><p>See <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH8-SW502" data-renderer-version="1">Program Facilitators</a></span>.</p></td></tr>
+</table></div>
+
+<p>The request operates on a single asset (specified by the <code>{adamIdStr, pricingParam}</code> tuple) for multiple associations and disassociations in a single request. Licenses are disassociated from all users specified by the <code>disassociateClientUserIdStrs</code> array, the devices specified by the <code>disassociateSerialNumbers</code> array, or the licenses specified by the <code>disassociateLicenseIdStrs</code> array (which must only specify licenses assigned to the specified asset). At most one of these <code>disassociate*</code> arrays may be specified per request. Then licenses are associated either with the users specified by the <code>associateClientUserIdStrs</code> array or the devices specified by the <code>associateSerialNumbers</code> array. You must specify either zero or one <code>associate*</code> and zero or one <code>disassociate*</code> array per request. Specifying more than one of either <code>associate*</code> or <code>disassociate*</code> arrays result in undefined behavior.</p>
+<p>The maximum number of entries allowed in the <code>associate*</code> and <code>disassociate*</code> arrays are indicated by the <code>maxBatchAssociateLicenseCount</code> or <code>maxBatchDisassociateLicenseCount</code> fields added to the <code>VPPServiceConfigSrv</code> response. Any request that exceeds these limits is immediately rejected with an error.</p>
+<p>If <code>notifyDisassociation</code> is set to <code>false</code>, notifications regarding the disassociation of the license are not sent to devices.</p>
+<div class="tableholder"><table class="graybox" border="0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Field Name</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Example of Value</p></th></tr>
+
+<tr>
+<td scope="row"><p><code>status</code></p></td>
+<td><p>0 for success, -1 if the request failed completely, -3 if any licenses could not be changed as requested.</p></td>
+</tr>
+<tr>
+<td scope="row"><p><code>adamIdStr</code></p></td>
+<td><p><code>"408709785"</code></p></td>
+</tr>
+<tr>
+<td scope="row"><p><code>pricingParam</code></p></td>
+<td><p><code>"STDQ"</code></p></td>
+</tr>
+<tr>
+<td scope="row"><p><code>productTypeId</code></p></td>
+<td><p><code>7</code> (see <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH8-SW802" data-renderer-version="1">productTypeId Codes</a></span>)</p></td>
+</tr>
+<tr>
+<td scope="row"><p><code>productTypeName</code></p></td>
+<td><p><code>"Software"</code></p></td>
+</tr>
+<tr>
+<td scope="row"><p><code>isIrrevocable</code></p></td>
+<td><p><code>false</code></p></td>
+</tr>
+<tr>
+<td scope="row"><p><code>associations</code></p></td>
+<td><p><code>[{</code></p>
+<p><code>  "clientUserIdStr":"810C9B91-...-408AD7F081A8",</code></p>
+<p><code>  "licenseIdStr":"2"</code></p>
+<p><code>},{</code></p>
+<p><code>  "clientUserIdStr":"d735c1cc-...-c74571007ef6",</code></p>
+<p><code>  "licenseIdStr":"3",</code></p>
+<p><code>  "errorMessage":"License already assigned",</code></p>
+<p><code>  "errorNumber": 9616</code></p>
+<p><code>},{</code></p>
+<p><code>  "serialNumber":"C17DK6D9DDQW",</code></p>
+<p><code>  "licenseIdStr":"4"</code></p>
+<p><code>},{</code></p>
+<p><code>  "serialNumber":"DLXL6044FPH8",</code></p>
+<p><code>  "errorMessage":"License not found",</code></p>
+<p><code>  "errorNumber": 9610</code></p>
+<p><code>}, ...]</code></p>
+</td>
+</tr>
+<tr>
+<td scope="row"><p><code>disassociations</code></p></td>
+<td><p><code>[{</code></p>
+<p><code>  "clientUserIdStr":"810C9B91-...-408AD7F081A8"</code></p>
+<p><code>},{</code></p>
+<p><code>  "clientUserIdStr":"d735c1cc-...-c74571007ef6",</code></p>
+<p><code>  "errorMessage":"Registered user not found",</code></p>
+<p><code>  "errorNumber": 9609</code></p>
+<p><code>},{</code></p>
+<p><code>  "serialNumber":"C17DK6D9DDQW"</code></p>
+<p><code>},{</code></p>
+<p><code>  "serialNumber":"DLXL6044FPH8",</code></p>
+<p><code>  "errorMessage":"License not associated",</code></p>
+<p><code>  "errorNumber": 9619</code></p>
+<p><code>}, ...]</code></p>
+</td>
+</tr>
+</table></div>
+<section><a name="//apple_ref/doc/uid/TP40017387-CH8-SW303" title="License Counts"></a><h4 class="jump">License Counts</h4>
+<p>The following fields are added to the <code>VPPServiceConfigSrv</code> response to indicate the maximum number of entries allowed in the <code>associateClientUserIdStrs</code>, <code>associateSerialNumbers</code>, <code>disassociateClientUserIdStrs</code>, <code>disassociateSerialNumbers</code>, or <code>disassociateLicenseIdStrs</code> arrays:</p>
+<div class="tableholder"><table class="graybox" border="0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Field Name</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Example of Value</p></th></tr>
+
+<tr>
+<td scope="row"><p><code>maxBatchAssociateLicenseCount</code></p></td>
+<td><p><code>20</code></p></td>
+</tr>
+<tr>
+<td scope="row"><p><code>maxBatchDisassociateLicenseCount</code></p></td>
+<td><p><code>20</code></p></td>
+</tr>
+</table></div>
+<p><code>VPPServiceConfigSrv</code> must be checked every 5 minutes to update the current <code>maxBatchAssociateLicenseCount</code> and <code>maxBatchDisassociateLicenseCount</code> values, which may decrease or increase without notice. Requests that exceed the current limits are rejected with the error code <code>9602 'Invalid Argument'</code>, and no work is done. If you receive this error code query <code>VPPServiceConfigSrv</code> to retrieve new <code>maxBatchAssociateLicenseCount</code> and <code>maxBatchDisassociateLicenseCount</code> values, correct the last request that was rejected and resend the request.</p>
+</section>
+</section>
+
+<section><a name="//apple_ref/doc/uid/TP40017387-CH8-SW10" title="associateVPPLicenseWithVPPUserSrv"></a><h3 class="jump">associateVPPLicenseWithVPPUserSrv</h3>
+<div class="notebox"><aside><a name="//apple_ref/doc/uid/TP40017387-CH8-SW26" title="Note"></a><p><strong>Note:</strong>&nbsp;
+This request is <strong>deprecated</strong>. Use <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH8-SW301" data-renderer-version="1">manageVPPLicensesByAdamIdSrv</a></span> instead.</p><p></p></aside></div>
+<p>The request takes the following parameters:</p><div class="tableholder"><table class="graybox" border="0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Parameter Name</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Required or Not</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Example</p></th></tr><tr><td scope="row"><p><code>userId</code></p></td><td rowspan="2"><p>One of these is required. <code>userId</code> takes precedence.</p></td><td><p><code>100001</code>.</p></td></tr><tr><td scope="row"><p><code>clientUserIdStr</code></p></td><td><p><code>"810C9B91-DF83-41DA-80A1-408AD7F081A8"</code>.</p></td></tr><tr><td scope="row"><p><code>adamId</code></p></td><td rowspan="2"><p>One of these is required. <code>licenseId</code> takes precedence.</p></td><td><p><code>361285480</code>.</p></td></tr><tr><td scope="row"><p><code>licenseId</code></p></td><td><p><code>100002</code>.</p></td></tr><tr><td scope="row"><p><code>pricingParam</code></p></td><td><p>No. Used in combination with an <code>adamId</code> value. <code>"STDQ"</code> is assumed if not specified.</p></td><td><p><code>"PLUS"</code>.</p></td></tr>
+
+<tr><td scope="row"><p><code>sToken</code></p></td><td><p>Required.</p></td><td><p><code>"h40Gte9aQnZFDNM...6ZQ="</code>.</p></td></tr>
+
+</table></div><p>For apps, pricingParam can only be <code>"STDQ"</code>. But if other types of assets are supported by VPP license, the following are the list of <code>pricingParam</code> values that may be used to narrow down the asset when used in combination with an <code>adamId</code> value:</p><div class="tableholder"><table class="graybox" border="0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>pricingParam</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Description</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Asset</p></th></tr><tr><td scope="row"><p><code>STDQ</code></p></td><td><p>Standard Quality.</p></td><td><p>Apps and Books.</p></td></tr><tr><td scope="row"><p><code>PLUS</code></p></td><td><p>High Quality.</p></td><td><p>Books.</p></td></tr></table></div><p>The response contains some of these fields:</p><div class="tableholder"><table class="graybox" border="0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Field Name</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Example of Value</p></th></tr><tr><td scope="row"><p><code>status</code></p></td><td><p><code>0</code> for success, <code>-1</code> for error.</p></td></tr><tr><td scope="row"><p><code>license</code></p></td><td><p><code>{</code></p><p><code>    "licenseId":2,</code></p><p><code>    "adamId":408709785,</code></p><p><code>    "productTypeId":7,</code></p><p><code>    "pricingParam":"STDQ",</code></p><p><code>    "productTypeName":"Software",</code></p><p><code>    "isIrrevocable": false,</code></p><p><code>    "userId":2,</code></p><p><code>    "clientUserIdStr":"810C9B91-DF83-41DA-80A1-408AD7F081A8",</code></p><p><code>    "itsIdHash":"C2Wwd8LcIaE2v6f2/mvu82Gs/Lc="</code></p><p><code>}</code></p></td></tr><tr><td scope="row"><p><code>user</code></p></td><td><p><code>{</code></p><p><code>      "userId":2,</code></p><p><code>      "email":"user2@test.com",</code></p><p><code>      "status":"Associated",</code></p><p><code>      "clientUserIdStr":"810C9B91-DF83-41DA-80A1-408AD7F081A8",</code></p><p><code>      "itsIdHash":"C2Wwd8LcIaE2v6f2/mvu82Gs/Lc="</code></p><p><code>}</code></p></td></tr><tr><td scope="row"><p><code>errorMessage</code></p></td><td><p><code>"License not found"</code>.</p></td></tr><tr><td scope="row"><p><code>errorNumber</code></p></td><td><p><code>9602</code>.</p></td></tr></table></div><p>The <code>itsIdHash</code> field is omitted if the account is not yet associated with an iTunes Store account.</p></section>
+<section><a name="//apple_ref/doc/uid/TP40017387-CH8-SW11" title="disassociateVPPLicenseFromVPPUserSrv"></a><h3 class="jump">disassociateVPPLicenseFromVPPUserSrv</h3>
+<div class="notebox"><aside><a name="//apple_ref/doc/uid/TP40017387-CH8-SW35" title="Note"></a><p><strong>Note:</strong>&nbsp;
+This request is <strong>deprecated</strong>. Use <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH8-SW301" data-renderer-version="1">manageVPPLicensesByAdamIdSrv</a></span> instead.</p><p></p></aside></div>
+<p>The request takes the following parameters:</p><div class="tableholder"><table class="graybox" border="0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Parameter Name</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Required or Not</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Example</p></th></tr>
+<tr><td scope="row"><p><code>userId</code></p></td><td><p>Required.</p></td><td><p><code>100001</code>.</p></td></tr><tr><td scope="row"><p><code>licenseId</code></p></td><td><p>Required.</p></td><td><p><code>100002</code>.</p></td></tr>
+
+<tr><td scope="row"><p><code>sToken</code></p></td><td><p>Required.</p></td><td><p><code>"h40Gte9aQnZFDNM...6ZQ="</code>.</p></td></tr>
+
+</table></div><p>The response contains some or all of these fields:</p><div class="tableholder"><table class="graybox" border="0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Field Name</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Example of Value</p></th></tr><tr><td scope="row"><p><code>status</code></p></td><td><p><code>0</code> for success, <code>-1</code> for error.</p></td></tr><tr><td scope="row"><p><code>license</code></p></td><td><p><code>{</code></p><p><code>    "licenseId":4,</code></p><p><code>    "adamId":408709785,</code></p><p><code>    "productTypeId":7,</code></p><p><code>    "pricingParam":"STDQ",</code></p><p><code>    "productTypeName":"Software",</code></p><p><code>    "isIrrevocable": false</code></p><p><code>}</code></p></td></tr><tr><td scope="row"><p><code>user</code></p></td><td><p><code>{</code></p><p><code>      "userId":2,</code></p><p><code>      "email":"user2@test.com",</code></p><p><code>      "status":"Associated",</code></p><p><code>      "clientUserIdStr":"810C9B91-DF83-41DA-80A1-408AD7F081A8",</code></p><p><code>      "itsIdHash":"C2Wwd8LcIaE2v6f2/mvu82Gs/Lc="</code></p><p><code>}</code></p></td></tr><tr><td scope="row"><p><code>errorMessage</code></p></td><td><p><code>"License not found"</code>.</p></td></tr><tr><td scope="row"><p><code>errorNumber</code></p></td><td><p><code>9602</code>.</p></td></tr></table></div><p>The <code>itsIdHash</code> field is omitted if the account is not yet associated with an iTunes Store account.</p><p>If the license is already disassociated, this request returns error number <code>9619</code> (license not associated).</p></section>
+
+<section><a name="//apple_ref/doc/uid/TP40017387-CH8-SW12" title="editVPPUserSrv"></a><h3 class="jump">editVPPUserSrv</h3><p>The request takes the following parameters:</p><div class="tableholder"><table class="graybox" border="0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Parameter Name</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Required or Not</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Example</p></th></tr><tr><td scope="row"><p><code>userId</code></p></td><td rowspan="2"><p>One of these is required. <code>userId</code> takes precedence.</p></td><td><p><code>20001</code>.</p></td></tr><tr><td scope="row"><p><code>clientUserIdStr</code></p></td><td><p><code>"810C9B91-DF83-41DA-80A1-408AD7F081A8"</code>.</p></td></tr><tr><td scope="row"><p><code>email</code></p></td><td><p>Not required.</p></td><td><p><code>"user1@someorg.com"</code>.</p></td></tr>
+
+<tr><td scope="row"><p><code>sToken</code></p></td>
+<td><p>Required.</p></td>
+<td><p><code>"h40Gte9aQnZFDNM...6ZQ="</code>.</p></td></tr>
+<tr><td scope="row"><p><code>facilitatorMemberId</code></p></td>
+<td><p>Not required.</p></td>
+<td><p>See <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH8-SW502" data-renderer-version="1">Program Facilitators</a></span>.</p></td></tr>
+
+<tr><td scope="row"><p><code>managedAppleIDStr</code></p></td><td><p>Not required.</p></td><td><p><code>"user1@someorg.com"</code>.</p></td></tr>
+</table></div>
+
+
+<p>The <code>email</code> field is updated only if the value is provided in the request.</p>
+
+<p>The <code>managedAppleIDStr</code> parameter is discussed in <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH8-SW501" data-renderer-version="1">Managed Apple IDs</a></span>.</p>
+
+<p>The response contains some of these fields:</p><div class="tableholder"><table class="graybox" border="0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Field Name</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Example of Value</p></th></tr><tr><td scope="row"><p><code>status</code></p></td><td><p><code>0</code> for success, <code>-1</code> for error.</p></td></tr><tr><td scope="row"><p><code>user</code></p></td><td><p><code>{</code></p><p><code>    "userId":100014,</code></p><p><code>    "email":"test_reg_user14_edited@test.com",</code></p><p><code>    "status":"Registered",</code></p><p><code>    "inviteUrl":</code></p><p><code>"https:\/\/buy.itunes.apple.com\/WebObjects\/MZFinance.woa\/wa\/</code></p><p><code>associateVPPUserWithITSAccount?inviteCode=</code></p><p><code>9e8d1ecc57924d9da13b42b4f772a066&amp;mt=8",</code></p><p><code>    "inviteCode":"9e8d1ecc57924d9da13b42b4f772a066",</code></p><p><code>    "clientUserIdStr":"810C9B91-DF83-41DA-80A1-408AD7F081A8"</code></p><p><code>}</code></p></td></tr>
+
+<tr><td scope="row"><p><code>facilitatorMember</code></p></td><td>
+<p><code>    {</code></p>
+<p><code>        "appleId":"user1@someorg.com",</code></p>
+<p><code>        "countryCode":"US",</code></p>
+<p><code>        "email":"user1@someorg.com",</code></p>
+<p><code>        "facilitatorMemberId":200843,</code></p>
+<p><code>        "organizationId":2168850000179778,</code></p>
+<p><code>    },</code></p>
+</td></tr>
+
+<tr><td scope="row"><p><code>errorMessage</code></p></td><td><p><code>"Missing \"userId\" input parameter"</code>.</p></td></tr><tr><td scope="row"><p><code>errorNumber</code></p></td><td><p><code>9600</code>.</p></td></tr></table></div></section><section><a name="//apple_ref/doc/uid/TP40017387-CH8-SW14" title="VPPClientConfigSrv"></a><h3 class="jump">VPPClientConfigSrv</h3><p>This service allows the client to store some information on the server on a per-organization basis. The information that currently can be stored is a <code>clientContext</code> string. The <code>clientContext</code> string is any JSON string less than 256 bytes in length. For format information, see <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH8-SW21" data-renderer-version="1">Service Response</a></span>.</p>
+
+<p>The request takes the following parameters:</p><div class="tableholder"><table class="graybox" border="0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Parameter Name</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Required or Not</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Example</p></th></tr><tr><td scope="row"><p><code>clientContext</code></p></td><td><p>Not required.</p></td><td><p>(any string less than 256 bytes)</p></td></tr>
+<tr><td scope="row"><p><code>sToken</code></p></td><td><p>Required.</p></td><td><p><code>"h40Gte9aQnZFDNM...6ZQ="</code>.</p></td></tr>
+<tr><td scope="row"><p><code>verbose</code></p></td><td><p>Not required.</p></td><td><p><code>"true"</code>.</p></td></tr>
+</table></div>
+<p>If a value is provided for <code>clientContext</code>, the value is stored by the server and the response contains the current value of this field. To clear the field value, provide an empty string as the input value; that is, <code>""</code>. If <code>"verbose":true"</code> is included in the request, the response contains the <code>appleId</code> field.</p>
+
+
+
+<p>The response to <code>VPPClientConfigSrv</code> contains some of these fields:</p>
+<div class="tableholder"><table class="graybox" border="0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Field Name</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Example of Value</p></th></tr>
+
+<tr><td scope="row"><p><code>status</code></p></td><td><p><code>0</code> for success, <code>-1</code> for error.</p></td></tr>
+<tr>
+<td scope="row"><p><code>clientContext</code></p></td>
+<td><p><code>"abc"</code></p></td>
+</tr>
+<tr><td scope="row"><p><code>errorMessage</code></p></td><td><p><code>"Login required"</code>.</p></td></tr><tr><td scope="row"><p><code>errorNumber</code></p></td><td><p><code>9601</code>.</p></td></tr>
+<tr><td scope="row"><p><code>countryCode</code></p></td><td><p><code>"US"</code>.</p></td></tr>
+<tr><td scope="row"><p><code>appleId</code></p></td><td><p><code>"user1@someorg.com"</code>.</p></td></tr>
+<tr><td scope="row"><p><code>email</code></p></td><td><p><code>"user1@someorg.com"</code>.</p></td></tr>
+<tr><td scope="row"><p><code>facilitatorMemberId</code></p></td><td><p><code>"200841"</code>.</p></td></tr><tr><td scope="row"><p><code>location</code></p></td><td><p><code> {</code></p><p><code>"locationId": 22222222222,</code></p><p><code>"locationName": "Lincoln High School" </code></p><p><code>}</code></p></td></tr>
+<tr><td scope="row"><p><code>vppGroupMembers</code></p></td><td><p>See <span class="content_text"><a href="#//apple_ref/doc/uid/TP40017387-CH8-SW502" data-renderer-version="1">Program Facilitators</a></span>.</p></td></tr>
+</table></div>
+<p>The <code>countryCode</code> value in the response is the ISO 3166-1 two-letter code designating the country where the VPP account is located. For example, "US" for United States, "CA" for Canada, "JP" for Japan, and so on.</p><p>The <code>location</code> field is only returned when using a location token with an account that has migrated to VPP in Apple School Manager.</p></section>
+<section><a name="//apple_ref/doc/uid/TP40017387-CH8-SW15" title="VPPServiceConfigSrv"></a><h3 class="jump">VPPServiceConfigSrv</h3><p>This service returns the full list of web service URLs, the registration URL used in the user invitation email, and a list of error numbers that can be returned from the web services. No parameters or authentication is necessary.</p><p>Clients should make a <code>VPPServiceConfigSrv</code> request to retrieve the list of service URLs at the appropriate moment (client restart) to ensure they are up-to-date, because the URLs may change under certain circumstances. The <code>VPPServiceConfigSrv</code> service exists to provide a level of indirection so that other service URLs can be changed in a way that is transparent to the clients.</p>
+<p>The request takes the following parameters:</p>
+<div class="tableholder"><table class="graybox" border="0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Parameter Name</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Required or Not</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Example</p></th></tr>
+<tr><td scope="row"><p><code>sToken</code></p></td>
+<td><p>Required.</p></td>
+<td><p><code>"h40Gte9aQnZFDNM...6ZQ="</code>.</p></td></tr>
+
+</table></div>
+<p>The response contains the URLs to be used to register VPP users and other web services.</p><div class="tableholder"><table class="graybox" border="0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Field Name</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Example of Value</p></th></tr>
+
+
+
+<tr><td scope="row"><p><code>invitationEmailUrl</code></p></td><td><p><code>"https://buy.itunes.apple.com/WebObjects/MZFinance.woa/wa/</code></p><p><code>associateVPPUserWithITSAccount?</code></p><p><code>inviteCode=%inviteCode%&amp;mt=8"</code></p><p>Your MDM server should replace <code>%inviteCode%</code> with the actual invitation code.</p></td></tr><tr><td scope="row"><p><code>registerUserSrvUrl</code></p></td><td><p><code>"https://vpp.itunes.apple.com/WebObjects/MZFinance.woa/wa/</code></p><p><code>registerVPPUserSrv"</code>.</p></td></tr><tr><td scope="row"><p><code>editUserSrvUrl</code></p></td><td><p><code>"https://vpp.itunes.apple.com/WebObjects/MZFinance.woa/wa/</code></p><p><code>editVPPUserSrv"</code>.</p></td></tr><tr><td scope="row"><p><code>getUserSrvUrl</code></p></td><td><p><code>"https://vpp.itunes.apple.com/WebObjects/MZFinance.woa/wa/</code></p><p><code>getVPPUserSrv"</code>.</p></td></tr><tr><td scope="row"><p><code>retireUserSrvUrl</code></p></td><td><p><code>"https://vpp.itunes.apple.com/WebObjects/MZFinance.woa/wa/</code></p><p><code>retireVPPUserSrv"</code>.</p></td></tr><tr><td scope="row"><p><code>getUsersSrvUrl</code></p></td><td><p><code>"https://vpp.itunes.apple.com/WebObjects/MZFinance.woa/wa/</code></p><p><code>getVPPUsersSrv"</code>.</p></td></tr><tr><td scope="row"><p><code>getLicensesSrvUrl</code></p></td><td><p><code>"https://vpp.itunes.apple.com/WebObjects/MZFinance.woa/wa/</code></p><p><code>getVPPLicensesSrv"</code>.</p></td></tr><tr><td scope="row"><p><code>associateLicenseSrvUrl</code></p></td><td><p><code>"https://vpp.itunes.apple.com/WebObjects/MZFinance.woa/wa/</code></p><p><code>associateVPPLicenseWithVPPUserSrv"</code>.</p></td></tr><tr><td scope="row"><p><code>disassociateLicenseSrvUrl</code></p></td><td><p><code>"https://vpp.itunes.apple.com/WebObjects/MZFinance.woa/wa/</code></p><p><code>disassociateVPPLicenseFromVPPUserSrv"</code>.</p></td></tr><tr><td scope="row"><p><code>errorCodes</code></p></td><td><p><code>
+[
+      {
+         "errorMessage":"Missing required argument",
+         "errorCode":9600
+      },
+      {
+         "errorMessage":"Login required",
+         "errorCode":9601
+      },
+      {
+         "errorMessage":"Invalid argument",
+         "errorCode":9602
+      },
+      {
+         "errorMessage":"Internal error",
+         "errorCode":9603
+      },
+      {
+         "errorMessage":"Result not found",
+         "errorCode":9604
+      },
+      {
+         "errorMessage":"Account storefront incorrect",
+         "errorCode":9605
+      },
+      {
+         "errorMessage":"Error constructing token",
+         "errorCode":9606
+      },
+      {
+         "errorMessage":"License irrevocable",
+         "errorCode":9607
+      },
+      {
+         "errorMessage":"Empty SharedData response",
+         "errorCode":9608
+      },
+      {
+         "errorMessage":"User not found",
+         "errorCode":9609
+      },
+      {
+         "errorMessage":"Lincese not found",
+         "errorCode":9610
+      },
+      {
+         "errorMessage":"Admin user not found",
+         "errorCode":9611
+      },
+      {
+         "errorMessage":"Fail creating SAPFeeder job for claim",
+         "errorCode":9612
+      },
+      {
+         "errorMessage":"Fail creating SAPFeeder job for unclaim",
+         "errorCode":9613
+      },
+      {
+         "errorMessage":"Invalid date formate",
+         "errorCode":9614
+      },
+      {
+         "errorMessage":"orgCountry not found",
+         "errorCode":9615
+      },
+      {
+         "errorMessage":"License already assigned to the iTunes account",
+         "errorCode":9616
+      },
+      {
+         "errorMessage":"User already retired",
+         "errorCode":9618
+      },
+      {
+         "errorMessage":"License not associated",
+         "errorCode":9619
+      },
+      {
+         "errorMessage":"User already deleted",
+         "errorCode":9620
+      },
+      {
+         "errorMessage":"The token has expired. You need to generate a new token online using your organization's account at https:\/\/vpp.itunes.apple.com.",
+         "errorCode":9621
+      },
+      {
+         "errorMessage":"The authentication token is invalid.",
+         "errorCode":9622
+      },
+      {
+         "errorMessage":"The APN token is invalid.",
+         "errorCode":9623
+      }
+      {
+         "errorMessage":"License was refunded and is no longer valid.",
+         "errorCode":9624
+      }
+      {
+         "errorMessage":"The sToken has been revoked.",
+         "errorCode":9625
+      }
+      {
+         "errorMessage":"License already assigned to a different user.",
+         "errorCode":9626
+      }
+   ]</code></p></td></tr>
+
+
+
+<tr><td scope="row"><p><code>clientConfigSrvUrl</code></p></td><td><p><code>"https://vpp.itunes.apple.com/WebObjects/MZFinance.woa/wa/</code></p><p><code>VPPClientConfigSrv"</code>.</p></td></tr>
+<tr>
+<td scope="row"><p><code>maxBatchAssociateLicenseCount</code></p></td>
+<td><p><code>20</code></p></td>
+</tr>
+<tr>
+<td scope="row"><p><code>maxBatchDisassociateLicenseCount</code></p></td>
+<td><p><code>20</code></p></td>
+</tr>
+</table></div></section></section>
+
+<section><a name="//apple_ref/doc/uid/TP40017387-CH8-SW24" title="Examples"></a><h2 class="jump">Examples</h2><p>The following are examples of requests and responses of each service. The requests are made with the curl command from the command line. The response JSON are all formatted with beautifier to facilitate viewing. They were one string without line breaks when received from the web services.</p><section><a name="//apple_ref/doc/uid/TP40017387-CH8-SW25" title="Request to VPPServiceConfigSrv"></a><h3 class="jump">Request to VPPServiceConfigSrv</h3><p>The curl command:</p>
+<div class="codesample clear"><table><tr><td scope="row"><pre>curl https://vpp.itunes.apple.com/WebObjects/MZFinance.woa/wa/VPPServiceConfigSrv<span></span></pre></td></tr></table></div>
+<p> The response:</p>
+
+<div class="codesample clear"><table><tr><td scope="row"><pre>{<span></span></pre></td></tr><tr><td scope="row"><pre>    "associateLicenseSrvUrl":"https://vpp.itunes.apple.com/ WebObjects/MZFinance.woa/wa/associateVPPLicenseSrv",<span></span></pre></td></tr><tr><td scope="row"><pre>    "clientConfigSrvUrl":"https://vpp.itunes.apple.com/ WebObjects/MZFinance.woa/wa/VPPClientConfigSrv",<span></span></pre></td></tr><tr><td scope="row"><pre>    "contentMetadataLookupUrl":"https://uclient-api.itunes.apple.com/ WebObjects/MZStorePlatform.woa/wa/lookup",<span></span></pre></td></tr><tr><td scope="row"><pre>    "disassociateLicenseSrvUrl":"https://vpp.itunes.apple.com/ WebObjects/MZFinance.woa/wa/disassociateVPPLicenseSrv",<span></span></pre></td></tr><tr><td scope="row"><pre>    "editUserSrvUrl":"https://vpp.itunes.apple.com/ WebObjects/MZFinance.woa/wa/editVPPUserSrv",<span></span></pre></td></tr><tr><td scope="row"><pre>    "errorCodes":[<span></span></pre></td></tr><tr><td scope="row"><pre>        {<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorMessage":"Missing required argument",<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorNumber":9600<span></span></pre></td></tr><tr><td scope="row"><pre>        },<span></span></pre></td></tr><tr><td scope="row"><pre>        {<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorMessage":"Login required",<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorNumber":9601<span></span></pre></td></tr><tr><td scope="row"><pre>        },<span></span></pre></td></tr><tr><td scope="row"><pre>        {<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorMessage":"Invalid argument",<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorNumber":9602<span></span></pre></td></tr><tr><td scope="row"><pre>        },<span></span></pre></td></tr><tr><td scope="row"><pre>        {<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorMessage":"Internal error",<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorNumber":9603<span></span></pre></td></tr><tr><td scope="row"><pre>        },<span></span></pre></td></tr><tr><td scope="row"><pre>        {<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorMessage":"Result not found",<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorNumber":9604<span></span></pre></td></tr><tr><td scope="row"><pre>        },<span></span></pre></td></tr><tr><td scope="row"><pre>        {<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorMessage":"Account storefront incorrect",<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorNumber":9605<span></span></pre></td></tr><tr><td scope="row"><pre>        },<span></span></pre></td></tr><tr><td scope="row"><pre>        {<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorMessage":"Error constructing token",<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorNumber":9606<span></span></pre></td></tr><tr><td scope="row"><pre>        },<span></span></pre></td></tr><tr><td scope="row"><pre>        {<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorMessage":"License is irrevocable",<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorNumber":9607<span></span></pre></td></tr><tr><td scope="row"><pre>        },<span></span></pre></td></tr><tr><td scope="row"><pre>        {<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorMessage":"Empty response from SharedData service",<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorNumber":9608<span></span></pre></td></tr><tr><td scope="row"><pre>        },<span></span></pre></td></tr><tr><td scope="row"><pre>        {<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorMessage":"Registered user not found",<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorNumber":9609<span></span></pre></td></tr><tr><td scope="row"><pre>        },<span></span></pre></td></tr><tr><td scope="row"><pre>        {<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorMessage":"License not found",<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorNumber":9610<span></span></pre></td></tr><tr><td scope="row"><pre>        },<span></span></pre></td></tr><tr><td scope="row"><pre>        {<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorMessage":"Admin user not found",<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorNumber":9611<span></span></pre></td></tr><tr><td scope="row"><pre>        },<span></span></pre></td></tr><tr><td scope="row"><pre>        {<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorMessage":"Failed to create claim job",<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorNumber":9612<span></span></pre></td></tr><tr><td scope="row"><pre>        },<span></span></pre></td></tr><tr><td scope="row"><pre>        {<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorMessage":"Failed to create unclaim job",<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorNumber":9613<span></span></pre></td></tr><tr><td scope="row"><pre>        },<span></span></pre></td></tr><tr><td scope="row"><pre>        {<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorMessage":"Invalid date format",<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorNumber":9614<span></span></pre></td></tr><tr><td scope="row"><pre>        },<span></span></pre></td></tr><tr><td scope="row"><pre>        {<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorMessage":"OrgCountry not found",<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorNumber":9615<span></span></pre></td></tr><tr><td scope="row"><pre>        },<span></span></pre></td></tr><tr><td scope="row"><pre>        {<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorMessage":"License already assigned",<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorNumber":9616<span></span></pre></td></tr><tr><td scope="row"><pre>        },<span></span></pre></td></tr><tr><td scope="row"><pre>        {<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorMessage":"The user has already been retired.",<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorNumber":9618<span></span></pre></td></tr><tr><td scope="row"><pre>        },<span></span></pre></td></tr><tr><td scope="row"><pre>        {<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorMessage":"License not associated",<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorNumber":9619<span></span></pre></td></tr><tr><td scope="row"><pre>        },<span></span></pre></td></tr><tr><td scope="row"><pre>        {<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorMessage":"The user has already been deleted.",<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorNumber":9620<span></span></pre></td></tr><tr><td scope="row"><pre>        },<span></span></pre></td></tr><tr><td scope="row"><pre>        {<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorMessage":"The token has expired. You need to generate a new token online using your organization's account at https://vpp.itunes.apple.com.",<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorNumber":9621<span></span></pre></td></tr><tr><td scope="row"><pre>        },<span></span></pre></td></tr><tr><td scope="row"><pre>        {<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorMessage":"Invalid authentication token",<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorNumber":9622<span></span></pre></td></tr><tr><td scope="row"><pre>        },<span></span></pre></td></tr><tr><td scope="row"><pre>        {<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorMessage":"Invalid APN token",<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorNumber":9623<span></span></pre></td></tr><tr><td scope="row"><pre>        },<span></span></pre></td></tr><tr><td scope="row"><pre>        {<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorMessage":"License was refunded and is no longer valid.",<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorNumber":9624<span></span></pre></td></tr><tr><td scope="row"><pre>        },<span></span></pre></td></tr><tr><td scope="row"><pre>        {<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorMessage":"The sToken has been revoked",<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorNumber":9625<span></span></pre></td></tr><tr><td scope="row"><pre>        },<span></span></pre></td></tr><tr><td scope="row"><pre>        {<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorMessage":"License already assigned to other user",<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorNumber":9626<span></span></pre></td></tr><tr><td scope="row"><pre>        },<span></span></pre></td></tr><tr><td scope="row"><pre>        {<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorMessage":"License disassociation fail due to frequent reassociation",<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorNumber":9627<span></span></pre></td></tr><tr><td scope="row"><pre>        },<span></span></pre></td></tr><tr><td scope="row"><pre>        {<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorMessage":"License not eligible for device assignment.",<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorNumber":9628<span></span></pre></td></tr><tr><td scope="row"><pre>        },<span></span></pre></td></tr><tr><td scope="row"><pre>        {<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorMessage":"The sToken is inapplicable to batchToken",<span></span></pre></td></tr><tr><td scope="row"><pre>            "errorNumber":9629<span></span></pre></td></tr><tr><td scope="row"><pre>        }<span></span></pre></td></tr><tr><td scope="row"><pre>    ],<span></span></pre></td></tr><tr><td scope="row"><pre>    "getLicensesSrvUrl":"https://vpp.itunes.apple.com/ WebObjects/MZFinance.woa/wa/getVPPLicensesSrv",<span></span></pre></td></tr><tr><td scope="row"><pre>    "getUserSrvUrl":"https://vpp.itunes.apple.com/ WebObjects/MZFinance.woa/wa/getVPPUserSrv",<span></span></pre></td></tr><tr><td scope="row"><pre>    "getUsersSrvUrl":"https://vpp.itunes.apple.com/ WebObjects/MZFinance.woa/wa/getVPPUsersSrv",<span></span></pre></td></tr><tr><td scope="row"><pre>    "getVPPAssetsSrvUrl":"https://vpp.itunes.apple.com/ WebObjects/MZFinance.woa/wa/getVPPAssetsSrv",<span></span></pre></td></tr><tr><td scope="row"><pre>    "invitationEmailUrl":"https://buy.itunes.apple.com/ WebObjects/MZFinance.woa/wa/associateVPPUserWithITSAccount?cc=us&amp;inviteCode=%25inviteCode%25&amp;mt=8",<span></span></pre></td></tr><tr><td scope="row"><pre>    "manageVPPLicensesByAdamIdSrvUrl":"https://vpp.itunes.apple.com/ WebObjects/MZFinance.woa/wa/manageVPPLicensesByAdamIdSrv",<span></span></pre></td></tr><tr><td scope="row"><pre>    "maxBatchAssociateLicenseCount":100,<span></span></pre></td></tr><tr><td scope="row"><pre>    "maxBatchDisassociateLicenseCount":100,<span></span></pre></td></tr><tr><td scope="row"><pre>    "registerUserSrvUrl":"https://vpp.itunes.apple.com/ WebObjects/MZFinance.woa/wa/registerVPPUserSrv",<span></span></pre></td></tr><tr><td scope="row"><pre>    "retireUserSrvUrl":"https://vpp.itunes.apple.com/ WebObjects/MZFinance.woa/wa/retireVPPUserSrv",<span></span></pre></td></tr><tr><td scope="row"><pre>    "status":0,<span></span></pre></td></tr><tr><td scope="row"><pre>    "vppWebsiteUrl":"https://vpp.itunes.apple.com/"<span></span></pre></td></tr><tr><td scope="row"><pre>}<span></span></pre></td></tr></table></div>
+</section>
+
+<section><a name="//apple_ref/doc/uid/TP40017387-CH8-SW27" title="Request to getVPPLicensesSrv"></a><h3 class="jump">Request to getVPPLicensesSrv</h3><p>Content of the get_licenses.json file used in the curl command next:</p><div class="codesample clear"><table><tr><td scope="row"><pre>{"sToken":"h40Gte9aQnZFDNM39IUkRPCsQDxBxbZB4Wy34pxefOuQkeeb3h2<span></span></pre></td></tr><tr><td scope="row"><pre>a5Rlopo4KDn3MrFKf4CM3OY+WGAoZ1cD6iZ6yzsMk1+5PVBNc66YS6ZQ="}<span></span></pre></td></tr></table></div><p>The curl command:</p><div class="codesample clear"><table><tr><td scope="row"><pre>curl https://vpp.itunes.apple.com/ WebObjects/MZFinance.woa/wa/getVPPLicensesSrv -d @get_licenses.json<span></span></pre></td></tr></table></div><p>The response:</p>
+
+<div class="codesample clear"><table><tr><td scope="row"><pre>[<span></span></pre></td></tr><tr><td scope="row"><pre>    {<span></span></pre></td></tr><tr><td scope="row"><pre>        "adamId":408709785,<span></span></pre></td></tr><tr><td scope="row"><pre>        "adamIdStr":"408709785",<span></span></pre></td></tr><tr><td scope="row"><pre>        "clientUserIdStr":"9a17b450-9820-471e-b232-13a479ddede0",<span></span></pre></td></tr><tr><td scope="row"><pre>        "isIrrevocable":false,<span></span></pre></td></tr><tr><td scope="row"><pre>        "itsIdHash":"LsrJ6NhzbsOzQXShrpUTWGnD/X8=",<span></span></pre></td></tr><tr><td scope="row"><pre>        "licenseId":102547,<span></span></pre></td></tr><tr><td scope="row"><pre>        "licenseIdStr":"102547",<span></span></pre></td></tr><tr><td scope="row"><pre>        "pricingParam":"STDQ",<span></span></pre></td></tr><tr><td scope="row"><pre>        "productTypeId":8,<span></span></pre></td></tr><tr><td scope="row"><pre>        "productTypeName":"Application",<span></span></pre></td></tr><tr><td scope="row"><pre>        "status":"Associated",<span></span></pre></td></tr><tr><td scope="row"><pre>        "userId":10715446,<span></span></pre></td></tr><tr><td scope="row"><pre>        "userIdStr":"10715446"<span></span></pre></td></tr><tr><td scope="row"><pre>    },<span></span></pre></td></tr><tr><td scope="row"><pre>    {<span></span></pre></td></tr><tr><td scope="row"><pre>        "adamId":435160039,<span></span></pre></td></tr><tr><td scope="row"><pre>        "adamIdStr":"435160039",<span></span></pre></td></tr><tr><td scope="row"><pre>        "clientUserIdStr":"9a17b450-9820-471e-b232-13a479ddede0",<span></span></pre></td></tr><tr><td scope="row"><pre>        "isIrrevocable":true,<span></span></pre></td></tr><tr><td scope="row"><pre>        "itsIdHash":"LsrJ6NhzbsOzQXShrpUTWGnD/X8=",<span></span></pre></td></tr><tr><td scope="row"><pre>        "licenseId":795047681,<span></span></pre></td></tr><tr><td scope="row"><pre>        "licenseIdStr":"795047681",<span></span></pre></td></tr><tr><td scope="row"><pre>        "pricingParam":"PLUS",<span></span></pre></td></tr><tr><td scope="row"><pre>        "productTypeId":10,<span></span></pre></td></tr><tr><td scope="row"><pre>        "productTypeName":"Publication",<span></span></pre></td></tr><tr><td scope="row"><pre>        "status":"Associated",<span></span></pre></td></tr><tr><td scope="row"><pre>        "userId":6561022,<span></span></pre></td></tr><tr><td scope="row"><pre>        "userIdStr":"6561022"<span></span></pre></td></tr><tr><td scope="row"><pre>    },<span></span></pre></td></tr><tr><td scope="row"><pre>    {<span></span></pre></td></tr><tr><td scope="row"><pre>        "adamId":645859810,<span></span></pre></td></tr><tr><td scope="row"><pre>        "adamIdStr":"645859810",<span></span></pre></td></tr><tr><td scope="row"><pre>        "isIrrevocable":false,<span></span></pre></td></tr><tr><td scope="row"><pre>        "licenseId":967494668,<span></span></pre></td></tr><tr><td scope="row"><pre>        "licenseIdStr":"967494668",<span></span></pre></td></tr><tr><td scope="row"><pre>        "pricingParam":"STDQ",<span></span></pre></td></tr><tr><td scope="row"><pre>        "productTypeId":8,<span></span></pre></td></tr><tr><td scope="row"><pre>        "productTypeName":"Application",<span></span></pre></td></tr><tr><td scope="row"><pre>        "serialNumber":"C39N3035G68P",<span></span></pre></td></tr><tr><td scope="row"><pre>        "status":"Associated"<span></span></pre></td></tr><tr><td scope="row"><pre>    }<span></span></pre></td></tr><tr><td scope="row"><pre>]<span></span></pre></td></tr></table></div>
+
+</section>
+<section><a name="//apple_ref/doc/uid/TP40017387-CH8-SW28" title="Request to getVPPUsersSrv"></a><h3 class="jump">Request to getVPPUsersSrv</h3><p>Content of the get_users.json file used in the curl command next:</p><div class="codesample clear"><table><tr><td scope="row"><pre>{"sToken":"h40Gte9aQnZFDNM39IUkRPCsQDxBxbZB4Wy34pxefOuQkeeb3h2<span></span></pre></td></tr><tr><td scope="row"><pre>a5Rlopo4KDn3MrFKf4CM3OY+WGAoZ1cD6iZ6yzsMk1+5PVBNc66YS6ZQ="}<span></span></pre></td></tr></table></div><p>The curl command:</p><div class="codesample clear"><table><tr><td scope="row"><pre>curl https://vpp.itunes.apple.com/ WebObjects/MZFinance.woa/wa/getVPPUsersSrv -d @get_users.json<span></span></pre></td></tr></table></div><p>The response:</p><div class="codesample clear"><table><tr><td scope="row"><pre>{<span></span></pre></td></tr><tr><td scope="row"><pre>   "users":[<span></span></pre></td></tr><tr><td scope="row"><pre>      {<span></span></pre></td></tr><tr><td scope="row"><pre>         "userId":1,<span></span></pre></td></tr><tr><td scope="row"><pre>         "email":"user1@test.com",<span></span></pre></td></tr><tr><td scope="row"><pre>         "clientUserIdStr":"200006",<span></span></pre></td></tr><tr><td scope="row"><pre>         "status":"Associated"<span></span></pre></td></tr><tr><td scope="row"><pre>         "itsIdHash":"C2Wwd8LcIaE2v6f2/mvu82Gs/Lc="<span></span></pre></td></tr><tr><td scope="row"><pre>      },<span></span></pre></td></tr><tr><td scope="row"><pre>      {<span></span></pre></td></tr><tr><td scope="row"><pre>         "userId":2,<span></span></pre></td></tr><tr><td scope="row"><pre>         "email":"user2@test.com",<span></span></pre></td></tr><tr><td scope="row"><pre>         "clientUserIdStr":"200007",<span></span></pre></td></tr><tr><td scope="row"><pre>         "status":"Associated"<span></span></pre></td></tr><tr><td scope="row"><pre>         "itsIdHash":"*leSKk3IaE2vk2KLmv2k3/200D3="<span></span></pre></td></tr><tr><td scope="row"><pre>      },<span></span></pre></td></tr><tr><td scope="row"><pre>      {<span></span></pre></td></tr><tr><td scope="row"><pre>         "userId":3,<span></span></pre></td></tr><tr><td scope="row"><pre>         "email":"user3@test.com",<span></span></pre></td></tr><tr><td scope="row"><pre>         "clientUserIdStr":"user3@test.com",<span></span></pre></td></tr><tr><td scope="row"><pre>         "status":"Registered",<span></span></pre></td></tr><tr><td scope="row"><pre>         "inviteCode":"f551b37da07146628e8dcbe0111f0364"<span></span></pre></td></tr><tr><td scope="row"><pre>         "inviteUrl":"https:\/\/buy.itunes.apple.com\/WebObjects\/MZFinance.woa\/wa\/<span></span></pre></td></tr><tr><td scope="row"><pre>             associateVPPUserWithITSAccount?inviteCode=<span></span></pre></td></tr><tr><td scope="row"><pre>             f551b37da07146628e8dcbe0111f0364&amp;mt=8",<span></span></pre></td></tr><tr><td scope="row"><pre>      },<span></span></pre></td></tr><tr><td scope="row"><pre>      {<span></span></pre></td></tr><tr><td scope="row"><pre>         "userId":4,<span></span></pre></td></tr><tr><td scope="row"><pre>         "email":"user4@test.com",<span></span></pre></td></tr><tr><td scope="row"><pre>         "clientUserIdStr":"user4@test.com",<span></span></pre></td></tr><tr><td scope="row"><pre>         "status":"Registered",<span></span></pre></td></tr><tr><td scope="row"><pre>         "inviteUrl":"https:\/\/buy.itunes.apple.com\/WebObjects\/MZFinance.woa\/wa\/<span></span></pre></td></tr><tr><td scope="row"><pre>             associateVPPUserWithITSAccount?inviteCode=<span></span></pre></td></tr><tr><td scope="row"><pre>             859c5aa3485a48918a5f4f70c5629ec8&amp;mt=8",<span></span></pre></td></tr><tr><td scope="row"><pre>         "inviteCode":"859c5aa3485a48918a5f4f70c5629ec8"<span></span></pre></td></tr><tr><td scope="row"><pre>      }<span></span></pre></td></tr><tr><td scope="row"><pre>   ],<span></span></pre></td></tr><tr><td scope="row"><pre>   "status":0,<span></span></pre></td></tr><tr><td scope="row"><pre>   "totalCount":4<span></span></pre></td></tr><tr><td scope="row"><pre>}<span></span></pre></td></tr></table></div></section><section><a name="//apple_ref/doc/uid/TP40017387-CH8-SW29" title="Request to getVPPUserSrv"></a><h3 class="jump">Request to getVPPUserSrv</h3><p>Content of the get_user.json file used in the curl command next:</p><div class="codesample clear"><table><tr><td scope="row"><pre>{"userId": 1, "sToken":"h40Gte9aQnZFDNM39IUkRPCsQDxBxbZB4Wy34pxefOuQ<span></span></pre></td></tr><tr><td scope="row"><pre>keeb3h2a5Rlopo4KDn3MrFKf4CM3OY+WGAoZ1cD6iZ6yzsMk1+5PVBNc66YS6ZQ="}<span></span></pre></td></tr></table></div><p>The curl command:</p><div class="codesample clear"><table><tr><td scope="row"><pre>curl https://vpp.itunes.apple.com/ WebObjects/MZFinance.woa/wa/getVPPUserSrv -d @get_user.json<span></span></pre></td></tr></table></div><p>The response:</p><div class="codesample clear"><table><tr><td scope="row"><pre>{<span></span></pre></td></tr><tr><td scope="row"><pre>   "status":0,<span></span></pre></td></tr><tr><td scope="row"><pre>   "user":{<span></span></pre></td></tr><tr><td scope="row"><pre>      "userId":1,<span></span></pre></td></tr><tr><td scope="row"><pre>      "email":"user1@test.com",<span></span></pre></td></tr><tr><td scope="row"><pre>      "clientUserIdStr":"200006",<span></span></pre></td></tr><tr><td scope="row"><pre>      "status":"Associated",<span></span></pre></td></tr><tr><td scope="row"><pre>      "itsIdHash":"C2Wwd8LcIaE2v6f2/mvu82Gs/Lc="<span></span></pre></td></tr><tr><td scope="row"><pre>      "licenses":[<span></span></pre></td></tr><tr><td scope="row"><pre>         {<span></span></pre></td></tr><tr><td scope="row"><pre>            "licenseId":2,<span></span></pre></td></tr><tr><td scope="row"><pre>            "adamId":408709785,<span></span></pre></td></tr><tr><td scope="row"><pre>            "productTypeId":7,<span></span></pre></td></tr><tr><td scope="row"><pre>            "pricingParam":"STDQ",<span></span></pre></td></tr><tr><td scope="row"><pre>            "productTypeName":"Software",<span></span></pre></td></tr><tr><td scope="row"><pre>            "isIrrevocable":false<span></span></pre></td></tr><tr><td scope="row"><pre>         },<span></span></pre></td></tr><tr><td scope="row"><pre>         {<span></span></pre></td></tr><tr><td scope="row"><pre>            "licenseId":4,<span></span></pre></td></tr><tr><td scope="row"><pre>            "adamId":497799835,<span></span></pre></td></tr><tr><td scope="row"><pre>            "productTypeId":7,<span></span></pre></td></tr><tr><td scope="row"><pre>            "pricingParam":"STDQ",<span></span></pre></td></tr><tr><td scope="row"><pre>            "productTypeName":"Software",<span></span></pre></td></tr><tr><td scope="row"><pre>            "isIrrevocable":false<span></span></pre></td></tr><tr><td scope="row"><pre>         }<span></span></pre></td></tr><tr><td scope="row"><pre>      ]<span></span></pre></td></tr><tr><td scope="row"><pre>   }<span></span></pre></td></tr><tr><td scope="row"><pre>}<span></span></pre></td></tr></table></div></section><section><a name="//apple_ref/doc/uid/TP40017387-CH8-SW30" title="Request to registerVPPUserSrv"></a><h3 class="jump">Request to registerVPPUserSrv</h3><p>Content of the reg_user.json file used in the curl command next:</p><div class="codesample clear"><table><tr><td scope="row"><pre>{"email": "test_reg_user11@test.com", "clientUserIdStr": "200002", sToken":<span></span></pre></td></tr><tr><td scope="row"><pre>"h40Gte9aQnZFDNM39IUkRPCsQDxBxbZB4Wy34pxefOuQkeeb3h2a5Rlopo4KDn3MrFKf4CM3OY+<span></span></pre></td></tr><tr><td scope="row"><pre>WGAoZ1cD6iZ6yzsMk1+5PVBNc66YS6ZQ=" }<span></span></pre></td></tr></table></div><p>The curl command:</p><div class="codesample clear"><table><tr><td scope="row"><pre>curl https://vpp.itunes.apple.com/ WebObjects/MZFinance.woa/wa/registerVPPUserSrv -d @reg_user.json<span></span></pre></td></tr></table></div><p>The response:</p><div class="codesample clear"><table><tr><td scope="row"><pre>{<span></span></pre></td></tr><tr><td scope="row"><pre>   "status":0,<span></span></pre></td></tr><tr><td scope="row"><pre>   "user":{<span></span></pre></td></tr><tr><td scope="row"><pre>      "userId":100014,<span></span></pre></td></tr><tr><td scope="row"><pre>      "email":"test_reg_user11@test.com",<span></span></pre></td></tr><tr><td scope="row"><pre>      "status":"Registered",<span></span></pre></td></tr><tr><td scope="row"><pre>      "inviteUrl": "https:\/\/buy.itunes.apple.com\/WebObjects\/MZFinance.woa\/<span></span></pre></td></tr><tr><td scope="row"><pre>          wa\/associateVPPUserWithITSAccount?inviteCode=<span></span></pre></td></tr><tr><td scope="row"><pre>          89e8d1ecc57924d9da13b42b4f772a066&amp;mt=8",<span></span></pre></td></tr><tr><td scope="row"><pre>      "inviteCode":"9e8d1ecc57924d9da13b42b4f772a066",<span></span></pre></td></tr><tr><td scope="row"><pre>      "clientUserIdStr":"200002"<span></span></pre></td></tr><tr><td scope="row"><pre>   }<span></span></pre></td></tr><tr><td scope="row"><pre>}<span></span></pre></td></tr></table></div></section><section><a name="//apple_ref/doc/uid/TP40017387-CH8-SW31" title="Request to associateVPPLicenseWithVPPUserSrv"></a><h3 class="jump">Request to associateVPPLicenseWithVPPUserSrv</h3><p>Content of the associate_license.json file:</p><div class="codesample clear"><table><tr><td scope="row"><pre>{"userId": 2, "licenseId": 4, "sToken":<span></span></pre></td></tr><tr><td scope="row"><pre>"h40Gte9aQnZFDNM39IUkRPCsQDxBxbZB4Wy34pxefOuQkeeb3h2a5Rlopo4KDn3MrFKf4CM3OY+<span></span></pre></td></tr><tr><td scope="row"><pre>WGAoZ1cD6iZ6yzsMk1+5PVBNc66YS6ZQ=" }<span></span></pre></td></tr></table></div><p>The command:</p><div class="codesample clear"><table><tr><td scope="row"><pre>curl https://vpp.itunes.apple.com/ WebObjects/MZFinance.woa/wa/associateVPPLicenseWithVPPUserSrv -d @associate_license.json<span></span></pre></td></tr></table></div><p>The response:</p><div class="codesample clear"><table><tr><td scope="row"><pre>{<span></span></pre></td></tr><tr><td scope="row"><pre>   "status":0,<span></span></pre></td></tr><tr><td scope="row"><pre>   "license":{<span></span></pre></td></tr><tr><td scope="row"><pre>       "licenseId":4,<span></span></pre></td></tr><tr><td scope="row"><pre>       "adamId":497799835,<span></span></pre></td></tr><tr><td scope="row"><pre>       "productTypeId":7,<span></span></pre></td></tr><tr><td scope="row"><pre>       "pricingParam":"STDQ",<span></span></pre></td></tr><tr><td scope="row"><pre>       "productTypeName":"Software",<span></span></pre></td></tr><tr><td scope="row"><pre>       "isIrrevocable":false,<span></span></pre></td></tr><tr><td scope="row"><pre>       "userId": 2,<span></span></pre></td></tr><tr><td scope="row"><pre>       "clientUserIdStr":"200007",<span></span></pre></td></tr><tr><td scope="row"><pre>       "itsIdHash":"C2Wwd8LcIaE2v6f2/mvu82Gs/Lc="<span></span></pre></td></tr><tr><td scope="row"><pre>   },<span></span></pre></td></tr><tr><td scope="row"><pre>   "user":{<span></span></pre></td></tr><tr><td scope="row"><pre>       "userId":2,<span></span></pre></td></tr><tr><td scope="row"><pre>       "email":"user2@test.com",<span></span></pre></td></tr><tr><td scope="row"><pre>       "clientUserIdStr":"200007",<span></span></pre></td></tr><tr><td scope="row"><pre>       "status":"Associated",<span></span></pre></td></tr><tr><td scope="row"><pre>       "itsIdHash":"C2Wwd8LcIaE2v6f2/mvu82Gs/Lc="<span></span></pre></td></tr><tr><td scope="row"><pre>   }<span></span></pre></td></tr><tr><td scope="row"><pre>}<span></span></pre></td></tr></table></div></section><section><a name="//apple_ref/doc/uid/TP40017387-CH8-SW32" title="Request to disassociateVPPLicenseFromVPPUserSrv"></a><h3 class="jump">Request to disassociateVPPLicenseFromVPPUserSrv</h3><p>Content of the <code>disassociate_license.json</code> file:</p><div class="codesample clear"><table><tr><td scope="row"><pre>{"userId": 2, "licenseId": 4, "sToken":<span></span></pre></td></tr><tr><td scope="row"><pre>"h40Gte9aQnZFDNM39IUkRPCsQDxBxbZB4Wy34pxefOuQkeeb3h2a5Rlopo4KDn3MrFKf4CM3OY+<span></span></pre></td></tr><tr><td scope="row"><pre>WGAoZ1cD6iZ6yzsMk1+5PVBNc66YS6ZQ=" }<span></span></pre></td></tr></table></div><p>The command:</p><div class="codesample clear"><table><tr><td scope="row"><pre>curl https://vpp.itunes.apple.com/ WebObjects/MZFinance.woa/wa/disassociateVPPLicenseFromVPPUserSrv -d<span></span></pre></td></tr><tr><td scope="row"><pre>@disassociate_license.json<span></span></pre></td></tr></table></div><p>The response:</p><div class="codesample clear"><table><tr><td scope="row"><pre>{<span></span></pre></td></tr><tr><td scope="row"><pre>   "status":0,<span></span></pre></td></tr><tr><td scope="row"><pre>   "license":{<span></span></pre></td></tr><tr><td scope="row"><pre>      "licenseId":4,<span></span></pre></td></tr><tr><td scope="row"><pre>      "adamId":497799835,<span></span></pre></td></tr><tr><td scope="row"><pre>      "productTypeId":7,<span></span></pre></td></tr><tr><td scope="row"><pre>      "pricingParam":"STDQ",<span></span></pre></td></tr><tr><td scope="row"><pre>      "isIrrevocable":false,<span></span></pre></td></tr><tr><td scope="row"><pre>      "productTypeName":"Software",<span></span></pre></td></tr><tr><td scope="row"><pre>   },<span></span></pre></td></tr><tr><td scope="row"><pre>   "user":{<span></span></pre></td></tr><tr><td scope="row"><pre>      "userId":2,<span></span></pre></td></tr><tr><td scope="row"><pre>      "email":"user2@test.com",<span></span></pre></td></tr><tr><td scope="row"><pre>      "clientUserIdStr":"user2@test.com",<span></span></pre></td></tr><tr><td scope="row"><pre>      "itsIdHash":"C2Wwd8LcIaE2v6f2/mvu82Gs/Lc="<span></span></pre></td></tr><tr><td scope="row"><pre>      "status":"Associated",<span></span></pre></td></tr><tr><td scope="row"><pre>      "inviteCode":"a5ea54beb2954d4dadc65cf19cee5e58",<span></span></pre></td></tr><tr><td scope="row"><pre>   }<span></span></pre></td></tr><tr><td scope="row"><pre>}<span></span></pre></td></tr></table></div></section><section><a name="//apple_ref/doc/uid/TP40017387-CH8-SW33" title="Request to editVPPUserSrv"></a><h3 class="jump">Request to editVPPUserSrv</h3><p>Content of the edit_user.json file:</p><div class="codesample clear"><table><tr><td scope="row"><pre>{"userId": 100014, "email": "test_reg_user15_edited@test.com", "sToken":<span></span></pre></td></tr><tr><td scope="row"><pre>"h40Gte9aQnZFDNM39IUkRPCsQDxBxbZB4Wy34pxefOuQkeeb3h2a5Rlopo4KDn3MrFKf4CM3OY+<span></span></pre></td></tr><tr><td scope="row"><pre>WGAoZ1cD6iZ6yzsMk1+5PVBNc66YS6ZQ=" }<span></span></pre></td></tr></table></div><p>The command:</p><div class="codesample clear"><table><tr><td scope="row"><pre>curl https://vpp.itunes.apple.com/ WebObjects/MZFinance.woa/wa/editVPPUserSrv -d @edit_user.json<span></span></pre></td></tr></table></div><p>The response:</p><div class="codesample clear"><table><tr><td scope="row"><pre>{<span></span></pre></td></tr><tr><td scope="row"><pre>   "status":0,<span></span></pre></td></tr><tr><td scope="row"><pre>   "user":{<span></span></pre></td></tr><tr><td scope="row"><pre>      "userId":100014,<span></span></pre></td></tr><tr><td scope="row"><pre>      "email":"test_reg_user15_edited@test.com",<span></span></pre></td></tr><tr><td scope="row"><pre>      "status":"Registered",<span></span></pre></td></tr><tr><td scope="row"><pre>      "inviteUrl": "https:\/\/buy.itunes.apple.com\/WebObjects\/MZFinance.woa\/<span></span></pre></td></tr><tr><td scope="row"><pre>          wa\/associateVPPUserWithITSAccount?inviteCode=<span></span></pre></td></tr><tr><td scope="row"><pre>          9e8d1ecc57924d9da13b42b4f772a066&amp;mt=8",<span></span></pre></td></tr><tr><td scope="row"><pre> <span></span></pre></td></tr><tr><td scope="row"><pre>      "inviteCode":"9e8d1ecc57924d9da13b42b4f772a066",<span></span></pre></td></tr><tr><td scope="row"><pre>      "clientUserIdStr":"200015",<span></span></pre></td></tr><tr><td scope="row"><pre>      "itsIdHash":"C2Wwd8LcIaE2v6f2/mvu82Gs/Lc="<span></span></pre></td></tr><tr><td scope="row"><pre>   }<span></span></pre></td></tr><tr><td scope="row"><pre>}<span></span></pre></td></tr></table></div></section><section><a name="//apple_ref/doc/uid/TP40017387-CH8-SW34" title="Request to retireVPPUserSrv"></a><h3 class="jump">Request to retireVPPUserSrv</h3><p>Content of the retire_user.json file:</p><div class="codesample clear"><table><tr><td scope="row"><pre>{"userId": 1, "sToken":<span></span></pre></td></tr><tr><td scope="row"><pre>"h40Gte9aQnZFDNM39IUkRPCsQDxBxbZB4Wy34pxefOuQkeeb3h2a5Rlopo4KDn3MrFKf4CM3OY+<span></span></pre></td></tr><tr><td scope="row"><pre>WGAoZ1cD6iZ6yzsMk1+5PVBNc66YS6ZQ=" }<span></span></pre></td></tr></table></div><p>The command:</p><div class="codesample clear"><table><tr><td scope="row"><pre> <span></span></pre></td></tr><tr><td scope="row"><pre>curl https://vpp.itunes.apple.com/ WebObjects/MZFinance.woa/wa/retireVPPUserSrv -d @retire_user.json<span></span></pre></td></tr></table></div><p>The response:</p><div class="codesample clear"><table><tr><td scope="row"><pre>{<span></span></pre></td></tr><tr><td scope="row"><pre>   "status":0,<span></span></pre></td></tr><tr><td scope="row"><pre>   "user":{<span></span></pre></td></tr><tr><td scope="row"><pre>      "userId":1,<span></span></pre></td></tr><tr><td scope="row"><pre>      "email":"user1@test.com",<span></span></pre></td></tr><tr><td scope="row"><pre>      "clientUserIdStr":"200006",<span></span></pre></td></tr><tr><td scope="row"><pre>      "status":"Retired",<span></span></pre></td></tr><tr><td scope="row"><pre>      "licenses":[<span></span></pre></td></tr><tr><td scope="row"><pre>          {<span></span></pre></td></tr><tr><td scope="row"><pre>              "licenseId":2,<span></span></pre></td></tr><tr><td scope="row"><pre>              "adamId":408709785,<span></span></pre></td></tr><tr><td scope="row"><pre>              "productTypeId":10,<span></span></pre></td></tr><tr><td scope="row"><pre>              "pricingParam":"STDQ",<span></span></pre></td></tr><tr><td scope="row"><pre>              "productTypeName":"Publication",<span></span></pre></td></tr><tr><td scope="row"><pre>              "isIrrevocable":true<span></span></pre></td></tr><tr><td scope="row"><pre>          }<span></span></pre></td></tr><tr><td scope="row"><pre>      ]<span></span></pre></td></tr><tr><td scope="row"><pre>   }<span></span></pre></td></tr><tr><td scope="row"><pre>}<span></span></pre></td></tr></table></div></section></section>
+
+        <div id="pageNavigationLinks_bottom" class="pageNavigationLinks">
+            <a class="nextLink" rel="next" href="https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/6.5-MDM_Rosters/MDM_Rosters.html">Next</a><a class="previousLink" rel="prev" href="https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/4-Profile_Management/ProfileManagement.html">Previous</a>
+        </div><br/>
+        <div class="copyright"><br/><hr/><div align="center"><p class="content_text" lang="en" dir="ltr"> Copyright &#x00a9; 2017 Apple Inc. All Rights Reserved. <a href="http://www.apple.com/legal/internet-services/terms/site.html" target="_blank">Terms of Use</a>   |  <a href="http://www.apple.com/privacy/" target="_blank">Privacy Policy</a>  |  Updated: 2017-09-12</p></div></div>
+
+        <div id="pediaWindow">
+            <div id="pediaHeader"></div>
+            <div id="pediaBody"></div>
+        </div>
+    </article>
+
+    <div id="blackout">
+    <div id="preload"></div>
+</div>
+<div id="leave_feedback" class="button" role="button" tabindex="0">Feedback</div>
+<div id="modal" aria-hidden="true">
+    <div id="closebox" tabindex="0" aria-label="Close feedback form" role="button"></div>
+    <div id="sending" class="hidden">
+        <h2 tabindex="0">Sending feedback&hellip;</h2>
+        <div id="sending_img"></div>
+    </div>
+    <div id="error" class="hidden">
+        <h2 tabindex="0">We&rsquo;re sorry, an error has occurred.</h2>
+        <p>Please try submitting your feedback later.</p>
+        <div id="error_icon"></div>
+    </div>
+    <div id="success" class="hidden">
+        <h2 tabindex="0">Thank you for providing feedback!</h2>
+        <p>Your input helps improve our developer documentation.</p>
+        <div id="thank_you_icon"></div>
+    </div>
+    
+    <form id="feedback" action="#" method="post">
+        <div class="left-leaf">
+            <h2 id="helpful_title" data-asterisk="a1" tabindex="0">How helpful is this document?</h2>     
+            <sup id="a1" class="asterisk" aria-hidden="true">*</sup>
+
+            <div id="star_group" role="radiogroup" aria-required="true">
+                <label> 
+                    <input class="radio" type="radio" name="helped" value="1"/> 
+                    Very helpful
+                </label>
+                <label> 
+                    <input class="radio" type="radio" name="helped" value="2"/> 
+                    Somewhat helpful
+                </label>
+                <label>
+                    <input class="radio" type="radio" name="helped" value="3"/> 
+                    Not helpful
+                </label>
+            </div>
+        </div>
+        <div class="right-leaf">
+            <h2>How can we improve this document?</h2>
+            <div id="improve" class="checkboxes">
+                <label>
+                    <input type="checkbox" name="typo"/> 
+                    Fix typos or links
+                </label>
+                <label>
+                    <input type="checkbox" name="infoIncorrect"/> 
+                    Fix incorrect information
+                </label>
+                <label>
+                    <input type="checkbox" name="needs_examples"/> 
+                    Add or update code samples
+                </label>
+                <label>
+                    <input type="checkbox" name="needs_art"/> 
+                    Add or update illustrations
+                </label>
+                <label>
+                    <input type="checkbox" name="missingInfo"/> 
+                    Add information about...
+                </label>
+            </div>
+        </div>
+
+        <textarea id="comment" name="problem" cols="70" rows="8" placeholder="Please tell us more about your experience with this document" data-asterisk="a2" required></textarea>
+        <sup id="a2" class="asterisk" aria-hidden="true">*</sup>
+
+        <p class="fineprint">
+            <em aria-hidden="true"><span>*</span> Required information</em>
+        </p> 
+
+        <input id="submit" type="button" value="Send"/>
+
+        <section id="legal">
+            <p>
+                To submit a product bug or enhancement request, please visit the 
+                <a href="https://developer.apple.com/bugreporter/" target="_blank">Bug Reporter</a> 
+                page.
+            </p>
+            <p>
+                Please read <a href="http://www.apple.com/legal/policies/ideas.html" target="_blank">Apple's Unsolicited Idea Submission Policy</a> 
+                before you send us your feedback.
+            </p> 
+        </section>
+    </form>
+</div>
+
+    
+    <script charset="utf-8" src="https://developer.apple.com/library/content/Resources/1264/JavaScript/lib/prototype.js"></script>
+    <script src="https://developer.apple.com/library/content/Resources/1264/JavaScript/library.js"></script>
+    <script src="https://developer.apple.com/library/content/Resources/1264/JavaScript/feedback.js"></script>
+</body>
+</html>

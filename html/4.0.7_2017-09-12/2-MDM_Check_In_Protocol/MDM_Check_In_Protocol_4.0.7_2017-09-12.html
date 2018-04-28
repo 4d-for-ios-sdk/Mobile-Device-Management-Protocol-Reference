@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>MDM Check-in Protocol</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=7">
+    <meta charset="utf-8">
+    <meta id="book-resource-type" name="book-resource-type" content="Guide">
+    <meta scheme="apple_ref" id="identifier" name="identifier" content="//apple_ref/doc/uid/TP40017387">
+    <meta id="document-version" name="document-version" content="4.0.7">
+    <meta id="build" name="build" content="b733b0803382729932826a3bf2043f77"/>
+    <meta id="chapterId" name="chapterId" content="TP40017387-CH4">
+    <meta id="date" name="date" content="2017-09-12">
+    <meta id="description" name="description" content="Describes how system administrators can send device
+management commands to managed devices.">
+    <meta id="book-title" name="book-title" content="Mobile Device Management Protocol Reference">
+    <meta id="book-root" name="book-root" content="../">
+    <meta id="book-json" name="book-json" content="../book.json">
+    <meta id="devcenter" name="devcenter" content="Mac Dev Center">
+    <meta id="devcenter-url" name="devcenter-url" content="http://developer.apple.com/devcenter/mac">
+    <meta id="reflib" name="reflib" content="Guides and Sample Code">
+    <meta id="book-assignments" name="book-assignments" content="{Type/Guide}, {Topic/Data Management/Device Information}">
+    
+    
+    <meta id="copyright" name="copyright" content="Copyright 2017 Apple Inc. All Rights Reserved.">
+    <meta id="xcode-display" name="xcode-display" content="render">
+    <meta id="IndexTitle" name="IndexTitle" content="Mobile Device Management Protocol Reference: MDM Check-in Protocol">
+    <meta id="resources-uri" name="resources-uri" content="../../../../../Resources/1264">
+    <link id="book-index-page" rel="Start" title="Mobile Device Management Protocol Reference" type="text/html" href="../index.html">
+    <link id="next-page" rel="Next" type="text/html" href="https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/3-MDM_Protocol/MDM_Protocol.html">
+    <link id="previous-page" rel="Prev" type="text/html" href="https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/1-Introduction/Introduction.html">
+    <link rel="stylesheet" type="text/css" href="https://developer.apple.com/library/content/Resources/1264/CSS/screen.css">
+    
+    <!-- xcode_css -->
+    <link rel="stylesheet" type="text/css" href="https://developer.apple.com/library/content/Resources/1264/CSS/feedback.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta id="platforms" name="platforms" content="">
+</head>    
+<body>
+<a name="//apple_ref/doc/uid/TP40017387-CH4" title="MDM Check-in Protocol"></a>
+    <div id="_omniture_top">
+    <!-- SiteCatalyst code version: H.8. Copyright 1997-2006 Omniture, Inc. -->
+    <script type="text/javascript">
+    /* RSID: */
+    var s_account="appleglobal,appleusdeveloper,dappdeveloperlib"
+    </script>
+
+    <script type="text/javascript" src="https://www.apple.com/metrics/scripts/s_code_h.js"></script>
+    <script type="text/javascript">
+    s.pageName=AC.Tracking.pageName();
+    s.channel="www.us.developer"
+
+    /************* DO NOT ALTER ANYTHING BELOW THIS LINE ! **************/
+    var s_code=s.t();if(s_code)document.write(s_code)</script>
+    <!-- End SiteCatalyst code version: H.8. -->
+    </div>
+
+    <div id="adcHeader" class="hideOnPrint hideInXcode">
+        <div id="ssi_Header" class="hideInXcode unified">
+            <a id="ssi_LibraryTitle" href="https://developer.apple.com/library/content/navigation/">Guides and Sample Code</a>
+            <a id="ssi_AppleDeveloperConnection" href="https://developer.apple.com/">Developer</a>
+            <div id="ssi_SearchButton" role="button" title="Search">Search</div>
+        </div>
+        <form id="ssi_SearchMenu" method="get" action="https://developer.apple.com/library/content/search/" accept-charset="utf-8">
+            <label for="adcsearch">Search Guides and Sample Code</label>
+            
+            
+    
+            <input type="search" id="ssi_SearchField" name="q" accesskey="s" results="5"/>
+        </form>
+    </div>
+
+    <header id="header">
+        <div id="title" role="banner">
+            <h1>Mobile Device Management Protocol Reference</h1>
+            <span id="file_links">
+                <a id="PDF_link" role="button" tabindex="4" rel="alternate" title="Download PDF"><span id="pdf_icon"></span>PDF</a>
+                <a id="Companion_link" role="button" tabindex="3" title="Download Companion File"><span id="companion_icon"></span>Companion File</a>
+            </span>
+        </div>
+        <ul id="headerButtons" class="hideOnPrint" role="toolbar">
+            <li id="toc_button" style="display:none">
+                <button tabindex="5" id="table_of_contents" class="open" role="checkbox" aria-label="Show Table of Contents"><span class="disclosure"></span>Table of Contents</button>
+            </li>
+            <li id="jumpto_button" style="display:none" role="navigation"><select tabindex="6" id="jumpTo"><option value="top">Jump To&#133;</option></select></li>
+            <li id="downloadSample_button" style="display:none">
+                <a id="Sample_link"><button id="Sample_button">Download Sample Code</button></a>
+            </li>
+        </ul>
+    </header>
+    <nav id="tocContainer" tabindex="7">
+        <ul id="toc" role="tree"></ul>
+    </nav>
+
+    <article id="contents" tabindex="0" role="main">
+        <div id="pageNavigationLinks_top" class="pageNavigationLinks">
+            <a class="nextLink" rel="next" href="https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/3-MDM_Protocol/MDM_Protocol.html">Next</a><a class="previousLink" rel="prev" href="https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/1-Introduction/Introduction.html">Previous</a>
+        </div>
+        <a id="top" name="top"></a>
+        <a id="INDEX" href="https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/index.html" style="display:none;"></a>
+        
+        <a name="//apple_ref/doc/uid/TP40017387-CH4-SW2" title="MDM Check-in Protocol"></a>
+<h1 id="pageTitle">MDM Check-in Protocol</h1>
+
+<p>The MDM check-in protocol is used during initialization to validate a device’s eligibility for MDM enrollment and to inform the server that a device’s push token has been updated.</p><p>If a check-in server URL is provided in the MDM payload, the check-in protocol is used to communicate with that check-in server. If no check-in server URL is provided, the main MDM server URL is used instead.</p>
+<div class="notebox"><aside><a name="//apple_ref/doc/uid/TP40017387-CH4-SW8" title="Note"></a><p><strong>Note:</strong>&nbsp;
+MDM configuration profiles can be stored in and read from Apple Open Directory servers.</p><p></p></aside></div>
+<section><a name="//apple_ref/doc/uid/TP40017387-CH4-SW3" title="Structure of a Check-in Request"></a>
+<h2 class="jump">Structure of a Check-in Request</h2>
+<p>When the MDM payload is installed, the device initiates communication with the check-in server. The device validates the TLS certificate of the server, then uses the identity specified in its MDM payload as the client authentication certificate for the connection.</p>
+
+<p>After successfully negotiating this secure connection, the device sends an HTTP PUT request in this format:</p>
+<div class="codesample clear"><table><tr><td scope="row"><pre>PUT /your/url HTTP/1.1<span></span></pre></td></tr><tr><td scope="row"><pre>Host: www.yourhostname.com<span></span></pre></td></tr><tr><td scope="row"><pre>Content-Length: 1234<span></span></pre></td></tr><tr><td scope="row"><pre>Content-Type: application/x-apple-aspen-mdm-checkin<span></span></pre></td></tr><tr><td scope="row"><pre> <span></span></pre></td></tr><tr><td scope="row"><pre>&lt;?xml version="1.0" encoding="UTF-8"?&gt;<span></span></pre></td></tr><tr><td scope="row"><pre>&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;<span></span></pre></td></tr><tr><td scope="row"><pre>&lt;plist version="1.0"&gt;<span></span></pre></td></tr><tr><td scope="row"><pre>  &lt;dict&gt;<span></span></pre></td></tr><tr><td scope="row"><pre>    &lt;key&gt;MessageType&lt;/key&gt;<span></span></pre></td></tr><tr><td scope="row"><pre>    &lt;string&gt;Authenticate&lt;/string&gt;<span></span></pre></td></tr><tr><td scope="row"><pre>    &lt;key&gt;Topic&lt;/key&gt;<span></span></pre></td></tr><tr><td scope="row"><pre>    &lt;string&gt;...&lt;/string&gt;<span></span></pre></td></tr><tr><td scope="row"><pre>    &lt;key&gt;UDID&lt;/key&gt;<span></span></pre></td></tr><tr><td scope="row"><pre>    &lt;string&gt;...&lt;/string&gt;<span></span></pre></td></tr><tr><td scope="row"><pre>  &lt;/dict&gt;<span></span></pre></td></tr><tr><td scope="row"><pre>&lt;/plist&gt;<span></span></pre></td></tr><tr><td scope="row"><pre> <span></span></pre></td></tr></table></div>
+<p>The server must send a <code>200 (OK)</code> status code to indicate success or a <code>401 (Unauthorized)</code> status code to indicate failure. The body of the reply is ignored.</p>
+</section>
+<section><a name="//apple_ref/doc/uid/TP40017387-CH4-SW4" title="Supported Check-in Commands"></a>
+<h2 class="jump">Supported Check-in Commands</h2>
+<section><a name="//apple_ref/doc/uid/TP40017387-CH4-SW5" title="Authenticate Message"></a>
+<h3 class="jump">Authenticate Message</h3><p>While the user is installing an MDM payload, the device sends an authenticate message that contains at least three key-value pairs in its property list:</p>
+<div class="tableholder"><table class="graybox" border="0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Key</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Type</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Value</p></th></tr><tr><td scope="row"><p><code>MessageType</code></p></td><td><p>String</p></td><td> <p><code>Authenticate</code>.</p> </td></tr><tr><td scope="row"><p><code>Topic</code></p></td><td><p>String</p></td><td><p>The topic the device will listen to.</p></td></tr>
+<tr><td scope="row"><p><code>UDID</code></p></td><td><p>String</p></td><td><p>The device’s UDID.</p></td></tr>
+</table></div>
+<p>The device may also send the following key-value pairs if it is running iOS 9 or later and if it has the Device Information access right:</p>
+<div class="tableholder"><table class="graybox" border="0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Key</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Type</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Value</p></th></tr>
+<tr><td scope="row"><p><code>OSVersion</code></p></td><td><p>String</p></td><td><p>The device’s OS version.</p></td></tr>
+<tr><td scope="row"><p><code>BuildVersion</code></p></td><td><p>String</p></td><td><p>The device’s build version.</p></td></tr>
+<tr><td scope="row"><p><code>ProductName</code></p></td><td><p>String</p></td><td><p>The device’s product name (e.g., <code>"iPhone3,1"</code>).</p></td></tr>
+<tr><td scope="row"><p><code>SerialNumber</code></p></td><td><p>String</p></td><td><p>The device’s serial number.</p></td></tr>
+<tr><td scope="row"><p><code>IMEI</code></p></td><td><p>String</p></td><td><p>The device’s IMEI (International Mobile Station Equipment Identity).</p></td></tr>
+<tr><td scope="row"><p><code>MEID</code></p></td><td><p>String</p></td><td><p>The device’s MEID (mobile equipment identifier).</p></td></tr>
+</table></div>
+<p><strong>Server Response</strong></p>
+<p>On success, the server must respond with a 200 OK status.</p><p>The server should not assume that the device has installed the MDM payload at this time, as other payloads in the profile may still fail to install. When the device has successfully installed the MDM payload, it  sends a token update message.</p>
+</section>
+<section><a name="//apple_ref/doc/uid/TP40017387-CH4-SW1" title="TokenUpdate Message"></a>
+<h3 class="jump">TokenUpdate Message</h3><p>A device sends a token update message to the check-in server whenever its device push token, push magic, or unlock token change. These fields are needed by the server to send the device push notifications or passcode resets.</p><p>The <code>TokenUpdate</code> message contains these key-value pairs in its property list:</p>
+<div class="tableholder"><table class="graybox" border="0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Key</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Type</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Value</p></th></tr><tr><td scope="row"><p><code>MessageType</code></p></td><td><p>String</p></td><td> <p><code>TokenUpdate</code>.</p> </td></tr><tr><td scope="row"><p><code>Topic</code></p></td><td><p>String</p></td><td><p>The topic the device will listen to.</p></td></tr><tr><td scope="row"><p><code>UDID</code></p></td><td><p>String</p></td><td><p>The device’s UDID.</p></td></tr><tr><td scope="row"><p><code>Token</code></p></td><td><p>Data</p></td>
+<td><p>The push token for the device. The server should use this updated token when sending push notifications to the device.</p><p><strong>Warning:</strong> The size of the device push token may vary, and MDM servers cannot assume that all push tokens will be of equal size. However, while the size of the largest push token may change in future releases, MDM servers may assume that it is no larger than 100 bytes currently.</p></td></tr>
+<tr><td scope="row"><p><code>PushMagic</code></p></td><td><p>String</p></td><td><p>The magic string that must be included in the push notification message. This value is generated by the device (see below).</p></td></tr>
+<tr><td scope="row"><p><code>UnlockToken</code></p></td><td><p>Data</p></td><td><p>Optional. A data blob that can be used to unlock the device. If provided, the server should remember this data blob and send it with the <span class="content_text"><a href="https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/3-MDM_Protocol/MDM_Protocol.html#//apple_ref/doc/uid/TP40017387-CH3-SW1" data-renderer-version="1">ClearPasscode Commands Clear the Passcode for a Device</a></span> command. This feature is not available in macOS.</p>
+<p>The data blob may be up to 8 kB in size after Base64 decoding.</p>
+</td></tr>
+
+<tr><td scope="row"><p><code>AwaitingConfiguration</code></p></td><td><p>Boolean</p></td><td><p>Optional. If set to <code>true</code>, the device is awaiting a <code>DeviceConfigured</code> MDM command before proceeding through Setup Assistant. <strong>Availability:</strong> Available in iOS 9 and later and can only be sent by DEP (see <span class="content_text"><a href="https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/4-Profile_Management/ProfileManagement.html#//apple_ref/doc/uid/TP40017387-CH7-SW1" data-renderer-version="1">Device Enrollment Program</a></span>).</p></td></tr>
+</table></div>
+
+<p>The device sends an initial token update message to the server when it has installed the MDM payload. The server should send push messages to the device only after receiving the first token update message. If the device reports that it is <code>AwaitingConfiguration</code>, the MDM server is expected to send a <code>DeviceConfigured</code> MDM command before the device can allow the user to proceed in Setup Assistant. This gives the MDM server the opportunity to do some setup via MDM commands.</p>
+
+<p>In addition to sending the initial <code>TokenUpdate</code> message, the iOS device may now send additional <code>TokenUpdate</code> messages to the check-in server at any time while it has a valid MDM enrollment.</p>
+
+<p>The use of <code>PushMagic</code> constrains the device to a unique MDM relationship. When a user removes the MDM profile, the device should no longer listen to the former relationship, even if the user reestablishes a management relationship with the same server topic. Note that only the push topic is the same in this case; the server’s address could have changed. This also helps when a user restores a device from backup that contains an older relationship. The use of <code>PushMagic</code> also ensures that the server that receives the CheckIn message is owned by the same enterprise as the computer sending push notifications. This is important because there is no way of knowing if the push topic belongs to the owner of the checkin server. It is conceivable that Apple could revoke a push token for one party, only to have that party re-enroll people piggybacking on some other topic that’s actively pushing. The fact that all MDM push topics reside in the namespace <code>com.apple.mgmt.*</code> helps prevent this.</p>
+
+<div class="notebox"><aside><a name="//apple_ref/doc/uid/TP40017387-CH4-SW9" title="Warning"></a><p><strong>Warning:</strong>&nbsp;
+The <code>PushMagic</code> or <code>UnlockToken</code> fields of subsequent <code>TokenUpdate</code> messages may be identical to those in previous messages or may be different (and may differ in size from previous values). If different, the server should update its record for the device to the new value provided by the message. Failure to do so results in the server being unable to send push notifications or perform passcode resets.</p><p></p></aside></div><p>While the <code>UnlockToken</code> message can be sent multiple times by the device, it is possible it may only be sent once if <code>PushMagic</code> or <code>UnlockToken</code> values change. Implementations should not rely on repeated messages to update lost server-side data or to recover from a failure to process a previous <code>TokenUpdate</code> message.</p>
+
+<div class="notebox"><aside><a name="//apple_ref/doc/uid/TP40017387-CH4-SW6" title="Note"></a><p><strong>Note:</strong>&nbsp;The topic string for the MDM check-in protocol must start with <code>com.apple.mgmt.*</code> where <code>*</code> is a unique suffix.</p><p></p></aside></div>
+
+</section><section><a name="//apple_ref/doc/uid/TP40017387-CH4-SW7" title="CheckOut"></a><h3 class="jump">CheckOut</h3><p>In iOS 5.0 and later, and in macOS v10.9, if the <code>CheckOutWhenRemoved</code> key in the MDM payload is set to <code>true</code>, the device attempts to send a <code>CheckOut</code> message when the MDM profile is removed.</p><p>In macOS v10.8, the device attempts to send a <code>CheckOut</code> message when the MDM profile is removed regardless of the value of this key (or its absence).</p><p>If network conditions do not allow the message to be delivered successfully, the device makes no further attempts to send the message.</p><p>The server’s response to this message is ignored.</p><p>The <code>CheckOut</code> message contains the following keys:</p><div class="tableholder"><table class="graybox" border="0" cellspacing="0" cellpadding="5"><tr><th scope="col" class="TableHeading_TableRow_TableCell"><p>Key</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Type</p></th><th scope="col" class="TableHeading_TableRow_TableCell"><p>Content</p></th></tr><tr><td scope="row"><p><code>MessageType</code></p></td><td><p>String</p></td><td><p><code>CheckOut</code>.</p></td></tr><tr><td scope="row"><p><code>Topic</code></p></td><td><p>String</p></td><td><p>The topic the device will listen to.</p></td></tr><tr><td scope="row"><p><code>UDID</code></p></td><td><p>String</p></td><td><p>The device’s UDID.</p></td></tr></table></div></section></section>
+
+
+
+
+        <div id="pageNavigationLinks_bottom" class="pageNavigationLinks">
+            <a class="nextLink" rel="next" href="https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/3-MDM_Protocol/MDM_Protocol.html">Next</a><a class="previousLink" rel="prev" href="https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/1-Introduction/Introduction.html">Previous</a>
+        </div><br/>
+        <div class="copyright"><br/><hr/><div align="center"><p class="content_text" lang="en" dir="ltr"> Copyright &#x00a9; 2017 Apple Inc. All Rights Reserved.  <a href="http://www.apple.com/legal/internet-services/terms/site.html" target="_blank">Terms of Use</a>   |  <a href="http://www.apple.com/privacy/" target="_blank">Privacy Policy</a>  |  Updated: 2017-09-12</p></div></div>
+
+        <div id="pediaWindow">
+            <div id="pediaHeader"></div>
+            <div id="pediaBody"></div>
+        </div>
+    </article>
+
+    <div id="blackout">
+    <div id="preload"></div>
+</div>
+<div id="leave_feedback" class="button" role="button" tabindex="0">Feedback</div>
+<div id="modal" aria-hidden="true">
+    <div id="closebox" tabindex="0" aria-label="Close feedback form" role="button"></div>
+    <div id="sending" class="hidden">
+        <h2 tabindex="0">Sending feedback&hellip;</h2>
+        <div id="sending_img"></div>
+    </div>
+    <div id="error" class="hidden">
+        <h2 tabindex="0">We&rsquo;re sorry, an error has occurred.</h2>
+        <p>Please try submitting your feedback later.</p>
+        <div id="error_icon"></div>
+    </div>
+    <div id="success" class="hidden">
+        <h2 tabindex="0">Thank you for providing feedback!</h2>
+        <p>Your input helps improve our developer documentation.</p>
+        <div id="thank_you_icon"></div>
+    </div>
+    
+    <form id="feedback" action="#" method="post">
+        <div class="left-leaf">
+            <h2 id="helpful_title" data-asterisk="a1" tabindex="0">How helpful is this document?</h2>     
+            <sup id="a1" class="asterisk" aria-hidden="true">*</sup>
+
+            <div id="star_group" role="radiogroup" aria-required="true">
+                <label> 
+                    <input class="radio" type="radio" name="helped" value="1"/> 
+                    Very helpful
+                </label>
+                <label> 
+                    <input class="radio" type="radio" name="helped" value="2"/> 
+                    Somewhat helpful
+                </label>
+                <label>
+                    <input class="radio" type="radio" name="helped" value="3"/> 
+                    Not helpful
+                </label>
+            </div>
+        </div>
+        <div class="right-leaf">
+            <h2>How can we improve this document?</h2>
+            <div id="improve" class="checkboxes">
+                <label>
+                    <input type="checkbox" name="typo"/> 
+                    Fix typos or links
+                </label>
+                <label>
+                    <input type="checkbox" name="infoIncorrect"/> 
+                    Fix incorrect information
+                </label>
+                <label>
+                    <input type="checkbox" name="needs_examples"/> 
+                    Add or update code samples
+                </label>
+                <label>
+                    <input type="checkbox" name="needs_art"/> 
+                    Add or update illustrations
+                </label>
+                <label>
+                    <input type="checkbox" name="missingInfo"/> 
+                    Add information about...
+                </label>
+            </div>
+        </div>
+
+        <textarea id="comment" name="problem" cols="70" rows="8" placeholder="Please tell us more about your experience with this document" data-asterisk="a2" required></textarea>
+        <sup id="a2" class="asterisk" aria-hidden="true">*</sup>
+
+        <p class="fineprint">
+            <em aria-hidden="true"><span>*</span> Required information</em>
+        </p> 
+
+        <input id="submit" type="button" value="Send"/>
+
+        <section id="legal">
+            <p>
+                To submit a product bug or enhancement request, please visit the 
+                <a href="https://developer.apple.com/bugreporter/" target="_blank">Bug Reporter</a> 
+                page.
+            </p>
+            <p>
+                Please read <a href="http://www.apple.com/legal/policies/ideas.html" target="_blank">Apple's Unsolicited Idea Submission Policy</a> 
+                before you send us your feedback.
+            </p> 
+        </section>
+    </form>
+</div>
+
+    
+    <script charset="utf-8" src="https://developer.apple.com/library/content/Resources/1264/JavaScript/lib/prototype.js"></script>
+    <script src="https://developer.apple.com/library/content/Resources/1264/JavaScript/library.js"></script>
+    <script src="https://developer.apple.com/library/content/Resources/1264/JavaScript/feedback.js"></script>
+</body>
+</html>
