@@ -188,7 +188,7 @@ The content of the `Command` dictionary must include the following required key,
 |Key|Type|Content|
 |-|-|-|
 |`RequestType`|String|Request type. See each command’s description.|
-|`RequestRequiresNetworkTether`|Boolean|Optional. If `true`, the command is executed only if the device has a tethered network connection; otherwise an MCMDM error value of 12081 is returned (see [MCMDMErrorDomain](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/3-MDM_Protocol/MDM_Protocol.html#//apple_ref/doc/uid/TP40017387-CH3-TRANSLATED_DEST_13)). Default value is `false`.|
+|`RequestRequiresNetworkTether`|Boolean|Optional. If `true`, the command is executed only if the device has a tethered network connection; otherwise an MCMDM error value of 12081 is returned (see [MCMDMErrorDomain ](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/3-MDM_Protocol/MDM_Protocol.html#//apple_ref/doc/uid/TP40017387-CH3-TRANSLATED_DEST_13)). Default value is `false`.|
   
   
 
@@ -754,6 +754,11 @@ Each entry in the `InstalledApplicationList` is a dictionary containing the foll
 |`DynamicSize`|Integer|The size of the app’s document, library, and other folders, in bytes.</br>**Availability:** Available in iOS 5.0 and later.|
 |`IsValidated`|Boolean|If `true`, the app has validated as allowed to run and is able to run on the device. If an app is enterprise-distributed and is not validated, it will not run on the device until validated.</br>**Availability:** Available in iOS 9.2 and later.|
 |`ExternalVersionIdentifier`|String|The application’s external version ID. It can be used for comparison in the iTunes Search API to decide if the application needs to be updated.</br>**Availability:** Available in iOS 11 and later.|
+|`AppStoreVendable`|Boolean|If `true`, the app came from the store and can participate in store features.</br>**Availability:** Available in iOS 11.3 and later.|
+|`DeviceBasedVPP`|Boolean|If `true`, the app is distributed to the device without requiring an Apple ID.</br>**Availability:** Available in iOS 11.3 and later.|
+|`BetaApp`|Boolean|If true, the app is part of the Beta program.</br>**Availability:** Available in iOS 11.3 and later.|
+|`AdHocCodeSigned`|Boolean|If true, the app is ad-hoc code signed.</br>**Availability:** Available in iOS 11.3 and later.|
+|`HasUpdateAvailable`|Boolean|If true, the app has an update available. This key will only be present for App Store apps. On macOS, this key will only be present for VPP apps.</br>**Availability:** Available in iOS 11.3 and later and in macOS 10.13.4 and later.|
   
 
   
@@ -925,24 +930,25 @@ Response:
 |`SecurityInfo`|Dictionary|Response dictionary.|
   
 
-In iOS only, the `SecurityInfo` dictionary contains the following keys and values:  
+The `SecurityInfo` dictionary contains the following keys and values:  
 
 
 |Key|Type|Content|
 |-|-|-|
-|`HardwareEncryptionCaps`|Integer|Bitfield. Describes the underlying hardware encryption capabilities of the device. Values are described in [Table 10](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/3-MDM_Protocol/MDM_Protocol.html#//apple_ref/doc/uid/TP40017387-CH3-SW23).|
-|`PasscodePresent`|Boolean|Set to `true` if the device is protected by a passcode.|
-|`PasscodeCompliant`|Boolean|Set to `true` if the user’s passcode is compliant with all requirements on the device, including Exchange and other accounts.|
-|`PasscodeCompliantWithProfiles`|Boolean|Set to `true` if the user’s passcode is compliant with requirements from profiles.|
-|`PasscodeLockGracePeriodEnforced`|Integer|The current enforced value for the amount of time in seconds the device must be locked before unlock will require the device passcode.|
+|`HardwareEncryptionCaps`|Integer|Bitfield. Describes the underlying hardware encryption capabilities of the device. Values are described in [Table 10](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/3-MDM_Protocol/MDM_Protocol.html#//apple_ref/doc/uid/TP40017387-CH3-SW23).</br>**Availability:** Available in iOS only.|
+|`PasscodePresent`|Boolean|Set to `true` if the device is protected by a passcode.</br>**Availability:** Available in iOS only.|
+|`PasscodeCompliant`|Boolean|Set to `true` if the user’s passcode is compliant with all requirements on the device, including Exchange and other accounts.</br>**Availability:** Available in iOS only.|
+|`PasscodeCompliantWithProfiles`|Boolean|Set to `true` if the user’s passcode is compliant with requirements from profiles.</br>**Availability:** Available in iOS only.|
+|`PasscodeLockGracePeriodEnforced`|Integer|The current enforced value for the amount of time in seconds the device must be locked before unlock will require the device passcode.</br>**Availability:** Available in iOS only.|
 |`FDE_Enabled`|Boolean|Device channel only. Whether Full Disk Encryption (FDE) is enabled or not.</br>**Availability:** Available in macOS 10.9 and later.|
 |`FDE_HasPersonalRecoveryKey`|Boolean|Device channel only. If FDE has been enabled, returns whether a personal recovery key has been set.</br>**Availability:** Available in macOS 10.9 and later.|
 |`FDE_HasInstitutionalRecoveryKey`|Boolean|Device channel only. If FDE has been enabled, returns whether an institutional recovery key has been set.</br>**Availability:** Available in macOS 10.9 and later.|
 |`FDE_PersonalRecoveryKeyCMS`|Data|If FileVault Personal Recovery Key (PRK) escrow is enabled and a recovery key has been set up, this key will contain the PRK encrypted with the certificate from the `com.apple.security.FDERecoveryKeyEscrow` payload and wrapped as a CMS blob.</br>**Availability:** Available in macOS 10.13 and later.|
 |`FDE_PersonalRecoveryKeyDeviceKey`|String|If FileVault PRK escrow is enabled and a recovery key has been set up, this key contains a short string that is displayed to the user in the EFI login window as part of the help message if the user enters an incorrect password three times. The server can use this string as an index when saving the device PRK. Currently, this string is the device serial number, which replaces the `recordNumber` that was returned by the server in the earlier escrow mechanism.</br>**Availability:** Available in macOS 10.13 and later.|
-|`FirewallSettings`|Dictionary|(macOS 10.12 and later): the current Firewall settings. This information will be returned only when the command is sent to the device channel. The response is a dictionary with the following keys:<ul><li>`FirewallEnabled` (Boolean): Whether firewall is on or off.</li><li>`BlockAllIncoming` (Boolean): Whether all incoming connections are blocked.</li><li>`StealthMode` (Boolean): Whether stealth mode is enabled.</li><li>`Applications` (array of dictionaries): Blocking status for specific applications. Each dictionary contains these keys:</li><li></br><ul>   <li>`BundleID` (string) : identifies the application</li>   <li>`Allowed` (Boolean) : specifies whether or not incoming connections are allowed</li>   <li>`Name` (string) : descriptive name of the application for display purposes only (may be missing if no corresponding app is found on the client computer).</li></ul></li></ul>|
-|`SystemIntegrityProtectionEnabled`|Boolean|Device channel only. Whether System Integrity Protection is enabled on the device. In macOS 10.11 or later, this information may also be retrieved using a `DeviceInformation` query.</br>**Availability:** Available in macOS 10.12 and later.|
+|`FirewallSettings`|Dictionary|The current Firewall settings. This information will be returned only when the command is sent to the device channel. The response is a dictionary with the following keys:<ul><li>`FirewallEnabled` (Boolean): Set to `true` if firewall is on.</li><li>`BlockAllIncoming` (Boolean): Set to `true` if all incoming connections are blocked.</li><li>`StealthMode` (Boolean): Set to `true` if stealth mode is enabled.</li><li>`Applications` (Array of Dictionaries): Blocking status for specific applications. Each dictionary contains these keys:</li><li></br><ul>   <li>`BundleID` (String) : Identifies the application</li>   <li>`Allowed` (Boolean) : Set to `true` if incoming connections are allowed</li>   <li>`Name` (String) : descriptive name of the application for display purposes only (may be missing if no corresponding app is found on the client computer).</li></ul></li></ul></br>**Availability:** Available in macOS 10.12 and later.|
+|`SystemIntegrityProtectionEnabled`|Boolean|Device channel only. Set to `true` if System Integrity Protection is enabled on the device. In macOS 10.11 or later, this information may also be retrieved using a `DeviceInformation` query.</br>**Availability:** Available in macOS 10.12 and later.|
 |`FirmwarePasswordStatus`|Dictionary|State of EFI firmware password; see .</br>**Availability:** Available in macOS 10.13 and later.|
+|`ManagementStatus`|Dictionary|Provides information about the client’s MDM enrollment. The dictionary contains these keys:<ul><li>`EnrolledViaDEP` (Boolean): Set to `true` if the device was entrolled in MDM during DEP.</li><li>`UserApprovedEnrollment` (Boolean): Set to `true` if the enrollment was “user approved”. If `false`, the client may reject certain security-sensitive payloads or commands.</li></ul></br>**Availability:** Available in macOS 10.13.2 and later.|
   
 
 Hardware encryption capabilities are described using the logical OR of the values in . Bits set to `1` (one) indicate that the corresponding feature is present, enabled, or in effect.  
@@ -981,8 +987,8 @@ The `DeviceLock` command is intended to lock lost devices remotely; it should no
 |-|-|-|
 |`RequestType`|String|`DeviceLock`|
 |`PIN`|String|The Find My Mac PIN. Must be 6 characters long.</br>**Availability:** Available in macOS 10.8 and later.|
-|`Message`|String|Optional. If provided, this message is displayed on the lock screen and should contain the words “lost iPad.” Available in iOS 7 and later.|
-|`PhoneNumber`|String|Optional. If provided, this phone number is displayed on the lock screen. Available in iOS 7 and later.|
+|`Message`|String|Optional. If provided, this message is displayed on the lock screen and should contain the words “lost iPad.” Ignored on Shared iPads.</br>**Availability:** Available in iOS 7 and later.|
+|`PhoneNumber`|String|Optional. If provided, this phone number is displayed on the lock screen. Ignored on Shared iPads. </br>**Availability:** Available in iOS 7 and later.|
   
 
 > **Security Note:** This command requires both Device Lock and Passcode Removal access rights.  
@@ -1031,7 +1037,7 @@ To send a `ClearPasscode` command, the server sends a dictionary containing the 
 |Key|Type|Content|
 |-|-|-|
 |`RequestType`|String|`ClearPasscode`|
-|`UnlockToken`|Data|The `UnlockToken` value that the device provided in its [TokenUpdate](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/2-MDM_Check_In_Protocol/MDM_Check_In_Protocol..html#//apple_ref/doc/uid/TP40017387-CH4-SW1) check-in message.|
+|`UnlockToken`|Data|The `UnlockToken` value that the device provided in its [TokenUpdate Message](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/2-MDM_Check_In_Protocol/MDM_Check_In_Protocol..html#//apple_ref/doc/uid/TP40017387-CH4-SW1) check-in message.|
   
 
 > **Security Note:** This command requires both Device Lock and Passcode Removal access rights.  
@@ -1053,6 +1059,7 @@ Upon receiving this command, the device immediately erases itself. No warning is
 |`RequestType`|String|`EraseDevice`|
 |`PIN`|String|The Find My Mac PIN. Must be 6 characters long.</br>**Availability:** Available in macOS 10.8 and later.|
 |`PreserveDataPlan`|Boolean|Optional. If `true`, and a data plan exists on the device, it will be preserved. Defaults to `false`.</br>**Availability:** Available in iOS 11 and later.|
+|`DisallowProximitySetup`|Boolean|Optional. If `true`, on the next reboot Proximity Setup is not allowed and the pane in Setup Assistant will be skipped. Defaults to `false`.</br>**Availability:** Available in iOS 11.3 and later.|
   
 
 The device attempts to send a response to the server, but unlike other commands, the response cannot be resent if initial transmission fails. Even if the acknowledgement did not make it to the server (due to network conditions), the device will still be erased.  
@@ -1952,6 +1959,20 @@ To send a `DataRoaming` command, the server sends a dictionary containing the fo
 |-|-|-|
 |`Item`|String|`DataRoaming`.|
 |`Enabled`|Boolean|If `true`, enables data roaming.</br>If `false`, disables data roaming.</br>Enabling data roaming also enables voice roaming.|
+  
+
+  
+
+#### Bluetooth Modifies the Bluetooth Setting
+  
+
+To send a `Bluetooth` command, the server sends a dictionary containing the following keys:  
+
+
+|Key|Type|Content|
+|-|-|-|
+|`Item`|String|`Bluetooth`.|
+|`Enabled`|Boolean|If `true`, enables Bluetooth.</br>If `false`, disables Bluetooth.</br>This setting takes effect even when the allowBluetoothModification restriction is set.|
   
 
   
@@ -2913,6 +2934,10 @@ The following sections list the error codes currently returned by iOS and macOS 
 | 12079 | No MDM instance |
 | 12080 | Could not play Lost Mode sound |
 | 12081 | Not netwok tethered |
+| 12082 | Global restrictions fetch failed |
+| 12083 | Profile restrictions fetch failed |
+| 12084 | Invalid request type |
+| 12085 | Activation lock bypass code expired |
   
 
   

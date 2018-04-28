@@ -303,6 +303,10 @@ The following sections list the error codes currently returned by iOS and macOS 
 | 12079 | No MDM instance |
 | 12080 | Could not play Lost Mode sound |
 | 12081 | Not netwok tethered |
+| 12082 | Global restrictions fetch failed |
+| 12083 | Profile restrictions fetch failed |
+| 12084 | Invalid request type |
+| 12085 | Activation lock bypass code expired |
   
 
   
