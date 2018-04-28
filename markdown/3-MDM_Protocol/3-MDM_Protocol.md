@@ -729,8 +729,8 @@ To send an `InstalledApplicationList` command, the server sends a dictionary con
 |Key|Type|Content|
 |-|-|-|
 |`RequestType`|String|`InstalledApplicationList`.|
-|`Identifiers`|Array|Optional. An array of app identifiers as strings. If provided, the response contains only the status of apps whose identifiers appear in this array. Available in iOS 7 and later.|
-|`ManagedAppsOnly`|Boolean|Optional. If `true`, only managed app identifiers are returned. Available in iOS 7 and later.|
+|`Identifiers`|Array|Optional. An array of app identifiers as strings. If provided, the response contains only the status of apps whose identifiers appear in this array. </br>**Availability:** Available in iOS 7 and later.|
+|`ManagedAppsOnly`|Boolean|Optional. If `true`, only managed app identifiers are returned. </br>**Availability:** Available in iOS 7 and later.|
   
 
 The device replies with:  
@@ -753,6 +753,7 @@ Each entry in the `InstalledApplicationList` is a dictionary containing the foll
 |`BundleSize`|Integer|The app’s static bundle size, in bytes.|
 |`DynamicSize`|Integer|The size of the app’s document, library, and other folders, in bytes.</br>**Availability:** Available in iOS 5.0 and later.|
 |`IsValidated`|Boolean|If `true`, the app has validated as allowed to run and is able to run on the device. If an app is enterprise-distributed and is not validated, it will not run on the device until validated.</br>**Availability:** Available in iOS 9.2 and later.|
+|`ExternalVersionIdentifier`|String|The application’s external version ID. It can be used for comparison in the iTunes Search API to decide if the application needs to be updated.</br>**Availability:** Available in iOS 11 and later.|
   
 
   
@@ -1051,6 +1052,7 @@ Upon receiving this command, the device immediately erases itself. No warning is
 |-|-|-|
 |`RequestType`|String|`EraseDevice`|
 |`PIN`|String|The Find My Mac PIN. Must be 6 characters long.</br>**Availability:** Available in macOS 10.8 and later.|
+|`PreserveDataPlan`|Boolean|Optional. If `true`, and a data plan exists on the device, it will be preserved. Defaults to `false`.</br>**Availability:** Available in iOS 11 and later.|
   
 
 The device attempts to send a response to the server, but unlike other commands, the response cannot be resent if initial transmission fails. Even if the acknowledgement did not make it to the server (due to network conditions), the device will still be erased.  
@@ -1426,7 +1428,6 @@ The options dictionary can contain the following keys:
 
 |Key|Type|Content|
 |-|-|-|
-|`NotManaged`|Boolean|If true, the app is queued for installation but is not managed. macOS app installation must set this value to `true`.|
 |`PurchaseMethod`|Integer|One of the following:</br>0: Legacy Volume Purchase Program (iOS only)</br>1: Volume Purchase Program App Assignment|
   
 
@@ -1621,7 +1622,7 @@ To send a `ManagedApplicationList` command, the server sends a dictionary contai
 |Key|Type|Content|
 |-|-|-|
 |`RequestType`|String|`ManagedApplicationList`.|
-|`Identifiers`|Array|Optional. An array of app identifiers as strings. If provided, the response contains only the status of apps whose identifiers appear in this array. Available in iOS 7 and later.|
+|`Identifiers`|Array|Optional. An array of app identifiers as strings. If provided, the response contains only the status of apps whose identifiers appear in this array. </br>**Availability: **Available in iOS 7 and later.|
   
 
 In response, the device sends a dictionary with the following keys:  
@@ -1640,9 +1641,10 @@ The keys of the `ManagedApplicationList` dictionary are the app identifiers for 
 |`Status`|String|The status of the managed app; see [Table 12](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/3-MDM_Protocol/MDM_Protocol.html#//apple_ref/doc/uid/TP40017387-CH3-SW333) for possible values.|
 |`ManagementFlags`|Integer|Management flags. (See InstallApplication command above for a list of flags.)|
 |`UnusedRedemptionCode`|String|If the user has already purchased a paid app, the unused redemption code is reported here. This code can be used again to purchase the app for someone else. This code is reported only once.|
-|HasConfiguration|Boolean|If `true`, the app has a server-provided configuration. For details, see [Managed App Configuration and Feedback](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/3-MDM_Protocol/MDM_Protocol.html#//apple_ref/doc/uid/TP40017387-CH3-SW68). Available in iOS 7 and later.|
-|HasFeedback|Boolean|If `true`, the app has feedback for the server. For details, see [Managed App Configuration and Feedback](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/3-MDM_Protocol/MDM_Protocol.html#//apple_ref/doc/uid/TP40017387-CH3-SW68). Available in iOS 7 and later.|
-|IsValidated|Boolean|If `true`, the app has validated as allowed to run and is able to run on the device. If an app is enterprise-distributed and is not validated, it will not run on the device until validated. Available in iOS 9.2 and later.|
+|HasConfiguration|Boolean|If `true`, the app has a server-provided configuration. For details, see [Managed App Configuration and Feedback](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/3-MDM_Protocol/MDM_Protocol.html#//apple_ref/doc/uid/TP40017387-CH3-SW68). </br>**Availability:** Available in iOS 7 and later.|
+|HasFeedback|Boolean|If `true`, the app has feedback for the server. For details, see [Managed App Configuration and Feedback](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/3-MDM_Protocol/MDM_Protocol.html#//apple_ref/doc/uid/TP40017387-CH3-SW68). </br>**Availability:** Available in iOS 7 and later.|
+|IsValidated|Boolean|If `true`, the app has validated as allowed to run and is able to run on the device. If an app is enterprise-distributed and is not validated, it will not run on the device until validated. </br>**Availability:** Available in iOS 9.2 and later.|
+|ExternalVersionIdentifier|String|The application’s external version ID. It can be used for comparison in the iTunes Search API to decide if the application needs to be updated. </br>**Availability:** Available in iOS 11 and later.|
   
 
 
@@ -2028,7 +2030,7 @@ The `MDMOptions` dictionary can contain the following keys:
 #### PasscodeLockGracePeriod Customizes the Passcode Lock on Shared iPads
   
 
-The `PasscodeLockGracePeriod` command sets  the time the screen must be locked before needing a passcode to unlock it:  
+Shared iPad Mode only. The `PasscodeLockGracePeriod` command sets the time the screen must be locked before needing a passcode to unlock it. Changing to a less restrictive value will not take effect until the user logs out.  
 
 
 |Key|Type|Content|
@@ -2037,11 +2039,11 @@ The `PasscodeLockGracePeriod` command sets  the time the screen must be locked b
 |`PasscodeLockGracePeriod`|Integer|The number of seconds the screen must be locked before unlock attempts will require the device passcode.|
   
 
-This command is valid for Shared iPad only. Changing to a less restrictive value will not take effect until the user logs out. The command is available on iOS 9.3.2 and later.  
+**Availability:** Available in iOS 9.3.2 and later.  
 
   
 
-#### MaximumResidentUsers
+#### MaximumResidentUsers Sets Maximum Number of Users for a Shared iPad
   
 
 Shared iPad Mode only. Sets the maximum number of users that can use a Shared iPad. This can be set only when the iPad is in the `AwaitingConfiguration` phase, before the `DeviceConfigured` message has been sent to the device. If `MaximumResidentUsers` is greater than the maximum possible number of users supported on the device, the device is configured with the maximum possible number of users instead.  
@@ -2054,6 +2056,38 @@ Shared iPad Mode only. Sets the maximum number of users that can use a Shared iP
   
 
 **Availability: **Available in iOS 9.3 and later.  
+
+  
+
+#### DiagnosticSubmission Enables Submission of Diagnostics
+  
+
+Shared iPad Mode only. Sets the user preference of diagnostic submission.  
+
+
+|Key|Type|Content|
+|-|-|-|
+|`Item`|String|`DiagnosticSubmission`.|
+|`Enabled`|Boolean|If `true`, enables diagnostic submission. </br>If `false`, disables diagnostic submission.|
+  
+
+**Availability: **Available in iOS 9.3 and later.  
+
+  
+
+#### AppAnalytics Enables Sharing Analytics with App Developers
+  
+
+Shared iPad Mode only. Sets the user preference of sharing analytics with app developers.  
+
+
+|Key|Type|Content|
+|-|-|-|
+|`Item`|String|`AppAnalytics`.|
+|`Enabled`|Boolean|If `true`, enables app analytics. </br>If `false`, disables app analytics.|
+  
+
+**Availability: **Available in iOS 9.3.2 and later.  
 
   
 
@@ -2451,7 +2485,7 @@ The build number of the update: e.g., 13A999.|
 |`InstallSize`|Number|Storage size needed to install the software update. Floating point number of bytes.|
 |`AppIdentifiersToClose`|Array|Array of strings. Each entry represents an app identifier that is closed to install this update (macOS only).|
 |`IsCritical`|Boolean|Set to `true` if this update is considered critical. Defaults to `false`.|
-|`IsConfigurationDataUpdate`|Boolean|Set to `true` if this is an update to a configuration file. Defaults to false (macOS only).|
+|`IsConfigurationDataUpdate`|Boolean|Set to `true` if this is an update to a configuration file. Defaults to `false` (macOS only).|
 |`IsFirmwareUpdate`|Boolean|Set to `true` if this is an update to firmware. Defaults to `false` (macOS only).|
 |`RestartRequired`|Boolean|Set to `true` if the device restarts after this update is installed. Defaults to `false`.|
 |`AllowsInstallLater`|Boolean|Set to `true` if the update is eligible for InstallLater. Defaults to `true`.|
@@ -2556,7 +2590,7 @@ To unlock a device by means of a password, `KeyType` must be set to `personal` a
 
 |Key|Type|Content|
 |-|-|-|
-|`Password`|String|The current Personal Recovery Key (PRK) or a FileVault user’s password.|
+|`Password`|String|A FileVault user’s password, or if using a CoreStorage volume, the current Personal Recovery Key (PRK).|
   
 
 To unlock a device using the institutional recovery key, `KeyType` must be set to `institutional` and the `FileVaultUnlock` dictionary must contain the following keys:  
