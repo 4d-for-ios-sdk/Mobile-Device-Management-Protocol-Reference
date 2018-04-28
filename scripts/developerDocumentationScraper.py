@@ -453,6 +453,11 @@ def stringForTag(tag):
 
 		if tag.has_attr('class') and tag[u'class'] == [u'codesample', u'clear']:
 			return stringForCodesample(tag)
+
+		# Ignore copyright information
+		if tag.has_attr('class') and tag[u'class'] == [u'copyright']:
+			return None
+
 	elif tagName == 'ol':
 		return stringForList(tag, False, True)
 
