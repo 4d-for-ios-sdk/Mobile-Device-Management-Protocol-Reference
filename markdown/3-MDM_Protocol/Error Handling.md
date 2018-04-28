@@ -30,7 +30,7 @@ The following commands are guaranteed to execute in iOS, and never return `NotNo
 * `Restrictions` 
   
 
-The OS X MDM client may respond with `NotNow` when:  
+The macOS MDM client may respond with `NotNow` when:  
 
 
 * The system is in Power Nap (dark wake) and a command other than `DeviceLock` or `EraseDevice` is received. 
@@ -38,4 +38,4 @@ The OS X MDM client may respond with `NotNow` when:
 * An `InstallProfile` or `RemoveProfile` request is made on the user connection and the user’s keychain is locked. 
   
 
-In OS X, the client may respond with `NotNow` if it is blocking the user’s login while it contacts the server, and if the server sends a request that may take a long time to answer (such as `InstalledApplicationList` or `DeviceInformation`).
+In macOS, the client may respond with `NotNow` if it is blocking the user’s login while it contacts the server, and if the server sends a request that may take a long time to answer (such as `InstalledApplicationList` or `DeviceInformation`).

@@ -8,10 +8,10 @@
 
   
 
-### OS X Extensions
+### macOS Extensions
   
 
-Unlike iOS clients, an OS X client on an MDM server enrolls devices and users as separate entities. OS X supports several extensions to the MDM protocol to allow managing the device and logged-in user independently. When enrolled in this manner, the MDM server receives requests for the device and for each logged-in user.  
+Unlike iOS clients, a macOS client on an MDM server enrolls devices and users as separate entities. macOS supports several extensions to the MDM protocol to allow managing the device and logged-in user independently. When enrolled in this manner, the MDM server receives requests for the device and for each logged-in user.  
 
 Device requests are sent from the `mdmclient` daemon, while user requests are sent from the `mdmclient` agent. If multiple users are logged in, there is one instance of an `mdmclient` agent for each logged-in user, and each may be sending requests concurrently in addition to device requests from the daemon.  
 
@@ -51,9 +51,9 @@ Note the following conditions for including the foregoing keys:
 
 * Requests from a device contain only the `UDID` key. 
 
-* `NeedSyncResponse` is optional. If it is present and true, it indicates that the client is in a state where the user is waiting for the completion of an MDM transaction. In OS X 10.9 and later versions, this key is added during user login when the login is blocked while the client checks in with the MDM server to ensure it has the latest settings and profiles. The key is meant as a hint to the server that it should send all commands in the current set of Idle/Acknowledged/Error transactions instead of relying on push notifications. During login, the client blocks the transaction only until the server sends an empty response to an Idle/Acknowledged/Error sequence. 
+* `NeedSyncResponse` is optional. If it is present and true, it indicates that the client is in a state where the user is waiting for the completion of an MDM transaction. In macOS 10.9 and later versions, this key is added during user login when the login is blocked while the client checks in with the MDM server to ensure it has the latest settings and profiles. The key is meant as a hint to the server that it should send all commands in the current set of Idle/Acknowledged/Error transactions instead of relying on push notifications. During login, the client blocks the transaction only until the server sends an empty response to an Idle/Acknowledged/Error sequence. 
 
-* `UserConfiguration` is optional. If it is present and true, it indicates that the OS X client is trying to obtain user-specific settings while in Setup Assistant during Device Enrollment (see [Device Enrollment Program](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/4-Profile_Management/ProfileManagement.html#//apple_ref/doc/uid/TP40017387-CH7-SW1)). After an OS X client obtains device-specific settings, it also attempts to determine if the server has any user-specific settings that may affect Setup Assistant. Currently, only password policies fall into this category. The password policies are used if Setup Assistant prompts to create a local user account. After the client receives a DeviceConfigured command on the device connection, it starts a normal Idle/Acknowledged/Error connection on the user connection. If the server sends commands or profiles during this time, nothing the client receives persists, because the user account hasn’t been created on the system yet. The client always responds `NotNow` to any commands it received during this time. It continues to respond with `NotNow` until it receives a reply with no additional commands (an empty body) or a `DeviceConfigured` command on the user connection. The client passes any password policies to Setup Assistant and discards everything else. After Setup Assistant creates the user account and the user logs in, the client initiates a new series of Idle/Acknowledged/Error connections. The server should then resend all commands and profiles. The client processes them normally and they will persist. 
+* `UserConfiguration` is optional. If it is present and true, it indicates that the macOS client is trying to obtain user-specific settings while in Setup Assistant during Device Enrollment (see [Device Enrollment Program](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/4-Profile_Management/ProfileManagement.html#//apple_ref/doc/uid/TP40017387-CH7-SW1)). After a macOS client obtains device-specific settings, it also attempts to determine if the server has any user-specific settings that may affect Setup Assistant. Currently, only password policies fall into this category. The password policies are used if Setup Assistant prompts to create a local user account. After the client receives a DeviceConfigured command on the device connection, it starts a normal Idle/Acknowledged/Error connection on the user connection. If the server sends commands or profiles during this time, nothing the client receives persists, because the user account hasn’t been created on the system yet. The client always responds `NotNow` to any commands it received during this time. It continues to respond with `NotNow` until it receives a reply with no additional commands (an empty body) or a `DeviceConfigured` command on the user connection. The client passes any password policies to Setup Assistant and discards everything else. After Setup Assistant creates the user account and the user logs in, the client initiates a new series of Idle/Acknowledged/Error connections. The server should then resend all commands and profiles. The client processes them normally and they will persist. 
   
 
   
@@ -61,7 +61,7 @@ Note the following conditions for including the foregoing keys:
 ### Network User Authentication Extensions
   
 
-To support environments where an OS X computer is bound to an Open Directory server and various network users may log in, extensions to the MDM protocol were developed to identify and authenticate the network user logging in. This way, network users are also managed by the MDM server via their user profiles.  
+To support environments where a macOS computer is bound to an Open Directory server and various network users may log in, extensions to the MDM protocol were developed to identify and authenticate the network user logging in. This way, network users are also managed by the MDM server via their user profiles.  
 
 At login time, if the user is a network user or has a mobile home, the MDM client issues a request to the server to authenticate the current user to the MDM server and obtain an `AuthToken` value that is used in subsequent requests made by this user to the server.  
 
@@ -77,7 +77,7 @@ The first request to the server is sent to the `CheckInURL` specified in the MDM
 |`UserID`|String|Local user’s GUID, or  network user’s GUID from Open Directory Record (see below).|
   
 
-If the OS X device being enrolled has an owner, the `UserID` key may designate a local user instead of a network user. If the local request succeeds, an `-MDM-is-owned` header is added to the response to all requests to the `checkinURL`, except `CheckOut` requests where it is optional. To this header may be added a value of 1 to indicate the device is owned; this is also the default behavior if the header is omitted. Only if the header is present with a value of 0 will requests from the client be optimized.  
+If the macOS device being enrolled has an owner, the `UserID` key may designate a local user instead of a network user. If the local request succeeds, an `-MDM-is-owned` header is added to the response to all requests to the `checkinURL`, except `CheckOut` requests where it is optional. To this header may be added a value of 1 to indicate the device is owned; this is also the default behavior if the header is omitted. Only if the header is present with a value of 0 will requests from the client be optimized.  
 
 The response from the server should contain a dictionary with:  
 
@@ -195,7 +195,29 @@ For push notifications, the client uses different push tokens for device and use
 
 A device running iOS 9.3 or later, and its logged-in users, can be managed independently as a Shared iPad, using a technique similar to [Network User Authentication Extensions](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/3-MDM_Protocol/MDM_Protocol.html#//apple_ref/doc/uid/TP40017387-CH3-SW736). The device and its users are assigned different push tokens. The server can use this difference to determine whether the device or a specific user is to contact the server with an `Idle` request.  
 
-To indicate that an MDM server supports both device and user connections, the `ServerCapabilities` array in its MDM enrollment payload must contain the string `com.apple.mdm.per-user-connections`, indicating support for shared iPad. Then when a user logs in, the device sends a `TokenUpdate` request on the user channel.  
+In general, the following types of MDM commands can be sent on the user channel:  
+
+
+* `
+kMCMDMPRequestTypeProfileList` 
+
+* `
+kMCMDMPRequestTypeInstallProfile` 
+
+* `
+kMCMDMPRequestTypeRemoveProfile` 
+
+* `
+kMCMDMPRequestTypeRestrictions` 
+
+* `
+kMCMDMPRequestTypeInviteToProgram` 
+
+* `
+kMCMDMPRequestTypeDeviceInformation` 
+  
+
+To indicate that an MDM server supports both device and user connections, the `ServerCapabilities` array in its MDM enrollment payload must contain the string `com.apple.mdm.per-user-connections`, indicating support for Shared iPad. Then when a user logs in, the device sends a `TokenUpdate` request on the user channel.  
 
 To help the server differentiate requests coming from a device versus a user, user requests must contain additional keys:  
 

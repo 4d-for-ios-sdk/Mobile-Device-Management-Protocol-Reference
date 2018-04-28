@@ -6,7 +6,7 @@
 ## Error Codes
   
 
-The following sections list the error codes currently returned by iOS and OS X devices. Your software should *not* depend on these values, because they may change in future operating system releases. They are provided solely for informational purposes.  
+The following sections list the error codes currently returned by iOS and macOS devices. Your software should *not* depend on these values, because they may change in future operating system releases. They are provided solely for informational purposes.  
 
   
 
@@ -97,7 +97,7 @@ The following sections list the error codes currently returned by iOS and OS X d
 | 4027 | Profile requires passcode change |
 | 4028 | Multiple home screen layout payloads |
 | 4029 | Multiple notification settings layout payloads |
-| 4030 | Unacceptable payload in ephemeral multi-user |
+| 4030 | Unacceptable payload in Shared iPad |
 | 4031 | Payload contains sensitive user information |
   
 
@@ -298,6 +298,11 @@ The following sections list the error codes currently returned by iOS and OS X d
 | 12074 | Could not delete user |
 | 12075 | Specified profile not installed |
 | 12076 | Per-user connections not supported |
+| 12077 | System update not permitted with logged-in user |
+| 12078 | Invalid request type in MDM Lost mode |
+| 12079 | No MDM instance |
+| 12080 | Could not play Lost Mode sound |
+| 12081 | Not netwok tethered |
   
 
   

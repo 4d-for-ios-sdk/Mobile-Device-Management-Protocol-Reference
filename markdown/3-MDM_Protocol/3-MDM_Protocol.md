@@ -51,12 +51,15 @@ The Mobile Device Management (MDM) payload, a simple property list, is designate
 |`IdentityCertificateUUID`|String|*Mandatory.* UUID of the certificate payload for the device’s identity. It may also point to a SCEP payload.|
 |`Topic`|String|*Mandatory.* The topic that MDM listens to for push notifications. The certificate that the server uses to send push notifications must have the same topic in its subject. The topic must begin with the `com.apple.mgmt.` prefix.|
 |`ServerURL`|String|*Mandatory.* The URL that the device contacts to retrieve device management instructions. Must begin with the `https://` URL scheme, and may contain a port number (`:1234`, for example).|
-|`ServerCapabilities`|Array|Optional. An array of strings indicating server capabilities. If the server manages OS X devices or a shared iPad, this field is mandatory and must contain the value `com.apple.mdm.per-user-connections`. This indicates that the server supports both device and user connections. See [MDM Protocol Extensions](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/3-MDM_Protocol/MDM_Protocol.html#//apple_ref/doc/uid/TP40017387-CH3-SW62).|
-|`SignMessage`|Bool|Optional. If `true`, each message coming from the device carries the additional `Mdm-Signature` HTTP header. Defaults to `false`.</br>See [Passing the Client Identity Through Proxies](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/6-MDM_Best_Practices/MDM_Best_Practices.html#//apple_ref/doc/uid/TP40017387-CH5-SW1) for details.|
+|`ServerCapabilities`|Array|Optional. An array of strings indicating server capabilities. If the server manages macOS devices or a Shared iPad, this field is mandatory and must contain the value `com.apple.mdm.per-user-connections`. This indicates that the server supports both device and user connections. See [MDM Protocol Extensions](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/3-MDM_Protocol/MDM_Protocol.html#//apple_ref/doc/uid/TP40017387-CH3-SW62).|
+|`SignMessage`|Boolean|Optional. If `true`, each message coming from the device carries the additional `Mdm-Signature` HTTP header. Defaults to `false`.</br>See [Passing the Client Identity Through Proxies](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/6-MDM_Best_Practices/MDM_Best_Practices.html#//apple_ref/doc/uid/TP40017387-CH5-SW1) for details.|
 |`CheckInURL`|String|Optional. The URL that the device should use to check in during installation. Must begin with the `https://` URL scheme and may contain a port number (`:1234`, for example). If this URL is not given, the `ServerURL` is used for both purposes.|
-|`CheckOutWhenRemoved`|Bool|Optional. If `true`, the device attempts to send a `CheckOut` message to the check-in server when the profile is removed. Defaults to `false`.</br>Note: OS X v10.8 acts as though this setting is always `true`.</br>**Availability: **Available in iOS 5.0 and later|
-|`AccessRights`|Integer, flags|*Required.* Logical OR of the following bit-flags:<ul><li>1: Allow inspection of installed configuration profiles.</li><li>2: Allow installation and removal of configuration profiles.</li><li>4: Allow device lock and passcode removal.</li><li>8: Allow device erase.</li><li>16: Allow query of Device Information (device capacity, serial number).</li><li>32: Allow query of Network Information (phone/SIM numbers, MAC addresses).</li><li>64: Allow inspection of installed provisioning profiles.</li><li>128: Allow installation and removal of provisioning profiles.</li><li>256: Allow inspection of installed applications.</li><li>512: Allow restriction-related queries.</li><li>1024: Allow security-related queries.</li><li>2048: Allow manipulation of settings. **Availability:** Available in iOS 5.0 and later. Available in OS X 10.9 for certain commands.</li><li>4096: Allow app management. **Availability:** Available in iOS 5.0 and later. Available in OS X 10.9 for certain commands.</li></ul></br>May not be zero. If 2 is specified, 1 must also be specified. If 128 is specified, 64 must also be specified.|
-|`UseDevelopmentAPNS`|Bool|Optional. If `true`, the device uses the development APNS servers. Otherwise, the device uses the production servers. Defaults to `false`. Note that this property must be set to false if your Apple Push Notification Service certificate was issued by the Apple Push Certificate Portal ([identity.apple.com/pushcert](https://identity.apple.com/pushcert)). That portal only issues certificates for the production push environment.|
+|`CheckOutWhenRemoved`|Boolean|Optional. If `true`, the device attempts to send a `CheckOut` message to the check-in server when the profile is removed. Defaults to `false`.</br>Note: macOS v10.8 acts as though this setting is always `true`.</br>**Availability: **Available in iOS 5.0 and later|
+|`AccessRights`|Integer, flags|*Required.* Logical OR of the following bit-flags:<ul><li>1: Allow inspection of installed configuration profiles.</li><li>2: Allow installation and removal of configuration profiles.</li><li>4: Allow device lock and passcode removal.</li><li>8: Allow device erase.</li><li>16: Allow query of Device Information (device capacity, serial number).</li><li>32: Allow query of Network Information (phone/SIM numbers, MAC addresses).</li><li>64: Allow inspection of installed provisioning profiles.</li><li>128: Allow installation and removal of provisioning profiles.</li><li>256: Allow inspection of installed applications.</li><li>512: Allow restriction-related queries.</li><li>1024: Allow security-related queries.</li><li>2048: Allow manipulation of settings. **Availability:** Available in iOS 5.0 and later. Available in macOS 10.9 for certain commands.</li><li>4096: Allow app management. **Availability:** Available in iOS 5.0 and later. Available in macOS 10.9 for certain commands.</li></ul></br>May not be zero. If 2 is specified, 1 must also be specified. If 128 is specified, 64 must also be specified.|
+|`UseDevelopmentAPNS`|Boolean|Optional. If `true`, the device uses the development APNS servers. Otherwise, the device uses the production servers. Defaults to `false`. Note that this property must be set to false if your Apple Push Notification Service certificate was issued by the Apple Push Certificate Portal ([identity.apple.com/pushcert](https://identity.apple.com/pushcert)). That portal only issues certificates for the production push environment.|
+|`ServerURLPinningCertificateUUIDs`|Array|Optional. Array of strings containing the `PayloadUUIDs` of certificates to be used when evaluating trust to the `.../connect/` URLs of MDM servers. **Availability:** Available in macOS 10.13 and later.|
+|`CheckInURLPinningCertificateUUIDs`|Array|Optional. Array of strings containing the `PayloadUUIDs` of certificates to be used when evaluating trust to the `.../checkin/` URLs of MDM servers. **Availability:** Available in macOS 10.13 and later.|
+|`PinningRevocationCheckRequired`|Boolean|Optional. If `true`, connection will fail unless a verified positive response is obtained during certificate revocation checks. If `false`, revocation checking is done on a best attempt basis and failure to reach the server is not considered fatal. Default is `false`.**Availability:** Available in macOS 10.13 and later.|
   
 
 In addition, four standard payload keys must be defined:  
@@ -185,6 +188,7 @@ The content of the `Command` dictionary must include the following required key,
 |Key|Type|Content|
 |-|-|-|
 |`RequestType`|String|Request type. See each command’s description.|
+|`RequestRequiresNetworkTether`|Boolean|Optional. If `true`, the command is executed only if the device has a tethered network connection; otherwise an MCMDM error value of 12081 is returned (see [MCMDMErrorDomain](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/3-MDM_Protocol/MDM_Protocol.html#//apple_ref/doc/uid/TP40017387-CH3-TRANSLATED_DEST_13)). Default value is `false`.|
   
   
 
@@ -235,10 +239,10 @@ The `ErrorDomain` and `ErrorCode` keys contain internal codes used by Apple that
 
   
 
-### OS X Extensions
+### macOS Extensions
   
 
-Unlike iOS clients, an OS X client on an MDM server enrolls devices and users as separate entities. OS X supports several extensions to the MDM protocol to allow managing the device and logged-in user independently. When enrolled in this manner, the MDM server receives requests for the device and for each logged-in user.  
+Unlike iOS clients, a macOS client on an MDM server enrolls devices and users as separate entities. macOS supports several extensions to the MDM protocol to allow managing the device and logged-in user independently. When enrolled in this manner, the MDM server receives requests for the device and for each logged-in user.  
 
 Device requests are sent from the `mdmclient` daemon, while user requests are sent from the `mdmclient` agent. If multiple users are logged in, there is one instance of an `mdmclient` agent for each logged-in user, and each may be sending requests concurrently in addition to device requests from the daemon.  
 
@@ -278,9 +282,9 @@ Note the following conditions for including the foregoing keys:
 
 * Requests from a device contain only the `UDID` key. 
 
-* `NeedSyncResponse` is optional. If it is present and true, it indicates that the client is in a state where the user is waiting for the completion of an MDM transaction. In OS X 10.9 and later versions, this key is added during user login when the login is blocked while the client checks in with the MDM server to ensure it has the latest settings and profiles. The key is meant as a hint to the server that it should send all commands in the current set of Idle/Acknowledged/Error transactions instead of relying on push notifications. During login, the client blocks the transaction only until the server sends an empty response to an Idle/Acknowledged/Error sequence. 
+* `NeedSyncResponse` is optional. If it is present and true, it indicates that the client is in a state where the user is waiting for the completion of an MDM transaction. In macOS 10.9 and later versions, this key is added during user login when the login is blocked while the client checks in with the MDM server to ensure it has the latest settings and profiles. The key is meant as a hint to the server that it should send all commands in the current set of Idle/Acknowledged/Error transactions instead of relying on push notifications. During login, the client blocks the transaction only until the server sends an empty response to an Idle/Acknowledged/Error sequence. 
 
-* `UserConfiguration` is optional. If it is present and true, it indicates that the OS X client is trying to obtain user-specific settings while in Setup Assistant during Device Enrollment (see [Device Enrollment Program](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/4-Profile_Management/ProfileManagement.html#//apple_ref/doc/uid/TP40017387-CH7-SW1)). After an OS X client obtains device-specific settings, it also attempts to determine if the server has any user-specific settings that may affect Setup Assistant. Currently, only password policies fall into this category. The password policies are used if Setup Assistant prompts to create a local user account. After the client receives a DeviceConfigured command on the device connection, it starts a normal Idle/Acknowledged/Error connection on the user connection. If the server sends commands or profiles during this time, nothing the client receives persists, because the user account hasn’t been created on the system yet. The client always responds `NotNow` to any commands it received during this time. It continues to respond with `NotNow` until it receives a reply with no additional commands (an empty body) or a `DeviceConfigured` command on the user connection. The client passes any password policies to Setup Assistant and discards everything else. After Setup Assistant creates the user account and the user logs in, the client initiates a new series of Idle/Acknowledged/Error connections. The server should then resend all commands and profiles. The client processes them normally and they will persist. 
+* `UserConfiguration` is optional. If it is present and true, it indicates that the macOS client is trying to obtain user-specific settings while in Setup Assistant during Device Enrollment (see [Device Enrollment Program](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/4-Profile_Management/ProfileManagement.html#//apple_ref/doc/uid/TP40017387-CH7-SW1)). After a macOS client obtains device-specific settings, it also attempts to determine if the server has any user-specific settings that may affect Setup Assistant. Currently, only password policies fall into this category. The password policies are used if Setup Assistant prompts to create a local user account. After the client receives a DeviceConfigured command on the device connection, it starts a normal Idle/Acknowledged/Error connection on the user connection. If the server sends commands or profiles during this time, nothing the client receives persists, because the user account hasn’t been created on the system yet. The client always responds `NotNow` to any commands it received during this time. It continues to respond with `NotNow` until it receives a reply with no additional commands (an empty body) or a `DeviceConfigured` command on the user connection. The client passes any password policies to Setup Assistant and discards everything else. After Setup Assistant creates the user account and the user logs in, the client initiates a new series of Idle/Acknowledged/Error connections. The server should then resend all commands and profiles. The client processes them normally and they will persist. 
   
 
   
@@ -288,7 +292,7 @@ Note the following conditions for including the foregoing keys:
 ### Network User Authentication Extensions
   
 
-To support environments where an OS X computer is bound to an Open Directory server and various network users may log in, extensions to the MDM protocol were developed to identify and authenticate the network user logging in. This way, network users are also managed by the MDM server via their user profiles.  
+To support environments where a macOS computer is bound to an Open Directory server and various network users may log in, extensions to the MDM protocol were developed to identify and authenticate the network user logging in. This way, network users are also managed by the MDM server via their user profiles.  
 
 At login time, if the user is a network user or has a mobile home, the MDM client issues a request to the server to authenticate the current user to the MDM server and obtain an `AuthToken` value that is used in subsequent requests made by this user to the server.  
 
@@ -304,7 +308,7 @@ The first request to the server is sent to the `CheckInURL` specified in the MDM
 |`UserID`|String|Local user’s GUID, or  network user’s GUID from Open Directory Record (see below).|
   
 
-If the OS X device being enrolled has an owner, the `UserID` key may designate a local user instead of a network user. If the local request succeeds, an `-MDM-is-owned` header is added to the response to all requests to the `checkinURL`, except `CheckOut` requests where it is optional. To this header may be added a value of 1 to indicate the device is owned; this is also the default behavior if the header is omitted. Only if the header is present with a value of 0 will requests from the client be optimized.  
+If the macOS device being enrolled has an owner, the `UserID` key may designate a local user instead of a network user. If the local request succeeds, an `-MDM-is-owned` header is added to the response to all requests to the `checkinURL`, except `CheckOut` requests where it is optional. To this header may be added a value of 1 to indicate the device is owned; this is also the default behavior if the header is omitted. Only if the header is present with a value of 0 will requests from the client be optimized.  
 
 The response from the server should contain a dictionary with:  
 
@@ -422,7 +426,29 @@ For push notifications, the client uses different push tokens for device and use
 
 A device running iOS 9.3 or later, and its logged-in users, can be managed independently as a Shared iPad, using a technique similar to [Network User Authentication Extensions](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/3-MDM_Protocol/MDM_Protocol.html#//apple_ref/doc/uid/TP40017387-CH3-SW736). The device and its users are assigned different push tokens. The server can use this difference to determine whether the device or a specific user is to contact the server with an `Idle` request.  
 
-To indicate that an MDM server supports both device and user connections, the `ServerCapabilities` array in its MDM enrollment payload must contain the string `com.apple.mdm.per-user-connections`, indicating support for shared iPad. Then when a user logs in, the device sends a `TokenUpdate` request on the user channel.  
+In general, the following types of MDM commands can be sent on the user channel:  
+
+
+* `
+kMCMDMPRequestTypeProfileList` 
+
+* `
+kMCMDMPRequestTypeInstallProfile` 
+
+* `
+kMCMDMPRequestTypeRemoveProfile` 
+
+* `
+kMCMDMPRequestTypeRestrictions` 
+
+* `
+kMCMDMPRequestTypeInviteToProgram` 
+
+* `
+kMCMDMPRequestTypeDeviceInformation` 
+  
+
+To indicate that an MDM server supports both device and user connections, the `ServerCapabilities` array in its MDM enrollment payload must contain the string `com.apple.mdm.per-user-connections`, indicating support for Shared iPad. Then when a user logs in, the device sends a `TokenUpdate` request on the user channel.  
 
 To help the server differentiate requests coming from a device versus a user, user requests must contain additional keys:  
 
@@ -466,7 +492,7 @@ The following commands are guaranteed to execute in iOS, and never return `NotNo
 * `Restrictions` 
   
 
-The OS X MDM client may respond with `NotNow` when:  
+The macOS MDM client may respond with `NotNow` when:  
 
 
 * The system is in Power Nap (dark wake) and a command other than `DeviceLock` or `EraseDevice` is received. 
@@ -474,7 +500,7 @@ The OS X MDM client may respond with `NotNow` when:
 * An `InstallProfile` or `RemoveProfile` request is made on the user connection and the user’s keychain is locked. 
   
 
-In OS X, the client may respond with `NotNow` if it is blocking the user’s login while it contacts the server, and if the server sends a request that may take a long time to answer (such as `InstalledApplicationList` or `DeviceInformation`).  
+In macOS, the client may respond with `NotNow` if it is blocking the user’s login while it contacts the server, and if the server sends a request that may take a long time to answer (such as `InstalledApplicationList` or `DeviceInformation`).  
   
 
 ## Handling a NotNow Response
@@ -506,7 +532,7 @@ The three example flowcharts below illustrate the foregoing choices.
 ## Request Types
   
 
-This section describes the MDM protocol request types for Apple devices that run iOS. Support for the equivalent request types used with Apple computers that run OS X is summarized in [Support for OS X Requests](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/3-MDM_Protocol/MDM_Protocol.html#//apple_ref/doc/uid/TP40017387-CH3-SW901).  
+This section describes the MDM protocol request types for Apple devices that run iOS. Support for the equivalent request types used with Apple computers that run macOS is summarized in [Support for macOS Requests](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/3-MDM_Protocol/MDM_Protocol.html#//apple_ref/doc/uid/TP40017387-CH3-SW901).  
 
   
 
@@ -618,7 +644,7 @@ Each entry in the `ProvisioningProfileList` array contains the following diction
 > **Security Note:** This query is available only if the MDM host has an Inspect Provisioning Profiles access right.  
   
 
-> **Note:** The OS X MDM client responds with an empty `ProvisioningProfileList` array.  
+> **Note:** The macOS MDM client responds with an empty `ProvisioningProfileList` array.  
   
 
   
@@ -764,13 +790,13 @@ The queries described in  are available without any special access rights:
 |Query|Reply Type|Comment|
 |-|-|-|
 |`UDID`|String|The unique device identifier (UDID) of the device.|
-|`Languages`|Array|Array of strings. The first entry in this array indicates the current language. **Availability:** Available in Apple TV software 6.0 and later. Supported in OS X 10.10 and 10.11 but will be removed in a future macOS release.|
-|`Locales`|String|Array of strings. The first entry in this array indicates the current locale. **Availability:** Available in Apple TV software 6.0 and later. Supported in OS X 10.10 and 10.11 but will be removed in a future macOS release.|
+|`Languages`|Array|Array of strings. The first entry in this array indicates the current language. **Availability:** Available in Apple TV software 6.0 and later. Supported in macOS 10.10 and 10.11 but will be removed in a future macOS release.|
+|`Locales`|String|Array of strings. The first entry in this array indicates the current locale. **Availability:** Available in Apple TV software 6.0 and later. Supported in macOS 10.10 and 10.11 but will be removed in a future macOS release.|
 |`DeviceID`|String|The Apple TV device ID. Available in iOS 7 (Apple TV software 6.0) and later, on Apple TV only.|
 |`OrganizationInfo`|Dictionary|The contents (if any) of a previously set `OrganizationInfo` setting. Available in iOS 7 and later.|
 |`LastCloudBackupDate`|Date|The date of the last iCloud backup. **Availability:** Available in iOS 8.0 and later.|
 |`AwaitingConfiguration`|Boolean|If `true`, device is still waiting for a DeviceConfigured message from MDM to continue through Setup Assistant. **Availability:** Available in iOS 9 and later and the response is only generated by devices enrolled in MDM via DEP (see [Device Enrollment Program](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/4-Profile_Management/ProfileManagement.html#//apple_ref/doc/uid/TP40017387-CH7-SW1)).|
-|`AutoSetupAdminAccounts`|Array of Dictionaries|Returns the local admin users (if any) created automatically by Setup Assistant during DEP enrollment via the `AccountConfiguration` command. **Availability:** Available in OS X 10.11 and later and the response is only generated by devices enrolled in MDM via DEP (see [Device Enrollment Program](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/4-Profile_Management/ProfileManagement.html#//apple_ref/doc/uid/TP40017387-CH7-SW1)).</br>Each dictionary in the array contains two keys: a key `GUID` with a string value of the Global Unique Identifier of a local admin account, and a key `shortName` with a string value of the short name of the admin account.|
+|`AutoSetupAdminAccounts`|Array of Dictionaries|Returns the local admin users (if any) created automatically by Setup Assistant during DEP enrollment via the `AccountConfiguration` command. **Availability:** Available in macOS 10.11 and later and the response is only generated by devices enrolled in MDM via DEP (see [Device Enrollment Program](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/4-Profile_Management/ProfileManagement.html#//apple_ref/doc/uid/TP40017387-CH7-SW1)).</br>Each dictionary in the array contains two keys: a key `GUID` with a string value of the Global Unique Identifier of a local admin account, and a key `shortName` with a string value of the short name of the admin account.|
   
 
   
@@ -783,8 +809,8 @@ The queries in  are available if the MDM host has an Install Applications access
 
 |Query|Reply Type|Content|
 |-|-|-|
-|`iTunesStoreAccountIsActive`|Boolean|`true` if the user is currently logged into an active iTunes Store account. Available in iOS 7 and later and in OS X 10.9.|
-|`iTunesStoreAccountHash`|String|Returns a hash of the iTunes Store account currently logged in. This string is identical to the `itsIdHash` returned by the VPP App Assignment web service. **Availability:** Available in iOS 8.0 and later and OS X 10.10 and later.|
+|`iTunesStoreAccountIsActive`|Boolean|`true` if the user is currently logged into an active iTunes Store account. Available in iOS 7 and later and in macOS 10.9.|
+|`iTunesStoreAccountHash`|String|Returns a hash of the iTunes Store account currently logged in. This string is identical to the `itsIdHash` returned by the VPP App Assignment web service. **Availability:** Available in iOS 8.0 and later and macOS 10.10 and later.|
   
 
   
@@ -797,7 +823,7 @@ The queries in  are available if the MDM host has a Device Information access ri
 
 |Query|Reply Type|Comment|
 |-|-|-|
-|`DeviceName`|String|The iOS device name or the OS X hostname.|
+|`DeviceName`|String|The iOS device name or the macOS hostname.|
 |`OSVersion`|String|The version of iOS the device is running.|
 |`BuildVersion`|String|The build number (8A260b, for example).|
 |`ModelName`|String|Name of the device model, e.g., “MacBook Pro.”|
@@ -808,21 +834,21 @@ The queries in  are available if the MDM host has a Device Information access ri
 |`AvailableDeviceCapacity`|Number|Floating-point gigabytes (base-1024 gigabytes).|
 |`BatteryLevel`|Number|Floating-point percentage expressed as a value between 0.0 and 1.0, or -1.0 if battery level cannot be determined.</br>**Availability:** Available in iOS 5.0 and later.|
 |`CellularTechnology`|Number|Returns the type of cellular technology.<ul><li>`0`: none</li><li>`1`: GSM</li><li>`2`: CDMA</li><li>`3`: both</li></ul></br>**Availability: **Available in iOS 4.2.6 and later.|
-|`IMEI`|String|The device’s IMEI number. Ignored if the device does not support GSM.</br>**Availability:** Not supported in OS X.|
-|`MEID`|String|The device’s MEID number. Ignored if the device does not support CDMA.</br>**Availability:** Not supported in OS X.|
-|`ModemFirmwareVersion`|String|The baseband firmware version.</br>**Availability:** Not supported in OS X.|
+|`IMEI`|String|The device’s IMEI number. Ignored if the device does not support GSM.</br>**Availability:** Not supported in macOS.|
+|`MEID`|String|The device’s MEID number. Ignored if the device does not support CDMA.</br>**Availability:** Not supported in macOS.|
+|`ModemFirmwareVersion`|String|The baseband firmware version.</br>**Availability:** Not supported in macOS.|
 |`IsSupervised`|Boolean|If `true`, the device is supervised.</br>**Availability:** Available in iOS 6 and later.|
 |`IsDeviceLocatorServiceEnabled`|Boolean|If `true`, the device has a device locator service (such as Find My iPhone) enabled.</br>**Availability:** Available in iOS 7 and later.|
-|`IsActivationLockEnabled`|Boolean|If true, the device has Activation Lock enabled. **Availability:** Available in iOS 7 and later and OS X 10.9 and later.|
+|`IsActivationLockEnabled`|Boolean|If true, the device has Activation Lock enabled. **Availability:** Available in iOS 7 and later and macOS 10.9 and later.|
 |`IsDoNotDisturbInEffect`|Boolean|If `true`, Do Not Disturb is in effect. This returns `true` whenever Do Not Disturb is turned on, even if the device is not currently locked.</br>**Availability:** Available in iOS 7 and later.|
 |`DeviceID`|String|Device ID.</br>**Availability:** Available in Apple TV software 6.0 and later only.|
-|`EASDeviceIdentifier`|String|The Device Identifier string reported to Exchange Active Sync (EAS).</br>**Availability:** Available in iOS 7 and later and OS X 10.9 and later.|
+|`EASDeviceIdentifier`|String|The Device Identifier string reported to Exchange Active Sync (EAS).</br>**Availability:** Available in iOS 7 and later and macOS 10.9 and later.|
 |`IsCloudBackupEnabled`|Boolean|If true, the device has iCloud backup enabled.</br>**Availability:** Available in iOS 7.1 and later.|
-|`OSUpdateSettings`|Dictionary|Returns the OS Update settings (see [Table 8](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/3-MDM_Protocol/MDM_Protocol.html#//apple_ref/doc/uid/TP40017387-CH3-SW25a)).</br>**Availability:** Available in OS X 10.11 and later.|
-|`LocalHostName`|String|Returns the local host name as reported by Bonjour.</br>**Availability:** Available in OS X 10.11 and later.|
-|`HostName`|String|Returns the host name.</br>**Availability:** Available in OS X 10.11 and later.|
+|`OSUpdateSettings`|Dictionary|Returns the OS Update settings (see [Table 8](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/3-MDM_Protocol/MDM_Protocol.html#//apple_ref/doc/uid/TP40017387-CH3-SW25a)).</br>**Availability:** Available in macOS 10.11 and later.|
+|`LocalHostName`|String|Returns the local host name as reported by Bonjour.</br>**Availability:** Available in macOS 10.11 and later.|
+|`HostName`|String|Returns the host name.</br>**Availability:** Available in macOS 10.11 and later.|
 |`SystemIntegrityProtectionEnabled`|Boolean|Whether System Integrity Protection is enabled on the device.</br>**Availability:** Available in macOS 10.12 and later.|
-|`ActiveManagedUsers`|Array of strings|Returns an array of the directory GUIDs (as strings) of the logged-in managed users. This query can be sent only to a device.</br>An additional key, `CurrentConsoleManagedUser`, is sent in the reply; its string value is the GUID of the managed user active on the console. If no user listed in the `ActiveManagedUsers` array is currently active on the console, this additional key is omitted from the reply.</br>**Availability:** Available in OS X 10.11 and later.|
+|`ActiveManagedUsers`|Array of strings|Returns an array of the directory GUIDs (as strings) of the logged-in managed users. This query can be sent only to a device.</br>An additional key, `CurrentConsoleManagedUser`, is sent in the reply; its string value is the GUID of the managed user active on the console. If no user listed in the `ActiveManagedUsers` array is currently active on the console, this additional key is omitted from the reply.</br>**Availability:** Available in macOS 10.11 and later.|
 |`IsMDMLostModeEnabled`|Boolean|If true, the device has MDM Lost Mode enabled. Defaults to false.</br>**Availability:** Available in iOS 9.3 and later.|
 |`MaximumResidentUsers`|Integer|Returns the maximum number of users that can use this Shared iPad mode device.</br>**Availability:** Available in iOS 9.3 and later.|
   
@@ -831,15 +857,15 @@ The queries in  are available if the MDM host has a Device Information access ri
 |Key|Type|Content|
 |-|-|-|
 |`CatalogURL`|String|The URL to the software update catalog currently in use by the client.|
-|`IsDefaultCatalog`|Bool|
+|`IsDefaultCatalog`|Boolean|
 |`PreviousScanDate`|Date|
 |`PreviousScanResult`|String|
-|`PerformPeriodicCheck`|Bool|
-|`AutomaticCheckEnabled`|Bool|
-|`BackgroundDownloadEnabled`|Bool|
-|`AutomaticAppInstallationEnabled`|Bool|
-|`AutomaticOSInstallationEnabled`|Bool|
-|`AutomaticSecurityUpdatesEnabled`|Bool|
+|`PerformPeriodicCheck`|Boolean|
+|`AutomaticCheckEnabled`|Boolean|
+|`BackgroundDownloadEnabled`|Boolean|
+|`AutomaticAppInstallationEnabled`|Boolean|
+|`AutomaticOSInstallationEnabled`|Boolean|
+|`AutomaticSecurityUpdatesEnabled`|Boolean|
   
 
   
@@ -849,7 +875,7 @@ The queries in  are available if the MDM host has a Device Information access ri
 
 The queries in  are available if the MDM host has a Network Information access right.  
 
-> **Note:** Not all devices understand all queries. For example, queries specific to GSM (IMEI, SIM card queries, and so on) are ignored if the device is not GSM-capable. The OS X MDM client responds only to `BluetoothMAC`, `WiFiMAC`, and `EthernetMACs`.  
+> **Note:** Not all devices understand all queries. For example, queries specific to GSM (IMEI, SIM card queries, and so on) are ignored if the device is not GSM-capable. The macOS MDM client responds only to `BluetoothMAC`, `WiFiMAC`, and `EthernetMACs`.  
   
 
 
@@ -858,16 +884,16 @@ The queries in  are available if the MDM host has a Network Information access r
 |`ICCID`|String|The ICC identifier for the installed SIM card.|
 |`BluetoothMAC`|String|Bluetooth MAC address.|
 |`WiFiMAC`|String|Wi-Fi MAC address.|
-|`EthernetMACs`|Array of strings|Ethernet MAC addresses.</br>**Availability:** Available in OS X v10.8 and later, and in iOS 7 and later.|
+|`EthernetMACs`|Array of strings|Ethernet MAC addresses.</br>**Availability:** Available in macOS v10.8 and later, and in iOS 7 and later.|
 |`CurrentCarrierNetwork`|String|Name of the current carrier network.|
 |`SIMCarrierNetwork`|String|Name of the home carrier network. (Note: this query *is* supported on CDMA in spite of its name.)|
 |`SubscriberCarrierNetwork`|String|Name of the home carrier network. (Replaces `SIMCarrierNetwork`.)</br>**Availability:** Available in iOS 5.0 and later.|
 |`CarrierSettingsVersion`|String|Version of the currently-installed carrier settings file.|
 |`PhoneNumber`|String|Raw phone number without punctuation, including country code.|
-|`VoiceRoamingEnabled`|Bool|The current setting of the Voice Roaming setting. This is only available on certain carriers.</br>**Availability:** iOS 5.0 and later.|
-|`DataRoamingEnabled`|Bool|The current setting of the Data Roaming setting.|
-|`IsRoaming`|Bool|Returns whether the device is currently roaming.</br>**Availability: **Available in iOS 4.2 and later. See note below.|
-|`PersonalHotspotEnabled`|Bool|True if the Personal Hotspot feature is currently turned on. This value is available only with certain carriers.</br>**Availability:** iOS 7.0 and later.|
+|`VoiceRoamingEnabled`|Boolean|The current setting of the Voice Roaming setting. This is only available on certain carriers.</br>**Availability:** iOS 5.0 and later.|
+|`DataRoamingEnabled`|Boolean|The current setting of the Data Roaming setting.|
+|`IsRoaming`|Boolean|Returns whether the device is currently roaming.</br>**Availability: **Available in iOS 4.2 and later. See note below.|
+|`PersonalHotspotEnabled`|Boolean|True if the Personal Hotspot feature is currently turned on. This value is available only with certain carriers.</br>**Availability:** iOS 7.0 and later.|
 |`SubscriberMCC`|String|Home Mobile Country Code (numeric string).</br>**Availability: **Available in iOS 4.2.6 and later.|
 |`SubscriberMNC`|String|Home Mobile Network Code (numeric string).</br>**Availability: **Available in iOS 4.2.6 and later.|
 |`CurrentMCC`|String|Current Mobile Country Code (numeric string).|
@@ -904,16 +930,18 @@ In iOS only, the `SecurityInfo` dictionary contains the following keys and value
 |Key|Type|Content|
 |-|-|-|
 |`HardwareEncryptionCaps`|Integer|Bitfield. Describes the underlying hardware encryption capabilities of the device. Values are described in [Table 10](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/3-MDM_Protocol/MDM_Protocol.html#//apple_ref/doc/uid/TP40017387-CH3-SW23).|
-|`PasscodePresent`|Bool|Set to `true` if the device is protected by a passcode.|
-|`PasscodeCompliant`|Bool|Set to `true` if the user’s passcode is compliant with all requirements on the device, including Exchange and other accounts.|
-|`PasscodeCompliantWithProfiles`|Bool|Set to `true` if the user’s passcode is compliant with requirements from profiles.|
-|`PasscodeLockGracePeriod`|Integer|The user preference for the amount of time in seconds the device must be locked before unlock will require the device passcode.|
+|`PasscodePresent`|Boolean|Set to `true` if the device is protected by a passcode.|
+|`PasscodeCompliant`|Boolean|Set to `true` if the user’s passcode is compliant with all requirements on the device, including Exchange and other accounts.|
+|`PasscodeCompliantWithProfiles`|Boolean|Set to `true` if the user’s passcode is compliant with requirements from profiles.|
 |`PasscodeLockGracePeriodEnforced`|Integer|The current enforced value for the amount of time in seconds the device must be locked before unlock will require the device passcode.|
 |`FDE_Enabled`|Boolean|Device channel only. Whether Full Disk Encryption (FDE) is enabled or not.</br>**Availability:** Available in macOS 10.9 and later.|
 |`FDE_HasPersonalRecoveryKey`|Boolean|Device channel only. If FDE has been enabled, returns whether a personal recovery key has been set.</br>**Availability:** Available in macOS 10.9 and later.|
 |`FDE_HasInstitutionalRecoveryKey`|Boolean|Device channel only. If FDE has been enabled, returns whether an institutional recovery key has been set.</br>**Availability:** Available in macOS 10.9 and later.|
+|`FDE_PersonalRecoveryKeyCMS`|Data|If FileVault Personal Recovery Key (PRK) escrow is enabled and a recovery key has been set up, this key will contain the PRK encrypted with the certificate from the `com.apple.security.FDERecoveryKeyEscrow` payload and wrapped as a CMS blob.</br>**Availability:** Available in macOS 10.13 and later.|
+|`FDE_PersonalRecoveryKeyDeviceKey`|String|If FileVault PRK escrow is enabled and a recovery key has been set up, this key contains a short string that is displayed to the user in the EFI login window as part of the help message if the user enters an incorrect password three times. The server can use this string as an index when saving the device PRK. Currently, this string is the device serial number, which replaces the `recordNumber` that was returned by the server in the earlier escrow mechanism.</br>**Availability:** Available in macOS 10.13 and later.|
 |`FirewallSettings`|Dictionary|(macOS 10.12 and later): the current Firewall settings. This information will be returned only when the command is sent to the device channel. The response is a dictionary with the following keys:<ul><li>`FirewallEnabled` (Boolean): Whether firewall is on or off.</li><li>`BlockAllIncoming` (Boolean): Whether all incoming connections are blocked.</li><li>`StealthMode` (Boolean): Whether stealth mode is enabled.</li><li>`Applications` (array of dictionaries): Blocking status for specific applications. Each dictionary contains these keys:</li><li></br><ul>   <li>`BundleID` (string) : identifies the application</li>   <li>`Allowed` (Boolean) : specifies whether or not incoming connections are allowed</li>   <li>`Name` (string) : descriptive name of the application for display purposes only (may be missing if no corresponding app is found on the client computer).</li></ul></li></ul>|
 |`SystemIntegrityProtectionEnabled`|Boolean|Device channel only. Whether System Integrity Protection is enabled on the device. In macOS 10.11 or later, this information may also be retrieved using a `DeviceInformation` query.</br>**Availability:** Available in macOS 10.12 and later.|
+|`FirmwarePasswordStatus`|Dictionary|State of EFI firmware password; see .</br>**Availability:** Available in macOS 10.13 and later.|
   
 
 Hardware encryption capabilities are described using the logical OR of the values in . Bits set to `1` (one) indicate that the corresponding feature is present, enabled, or in effect.  
@@ -923,6 +951,16 @@ Hardware encryption capabilities are described using the logical OR of the value
 |-|-|
 |`1`|Block-level encryption.|
 |`2`|File-level encryption.|
+  
+
+EFI firmware status is returned as a dictionary that contains the fields listed below.  
+
+
+|Key|Value|Description|
+|-|-|-|
+|`PasswordExists`|`Boolean`|Whether an EFI firmware password is set or not.|
+|`ChangePending`|`Boolean`|If `true`, a firmware password change is pending and the device requires rebooting; attempts to set, change, or delete the password will fail.|
+|`AllowOroms`|`Boolean`|Whether or not option ROMs are enabled.|
   
 
 For a device to be protected with Data Protection, `HardwareEncryptionCaps` must be `3`, and `PasscodePresent` must be `true`.  
@@ -941,7 +979,7 @@ The `DeviceLock` command is intended to lock lost devices remotely; it should no
 |Key|Type|Content|
 |-|-|-|
 |`RequestType`|String|`DeviceLock`|
-|`PIN`|String|The Find My Mac PIN. Must be 6 characters long.</br>**Availability:** Available in OS X 10.8 and later.|
+|`PIN`|String|The Find My Mac PIN. Must be 6 characters long.</br>**Availability:** Available in macOS 10.8 and later.|
 |`Message`|String|Optional. If provided, this message is displayed on the lock screen and should contain the words “lost iPad.” Available in iOS 7 and later.|
 |`PhoneNumber`|String|Optional. If provided, this phone number is displayed on the lock screen. Available in iOS 7 and later.|
   
@@ -950,6 +988,36 @@ The `DeviceLock` command is intended to lock lost devices remotely; it should no
   
 
 If a passcode has been set on the device, the device is locked and the text and phone number passed with the `DeviceLock` command are displayed on the locked screen. The device returns a `Status` of `Acknowledged` and a `MessageResult` of `Success`. If a passcode has not been set on the device, the device is locked but the message and phone number are not displayed on the screen. The device returns a `Status` of `Acknowledged` and a `MessageResult` of `NoPasscodeSet`.  
+
+  
+
+### RestartDevice Commands Restart Devices
+  
+
+To send a `RestartDevice` command, the server sends the following key:  
+
+
+|Key|Type|Content|
+|-|-|-|
+|`RequestType`|String|`RestartDevice`|
+  
+
+This command is supervised only and requires the Device Lock access right. The device will restart immediately. Available in iOS 10.3 and later. Passcode-locked iOS devices do not rejoin Wi-Fi networks after restarting, so they may not be able to communicate with the server.  
+
+  
+
+### ShutDownDevice Commands Shut Down Devices
+  
+
+To send a `ShutDownDevice` command, the server sends the following key:  
+
+
+|Key|Type|Content|
+|-|-|-|
+|`RequestType`|String|`ShutDownDevice`|
+  
+
+This command is supervised only and requires the Device Lock access right. The device will shut down immediately. Available in iOS 10.3 and later.  
 
   
 
@@ -968,7 +1036,7 @@ To send a `ClearPasscode` command, the server sends a dictionary containing the 
 > **Security Note:** This command requires both Device Lock and Passcode Removal access rights.  
   
 
-> **Note:** The OS X MDM client generates an `Error` response to the server.  
+> **Note:** The macOS MDM client generates an `Error` response to the server.  
   
 
   
@@ -982,7 +1050,7 @@ Upon receiving this command, the device immediately erases itself. No warning is
 |Key|Type|Content|
 |-|-|-|
 |`RequestType`|String|`EraseDevice`|
-|`PIN`|String|The Find My Mac PIN. Must be 6 characters long.</br>**Availability:** Available in OS X 10.8 and later.|
+|`PIN`|String|The Find My Mac PIN. Must be 6 characters long.</br>**Availability:** Available in macOS 10.8 and later.|
   
 
 The device attempts to send a response to the server, but unlike other commands, the response cannot be resent if initial transmission fails. Even if the acknowledgement did not make it to the server (due to network conditions), the device will still be erased.  
@@ -1042,7 +1110,7 @@ This command allows the server to determine what restrictions are being enforced
 |Key|Type|Content|
 |-|-|-|
 |`RequestType`|String|`Restrictions`|
-|`ProfileRestrictions`|Bool|Optional. If `true`, the device reports restrictions enforced by each profile.|
+|`ProfileRestrictions`|Boolean|Optional. If `true`, the device reports restrictions enforced by each profile.|
   
 
 The device responds with:  
@@ -1059,13 +1127,13 @@ The `GlobalRestrictions` dictionary and each entry in the `ProfileRestrictionLis
 
 |Key|Type|Content|
 |-|-|-|
-|`restrictedBool`|Dictionary|A dictionary of boolean restrictions.|
+|`restrictedBoolean`|Dictionary|A dictionary of boolean restrictions.|
 |`restrictedValue`|Dictionary|A dictionary of numeric restrictions.|
 |`intersection`|Dictionary|A dictionary of intersected restrictions.|
 |`union`|Dictionary|A dictionary of unioned restrictions.|
   
 
-The `restrictedBool` and `restrictedValue` dictionaries have the following keys:  
+The `restrictedBoolean` and `restrictedValue` dictionaries have the following keys:  
 
 
 |Key|Type|Content|
@@ -1087,7 +1155,7 @@ Each entry in the dictionary contains the following keys:
 > Per-profile restrictions queries require an Inspect Configuration Profiles access right.  
   
 
-> **Note:** Restrictions commands are not supported on the OS X MDM client.  
+> **Note:** Restrictions commands are not supported on the macOS MDM client.  
   
 
 The `intersection` and `union` dictionaries have the following keys:  
@@ -1130,9 +1198,13 @@ The `ClearRestrictionsPassword` command allows the server to clear the restricti
 
 Three MDM Protocol commands—`UsersList`, `LogOutUser`, and `DeleteUser`—let the MDM server exercise control over the access of users to MDM devices in an educational environment. These commands are all available in iOS 9.3 and later and may be used only in Shared iPad mode.  
 
+> **Note:** 
+Enterprise apps are not supported on Shared iPads; only device-based apps installed under the Volume Purchase Program may be used.  
   
 
-#### UsersList
+  
+
+#### UserList
   
 
 This command allows the server to query for a list of users that have active accounts on the current device.  
@@ -1151,16 +1223,43 @@ The device replies with either an error response of code 12070 if the device can
 |`Users`|Array|Array of dictionaries containing information about active users.|
   
 
-Each entry in the Users array contains the following dictionary:  
+For iOS, each entry in the Users array contains the following dictionary:  
 
 
 |Key|Type|Content|
 |-|-|-|
 |`UserName`|String|The user name of the user.|
 |`HasDataToSync`|Boolean|Whether the user has data that still needs to be synchronized to the cloud.|
-|`DataQuota`|Integer|The data quota set for the user in bytes. This key is optional, and may not be present if user quotas have been temporarily turned off by the system. |
-|`DataUsed`|Integer|The amount of data used by the user in bytes.|
+|`DataQuota`|Integer|The data quota set for the user in bytes. This key is optional and may not be present if user quotas have been temporarily turned off by the system or are not enforced for the user. |
+|`DataUsed`|Integer|The amount of data used by the user in bytes. This key is optional and may not be present if an error occurs while the system is trying to determine the information.|
 |`IsLoggedIn`|Boolean|If `true`, the user is currently logged onto the device.|
+  
+
+For macOS 10.13 or later, each entry in the `Users` array contains the following dictionary:  
+
+
+|Key|Type|Content|
+|-|-|-|
+|`UserName`|String|The short name of the user.|
+|`FullName`|String|The full name of the user.|
+|`UID`|Integer|The user’s `UniqueID`.|
+|`UserGUID`|String|The `GeneratedUID` for the user.|
+|`MobileAccount`|Boolean|If `true`, the account is a mobile account.|
+|`IsLoggedIn`|Boolean|If `true`, the user is currently logged onto the device.|
+  
+
+  
+
+#### UnlockUserAccount
+  
+
+This command lets the server unlock a local user account that has been locked for too many failed password attempts. It requires the Device Lock and Passcode Removal Right and it may be sent only on the device channel.  
+
+
+|Key|Type|Content|
+|-|-|-|
+|`RequestType`|String|`UnlockUserAccount`.|
+|`UserName`|String|Required. The username of the local account, which may be any local account on the system (not just a user account that is managed by MDM).|
   
 
   
@@ -1181,7 +1280,7 @@ This command allows the server to force the current user to log out.
 #### DeleteUser
   
 
-This command allows the server to delete a user that has an active account on the device.  
+This command allows the server to delete a user that has an active account on the device. With iOS it is available in Education Mode only; with macOS it requires DEP enrollment.  
 
 
 |Key|Type|Content|
@@ -1191,16 +1290,18 @@ This command allows the server to delete a user that has an active account on th
 |`ForceDeletion`|Boolean|Optional. Whether the user should be deleted even if they have data that needs to be synced to the cloud. Defaults to false.|
   
 
-The status of the response to `DeleteUser` is either Acknowledged, or Error with code 12071 if the specified user does not exist, 12072 if the specified user is logged in, 12073 if the specified user has data to sync and `ForceDeletion` is false or not specified, or 12074 if the specified user could not be deleted.  
+With macOS and iOS, the status of the response to `DeleteUser` is either Acknowledged, or Error with code 12071 if the specified user does not exist, 12072 if the specified user is logged in, 12073 if the specified user has data to sync and `ForceDeletion` is false or not specified, or 12074 if the specified user could not be deleted. With macOS, 12074 is also returned if an attempt was made to delete the last admin user.  
 
   
 
 ### MDM Lost Mode Helps Lock and Locate Lost Devices
   
 
-Three MDM Protocol commands—`EnableLostMode`, `DisableLostMode`, and `DeviceLocation`—let the MDM server help locate supervised devices when they are lost or stolen. These commands are all available in iOS 9.3 and later and may be used only in supervised mode.  
+Three MDM Protocol commands—`EnableLostMode`, `DisableLostMode`, and `DeviceLocation`—let the MDM server help locate supervised devices when they are lost or stolen. A fourth command, `PlayLostModeSound`, plays a loud sound on the lost device. These commands may be used only in supervised mode. The first three commands are available in iOS 9.3 and later and the fourth in iOS 10.3.  
 
 When a device is erased, Lost Mode is disabled. To re-enable Lost Mode on the device, the MDM server should store the device’s Lost Mode state before erasing it. If the device is enrolled again, the MDM server can then restore the correct Lost Mode state.  
+
+When a device is in MDM Lost mode, invalid commands sent to it may return an Error with code 12078.  
 
   
 
@@ -1219,6 +1320,21 @@ This command allows the server to put the device in MDM lost mode, with a messag
   
 
 The response status is either Acknowledged or it is Error with code 12066 if MDM Lost Mode could not be enabled.  
+
+  
+
+#### Play Lost Mode Sound
+  
+
+This command allows the server to tell the device to play a sound if it is in MDM Lost Mode. The sound will play until the device is either removed from Lost Mode or a user disables the sound at the device.  
+
+
+|Key|Type|Content|
+|-|-|-|
+|`RequestType`|String|`PlayLostModeSound`.|
+  
+
+The response status is either Acknowledged, or Error with code 12067 if the device is not in MDM Lost Mode, or Error with code 12080 if the sound could not be played.  
 
   
 
@@ -1255,6 +1371,12 @@ The device replies with either an error response with code 12067 if the device i
 |-|-|-|
 |`Latitude`|Double|The latitude of the device’s current location.|
 |`Longitude`|Double|The longitude of the device’s current location.|
+|`HorizontalAccuracy`|Double|The radius of uncertainty for the location, measured in meters. If negative, this value could not be determined.|
+|`VerticalAccuracy`|Double|The accuracy of the altitude value in meters. If negative, this value could not be determined.|
+|`Altitude`|Double|The altitude of the device’s current location. If negative, this value could not be determined.|
+|`Speed`|Double|The instantaneous speed of the device in meters per second. If negative, this value could not be determined.|
+|`Course`|Double|The direction in which the device is traveling. If negative, this value could not be determined.|
+|`Timestamp`|String|The [RFC 3339](https://tools.ietf.org/html/rfc3339) timestamp for when this location was determined.|
   
 
   
@@ -1272,7 +1394,7 @@ To install a managed app on an iOS device, the MDM server sends an installation 
 
 When a server requests the installation of a managed app from the App Store, if the app was not purchased using App Assignment (that is, if the original `InstallApplication` request’s `Options` dictionary contained a `PurchaseMethod` value of 0), the app “belongs” to the iTunes account that is used at the time the app is installed. Paid apps require the server to send in a Volume Purchasing Program (VPP) redemption code that purchases the app for the end user. For more information on VPP, go to [http://www.apple.com/business/vpp/](http://www.apple.com/business/vpp/).  
 
-The OS X MDM client does not support managed applications. However, it does support the parts of the `InstallApplication`, `InstallMedia`, and `InviteToProgram` MDM commands related to VPP enrollment and installation.  
+The macOS MDM client does not support managed applications. However, it does support the parts of the `InstallApplication`, `InstallMedia`, and `InviteToProgram` MDM commands related to VPP enrollment and installation.  
 
   
 
@@ -1304,7 +1426,7 @@ The options dictionary can contain the following keys:
 
 |Key|Type|Content|
 |-|-|-|
-|`NotManaged`|Boolean|If true, the app is queued for installation but is not managed. OS X app installation must set this value to `true`.|
+|`NotManaged`|Boolean|If true, the app is queued for installation but is not managed. macOS app installation must set this value to `true`.|
 |`PurchaseMethod`|Integer|One of the following:</br>0: Legacy Volume Purchase Program (iOS only)</br>1: Volume Purchase Program App Assignment|
   
 
@@ -1356,12 +1478,12 @@ If the app cannot be installed, the device responds with an Error status, with
 
   
 
-##### OS X App Installation
+##### macOS App Installation
   
 
-OS X apps are installed through MDM as packages. Using `productbuild`, each package must be signed with an appropriate certificate (such as a TLS/SSL certificate with signing usage) and must be md5 hashed into 10 MB chunks. Only the package needs to be signed, not the app; Apple’s Gatekeeper doesn’t check apps installed through MDM.  
+macOS apps are installed through MDM as packages. Using `productbuild`, each package must be signed with an appropriate certificate (such as a TLS/SSL certificate with signing usage) and must be md5 hashed into 10 MB chunks. Only the package needs to be signed, not the app; Apple’s Gatekeeper doesn’t check apps installed through MDM.  
 
-The command lines to install an OS X app package should look like this:  
+The command lines to install a macOS app package should look like this:  
 
 ```
 $ sudo pkgbuild —component ~/Desktop/MyApp.app —install-location /Applications
@@ -1515,7 +1637,7 @@ The keys of the `ManagedApplicationList` dictionary are the app identifiers for 
 
 |Key|Type|Content|
 |-|-|-|
-|`Status`|String|The status of the managed app; see [Table 11](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/3-MDM_Protocol/MDM_Protocol.html#//apple_ref/doc/uid/TP40017387-CH3-SW333) for possible values.|
+|`Status`|String|The status of the managed app; see [Table 12](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/3-MDM_Protocol/MDM_Protocol.html#//apple_ref/doc/uid/TP40017387-CH3-SW333) for possible values.|
 |`ManagementFlags`|Integer|Management flags. (See InstallApplication command above for a list of flags.)|
 |`UnusedRedemptionCode`|String|If the user has already purchased a paid app, the unused redemption code is reported here. This code can be used again to purchase the app for someone else. This code is reported only once.|
 |HasConfiguration|Boolean|If `true`, the app has a server-provided configuration. For details, see [Managed App Configuration and Feedback](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/3-MDM_Protocol/MDM_Protocol.html#//apple_ref/doc/uid/TP40017387-CH3-SW68). Available in iOS 7 and later.|
@@ -1626,7 +1748,7 @@ To send an `InstallMedia` command (in iOS 8 or later), the server sends a dictio
 |-|-|-|
 |`RequestType`|String|`InstallMedia`.|
 |`iTunesStoreID`|Integer|Optional. The media’s iTunes Store ID.|
-|`MediaURL`|String|Optional; not supported in OS X. The URL from which the media will be retrieved.|
+|`MediaURL`|String|Optional; not supported in macOS. The URL from which the media will be retrieved.|
 |`MediaType`|String|`Book`.|
   
 
@@ -1737,7 +1859,7 @@ Upon success, an `Acknowledged` status is returned. Otherwise, an error status i
 
 In iOS 5 or later, this command allows the server to set settings on the device. These settings take effect on a one-time basis. The user may still be able to change the settings at a later time. This command requires the Apply Settings right.  
 
-The OS X MDM client does not support managing settings.  
+The macOS MDM client does not support managing settings.  
 
 
 |Key|Type|Content|
@@ -1858,16 +1980,25 @@ The keys that can appear in the `Attributes` dictionary are listed below:
 
   
 
-#### DeviceName Sets the Name of the Device
+#### DeviceName and HostName Set the Names of the Device
   
 
-To send a `DeviceName` command (available only on supervised devices or devices running OS X v10.10 or later), the server sends a dictionary containing the following keys:  
+To send a `DeviceName` command (available only on supervised devices or devices running macOS v10.10 or later), the server sends a dictionary containing the following keys:  
 
 
 |Key|Type|Content|
 |-|-|-|
 |`Item`|String|`DeviceName`.|
-|`DeviceName`|String|The requested name for the device.|
+|`DeviceName`|String|The requested computer name and local host name for the device.|
+  
+
+On macOS, the `DeviceName` command sets only the computer name and local host name of the device. To set the `HostName` of the device (available only on macOS 10.11 or later), the server sends a dictionary containing the following keys:  
+
+
+|Key|Type|Content|
+|-|-|-|
+|`Item`|String|`HostName`.|
+|`HostName`|String|The requested `HostName` for the device.|
   
 
   
@@ -1894,10 +2025,26 @@ The `MDMOptions` dictionary can contain the following keys:
 
   
 
+#### PasscodeLockGracePeriod Customizes the Passcode Lock on Shared iPads
+  
+
+The `PasscodeLockGracePeriod` command sets  the time the screen must be locked before needing a passcode to unlock it:  
+
+
+|Key|Type|Content|
+|-|-|-|
+|`Item`|String|`PasscodeLockGracePeriod`.|
+|`PasscodeLockGracePeriod`|Integer|The number of seconds the screen must be locked before unlock attempts will require the device passcode.|
+  
+
+This command is valid for Shared iPad only. Changing to a less restrictive value will not take effect until the user logs out. The command is available on iOS 9.3.2 and later.  
+
+  
+
 #### MaximumResidentUsers
   
 
-Shared iPad Mode only. Sets the maximum number of users that can use a shared iPad. This can be set only when the iPad is in the `AwaitingConfiguration` phase, before the `DeviceConfigured` message has been sent to the device. If `MaximumResidentUsers` is greater than the maximum possible number of users supported on the device, the device is configured with the maximum possible number of users instead.  
+Shared iPad Mode only. Sets the maximum number of users that can use a Shared iPad. This can be set only when the iPad is in the `AwaitingConfiguration` phase, before the `DeviceConfigured` message has been sent to the device. If `MaximumResidentUsers` is greater than the maximum possible number of users supported on the device, the device is configured with the maximum possible number of users instead.  
 
 
 |Key|Type|Content|
@@ -2053,7 +2200,7 @@ Each member of the `ApplicationConfigurations` array is a dictionary with the fo
 ### AccountConfiguration
   
 
-When an OS X (v10.11 and later) device is configured via DEP to enroll in an MDM server and the DEP profile has the `await_device_configuration` flag set to true, the `AccountConfiguration` command can be sent to the device to have it create the local administrator account (thereby skipping the page to create this account in Setup Assistant). This command can only be sent to an OS X device that is in the `AwaitingConfiguration` state.  
+When a macOS (v10.11 and later) device is configured via DEP to enroll in an MDM server and the DEP profile has the `await_device_configuration` flag set to true, the `AccountConfiguration` command can be sent to the device to have it create the local administrator account (thereby skipping the page to create this account in Setup Assistant). This command can only be sent to a macOS device that is in the `AwaitingConfiguration` state.  
 
 The `AccountConfiguration` command replaces the `SetupConfiguration` command, which is deprecated. While both commands remain supported, new software should use `AccountConfiguration`.  
 
@@ -2063,8 +2210,7 @@ The `AccountConfiguration` command replaces the `SetupConfiguration` command, wh
 |`RequestType`|String|`AccountConfiguration`.|
 |`SkipPrimarySetupAccountCreation`|Boolean|(Optional, default=false). If true, skip the UI for setting up the primary accounts. Setting this key to true requires that an entry be specified in `AutoSetupAdminAccounts`. Setting this value to true also prevents auto login after Setup Assistant completes.|
 |`SetPrimarySetupAccountAsRegularUser`|Boolean|(Optional, default=false). If true, the primary accounts are created as regular users. Setting this to true requires that an entry be specified in `AutoSetupAdminAccounts`.|
-|`AutoSetupAdminAccounts`|Array of Dictionaries|(Required if either of the above options are true) Describes the admin accounts to be created by Setup Assistant (see below). Currently, OS X creates only a single admin account. Array elements after the first are ignored.|
-|`SetAutoAdminPassword`|Array of Dictionaries|(Optional; available in OS X v10.11 and later) Allows changing the password of a local admin account that was created by Setup Assistant during DEP enrollment via the `AccountConfiguration` command.|
+|`AutoSetupAdminAccounts`|Array of Dictionaries|(Required if either of the above options are true) Describes the admin accounts to be created by Setup Assistant (see below). Currently, macOS creates only a single admin account. Array elements after the first are ignored.|
   
 
 The `AutoSetupAdminAccounts` dictionaries contain the specifications of local administrator accounts to be created before Setup Assistant finishes:  
@@ -2078,11 +2224,90 @@ The `AutoSetupAdminAccounts` dictionaries contain the specifications of local ad
 |`hidden`|Boolean|(Optional, default=false) If true, this sets the account attribute to make the account hidden to `loginwindow` and Users&Groups. OD attribute: `dsAttrTypeNative:IsHidden`.|
   
 
-The `SetAutoAdminPassword` dictionaries contain these keys:  
+The `passwordHash` data objects should be created on the server using the CommonCrypto libraries or equivalent as a salted SHA512 PBKDF2 dictionary containing three items: `entropy` is the derived key from the password hash (an example is from `CCKeyDerivationPBKDF()`), `salt` is the 32 byte randomized salt (from `CCRandomCopyBytes()`), and `iterations` contains the number of iterations (from `CCCalibratePBKDF()`) using a minimum hash time of 100 milliseconds (or if not known, a number in the range 20,000 to 40,000 iterations). This dictionary of the three keys should be placed into an outer dictionary under the key `SALTED-SHA512-PBKDF2` and converted to binary data before being set into the configuration dictionary `passwordHash` key value.  
+
+  
+
+### Firmware (EFI) Password Management
+  
+
+Starting with macOS 10.13, two commands, `SetFirmwarePassword` and `VerifyFirmwarePassword`, let MDM manage firmware passwords.  
+
+> **Note:** 
+There is no way through software to clear an EFI password without knowing the current password. Therefore, if an EFI password is set before MDM can manage it, there is no way for MDM to change it unless the server provides a way of prompting an administrator to enter the current password.  
+  
+
+  
+
+#### SetFirmwarePassword
+  
+
+This command changes or clears the firmware password for the device. It requires the Device Lock and Passcode Removal Right and may be sent only on the device channel.  
+
+The request dictionary has these keys:  
 
 
 |Key|Type|Content|
 |-|-|-|
+|`RequestType`|String|`SetFirmwarePassword`.|
+|`CurrentPassword`|String|Required if the device currently has a firmware password set.|
+|`NewPassword`|String|(Required) Pass an empty string to clear the firmware password|
+|`AllowOroms`|Boolean|Pass `true` if option ROMs are to be enabled. Default is `false`.|
+  
+
+The response dictionary has this key:  
+
+
+|Key|Type|Content|
+|-|-|-|
+|`PasswordChanged`|Boolean|Indicates success or failure. In case of failure, `ErrorChain` may provide additional error information.|
+  
+
+This command will force the firmware password mode to a value of `command`. It will prompt the user only if MDM is attempting to option+boot to a different volume.  
+
+The characters in `NewPassword` must consist of low-ASCII printable characters (0x20 .. 0x7E) to ensure that all characters can be entered on the EFI login screen. This is a subset of the characters allowed in the EFI login window. However, since the exact allowed character set is not well-defined, the `SetFirmwarePassword` command is conservative in limiting the characters it allows.  
+
+The device imust be restarted for the new firmware password to take effect. This command will fail and return an error in `ErrorChain` if the device has a firmware change pending; see `ChangePending` in [Table 11](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/3-MDM_Protocol/MDM_Protocol.html#//apple_ref/doc/uid/TP40017387-CH3-SW423).  
+
+This command will return an error if it is called again within 30 seconds after providing an incorrect password.  
+
+  
+
+#### VerifyFirmwarePassword
+  
+
+This command verifies the device’s firmware password. It may be sent only on the device channel.  
+
+The request dictionary has these keys:  
+
+
+|Key|Type|Content|
+|-|-|-|
+|`RequestType`|String|`VerifyFirmwarePassword`.|
+|`Password`|String|(Required) The password to be verified.|
+  
+
+The response dictionary has this key:  
+
+
+|Key|Type|Content|
+|-|-|-|
+|`PasswordVerified`|Boolean|Whether or not the provided password matches the firmware password set for the device.|
+  
+
+This command delays for 30 seconds so it won’t execute too often. If another request is received within that interval, this command will return `false` and set an error in `ErrorChain`.  
+
+  
+
+### SetAutoAdminPassword
+  
+
+`SetAutoAdminPassword` allows changing the password of a local admin account that was created by Setup Assistant during DEP enrollment via the `AccountConfiguration` command. It is available in macOS v10.11 and later.  
+
+
+|Key|Type|Content|
+|-|-|-|
+|`RequestType`|String|`SetAutoAdminPassword`.|
 |`GUID`|String|The Globally Unique Identifier of the local admin account for which the password is to be changed. If this string does not correspond to the GUID of an admin account created during DEP enrollment, the command returns an error.|
 |`passwordHash`|Data|Contains the pre-created salted PBKDF2 SHA512 password hash for the account (see below).|
   
@@ -2107,7 +2332,7 @@ The `passwordHash` data objects should be created on the server using the Common
 ### Software Update
   
 
-The Software Update commands allow an MDM server to perform software updates. In OS X, a variety of system software can be updated. In iOS, only OS updates are supported.  
+The Software Update commands allow an MDM server to perform software updates. In macOS, a variety of system software can be updated. In iOS, only OS updates are supported.  
 
 > **Note:** 
 If the device has a passcode, it must be cleared before an iOS update is performed.  
@@ -2135,7 +2360,7 @@ The Updates array contains dictionaries with the following keys and values:
 |Key|Type|Content|
 |-|-|-|
 |`ProductKey`|String|The product key of the update to be installed.|
-|`InstallAction`|String|One of the following:<ul><li>`Default`: Download and install the software update.</li><li>`DownloadOnly`: Download the software update without installing it.</li><li>`InstallASAP`: Install an already downloaded software update.</li><li>`NotifyOnly`: Download the software update and notify the user via the App Store (OS X only).</li><li>`InstallLater`: Download the software update and install it at a later time (OS X only).</li></ul>|
+|`InstallAction`|String|One of the following:<ul><li>`Default`: Download and/or install the software update, depending on the current device state. See the `UpdateResults` dictionary, below, to determine which `InstallAction` is scheduled.</li><li>`DownloadOnly`: Download the software update without installing it.</li><li>`InstallASAP`: Install an already downloaded software update.</li><li>`NotifyOnly`: Download the software update and notify the user via the App Store (macOS only).</li><li>`InstallLater`: Download the software update and install it at a later time (macOS only).</li></ul>|
   
 
 The device returns the following response:  
@@ -2152,7 +2377,7 @@ The `UpdateResults` dictionary contains the following keys and values:
 |Key|Type|Content|
 |-|-|-|
 |`ProductKey`|String|The product key.|
-|`InstallAction`|String|The install action that the device has scheduled for this update. One of the following:<ul><li>`Error`: An error occurred during scheduling.</li><li>`DownloadOnly`: Download the software update without installing it.</li><li>`InstallASAP`: Install an already downloaded software update.</li><li>`NotifyOnly`: Download the software update and notify the user via the App Store (OS X only).</li><li>`InstallLater`: Download the software update and install it at a later time (OS X only).</li></ul>|
+|`InstallAction`|String|The install action that the device has scheduled for this update. One of the following:<ul><li>`Error`: An error occurred during scheduling.</li><li>`DownloadOnly`: Download the software update without installing it.</li><li>`InstallASAP`: Install an already downloaded software update.</li><li>`NotifyOnly`: Download the software update and notify the user via the App Store (macOS only).</li><li>`InstallLater`: Download the software update and install it at a later time (macOS only).</li></ul>|
 |`Status`|String|The status of the software update. Possible values are:<ul><li>`Idle`: No action is being taken on this software update.</li><li>`Downloading`: The software update is being downloaded.</li><li>`DownloadFailed`: The download has failed.</li><li>`DownloadRequiresComputer`: The device must be connected to a computer to download this update (iOS only).</li><li>`DownloadInsufficientSpace`: There is not enough space to download the update.</li><li>`DownloadInsufficientPower`: There is not enough power to download the update.</li><li>`DownloadInsufficientNetwork`: There is insufficient network capacity to download the update.</li><li>`Installing`: The software update is being installed.</li><li>`InstallInsufficientSpace`: There is not enough space to install the update.</li><li>`InstallInsufficientPower`: There is not enough power to install the update.</li><li>`InstallPhoneCallInProgress`: Installation has been rejected because a phone call is in progress.</li><li>`InstallFailed`: Installation has failed for an unspecified reason.</li></ul>|
 |`ErrorChain`|Array|Array of dictionaries describing the error that occurred.|
   
@@ -2160,7 +2385,7 @@ The `UpdateResults` dictionary contains the following keys and values:
 The device may return a different `InstallAction` than the one that was requested.  
 
 > **Note:** 
-Responding to the `ScheduleOSUpdate` request currently relies on the device not being passcode-protected.  
+In iOS versions before 10.3, responding to the `ScheduleOSUpdate` request relied on the device not being passcode-protected.  
   
 
 Because software updates may happen immediately, the device may not have the opportunity to respond to an installation command before it restarts for installation. When this happens, the MDM server should resend the `ScheduleOSUpdate` request when the device checks in again. The device returns a status of `Idle` because the update has been installed and is no longer applicable.  
@@ -2184,18 +2409,18 @@ The device returns the following response:
 
 |Key|Type|Content|
 |-|-|-|
-|`ScanInitiated`|Boolean|Returns true if the scan was successfully initiated (OS X only).
+|`ScanInitiated`|Boolean|Returns true if the scan was successfully initiated (macOS only).
 |
   
 
-This command is needed by OS X only. iOS devices respond with an `Acknowledged` status on success.  
+This command is needed by macOS only. iOS devices respond with an `Acknowledged` status on success.  
 
   
 
 #### AvailableOSUpdates
   
 
-`AvailableOSUpdates` queries the device for a list of available OS updates. In OS X, a `ScheduleOSUpdateScan` must be performed to update the results returned by this query.  
+`AvailableOSUpdates` queries the device for a list of available OS updates. In macOS, a `ScheduleOSUpdateScan` must be performed to update the results returned by this query.  
 
 
 |Key|Type|Content|
@@ -2224,10 +2449,10 @@ Each element in the AvailableOSUpdates array contains a dictionary with the fo
 The build number of the update: e.g., 13A999.|
 |`DownloadSize`|Number|Storage size needed to download the software update. Floating point number of bytes.|
 |`InstallSize`|Number|Storage size needed to install the software update. Floating point number of bytes.|
-|`AppIdentifiersToClose`|Array|Array of strings. Each entry represents an app identifier that is closed to install this update (OS X only).|
+|`AppIdentifiersToClose`|Array|Array of strings. Each entry represents an app identifier that is closed to install this update (macOS only).|
 |`IsCritical`|Boolean|Set to `true` if this update is considered critical. Defaults to `false`.|
-|`IsConfigurationDataUpdate`|Boolean|Set to `true` if this is an update to a configuration file. Defaults to false (OS X only).|
-|`IsFirmwareUpdate`|Boolean|Set to `true` if this is an update to firmware. Defaults to `false` (OS X only).|
+|`IsConfigurationDataUpdate`|Boolean|Set to `true` if this is an update to a configuration file. Defaults to false (macOS only).|
+|`IsFirmwareUpdate`|Boolean|Set to `true` if this is an update to firmware. Defaults to `false` (macOS only).|
 |`RestartRequired`|Boolean|Set to `true` if the device restarts after this update is installed. Defaults to `false`.|
 |`AllowsInstallLater`|Boolean|Set to `true` if the update is eligible for InstallLater. Defaults to `true`.|
   
@@ -2273,7 +2498,7 @@ Percentage of download that is complete. Floating point number (0.0 to 1.0).|
 ### Support for macOS Requests
   
 
-The table below lists the MDM protocol request types that are available for Apple devices that run macOS. The interfaces of these requests to OS X are similar to the iOS interfaces described in the rest of this chapter.  
+The table below lists the MDM protocol request types that are available for Apple devices that run macOS. The interfaces of these requests to macOS are similar to the iOS interfaces described in the rest of this chapter.  
 
 
 |Command|Min OS|User/Device|Comments|
@@ -2298,7 +2523,7 @@ The table below lists the MDM protocol request types that are available for Appl
 |RemoveProfile|10.7|Both|
 |RequestMirroring|10.10|Device|
 |Restrictions|10.7|Both|Supported, but always returns empty list.|
-|RotateFileVaultKey|10.9|Device|
+|RotateFileVaultKey|10.9|Device|See [Using the RotateFileVaultKey Command](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/3-MDM_Protocol/MDM_Protocol.html#//apple_ref/doc/uid/TP40017387-CH3-SW566).|
 |ScheduleOSUpdate|10.11|Device|Requires DEP enrolled computer.|
 |ScheduleOSUpdateScan|10.11|Device|
 |SecurityInfo|10.7|Varies|See [SecurityInfo Commands Request Security-Related Information](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/3-MDM_Protocol/MDM_Protocol.html#//apple_ref/doc/uid/TP40017387-CH3-SW19).|
@@ -2306,12 +2531,58 @@ The table below lists the MDM protocol request types that are available for Appl
 |Settings|10.9|varies|DeviceName (device), OrganizationInfo (device).|
 |StopMirroring|10.10|Device|
   
+
+  
+
+#### Using the RotateFileVaultKey Command
+  
+
+Resetting a device deployment’s `FileVaultMaster.keychain` password periodically through Master Password rotation helps mitigate the risk of compromising the security of the deployed devices. For further information about this technique, see Apple’s *Best Practices for Deploying FileVault 2*, page 36, at [training.apple.com/pdf/WP_FileVault2.pdf](http://training.apple.com/pdf/WP_FileVault2.pdf).  
+
+The `RotateFileVaultKey` command requires the access right “Device Lock and Passcode Removal” and is processed only if sent to the device channel. To send a `RotateFileVaultKey` command, the server sends a dictionary containing the following keys:  
+
+
+|Key|Type|Content|
+|-|-|-|
+|`RequestType`|String|`RotateFileVaultKey`.|
+|`KeyType`|String|Either `'personal'` or `'institutional'` (see below).|
+|`FileVaultUnlock`|Dictionary|See below.|
+|`NewCertificate`|Data|Required if `KeyType` is set to `institutional`. A DER-encoded certificate to be used in creating a new institutional recovery key. The certificate must have a common name containing “FileVault Recovery Key” and meet other requirements specified in Apple’s *Best Practices for Deploying FileVault 2* ([training.apple.com/pdf/WP_FileVault2.pdf](http://training.apple.com/pdf/WP_FileVault2.pdf)).|
+|`ReplyEncryptionCertificate`|Data|Required if `KeyType` is set to `personal`. A DER-encoded certificate to be used in encrypting the new personal recovery key into a wrapper conforming to the IETF Cryptographic Message Syntax (CMS) standard.|
+  
+
+To unlock a device by means of a password, `KeyType` must be set to `personal` and the `FileVaultUnlock` dictionary must contain this key:  
+
+
+|Key|Type|Content|
+|-|-|-|
+|`Password`|String|The current Personal Recovery Key (PRK) or a FileVault user’s password.|
+  
+
+To unlock a device using the institutional recovery key, `KeyType` must be set to `institutional` and the `FileVaultUnlock` dictionary must contain the following keys:  
+
+
+|Key|Type|Content|
+|-|-|-|
+|`PrivateKeyExport`|Data|The data for a .p12 export of the private key for the current institutional recovery key.|
+|`PrivateKeyExportPassword`|String|The password for the `PrivateKeyExport`.p12 data (see above).|
+  
+
+If the device is unlocked by means of a personal password, the response sent back to MDM server will be embedded within a `RotateResult` dictionary containing the following key:  
+
+
+|Key|Type|Content|
+|-|-|-|
+|`EncryptedNewRecoveryKey`|Data|A new PRK that is encrypted using a `ReplyEncryptionCertificate` as a CMS-compliant envelope.|
+  
+
+If the device is unlocked using the institutional recovery key, no response will be needed and no dictionary will be sent.  
   
 
 ## Error Codes
   
 
-The following sections list the error codes currently returned by iOS and OS X devices. Your software should *not* depend on these values, because they may change in future operating system releases. They are provided solely for informational purposes.  
+The following sections list the error codes currently returned by iOS and macOS devices. Your software should *not* depend on these values, because they may change in future operating system releases. They are provided solely for informational purposes.  
 
   
 
@@ -2402,7 +2673,7 @@ The following sections list the error codes currently returned by iOS and OS X d
 | 4027 | Profile requires passcode change |
 | 4028 | Multiple home screen layout payloads |
 | 4029 | Multiple notification settings layout payloads |
-| 4030 | Unacceptable payload in ephemeral multi-user |
+| 4030 | Unacceptable payload in Shared iPad |
 | 4031 | Payload contains sensitive user information |
   
 
@@ -2603,6 +2874,11 @@ The following sections list the error codes currently returned by iOS and OS X d
 | 12074 | Could not delete user |
 | 12075 | Specified profile not installed |
 | 12076 | Per-user connections not supported |
+| 12077 | System update not permitted with logged-in user |
+| 12078 | Invalid request type in MDM Lost mode |
+| 12079 | No MDM instance |
+| 12080 | Could not play Lost Mode sound |
+| 12081 | Not netwok tethered |
   
 
   
