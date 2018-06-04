@@ -37,7 +37,7 @@ This is a sample response:
 
 ```
 {
-  "PublicAssetSets": {
+ "PublicAssetSets": {
     "iOS": [
       {
         “ProductVersion": "10.0.2",
@@ -76,7 +76,6 @@ This is a sample response:
     ]
   }
 }
-
 ```  
 
 Use the product version list to determine which versions are greater than the device’s current OS version. Provide that list of versions to the administrator as potential OS update candidates.  

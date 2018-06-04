@@ -10,6 +10,7 @@ This table describes the changes to *Mobile Device Management Protocol Reference
 
 |**Date**|**Notes**|
 |-|-|
+|2018-06-04|Updated for iOS 12, macOS 10.14, and tvOS 12.|
 |2018-04-19|Created chapter on [Managed Apps & Updates](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/ManagedAppsUpdates/ManagedAppsUpdates.html#//apple_ref/doc/uid/TP40017387-CH10-SW1) and added new section for the [Apple Software Lookup Service](https://developer.apple.com/library/content/documentation/Miscellaneous/Reference/MobileDeviceManagementProtocolRef/ManagedAppsUpdates/ManagedAppsUpdates.html#//apple_ref/doc/uid/TP40017387-CH10-SW44).|
 |2018-04-09|Updated for iOS 11.3, macOS 10.13.3, and tvOS 11.3.|
 |2017-12-07|Updated for iOS 11.1, macOS 10.13.1, and tvOS 11.1.|

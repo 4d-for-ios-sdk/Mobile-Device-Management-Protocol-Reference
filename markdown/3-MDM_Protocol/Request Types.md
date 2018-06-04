@@ -1212,11 +1212,11 @@ This command allows the server to force validation of the free developer and uni
 ### Installed Books
   
 
-Books obtained from the iBooks Store can be installed on a device. These books will be backed up, will sync to iTunes, and will remain after the MDM profile is removed. Books not obtained from the iBooks Store will not sync to iTunes and will be removed when the MDM profile is removed.  
+Books obtained from Apple Books can be installed on a device. These books will be backed up, will sync to iTunes, and will remain after the MDM profile is removed. Books not obtained from Apple Books will not sync to iTunes and will be removed when the MDM profile is removed.  
 
-Books obtained from the iBooks Store must be purchased using VPP Licensing. Installing a book from the iBooks Store on a device that already has that book installed causes the book to be visible to the MDM server.  
+Books obtained from Apple Books must be purchased using VPP Licensing. Installing a book from Apple Books on a device that already has that book installed causes the book to be visible to the MDM server.  
 
-Installation of books requires the App Installation right. The App Store must be enabled for iBooks Store media installation to work. The App Store need not be enabled to install books retrieved using a URL.  
+Installation of books requires the App Installation right. The App Store must be enabled for Apple Books media installation to work. The App Store need not be enabled to install books retrieved using a URL.  
 
   
 
@@ -1236,7 +1236,7 @@ To send an `InstallMedia` command (in iOS 8 or later), the server sends a dictio
 
 The request must contain either an `iTunesStoreID` or a `MediaURL`.  
 
-If a `MediaURL` is provided, the URL must lead to a PDF, gzipped epub, or gzipped iBooks document. The following fields are provided to define this document:  
+If a `MediaURL` is provided, the URL must lead to a PDF, gzipped epub, or gzipped iBooks Author document. The following fields are provided to define this document:  
 
 
 |Key|Type|Content|
@@ -1248,9 +1248,9 @@ If a `MediaURL` is provided, the URL must lead to a PDF, gzipped epub, or gzippe
 |`Title`|String|Optional.|
   
 
-Installing a book not from the iBooks Storewith the same `PersistentID` as an existing book not from the iBooks Store replaces the old book with the new. Installing an iBooks Store book with the same `iTunesStoreID` as an existing installed book updates the book from the iBooks Store.  
+Installing a book not from Apple Books with the same `PersistentID` as an existing book not from Apple Books replaces the old book with the new. Installing an Apple Books book with the same `iTunesStoreID` as an existing installed book updates the book from Apple Books.  
 
-The user is not prompted for book installation or update unless user interaction is needed to complete an iBooks Store transaction.  
+The user is not prompted for book installation or update unless user interaction is needed to complete an Apple Books transaction.  
 
 If the request is accepted, the device responds with an Acknowledged response and the following fields:  
 
@@ -1866,12 +1866,16 @@ On macOS, all supported Software Update commands except the `AvailableOSUpdates`
 
 On iOS 10.3 and later, supported Software Update commands require supervision but not DEP enrollment. If there is a passcode on the device, a user must enter it to start a software update. Prior to iOS 10.3, the supervised devices need to be DEP-enrolled and have no passcode.  
 
+On Shared iPad devices, these update commands are not available when any user is logged in.  
+
 The MDM server must have the App Installation right to perform these commands.  
 
   
 
 #### ScheduleOSUpdate
   
+
+`ScheduleOSUpdate` requests that the device update its OS. This command overrides the `forceDelayedSoftwareUpdates` restrictions for the user.  
 
 
 |Key|Type|Content|

@@ -199,22 +199,22 @@ In general, the following types of MDM commands can be sent on the user channel:
 
 
 * `
-kMCMDMPRequestTypeProfileList` 
+ProfileList` 
 
 * `
-kMCMDMPRequestTypeInstallProfile` 
+InstallProfile` 
 
 * `
-kMCMDMPRequestTypeRemoveProfile` 
+RemoveProfile` 
 
 * `
-kMCMDMPRequestTypeRestrictions` 
+Restrictions` 
 
 * `
-kMCMDMPRequestTypeInviteToProgram` 
+InviteToProgram` 
 
 * `
-kMCMDMPRequestTypeDeviceInformation` 
+DeviceInformation` 
   
 
 To indicate that an MDM server supports both device and user connections, the `ServerCapabilities` array in its MDM enrollment payload must contain the string `com.apple.mdm.per-user-connections`, indicating support for Shared iPad. Then when a user logs in, the device sends a `TokenUpdate` request on the user channel.  

@@ -18,12 +18,6 @@ The three example flowcharts below illustrate the foregoing choices.
 
 **Example 1:** The final command results in the server receiving a `NotNow` response. The device will poll the server later, when the `InstallApplication` command might succeed.  
 
-<img src="https://github.com/erikberglund/Mobile-Device-Management-Protocol-Reference/blob/master/assets/Art/NotNow1_2x.png" height="400" width="407">  
-
 **Example 2:** The final command results in the server receiving something other than a `NotNow` response. The device will not poll the server later, because the last response was not `NotNow`.  
 
-<img src="https://github.com/erikberglund/Mobile-Device-Management-Protocol-Reference/blob/master/assets/Art/NotNow2_2x.png" height="322" width="407">  
-
-**Example 3:** The connection to the device is unexpectedly interrupted. Because the last status the server received was not `NotNow`, the server should send a push notification to the device to retry the `InstallApplication` command. The server must not assume that the device will automatically poll the server later.  
-
-<img src="https://github.com/erikberglund/Mobile-Device-Management-Protocol-Reference/blob/master/assets/Art/NotNow3_2x.png" height="357" width="454">
+**Example 3:** The connection to the device is unexpectedly interrupted. Because the last status the server received was not `NotNow`, the server should send a push notification to the device to retry the `InstallApplication` command. The server must not assume that the device will automatically poll the server later.
